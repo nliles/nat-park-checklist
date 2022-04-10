@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
-import ParkContainer from './components/ParkContainer';
+import React from 'react';
+import ListContainer from './components/ListContainer/ListContainer';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <ParkContainer/>
-      </div>
-    );
-  }
-}
+const App = () => (
+      <ListContainer/>
+  )
+
 
 export default App;
