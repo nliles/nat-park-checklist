@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import List from "../List/List";
+import Map from "../Map/Map"
 import { NPS_API, API_KEY } from "../constants";
 import styles from './ListContainer.module.css'
 
@@ -37,8 +38,9 @@ const ListContainer = () => {
   return (
     <div className={styles.container}>
     <nav>
-      <header>National Parks</header>
+      <h1 className={styles.header}>National Parks</h1>
     </nav>
+      <Map data={data} />
       <List parks={data} handleChange={handleSelected} />
     </div>
   )
