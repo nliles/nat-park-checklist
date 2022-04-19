@@ -19,12 +19,10 @@ export const Map = ({ data = [], seletedData = []}) => {
 
     const parks = data.map((d, i) => {
       const cords = projection([d.longitude, d.latitude])
-      const x = cords?.[1]
-      const y = cords?.[0]
+      const x = cords?.[0] - 17.5
+      const y = cords?.[1] - 35
       return (
-        <image href="./tree.svg" key={d.id} x={y} y={x} width="50" height="50">
-          <desc>A perfect circle</desc>
-        </image>
+        <image className={styles.icon} href="./tree.svg" key={d.id} x={x} y={y}/>
        )
     })
 

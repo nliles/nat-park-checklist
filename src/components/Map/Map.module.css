@@ -4,6 +4,10 @@
   padding-bottom: 100px;
 }
 
+.icon svg {
+  fill: red;
+}
+
 .state {
   fill: #eae3d1;
   stroke: #d8d2bc;

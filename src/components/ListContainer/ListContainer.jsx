@@ -3,6 +3,7 @@ import List from "../List/List";
 import Map from "../Map/Map"
 import { NPS_API, API_KEY } from "../constants";
 import styles from './ListContainer.module.css'
+import { groupBy } from 'lodash';
 
 const ListContainer = () => {
   const [data, setData] = useState([])
@@ -14,7 +15,7 @@ const ListContainer = () => {
 
   const getParks = async () => {
     try {
-      const res = await fetch(`${NPS_API}/parks?limit=30&sort=fullName&api_key=${API_KEY}`)
+      const res = await fetch(`${NPS_API}/parks?limit=2000&sort=fullName&api_key=${API_KEY}`)
       const json = await res.json()
       setData(json.data)
     } catch (e) {
@@ -35,13 +36,15 @@ const ListContainer = () => {
     }
   }
 
+  const filtered = groupBy(data, 'designation')['National Park']
+
   return (
     <div className={styles.container}>
     <nav>
       <h1 className={styles.header}>National Parks</h1>
     </nav>
-      <Map data={data} />
-      <List parks={data} handleChange={handleSelected} />
+      <Map data={filtered || []} />
+      <List parks={filtered || []} handleChange={handleSelected} />
     </div>
   )
 }
