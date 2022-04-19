@@ -1,6 +1,6 @@
 import React from "react";
 import usMapData from './us';
-import { geoAlbersUsa, geoPath } from 'd3-geo'
+import { geoPath } from 'd3-geo'
 import Tree from './Tree'
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "https://cdn.skypack.dev/topojson@3.0.2";
@@ -22,7 +22,8 @@ export const Map = ({ data = [], seletedData = []}) => {
       const x = cords?.[1]
       const y = cords?.[0]
       return (
-        <image key={d.id} x={y} y={x} width="50" height="50" href="./tree.png">
+        <image href="./tree.svg" key={d.id} x={y} y={x} width="50" height="50">
+          <desc>A perfect circle</desc>
         </image>
        )
     })
