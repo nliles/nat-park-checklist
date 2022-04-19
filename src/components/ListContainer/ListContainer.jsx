@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import List from "../List/List";
 import Map from "../Map/Map"
 import { NPS_API, API_KEY } from "../constants";
-import styles from './ListContainer.module.css'
+import styles from './ListContainer.module.scss'
 import { groupBy } from 'lodash';
 
 const ListContainer = () => {
@@ -40,11 +40,11 @@ const ListContainer = () => {
 
   return (
     <div className={styles.container}>
-    <nav>
+    <nav className={styles.nav}>
       <h1 className={styles.header}>National Parks</h1>
     </nav>
-      <Map data={filtered || []} />
-      <List parks={filtered || []} handleChange={handleSelected} />
+      <Map data={filtered || []} selected={selected}/>
+      <List parks={filtered || []} count={selected.length} handleChange={handleSelected} />
     </div>
   )
 }
