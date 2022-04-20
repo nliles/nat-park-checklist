@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "classnames": "^2.3.1",
     "d3": "^7.4.4",
     "d3-composite-projections": "^1.4.0",
     "d3-geo": "^2.0.1",

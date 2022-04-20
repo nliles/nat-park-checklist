@@ -1,13 +1,14 @@
 import React from "react";
+import cn from 'classnames'
 import usMapData from './us';
 import { geoPath } from 'd3-geo'
 import Tree from './Tree'
+import Tooltip from './Tooltip'
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "https://cdn.skypack.dev/topojson@3.0.2";
 import styles from './Map.module.scss'
 
 export const Map = ({ data = [], selected = []}) => {
-
     const usData = topojson.feature(usMapData, usMapData.objects.states)
 
     //Width and height of maps
@@ -20,10 +21,17 @@ export const Map = ({ data = [], selected = []}) => {
     const parks = data.map((d, i) => {
       const isSelected = selected.find(s => s.id === d.id)
       const cords = projection([d.longitude, d.latitude])
-      const x = cords?.[0] - 17.5
-      const y = cords?.[1] - 35
+      const height = 35
+      const x = cords?.[0] - (height / 2)
+      const y = cords?.[1] - (height)
       return (
-        <Tree key={d.id} x={x} y={y} isSelected={isSelected}/>
+        <g key={d.id} height="35" width="35" className={styles.group} transform={`translate(${x} ${y})`}>
+          <g className={styles.icon}>
+           <Tree isSelected={isSelected}/>
+           <text x={i < 10 ? "13.5" : "10.5"} y="25" fill="white" className={styles.text}>{i + 1}</text>
+          </g>
+          <Tooltip park={d} />
+        </g>
        )
     })
 
