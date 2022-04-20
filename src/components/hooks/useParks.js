@@ -7,13 +7,15 @@ function useParks() {
 
 	useEffect(() => {
 			const fetchParks = async () => {
+          setLoading(true)
           try {
             const res = await fetch(`${NPS_API}/parks?limit=2000&sort=fullName&api_key=${API_KEY}`)
             const json = await res.json()
-             console.log('here', json)
             setParks(json.data)
+            setLoading(false)
           } catch (e) {
             console.log(e)
+            setLoading(false)
           }
       }
     fetchParks()

@@ -1,29 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import List from "../List/List";
 import Map from "../Map/Map";
-import { NPS_API, API_KEY } from "../constants";
 import { useParks } from "../hooks"
 import styles from './ListContainer.module.scss'
 import { groupBy } from 'lodash';
 
 const ListContainer = () => {
   const { parks } = useParks()
-    // const [data, setData] = useState([])
   const [selected, setSelected] = useState([])
-  //
-  // useEffect(() => {
-  //   getParks()
-  // }, [])
-  //
-  // const getParks = async () => {
-  //   try {
-  //     const res = await fetch(`${NPS_API}/parks?limit=2000&sort=fullName&api_key=${API_KEY}`)
-  //     const json = await res.json()
-  //     setData(json.data)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
   const handleSelected = (park) => {
     const isSelected = selected.find(s => s.id === park.id)
