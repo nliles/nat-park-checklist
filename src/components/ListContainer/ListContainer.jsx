@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import List from "../List/List";
 import Map from "../Map/Map";
-import { useParks } from "../hooks"
+import { useParks } from "../../hooks"
 import styles from './ListContainer.module.scss'
 import { groupBy } from 'lodash';
 
@@ -45,10 +45,10 @@ const ListContainer = () => {
   return (
     <div className={styles.container}>
     <nav className={styles.nav}>
-      <h1 className={styles.header}>National Parks</h1>
+      <h1 className={styles.header}>US National Parks</h1>
     </nav>
-      <Map data={newArr || []} selected={selected}/>
-      <List parks={newArr || []} count={selected.length} handleChange={handleSelected} />
+      <Map data={newArr} selected={selected}/>
+      <List parks={newArr} count={selected.length} handleChange={handleSelected} />
     </div>
   )
 }
