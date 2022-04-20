@@ -1,5 +1,4 @@
 import React from "react";
-import cn from 'classnames'
 import usMapData from './us';
 import { geoPath } from 'd3-geo'
 import Tree from './Tree'

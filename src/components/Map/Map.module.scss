@@ -9,16 +9,8 @@
   stroke: #d8d2bc;
 }
 
-.icon {
-  position: relative;
-}
-
-.icon:hover {
-  cursor: pointer;
-
-  + foreignObject {
-    visibility: visible;
-  }
+.tooltip {
+  opacity: 0;
 }
 
 .group {
@@ -38,8 +30,7 @@
   border: 1px solid black;
   font-size: 12px;
   display: flex;
-  height: 80px
-  // visibility: hidden;
+  height: 80px;
 
   &::before {
     content: " ";
