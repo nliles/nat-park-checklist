@@ -17,6 +17,10 @@ export const Map = ({ data = [], selected = []}) => {
     const projection = geoAlbersUsaTerritories().translate([width/2, height/2]).scale(1500);          // scale things down so see entire US
     const pathGenerator = geoPath().projection(projection);
 
+    const handleOnMouseEnter = () => {
+      console.log('mouse enter')
+    }
+
     const parks = data.map((d, i) => {
       const isSelected = selected.find(s => s.id === d.id)
       const cords = projection([d.longitude, d.latitude])
@@ -26,7 +30,7 @@ export const Map = ({ data = [], selected = []}) => {
       return (
         <g key={d.id} height="35" width="35" className={styles.group} transform={`translate(${x} ${y})`}>
           <g className={styles.icon}>
-           <Tree isSelected={isSelected}/>
+           <Tree isSelected={isSelected} />
            <text x={i < 10 ? "13.5" : "10.5"} y="25" fill="white" className={styles.text}>{i + 1}</text>
           </g>
           <Tooltip park={d} />

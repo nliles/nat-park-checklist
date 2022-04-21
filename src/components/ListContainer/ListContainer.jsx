@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import List from "../List/List";
 import Map from "../Map/Map";
+import Spinner from "../Spinner/Spinner";
 import { useParks } from "../../hooks"
 import styles from './ListContainer.module.scss'
 import { groupBy } from 'lodash';
 
 const ListContainer = () => {
-  const { parks } = useParks()
+  const { loading, parks } = useParks()
   const [selected, setSelected] = useState([])
 
   const handleSelected = (park) => {
@@ -30,16 +31,16 @@ const ListContainer = () => {
     'National and State Parks'
   ]
 
-  const samoa = (parks || []).find(p => p.fullName === "National Park of American Samoa")
-  const test = groupBy(parks, 'designation')
-  let newArr = []
-  for (let i in test) {
+  const groupedParks = groupBy(parks, 'designation')
+  let filteredParks = []
+  for (let i in groupedParks) {
     if (parkKeys.includes(i)) {
-      newArr = newArr.concat(test[i])
+      filteredParks = filteredParks.concat(groupedParks[i])
     }
-  }
-  if (samoa) {
-    newArr.push(samoa)
+    if (i === "") {
+      const samoa = groupedParks[i].find(p => p.fullName === "National Park of American Samoa")
+      filteredParks.push(samoa)
+    }
   }
 
   return (
@@ -47,8 +48,15 @@ const ListContainer = () => {
     <nav className={styles.nav}>
       <h1 className={styles.header}>US National Parks</h1>
     </nav>
-      <Map data={newArr} selected={selected}/>
-      <List parks={newArr} count={selected.length} handleChange={handleSelected} />
+    {loading &&
+      <Spinner/>
+    }
+    {!loading && (
+      <>
+      <Map data={filteredParks} selected={selected}/>
+      <List parks={filteredParks} count={selected.length} handleChange={handleSelected} />
+      </>
+    )}
     </div>
   )
 }

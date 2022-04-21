@@ -1,7 +1,10 @@
 .container {
-  width: 1200px;
-  margin: 0 auto;
+  margin: 0 100px;
   padding-bottom: 100px;
+
+  @media (max-width: 540px) {
+      margin: 0 25px;
+  }
 }
 
 h2 {
@@ -24,4 +27,12 @@ h2 {
 .listContainer {
   column-count: 3;
   column-fill: auto;
+
+  @media (max-width: 1000px) {
+    column-count: 2;
+  }
+
+  @media (max-width: 540px) {
+    column-count: 1;
+  }
 }
