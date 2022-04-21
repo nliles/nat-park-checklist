@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './ListItem.module.css'
+import styles from './ListItem.module.scss'
 
 const ListItem = ({ park = {}, handleChange, index = 0 }) => {
   return (
