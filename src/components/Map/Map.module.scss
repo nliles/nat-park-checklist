@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .mapContainer {
   display: flex;
   justify-content: center;
@@ -5,7 +7,7 @@
 }
 
 .state {
-  fill: #eae3d1;
+  fill: $tan;
   stroke: #d8d2bc;
 }
 
