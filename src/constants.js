@@ -1,2 +1,3 @@
 export const API_KEY = "coWPLtsaQYAhRKBnWEEOKcnnNXgKwGHDBn7vLl1c"
 export const NPS_API = "https://developer.nps.gov/api/v1"
+export const NAT_PARK_CODES = ['acad', 'arch', 'badl', 'bibe', 'bisc', 'blca', 'brca', 'cany', 'care', 'cave', 'chis', 'cong', 'crla', 'cuva', 'deva', 'dena', 'drto', 'ever', 'gaar', 'jeff', 'glba', 'glac', 'grca', 'grte', 'grba', 'grsa', 'grsm', 'gumo', 'hale', 'havo', 'hosp', 'indu', 'isro', 'jotr', 'katm', 'kefj', 'kova', 'lacl', 'lavo', 'maca', 'meve', 'mora', 'npsa', 'neri', 'noca', 'olym', 'pefo', 'pinn', 'redw', 'romo', 'sagu', 'seki', 'shen', 'thro', 'viis', 'voya', 'whsa', 'wica', 'wrst', 'yell', 'yose', 'zion']

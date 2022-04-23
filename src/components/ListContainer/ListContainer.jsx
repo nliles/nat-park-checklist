@@ -4,7 +4,6 @@ import Map from "../Map/Map";
 import Spinner from "../Spinner/Spinner";
 import { useParks } from "../../hooks"
 import styles from './ListContainer.module.scss'
-import { groupBy } from 'lodash';
 
 const ListContainer = () => {
   const { loading, parks } = useParks()
@@ -23,26 +22,6 @@ const ListContainer = () => {
     }
   }
 
-  const parkKeys = [
-    'National Park',
-    'National Parks',
-    'National Park and Preserve',
-    'National Park & Preserve',
-    'National and State Parks'
-  ]
-
-  const groupedParks = groupBy(parks, 'designation')
-  let filteredParks = []
-  for (let i in groupedParks) {
-    if (parkKeys.includes(i)) {
-      filteredParks = filteredParks.concat(groupedParks[i])
-    }
-    if (i === "") {
-      const samoa = groupedParks[i].find(p => p.fullName === "National Park of American Samoa")
-      filteredParks.push(samoa)
-    }
-  }
-
   return (
     <div className={styles.container}>
     <nav className={styles.nav}>
@@ -53,8 +32,8 @@ const ListContainer = () => {
     }
     {!loading && (
       <>
-      <Map data={filteredParks} selected={selected}/>
-      <List parks={filteredParks} count={selected.length} handleChange={handleSelected} />
+      <Map data={parks} selected={selected}/>
+      <List parks={parks} count={selected.length} handleChange={handleSelected} />
       </>
     )}
     </div>

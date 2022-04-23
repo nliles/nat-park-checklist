@@ -1,16 +1,16 @@
 import styles from './Map.module.scss'
 
-const Tooltip = ({ park }) => {
+const Tooltip = ({ park, x, y }) => {
   const image = park.images[0]
   const statesArr = park.states?.split(',')
   return (
-    <foreignObject x="-73" y="0" className={styles.tooltip} width="180px" height="115px">
+    <foreignObject id={`tooltip-${park.fullName}`} x={x} y={y} className={styles.tooltip} width="180px" height="115px">
       <div className={styles.content}>
         <div className={styles.imgContainer}>
         <img src={image.url} alt={image.altText}/>
         </div>
         <div className={styles.text}>
-        <h4>{park.fullName}</h4>
+        <h4><a href={park.url} alt={park.fullName}>{park.fullName}</a></h4>
         <span>State{statesArr.length > 1 ? 's' : ''}: {park.states}</span>
         </div>
       </div>
