@@ -9,15 +9,15 @@ const ListContainer = () => {
   const { loading, parks } = useParks()
   const [selected, setSelected] = useState([])
 
-  const handleSelected = (park) => {
-    const isSelected = selected.find(s => s.id === park.id)
+  const handleSelected = (parkId) => {
+    const isSelected = selected.includes(parkId)
     const newItems = [...selected]
     if (isSelected) {
-      const index = selected.findIndex(s => s.id === park.id);
+      const index = selected.indexOf(parkId)
       newItems.splice(index, 1);
       setSelected(newItems);
     } else {
-      newItems.push(park)
+      newItems.push(parkId)
       setSelected(newItems);
     }
   }
@@ -32,7 +32,7 @@ const ListContainer = () => {
     }
     {!loading && (
       <>
-      <Map data={parks} selected={selected}/>
+      <Map parks={parks} selected={selected}/>
       <List parks={parks} count={selected.length} handleChange={handleSelected} />
       </>
     )}

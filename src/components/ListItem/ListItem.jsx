@@ -2,16 +2,18 @@ import React from "react";
 import styles from './ListItem.module.scss'
 
 const ListItem = ({ park = {}, handleChange, index = 0 }) => {
+  const label = `${index + 1}. ${park?.fullName}`
+  const name = park.fullName
   return (
-    <div key={park?.fullName}>
-    <label className={styles.container} htmlFor={park?.fullName}><span>{index + 1}.{' '}</span>{park?.fullName}
+    <div key={name}>
+    <label className={styles.container} htmlFor={name}>
+      {label}
       <input
       className={styles.checkbox}
-      onChange={() => handleChange(park) }
+      onChange={() => handleChange(park.id) }
       type="checkbox"
-      id={park?.fullName}
-      name={park?.fullName}
-      value="Bike"/>
+      id={name}
+      name={name}/>
       <span className={styles.checkmark}></span>
       </label>
     </div>
