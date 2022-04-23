@@ -10,7 +10,8 @@ import styles from './Map.module.scss'
 
 const Map = ({ parks = [], selected = []}) => {
     const [tooltipContent, setTooltipContent] = useState(null);
-    const [width, height] = useWindowResize();
+    const [width] = useWindowResize();
+    const height = width / 2
     const usData = topojson.feature(usMapData, usMapData.objects.states);
 
     const projection = geoAlbersUsaTerritories().fitSize([width, height], usData);         // scale things down so see entire US
@@ -31,16 +32,22 @@ const Map = ({ parks = [], selected = []}) => {
        />
      )
 
-    const natParks = parks.map((p, i) => (
-        <Tree
-        key={p.fullName}
-        coords={projection([p.longitude, p.latitude])}
-        isSelected={selected.includes(p.id)}
-        park={p}
-        handleMouseOver={handleMouseOverPark}
-        handleMouseLeave={handleMouseLeavePark}
-        number={i + 1} />
-    ))
+    const natParks = parks.map((p, i) => {
+      const coords = projection([p.longitude, p.latitude])
+      return (
+        <>
+            <Tree
+            key={p.fullName}
+            coords={coords}
+            isSelected={selected.includes(p.id)}
+            park={p}
+            handleMouseOver={handleMouseOverPark}
+            handleMouseLeave={handleMouseLeavePark}
+            number={i + 1} />
+            <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]}/>
+          </>
+        )
+    })
 
     return (
       <div className={styles.mapContainer}>

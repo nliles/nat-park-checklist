@@ -13,7 +13,7 @@ const Tree = ({ coords, park, isSelected, handleMouseOver, handleMouseLeave, num
   const x = coords?.[0] - 20 // subtract half the height
   const y = coords?.[1] - 40 // subtract full height
   return (
-    <svg key={park.id} x={x} y={y} className={styles.test}
+    <svg key={park.id} x={x} y={y} className={styles.icon}
       onMouseEnter={(e) => handleMouseOver(e, park)}
       onMouseLeave={() => handleMouseLeave()}>
        <TreeIcon isSelected={isSelected} />
