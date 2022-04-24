@@ -9,7 +9,7 @@ const List = ({ parks = [], count, handleChange }) => {
     <h2>Checklist <span className={styles.count}>{countDisplay}</span></h2>
     <div className={styles.listContainer}>
       {parks && parks.map((park, i) => (
-        <ListItem key={park?.fullName} index={i} park={park} handleChange={handleChange}/>
+        <ListItem key={park.fullName} index={i} park={park} handleChange={handleChange}/>
         )
       )}
     </div>

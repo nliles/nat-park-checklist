@@ -11,10 +11,13 @@ import styles from './Map.module.scss'
 const Map = ({ parks = [], selected = []}) => {
     const [tooltipContent, setTooltipContent] = useState(null);
     const [width] = useWindowResize();
-    const height = width / 2
+    const height = (width / 2)
     const usData = topojson.feature(usMapData, usMapData.objects.states);
+    const padding = width > 540 ? 30 : 0
+    const bottomPadding = width > 768 ? 100 : 0
 
-    const projection = geoAlbersUsaTerritories().fitSize([width, height], usData);         // scale things down so see entire US
+    const projection = geoAlbersUsaTerritories()
+    .fitExtent([[padding, padding], [width, height]], usData);
     const pathGenerator = geoPath().projection(projection);
 
     const handleMouseOverPark = (e, park) => {
@@ -44,14 +47,16 @@ const Map = ({ parks = [], selected = []}) => {
             handleMouseOver={handleMouseOverPark}
             handleMouseLeave={handleMouseLeavePark}
             number={i + 1} />
-            <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]}/>
+            {coords &&
+              <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]}/>
+            }
           </>
         )
     })
 
     return (
       <div className={styles.mapContainer}>
-        <svg width={width} height={height}>
+        <svg width={width} height={height + bottomPadding}>
           {states}
           {natParks}
           {tooltipContent && <Tooltip park={tooltipContent} coords={projection([tooltipContent.longitude, tooltipContent.latitude])}/>}

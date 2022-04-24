@@ -16,6 +16,9 @@
   width: 180px;
   height: 115px;
   pointer-events: none;
+  @media (max-width: $desktop) {
+    display: none;
+  }
 }
 
 .icon {
