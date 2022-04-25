@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
-import { NAT_PARK_CODES, NPS_API, API_KEY } from "../constants";
+import { PARK_CODES, NPS_API, API_KEY } from "../constants";
 
-function useParks() {
+function useParks(selectedItem) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
   const [parks, setParks] = useState([])
 
 	useEffect(() => {
 			const fetchParks = async () => {
+					const codes = PARK_CODES[selectedItem]
           setLoading(true)
           try {
-            const res = await fetch(`${NPS_API}/parks?parkCode=${NAT_PARK_CODES}&limit=466&sort=fullName&api_key=${API_KEY}`)
+            const res = await fetch(`${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`)
             const json = await res.json()
             setParks(json.data)
             setLoading(false)
@@ -19,8 +20,10 @@ function useParks() {
             setLoading(false)
           }
       }
-    fetchParks()
-	}, [])
+		if (selectedItem) {
+		   fetchParks()
+		}
+	}, [selectedItem])
 
 	return {
 		error,

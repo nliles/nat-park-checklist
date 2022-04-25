@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useWindowResize } from "../../hooks"
 import usMapData from './us';
 import { geoPath } from 'd3-geo'
-import Tree from './Tree'
+import ParkIcon from './ParkIcon'
 import Tooltip from './Tooltip'
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "https://cdn.skypack.dev/topojson@3.0.2";
@@ -29,30 +29,24 @@ const Map = ({ parks = [], selected = []}) => {
     }
 
     const states = usData.features.map((d) => <path
-       key={d.properties?.name}
+       key={d.fullName}
        d={pathGenerator(d)}
        className={styles.state}
        />
      )
 
-    const natParks = parks.map((p, i) => {
-      const coords = projection([p.longitude, p.latitude])
-      return (
-        <>
-            <Tree
+    const natParks = parks.map((p, i) => (
+            <ParkIcon
             key={p.fullName}
-            coords={coords}
+            coords={projection([p.longitude, p.latitude])}
             isSelected={selected.includes(p.id)}
             park={p}
             handleMouseOver={handleMouseOverPark}
             handleMouseLeave={handleMouseLeavePark}
-            number={i + 1} />
-            {coords &&
-              <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]}/>
-            }
-          </>
+            number={i + 1}
+            />
         )
-    })
+    )
 
     return (
       <div className={styles.mapContainer}>

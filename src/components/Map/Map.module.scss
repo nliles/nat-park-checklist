@@ -16,9 +16,6 @@
   width: 180px;
   height: 115px;
   pointer-events: none;
-  @media (max-width: $desktop) {
-    display: none;
-  }
 }
 
 .icon {
@@ -31,7 +28,7 @@
 .circle {
   fill: $green;
   display: none;
-  @media (max-width: $mobile-landscape) {
+  @media (max-width: $desktop) {
     display: block;
   }
 }

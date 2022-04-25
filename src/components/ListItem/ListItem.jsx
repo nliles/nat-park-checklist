@@ -5,7 +5,7 @@ const ListItem = ({ park = {}, handleChange, index = 0 }) => {
   const label = `${index + 1}. ${park?.fullName}`
   const name = park.fullName
   return (
-    <div key={name}>
+    <div>
     <label className={styles.container} htmlFor={name}>
       {label}
       <input
