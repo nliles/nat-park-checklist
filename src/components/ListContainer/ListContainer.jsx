@@ -14,7 +14,7 @@ const ListContainer = () => {
   const [selected, setSelected] = useState([])
   const { loading, parks } = useParks(selectedListItem)
   console.log(parks)
-  const grouped = groupBy(parks, 'designation')['National Military Park']
+  // const grouped = groupBy(parks, 'designation')['National Military Park']
   // console.log(grouped?.map(g => g.parkCode))
 
   const handleListItemChange = (item) => {

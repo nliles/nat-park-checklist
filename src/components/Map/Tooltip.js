@@ -4,7 +4,7 @@ const Tooltip = ({ park, coords }) => {
   const image = park.images[0];
   const statesArr = park.states?.split(',');
   const states = `State${statesArr.length > 1 ? 's' : ''}: ${statesArr.join(", ")}`
-  const x = coords?.[0] - 90 // x - half tooltip width to center
+  const x = coords?.[0] - 100 // x - half tooltip width to center
   const y = coords?.[1]
   return (
     <foreignObject className={styles.tooltip} x={x} y={y}>
