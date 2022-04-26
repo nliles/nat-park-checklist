@@ -53,6 +53,8 @@
   position: absolute;
   z-index: 1;
   background: $white;
+  max-height: 200px;
+  overflow: auto;
   top: 40px;
   left: -2px;
   width: 100%;
@@ -61,8 +63,6 @@
 	border-top: 0;
   width: 250px;
   visibility: hidden;
-  display: flex;
-  flex-direction: column;
   border: 2px solid $green;
   list-style: none;
 }
@@ -77,11 +77,11 @@
   cursor: pointer;
 
   &.selected {
-    background: #f9f9f9;
+    background: $tan;
   }
 
   &:hover {
-    background: #f9f9f9;
+    background: $tan;
   }
 
   &:last-child {

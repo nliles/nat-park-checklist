@@ -4,18 +4,14 @@ import Map from "../Map/Map";
 import Spinner from "../Spinner/Spinner";
 import Dropdown from "../Dropdown/Dropdown";
 import { useParks } from "../../hooks";
-import { groupBy } from 'lodash';
 import { removeDashes } from "../../helpers";
 import styles from './ListContainer.module.scss';
-import { LIST_OPTIONS, NAT_PARK } from "../../constants";
+import { LIST_OPTIONS, PARK_DESIGNATION_KEY } from "../../constants";
 
 const ListContainer = () => {
-  const [selectedListItem, setSelectedListItem] = useState(NAT_PARK)
+  const [selectedListItem, setSelectedListItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
   const [selected, setSelected] = useState([])
   const { loading, parks } = useParks(selectedListItem)
-  console.log(parks)
-  // const grouped = groupBy(parks, 'designation')['National Military Park']
-  // console.log(grouped?.map(g => g.parkCode))
 
   const handleListItemChange = (item) => {
     setSelectedListItem(item)
