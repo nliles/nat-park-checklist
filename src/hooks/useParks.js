@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { PARK_CODES, NPS_API, API_KEY } from "../constants";
+import { sortParks } from "../helpers";
 
 function useParks(selectedItem) {
 	const [loading, setLoading] = useState(false)
@@ -13,7 +14,8 @@ function useParks(selectedItem) {
           try {
             const res = await fetch(`${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`)
             const json = await res.json()
-            setParks(json.data)
+						const sorted = sortParks(json.data)
+            setParks(sorted)
             setLoading(false)
           } catch (e) {
             setError(true)

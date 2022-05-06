@@ -1,8 +1,8 @@
 import React from 'react';
-import ListContainer from './components/ListContainer/ListContainer';
+import ParkContainer from './components/ParkContainer/ParkContainer';
 
 const App = () => (
-      <ListContainer/>
+      <ParkContainer/>
   )
 
 
