@@ -1,0 +1,11 @@
+@import '../../styles/colors.scss';
+
+.container {
+  margin: 0 100px;
+  display: flex;
+  align-items: center;
+}
+
+.count {
+  color: $green;
+}

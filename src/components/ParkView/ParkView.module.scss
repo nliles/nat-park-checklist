@@ -14,6 +14,11 @@ div#app {
   height: 100%;
 }
 
+.tree {
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   font-family: 'Nanum Myeongjo', serif;
   text-transform: uppercase;

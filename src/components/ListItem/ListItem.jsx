@@ -4,7 +4,6 @@ import styles from './ListItem.module.scss'
 const ListItem = ({ park = {}, handleChange, index = 0, selected }) => {
   const label = `${index + 1}. ${park?.fullName}`
   const isSelected = selected.includes(park.id)
-  console.log(isSelected)
   const name = park.fullName
   return (
     <div>

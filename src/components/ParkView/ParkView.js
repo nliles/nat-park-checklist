@@ -2,10 +2,9 @@ import React from "react";
 import List from "../List/List";
 import Map from "../Map/Map";
 import Spinner from "../ui/Spinner/Spinner";
-import Dropdown from "../ui/Dropdown/Dropdown";
+import SubNav from "../SubNav/SubNav";
 import { removeDashes } from "../../helpers";
 import styles from './ParkView.module.scss';
-import { LIST_OPTIONS } from "../../constants";
 
 const ParkView = ({ loading, parks, selected, selectedDropdownItem, handleListItemChange, handleSelected }) => {
   return (
@@ -18,7 +17,7 @@ const ParkView = ({ loading, parks, selected, selectedDropdownItem, handleListIt
     }
     {!loading && (
       <>
-        <Dropdown list={LIST_OPTIONS} selectedItem={selectedDropdownItem} handleClick={handleListItemChange} />
+        <SubNav selected={selected} selectedDropdownItem={selectedDropdownItem} handleListItemChange={handleListItemChange}/>
         <Map parks={parks} selected={selected}/>
         <List parks={parks} selected={selected} count={selected.length} handleChange={handleSelected} />
       </>
