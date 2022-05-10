@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ParkView from "../ParkView/ParkView"
 import { useParks } from "../../hooks";
-import { groupBy } from 'lodash'
 import { PARK_DESIGNATION_KEY } from "../../constants";
 import { loadState, saveState } from "../../storage/sessionStorage"
 
@@ -9,8 +8,6 @@ const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
   const [selected, setSelected] = useState([])
   const { loading, parks } = useParks(selectedDropdownItem)
-  // const found = groupBy(parks, 'designation')['National Recreation Area']
-  // console.log(parks?.filter(p => p.fullName.includes("Chelan")))
 
   useEffect(() => {
     const stored = loadState() || []
