@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ParkView from "../ParkView/ParkView"
 import { useParks } from "../../hooks";
 import { groupBy } from 'lodash'
 import { PARK_DESIGNATION_KEY } from "../../constants";
+import { loadState, saveState } from "../../storage/sessionStorage"
 
 const ParkContainer = () => {
-  const [selectedListItem, setSelectedListItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
+  const [selectedDropdownItem, setSelectedDropdownItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
   const [selected, setSelected] = useState([])
-  const { loading, parks } = useParks(selectedListItem)
+  const { loading, parks } = useParks(selectedDropdownItem)
   // const found = groupBy(parks, 'designation')['National Recreation Area']
   // console.log(parks?.filter(p => p.fullName.includes("Chelan")))
 
+  useEffect(() => {
+    const stored = loadState() || []
+    setSelected(stored)
+  }, [])
+
+  const saveToStorage = () => {
+    saveState(selected)
+  }
+
   const handleListItemChange = (item) => {
-    setSelectedListItem(item)
+    setSelectedDropdownItem(item)
+    saveToStorage()
   }
 
   const handleSelected = (parkId) => {
@@ -29,7 +40,7 @@ const ParkContainer = () => {
   }
 
   return (
-    <ParkView loading={loading} selected={selected} selectedListItem={selectedListItem} parks={parks} handleSelected={handleSelected} handleListItemChange={handleListItemChange}/>
+    <ParkView loading={loading} selected={selected} selectedDropdownItem={selectedDropdownItem} parks={parks} handleSelected={handleSelected} handleListItemChange={handleListItemChange}/>
   )
 }
 

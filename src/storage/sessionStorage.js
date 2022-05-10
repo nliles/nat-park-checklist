@@ -1,7 +1,7 @@
 // load state from local storage
 export const loadState = () => {
   try {
-    const serializedState = sessionStorage.getItem("state");
+    const serializedState = sessionStorage.getItem("selected");
     if (serializedState === null) {
       return undefined;
     }
@@ -12,9 +12,9 @@ export const loadState = () => {
 };
 
 // save state to local storage
-export const saveState = state => {
+export const saveState = selected => {
   try {
-    const serializedState = JSON.stringify(state);
-    sessionStorage.setItem("state", serializedState);
+    const serializedState = JSON.stringify(selected);
+    sessionStorage.setItem("selected", serializedState);
   } catch {}
 };
