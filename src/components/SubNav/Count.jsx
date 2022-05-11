@@ -1,9 +1,9 @@
 import styles from './SubNav.module.scss';
 
-const Count = ({ count, total }) => {
+const Count = ({ count, total, totalSelected }) => {
   return (
     <div className={styles.count}>
-      <span><strong>{count}</strong> out of {total}</span>
+      <span><strong>{totalSelected}</strong> out of {total}</span>
     </div>
   )
 }

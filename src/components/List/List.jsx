@@ -2,7 +2,8 @@ import React from "react";
 import ListItem from '../ListItem/ListItem'
 import styles from './List.module.scss'
 
-const List = ({ parks = [], count = 0, selected = [], handleChange }) => {
+const List = ({ parks = [], selected = [], handleChange }) => {
+  const count = parks.filter(p => selected.includes(p.id)).length
   const countDisplay =`${count} out of ${parks.length}`
   return (
   <div className={styles.container}>

@@ -8,7 +8,7 @@ const SubNav = ({ selected, selectedDropdownItem, handleListItemChange }) => {
   return (
     <div className={styles.container}>
       <Dropdown list={LIST_OPTIONS} selectedItem={selectedDropdownItem} handleClick={handleListItemChange} />
-      <Count count={selected.length} total={total}/>
+      <Count totalSelected={selected.length} total={total}/>
     </div>
   )
 }
