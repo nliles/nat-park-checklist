@@ -4,7 +4,7 @@ import usMapData from "./us";
 import { geoPath } from "d3-geo";
 import MapMarker from "./MapMarker";
 import Tooltip from "./Tooltip";
-import { Park } from "../../types";
+// import { Park } from "../../types";
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import styles from "./index.module.scss";
