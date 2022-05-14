@@ -1,4 +1,4 @@
-import styles from './Map.module.scss'
+import styles from '../index.module.scss'
 
 const Tooltip = ({ park, coords }) => {
   const image = park.images[0];

@@ -1,6 +1,6 @@
 import React from "react";
-import ListItem from '../ListItem/ListItem'
-import styles from './List.module.scss'
+import ListItem from '../ListItem'
+import styles from './index.module.scss'
 
 const List = ({ parks = [], selected = [], handleChange }) => {
   const count = parks.filter(p => selected.includes(p.id)).length

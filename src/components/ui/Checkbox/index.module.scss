@@ -1,26 +1,43 @@
-@import '../../styles/colors.scss';
-@import '../../styles/breakpoints.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/breakpoints.scss';
 
-.container {
+.checkboxWrapper {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
+  padding-bottom: 12px;
   cursor: pointer;
   font-size: 18px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+          page-break-inside: avoid; /* Firefox */
+               break-inside: avoid; /* IE 10+ */
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.checkboxWrapper input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+.checkboxWrapper:hover input ~ .checkmark {
+  background-color: #bcb28c;
+}
+
+.checkboxWrapper > input:focus + span {
+	background-color: #bcb28c;
+}
+
+.checkboxWrapper input:checked ~ .checkmark {
+  background-color: $green;
 }
 
 .checkmark {
@@ -31,14 +48,7 @@
   width: 20px;
   background-color: $tan;
   border: 1px solid $green;
-}
-
-.container:hover input ~ .checkmark {
-  background-color: $green;
-}
-
-.container input:checked ~ .checkmark {
-  background-color: $green;
+  z-index: -1;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -49,12 +59,12 @@
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.checkboxWrapper input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.checkboxWrapper .checkmark:after {
   left: 7px;
   top: 3px;
   width: 5px;

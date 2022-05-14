@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useWindowResize } from "../../hooks"
 import usMapData from './us';
 import { geoPath } from 'd3-geo'
-import ParkIcon from './ParkIcon'
+import MapMarker from './MapMarker'
 import Tooltip from './Tooltip'
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "https://cdn.skypack.dev/topojson@3.0.2";
-import styles from './Map.module.scss'
+import styles from './index.module.scss'
 
 const Map = ({ parks = [], selected = []}) => {
     const [tooltipContent, setTooltipContent] = useState(null);
@@ -36,7 +36,7 @@ const Map = ({ parks = [], selected = []}) => {
      )
 
     const natParks = parks.map((p, i) => (
-            <ParkIcon
+            <MapMarker
             key={p.fullName}
             coords={projection([p.longitude, p.latitude])}
             isSelected={selected.includes(p.id)}

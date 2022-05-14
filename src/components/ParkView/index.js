@@ -1,10 +1,10 @@
 import React from "react";
-import List from "../List/List";
-import Map from "../Map/Map";
-import Spinner from "../ui/Spinner/Spinner";
-import SubNav from "../SubNav/SubNav";
+import List from "../List";
+import Map from "../Map";
+import Spinner from "../ui/Spinner";
+import SubNav from "../SubNav";
 import { removeDashes } from "../../helpers";
-import styles from './ParkView.module.scss';
+import styles from './index.module.scss';
 
 const ParkView = ({ loading, parks, selected, selectedDropdownItem, handleListItemChange, handleSelected }) => {
   return (

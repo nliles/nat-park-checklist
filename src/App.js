@@ -1,5 +1,5 @@
 import React from 'react';
-import ParkContainer from './components/ParkContainer/ParkContainer';
+import ParkContainer from './components/ParkContainer';
 
 const App = () => (
       <ParkContainer/>
