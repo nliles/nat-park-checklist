@@ -1,6 +1,6 @@
-// import { Park } from '../types'
+import { Park } from '../types'
 
-const sortParks = (parks) => {
+const sortParks = (parks: Park[]) => {
   return parks.sort( (a, b) => a.fullName.localeCompare(b.fullName, 'fr', { ignorePunctuation: true }));
 }
 

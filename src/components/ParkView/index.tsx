@@ -1,4 +1,3 @@
-import React from "react";
 import List from "../List";
 import Map from "../Map";
 import Spinner from "../ui/Spinner";

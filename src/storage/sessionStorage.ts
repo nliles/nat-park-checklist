@@ -12,7 +12,7 @@ export const loadState = () => {
 };
 
 // save state to local storage
-export const saveState = selected => {
+export const saveState = (selected: string[]) => {
   try {
     const serializedState = JSON.stringify(selected);
     sessionStorage.setItem("selected", serializedState);

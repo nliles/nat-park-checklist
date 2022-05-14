@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Park } from '../types'
 import { PARK_CODES, NPS_API, API_KEY } from "../constants";
 import { sortParks } from "../helpers";
 
 function useParks(selectedItem: string) {
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(false)
-  const [parks, setParks] = useState([])
+	const [loading, setLoading] = useState<boolean>(false)
+	const [error, setError] = useState<boolean>(false)
+  const [parks, setParks] = useState<Park[]>([])
 
 	useEffect(() => {
 			const fetchParks = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ParkView from "../ParkView"
 import { useParks } from "../../hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
