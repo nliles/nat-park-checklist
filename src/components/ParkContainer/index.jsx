@@ -6,16 +6,16 @@ import { loadState, saveState } from "../../storage/sessionStorage"
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
-  const [selected, setSelected] = useState([])
+  const [selectedParks, setSelectedParks] = useState([])
   const { loading, parks } = useParks(selectedDropdownItem)
 
   useEffect(() => {
     const stored = loadState() || []
-    setSelected(stored)
+    setSelectedParks(stored)
   }, [])
 
   const saveToStorage = () => {
-    saveState(selected)
+    saveState(selectedParks)
   }
 
   const handleListItemChange = (item) => {
@@ -24,20 +24,20 @@ const ParkContainer = () => {
   }
 
   const handleSelected = (parkId) => {
-    const isSelected = selected.includes(parkId)
-    const newItems = [...selected]
+    const isSelected = selectedParks.includes(parkId)
+    const newItems = [...selectedParks]
     if (isSelected) {
-      const index = selected.indexOf(parkId)
+      const index = selectedParks.indexOf(parkId)
       newItems.splice(index, 1);
-      setSelected(newItems);
+      setSelectedParks(newItems);
     } else {
       newItems.push(parkId)
-      setSelected(newItems);
+      setSelectedParks(newItems);
     }
   }
 
   return (
-    <ParkView loading={loading} selected={selected} selectedDropdownItem={selectedDropdownItem} parks={parks} handleSelected={handleSelected} handleListItemChange={handleListItemChange}/>
+    <ParkView loading={loading} selectedParks={selectedParks} selectedDropdownItem={selectedDropdownItem} parks={parks} handleSelected={handleSelected} handleListItemChange={handleListItemChange}/>
   )
 }
 

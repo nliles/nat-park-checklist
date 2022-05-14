@@ -8,7 +8,7 @@ import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "https://cdn.skypack.dev/topojson@3.0.2";
 import styles from './index.module.scss'
 
-const Map = ({ parks = [], selected = []}) => {
+const Map = ({ parks = [], selectedParks = []}) => {
     const [tooltipContent, setTooltipContent] = useState(null);
     const [width] = useWindowResize();
     const height = (width / 2)
@@ -39,7 +39,7 @@ const Map = ({ parks = [], selected = []}) => {
             <MapMarker
             key={p.fullName}
             coords={projection([p.longitude, p.latitude])}
-            isSelected={selected.includes(p.id)}
+            isSelected={selectedParks.includes(p.id)}
             park={p}
             handleMouseOver={handleMouseOverPark}
             handleMouseLeave={handleMouseLeavePark}

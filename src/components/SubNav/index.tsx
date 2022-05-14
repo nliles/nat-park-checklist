@@ -4,16 +4,16 @@ import styles from './index.module.scss';
 
 type SubNavType = {
   handleListItemChange: () => void,
-  selected: string[],
+  selectedParks: string[],
   selectedDropdownItem: string
 }
-const SubNav = ({ selected, selectedDropdownItem, handleListItemChange }: SubNavType) => {
+const SubNav = ({ selectedParks, selectedDropdownItem, handleListItemChange }: SubNavType) => {
   const total = Object.values(PARK_CODES).reduce((acc,element) => acc + element.length, 0);
   return (
     <div className={styles.container}>
       <Dropdown list={LIST_OPTIONS} selectedItem={selectedDropdownItem} handleClick={handleListItemChange} />
       <div className={styles.count}>
-        <span><strong>{selected.length}</strong> out of {total}</span>
+        <span><strong>{selectedParks.length}</strong> out of {total}</span>
       </div>
     </div>
   )

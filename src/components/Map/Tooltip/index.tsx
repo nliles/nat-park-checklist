@@ -1,6 +1,12 @@
+import { Park } from '../../../types'
 import styles from '../index.module.scss'
 
-const Tooltip = ({ park, coords }) => {
+type TooltipType = {
+  coords: number[],
+  park: Park
+}
+
+const Tooltip = ({ park, coords }: TooltipType) => {
   const image = park.images[0];
   const statesArr = park.states?.split(',');
   const states = `State${statesArr.length > 1 ? 's' : ''}: ${statesArr.join(", ")}`
