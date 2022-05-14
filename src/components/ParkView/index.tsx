@@ -8,8 +8,8 @@ import { removeDashes } from "../../helpers";
 import styles from './index.module.scss';
 
 type ParkViewType = {
-  handleListItemChange: () => void,
-  handleSelected: () => void,
+  handleListItemChange: (item: string) => void,
+  handleSelected: (item: string) => void,
   loading: boolean,
   parks: Park[],
   selectedParks: string[],

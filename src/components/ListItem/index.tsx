@@ -4,13 +4,12 @@ import Checkbox from "../ui/Checkbox"
 
 type ListItemType = {
   park: Park,
-  handleChange: () => void,
+  handleChange: (item: string) => void,
   index: number,
   selectedParks: string[]
 }
 
 const ListItem = ({ park, handleChange, index = 0, selectedParks }: ListItemType) => {
-  console.log(park)
   const { id, fullName } = park
   const label = `${index + 1}. ${fullName}`
   const isSelected = selectedParks.includes(id)

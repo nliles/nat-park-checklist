@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 type ListType = {
   parks: Park[],
   selectedParks: string[],
-  handleChange: () => void
+  handleChange: (item: string) => void
 }
 
 const List = ({ parks = [], selectedParks = [], handleChange }: ListType) => {

@@ -6,7 +6,7 @@ import { loadState, saveState } from "../../storage/sessionStorage"
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(PARK_DESIGNATION_KEY.NAT_PARK)
-  const [selectedParks, setSelectedParks] = useState([])
+  const [selectedParks, setSelectedParks] = useState<string[]>([])
   const { loading, parks } = useParks(selectedDropdownItem)
 
   useEffect(() => {
@@ -18,12 +18,12 @@ const ParkContainer = () => {
     saveState(selectedParks)
   }
 
-  const handleListItemChange = (item) => {
+  const handleListItemChange = (item: string) => {
     setSelectedDropdownItem(item)
     saveToStorage()
   }
 
-  const handleSelected = (parkId) => {
+  const handleSelected = (parkId: string) => {
     const isSelected = selectedParks.includes(parkId)
     const newItems = [...selectedParks]
     if (isSelected) {

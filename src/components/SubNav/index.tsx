@@ -3,7 +3,7 @@ import { LIST_OPTIONS, PARK_CODES } from "../../constants";
 import styles from './index.module.scss';
 
 type SubNavType = {
-  handleListItemChange: () => void,
+  handleListItemChange: (item: string) => void,
   selectedParks: string[],
   selectedDropdownItem: string
 }
