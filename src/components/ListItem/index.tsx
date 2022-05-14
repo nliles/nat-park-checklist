@@ -1,7 +1,16 @@
 import React from "react";
+import { Park } from '../../types'
 import Checkbox from "../ui/Checkbox"
 
-const ListItem = ({ park = {}, handleChange, index = 0, selected }) => {
+type ListItemType = {
+  park: Park,
+  handleChange: () => void,
+  index: number,
+  selected: string[]
+}
+
+const ListItem = ({ park, handleChange, index = 0, selected }: ListItemType) => {
+  console.log(park)
   const { id, fullName } = park
   const label = `${index + 1}. ${fullName}`
   const isSelected = selected.includes(id)

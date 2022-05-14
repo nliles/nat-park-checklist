@@ -4,12 +4,18 @@ import { removeDashes } from "../../../helpers";
 import styles from './index.module.scss'
 import cn from 'classnames';
 
-const Dropdown = ({ list, selectedItem, handleClick = () => {} }) => {
+// type DropdownType = {
+//   handleClick: () => {},
+//   list: string[],
+//   selectedItem: string,
+// }
+
+const Dropdown = ({ handleClick, list, selectedItem }) => {
   const myRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClickOutside = e => {
-      if (!myRef.current.contains(e.target)) {
+  const handleClickOutside = (e) => {
+      if (!myRef?.current.contains(e?.target)) {
           setIsOpen(false)
       }
   }

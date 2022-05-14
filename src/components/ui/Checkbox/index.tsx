@@ -1,7 +1,14 @@
 import React from "react";
 import styles from './index.module.scss'
 
-const Checkbox = ({ id, handleChange, label, checked }) => {
+type CheckboxType = {
+  checked: boolean,
+  handleChange: (id: string) => void,
+  id: string,
+  label: string,
+}
+
+const Checkbox = ({ id, handleChange, label, checked }: CheckboxType) => {
   return (
     <div>
     <label className={styles.checkboxWrapper} htmlFor={id}>

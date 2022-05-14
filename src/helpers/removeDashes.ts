@@ -1,4 +1,4 @@
-const removeDashes = (item) => {
+const removeDashes = (item: string) => {
   return item.replace(/-/g, ' ')
 }
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { PARK_CODES, NPS_API, API_KEY } from "../constants";
 import { sortParks } from "../helpers";
 
-function useParks(selectedItem) {
+function useParks(selectedItem: string) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
   const [parks, setParks] = useState([])
