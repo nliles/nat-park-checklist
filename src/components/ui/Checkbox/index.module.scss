@@ -1,5 +1,5 @@
-@import '../../../styles/colors.scss';
-@import '../../../styles/breakpoints.scss';
+@import "../../../styles/colors.scss";
+@import "../../../styles/breakpoints.scss";
 
 .checkboxWrapper {
   display: block;
@@ -13,8 +13,8 @@
   -ms-user-select: none;
   user-select: none;
   -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-          page-break-inside: avoid; /* Firefox */
-               break-inside: avoid; /* IE 10+ */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
 }
 
 /* Hide the browser's default checkbox */
@@ -33,7 +33,7 @@
 }
 
 .checkboxWrapper > input:focus + span {
-	background-color: #bcb28c;
+  background-color: #bcb28c;
 }
 
 .checkboxWrapper input:checked ~ .checkmark {

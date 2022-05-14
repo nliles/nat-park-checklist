@@ -1,11 +1,11 @@
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
 const Spinner = () => {
   return (
     <div className={styles.spinner}>
-      <div className={styles.loading}/>
+      <div className={styles.loading} />
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

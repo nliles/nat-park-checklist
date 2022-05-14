@@ -1,9 +1,6 @@
-import React from 'react';
-import ParkContainer from './components/ParkContainer';
+import React from "react";
+import ParkContainer from "./components/ParkContainer";
 
-const App = () => (
-    <ParkContainer/>
-)
-
+const App = () => <ParkContainer />;
 
 export default App;

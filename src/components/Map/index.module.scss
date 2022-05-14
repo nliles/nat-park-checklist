@@ -1,5 +1,5 @@
-@import '../../styles/colors.scss';
-@import '../../styles/breakpoints.scss';
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
 
 .mapContainer {
   display: flex;
@@ -54,7 +54,7 @@
   &::before {
     content: " ";
     position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
+    bottom: 100%; /* At the top of the tooltip */
     left: 50%;
     margin-left: -10.5px;
     border: 10.5px solid transparent;
@@ -64,7 +64,7 @@
   &::after {
     content: " ";
     position: absolute;
-    bottom: 99%;  /* At the top of the tooltip */
+    bottom: 99%; /* At the top of the tooltip */
     left: 50%;
     margin-left: -10px;
     width: 0;

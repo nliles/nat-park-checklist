@@ -1,9 +1,10 @@
-@import '../../styles/colors.scss';
-@import '../../styles/breakpoints.scss';
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
 
-html, body {
+html,
+body {
   height: 100%;
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 div#app {
@@ -20,7 +21,7 @@ div#app {
 }
 
 .header {
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: "Nanum Myeongjo", serif;
   text-transform: uppercase;
   color: $green;
   text-align: center;
@@ -33,7 +34,7 @@ div#app {
   letter-spacing: 8px;
 
   @media (max-width: 540px) {
-      margin: 25px 25px;
-      font-size: 1.5rem;
+    margin: 25px 25px;
+    font-size: 1.5rem;
   }
 }

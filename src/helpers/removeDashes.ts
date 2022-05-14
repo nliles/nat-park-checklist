@@ -1,5 +1,5 @@
 const removeDashes = (item: string) => {
-  return item.replace(/-/g, ' ')
-}
+  return item.replace(/-/g, " ");
+};
 
-export default removeDashes
+export default removeDashes;

@@ -1,7 +1,9 @@
-import { Park } from '../types'
+import { Park } from "../types";
 
 const sortParks = (parks: Park[]) => {
-  return parks.sort( (a, b) => a.fullName.localeCompare(b.fullName, 'fr', { ignorePunctuation: true }));
-}
+  return parks.sort((a, b) =>
+    a.fullName.localeCompare(b.fullName, "fr", { ignorePunctuation: true })
+  );
+};
 
-export default sortParks
+export default sortParks;
