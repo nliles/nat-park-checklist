@@ -39,8 +39,10 @@ const Map = ({ parks = [], selectedParks = [] }) => {
     setTooltipContent(null);
   };
 
-  const states = usData.features.map((d) => (
-    <path key={d.fullName} d={pathGenerator(d)} className={styles.state} />
+  console.log(usData.features)
+
+  const states = usData.features.map(d => (
+    <path key={d.id} d={pathGenerator(d)} className={styles.state} />
   ));
 
   const natParks = parks.map((p, i) => (
