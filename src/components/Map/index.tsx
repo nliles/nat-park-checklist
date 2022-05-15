@@ -4,7 +4,6 @@ import usMapData from "./us";
 import { geoPath } from "d3-geo";
 import MapMarker from "./MapMarker";
 import Tooltip from "./Tooltip";
-// import { GeometryObject, Topology } from 'topojson-specification';
 import { Park } from "../../types";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
@@ -20,7 +19,7 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
   const [tooltipContent, setTooltipContent] = useState<Park | undefined>(undefined);
   const [width] = useWindowResize();
   const height = width / 2;
-  const usData = topojson.feature(usMapData as any, (usMapData as any).objects.states);
+  const usData = topojson.feature(usMapData, usMapData.objects.states);
   const padding = width > 540 ? 30 : 0;
   const bottomPadding = width > 768 ? 100 : 0;
 
