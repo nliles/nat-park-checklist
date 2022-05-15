@@ -1,0 +1,41 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.container {
+  margin: 0 100px;
+  padding-bottom: 100px;
+
+  @media (max-width: $desktop) {
+    margin: 0 25px;
+  }
+}
+
+h2 {
+  font-family: "Nanum Myeongjo", serif;
+  text-transform: uppercasse;
+  color: $green;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 400;
+  padding-bottom: 10px;
+  border-bottom: 2px solid $green;
+  letter-spacing: 8px;
+}
+
+.count {
+  font-size: 12px;
+  letter-spacing: normal;
+}
+
+.listContainer {
+  column-count: 3;
+  column-fill: auto;
+
+  @media (max-width: $desktop) {
+    column-count: 2;
+  }
+
+  @media (max-width: $mobile-landscape) {
+    column-count: 1;
+  }
+}

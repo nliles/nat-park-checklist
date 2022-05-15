@@ -1,0 +1,29 @@
+@import "../../../styles/colors.scss";
+
+.spinner {
+  margin: 0 auto;
+  position: relative;
+  top: 30%;
+  transform: translateY(-30%);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+.loading::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 10px solid $tan;
+  border-top-color: $green;
+  border-radius: 50%;
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(1turn);
+  }
+}

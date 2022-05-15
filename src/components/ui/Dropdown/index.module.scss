@@ -1,0 +1,95 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/breakpoints.scss";
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 250px;
+  margin: 10px auto;
+  border: 2px solid $green;
+
+  &.isOpen {
+    .list {
+      visibility: visible;
+    }
+
+    .caret {
+      transform: rotateY(0deg) rotate(180deg);
+    }
+  }
+}
+
+.header {
+  height: 45px;
+  width: 250px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.title {
+  font-size: 18px;
+  text-transform: capitalize;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid $green;
+  display: block;
+}
+
+.list {
+  position: absolute;
+  z-index: 1;
+  background: $white;
+  max-height: 200px;
+  overflow: auto;
+  top: 40px;
+  left: -2px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  width: 250px;
+  visibility: hidden;
+  border: 2px solid $green;
+  list-style: none;
+}
+
+.listItem {
+  height: 45px;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  border-bottom: 1px solid $green;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &.selected {
+    background: $tan;
+  }
+
+  &:hover {
+    background: $tan;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
