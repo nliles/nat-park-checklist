@@ -4,21 +4,23 @@ import usMapData from "./us";
 import { geoPath } from "d3-geo";
 import MapMarker from "./MapMarker";
 import Tooltip from "./Tooltip";
-// import { Park } from "../../types";
+// import { GeometryObject, Topology } from 'topojson-specification';
+import { Park } from "../../types";
+// @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import styles from "./index.module.scss";
 
-// type MapType = {
-//   parks: Park[],
-//   selectedParks: string[]
-// }
+type MapType = {
+  parks: Park[],
+  selectedParks: string[]
+}
 
-const Map = ({ parks = [], selectedParks = [] }) => {
-  const [tooltipContent, setTooltipContent] = useState(null);
+const Map = ({ parks = [], selectedParks = [] }: MapType) => {
+  const [tooltipContent, setTooltipContent] = useState<Park | undefined>(undefined);
   const [width] = useWindowResize();
   const height = width / 2;
-  const usData = topojson.feature(usMapData, usMapData.objects.states);
+  const usData = topojson.feature(usMapData as any, (usMapData as any).objects.states);
   const padding = width > 540 ? 30 : 0;
   const bottomPadding = width > 768 ? 100 : 0;
 
@@ -31,21 +33,22 @@ const Map = ({ parks = [], selectedParks = [] }) => {
   );
   const pathGenerator = geoPath().projection(projection);
 
-  const handleMouseOverPark = (park) => {
+  const handleMouseOverPark = (park: Park) => {
     setTooltipContent(park);
   };
 
   const handleMouseLeavePark = () => {
-    setTooltipContent(null);
+    setTooltipContent(undefined);
   };
 
-  console.log(usData.features)
 
+  // @ts-expect-error
   const states = usData.features.map(d => (
+    // @ts-expect-error
     <path key={d.id} d={pathGenerator(d)} className={styles.state} />
   ));
 
-  const natParks = parks.map((p, i) => (
+  const natParks = parks.map((p: Park, i: number) => (
     <MapMarker
       key={p.fullName}
       coords={projection([p.longitude, p.latitude])}
