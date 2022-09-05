@@ -18,6 +18,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   const handleClickOutside = (e: MouseEvent) => {
     if (myRef?.current && !myRef.current.contains(e.target as Node)) {
       setIsOpen(false);
+      setActiveIndex(-1)
     }
   };
 
