@@ -1,18 +1,18 @@
 @import "../../../styles/colors.scss";
 @import "../../../styles/breakpoints.scss";
 
-.wrapper {
+.container {
   position: relative;
   display: flex;
   align-items: center;
   height: 40px;
-  width: 250px;
+  width: auto;
   margin: 10px auto;
   border: 2px solid $green;
 
   &.isOpen {
     .list {
-      visibility: visible;
+      display: block;
     }
 
     .caret {
@@ -58,7 +58,7 @@
   position: absolute;
   z-index: 1;
   background: $white;
-  max-height: 200px;
+  max-height: 183px;
   overflow: auto;
   top: 40px;
   left: -2px;
@@ -66,8 +66,7 @@
   margin: 0;
   padding: 0;
   border-top: 0;
-  width: 250px;
-  visibility: hidden;
+  display: none;
   border: 2px solid $green;
   list-style: none;
 }
@@ -85,6 +84,7 @@
     background: $tan;
   }
 
+  &.active,
   &:hover {
     background: $tan;
   }

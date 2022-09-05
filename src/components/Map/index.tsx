@@ -11,12 +11,14 @@ import * as topojson from "topojson";
 import styles from "./index.module.scss";
 
 type MapType = {
-  parks: Park[],
-  selectedParks: string[]
-}
+  parks: Park[];
+  selectedParks: string[];
+};
 
 const Map = ({ parks = [], selectedParks = [] }: MapType) => {
-  const [tooltipContent, setTooltipContent] = useState<Park | undefined>(undefined);
+  const [tooltipContent, setTooltipContent] = useState<Park | undefined>(
+    undefined
+  );
   const [width] = useWindowResize();
   const height = width / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
@@ -40,9 +42,8 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
     setTooltipContent(undefined);
   };
 
-
   // @ts-expect-error
-  const states = usData.features.map(d => (
+  const states = usData.features.map((d) => (
     // @ts-expect-error
     <path key={d.id} d={pathGenerator(d)} className={styles.state} />
   ));
