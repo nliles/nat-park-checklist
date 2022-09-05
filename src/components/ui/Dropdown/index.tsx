@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
 import { PARK_CODES } from "../../../constants";
 import { removeDashes } from "../../../helpers";
 import styles from "./index.module.scss";
@@ -31,7 +31,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   };
 
   // Event handler for keydowns
-  const handleListItemKeyDown = (item: string) => (e: any) => {
+  const handleListItemKeyDown = (item: string) => (e: KeyboardEvent) => {
     switch (e.key) {
       case " ":
       case "SpaceBar":
@@ -45,7 +45,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
     }
   };
 
-  const handleListKeyDown = (e: any) => {
+  const handleListKeyDown = (e: KeyboardEvent) => {
     let newIndex = activeIndex;
     switch (e.key) {
       case "Enter":
