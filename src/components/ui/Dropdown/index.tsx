@@ -15,17 +15,20 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<any>(-1);
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (myRef?.current && !myRef.current.contains(e.target as Node)) {
-      setIsOpen(false);
-      setActiveIndex(-1)
-    }
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (myRef?.current && !myRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+      setActiveIndex(-1);
+    }
+  };
+
+  const formatListItem = (item: string) =>
+    `${removeDashes(item)}s (${PARK_CODES[item].length})`;
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -33,6 +36,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
 
   // Event handler for keydowns
   const handleListItemKeyDown = (item: string) => (e: KeyboardEvent) => {
+    console.log("handle list item key down");
     switch (e.key) {
       case " ":
       case "SpaceBar":
@@ -47,6 +51,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   };
 
   const handleListKeyDown = (e: KeyboardEvent) => {
+    console.log("handle list key down", e);
     let newIndex = activeIndex;
     switch (e.key) {
       case "Enter":
@@ -73,25 +78,27 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
       className={cn(styles.container, {
         [styles.isOpen]: isOpen,
       })}
-      aria-haspopup="listbox"
-      aria-expanded={isOpen}
       ref={myRef}
-      role="button"
-      onClick={handleOpen}
-      onKeyDown={handleListKeyDown}
-      tabIndex={0}
     >
-      <div className={styles.header}>
-        <div className={styles.title}>{`${removeDashes(selectedItem)}s`}</div>
-        <div className={styles.icon}>
+      <div
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className={styles.button}
+        role="button"
+        onClick={handleOpen}
+        onKeyDown={handleListKeyDown}
+        tabIndex={0}
+      >
+        <span className={styles.title}>{`${removeDashes(selectedItem)}s`}</span>
+        <span className={styles.icon}>
           <span className={styles.caret} />
-        </div>
+        </span>
       </div>
       <ul
         className={styles.list}
         role="listbox"
         aria-activedescendant={selectedItem}
-        onKeyDown={handleListKeyDown}
+        tabIndex={-1}
       >
         {list.map((item, index) => (
           <li
@@ -102,10 +109,12 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
             aria-selected={selectedItem == item}
             tabIndex={0}
             key={item}
-            onKeyDown={handleListItemKeyDown(item)}
+            onKeyDown={() => handleListItemKeyDown(item)}
             onClick={() => handleClick(item)}
             role="option"
-          >{`${removeDashes(item)}s (${PARK_CODES[item].length})`}</li>
+          >
+            {formatListItem(item)}
+          </li>
         ))}
       </ul>
     </div>
