@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
 import { PARK_CODES } from "../../../constants";
 import { removeDashes } from "../../../helpers";
 import styles from "./index.module.scss";
@@ -15,23 +15,27 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<any>(-1);
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (myRef?.current && !myRef.current.contains(e.target as Node)) {
-      setIsOpen(false);
-    }
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (myRef?.current && !myRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+      setActiveIndex(-1);
+    }
+  };
+
+  const formatListItem = (item: string) =>
+    `${removeDashes(item)}s (${PARK_CODES[item].length})`;
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
 
   // Event handler for keydowns
-  const handleListItemKeyDown = (item: string) => (e: any) => {
+  const handleListKeyDown = (item: string) => (e: KeyboardEvent) => {
     switch (e.key) {
       case " ":
       case "SpaceBar":
@@ -45,12 +49,18 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
     }
   };
 
-  const handleListKeyDown = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     let newIndex = activeIndex;
     switch (e.key) {
-      case "Enter":
       case "Escape":
-        handleOpen();
+        e.preventDefault();
+        setIsOpen(false);
+        break;
+      case " ":
+      case "SpaceBar":
+      case "Enter":
+        e.preventDefault();
+        !isOpen && setIsOpen(true);
         break;
       case "ArrowUp":
         e.preventDefault();
@@ -72,39 +82,42 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
       className={cn(styles.container, {
         [styles.isOpen]: isOpen,
       })}
-      aria-haspopup="listbox"
-      aria-expanded={isOpen}
       ref={myRef}
-      role="button"
-      onClick={handleOpen}
-      onKeyDown={handleListKeyDown}
-      tabIndex={0}
     >
-      <div className={styles.header}>
-        <div className={styles.title}>{`${removeDashes(selectedItem)}s`}</div>
-        <div className={styles.icon}>
+      <div
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className={styles.button}
+        role="button"
+        onClick={handleOpen}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+      >
+        <span className={styles.title}>{`${removeDashes(selectedItem)}s`}</span>
+        <span className={styles.icon}>
           <span className={styles.caret} />
-        </div>
+        </span>
       </div>
       <ul
         className={styles.list}
         role="listbox"
         aria-activedescendant={selectedItem}
-        onKeyDown={handleListKeyDown}
       >
         {list.map((item, index) => (
           <li
+            aria-selected={item === selectedItem}
             className={cn(styles.listItem, {
               [styles.selected]: item === selectedItem,
               [styles.active]: index === activeIndex,
             })}
-            aria-selected={selectedItem == item}
-            tabIndex={0}
+            id={item}
             key={item}
-            onKeyDown={handleListItemKeyDown(item)}
+            onKeyUp={handleListKeyDown(item)}
             onClick={() => handleClick(item)}
             role="option"
-          >{`${removeDashes(item)}s (${PARK_CODES[item].length})`}</li>
+          >
+            {formatListItem(item)}
+          </li>
         ))}
       </ul>
     </div>
