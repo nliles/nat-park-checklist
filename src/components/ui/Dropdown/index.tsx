@@ -35,8 +35,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
   };
 
   // Event handler for keydowns
-  const handleListItemKeyDown = (item: string) => (e: KeyboardEvent) => {
-    console.log("handle list item key down");
+  const handleListKeyDown = (item: string) => (e: KeyboardEvent) => {
     switch (e.key) {
       case " ":
       case "SpaceBar":
@@ -50,13 +49,18 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
     }
   };
 
-  const handleListKeyDown = (e: KeyboardEvent) => {
-    console.log("handle list key down", e);
+  const handleKeyDown = (e: KeyboardEvent) => {
     let newIndex = activeIndex;
     switch (e.key) {
-      case "Enter":
       case "Escape":
-        handleOpen();
+        e.preventDefault();
+        setIsOpen(false);
+        break;
+      case " ":
+      case "SpaceBar":
+      case "Enter":
+        e.preventDefault();
+        !isOpen && setIsOpen(true);
         break;
       case "ArrowUp":
         e.preventDefault();
@@ -86,7 +90,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
         className={styles.button}
         role="button"
         onClick={handleOpen}
-        onKeyDown={handleListKeyDown}
+        onKeyDown={handleKeyDown}
         tabIndex={0}
       >
         <span className={styles.title}>{`${removeDashes(selectedItem)}s`}</span>
@@ -98,18 +102,17 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
         className={styles.list}
         role="listbox"
         aria-activedescendant={selectedItem}
-        tabIndex={-1}
       >
         {list.map((item, index) => (
           <li
+            aria-selected={item === selectedItem}
             className={cn(styles.listItem, {
               [styles.selected]: item === selectedItem,
               [styles.active]: index === activeIndex,
             })}
-            aria-selected={selectedItem == item}
-            tabIndex={0}
+            id={item}
             key={item}
-            onKeyDown={() => handleListItemKeyDown(item)}
+            onKeyUp={handleListKeyDown(item)}
             onClick={() => handleClick(item)}
             role="option"
           >

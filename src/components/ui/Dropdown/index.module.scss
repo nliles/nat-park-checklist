@@ -85,6 +85,7 @@
   }
 
   &.active,
+  &:focus-visible,
   &:hover {
     background: $tan;
   }
