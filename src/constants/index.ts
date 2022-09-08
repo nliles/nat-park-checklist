@@ -490,3 +490,35 @@ export const PARK_CODES = {
   [PARK_DESIGNATION_KEY.OTHER_DESIGNATION]: OTHER_DESIGNATION_CODES,
   [PARK_DESIGNATION_KEY.INTERNATIONAL_HISTORIC_SITE]: ["sacr"],
 };
+
+export const PARK_LENGTH_OFFSET = 3;
+
+export const LAKE_CHELAN_NRA = {
+  id: '1',
+  images: [{
+    altText: "boats on the water with mountains and trees surrounding",
+    url: "https://www.nps.gov/common/uploads/structured_data/3C7A599D-1DD8-B71B-0BBDC12BEC5107B5.jpg",
+  }],
+  name: 'Lake Chelan National Recreation',
+  fullName: 'Lake Chelan National Recreation',
+  states: 'WA',
+  latitude: '48.026974',
+  longitude: '-120.337732',
+  designation: 'National Recreation Area',
+  url: 'https://www.nps.gov/noca/planyourvisit/visitorcenters.htm'
+}
+
+export const LAKE_ROSS_NRA = {
+  id: '2',
+  images: [{
+    altText: "Tents set up in a wooded area.",
+    url: "https://www.nps.gov/common/uploads/structured_data/3C7A5B0D-1DD8-B71B-0B1104A95B7A2026.jpg",
+  }],
+  name: 'Lake Ross National Recreation',
+  fullName: 'Lake Ross National Recreation',
+  states: 'WA',
+  latitude: '48.868113',
+  longitude: '-121.06395',
+  designation: 'National Recreation Area',
+  url: 'https://www.nps.gov/noca/planyourvisit/visitorcenters.htm'
+}

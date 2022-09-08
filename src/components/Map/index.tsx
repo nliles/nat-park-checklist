@@ -28,7 +28,7 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [width, height],
+      [width - 40, height],
     ],
     usData
   );
