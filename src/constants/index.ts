@@ -83,7 +83,6 @@ const NAT_PARK_CODES = [
   "romo",
   "sagu",
   "seki",
-  "seki",
   "shen",
   "thro",
   "viis",
@@ -491,6 +490,8 @@ export const PARK_CODES = {
   [PARK_DESIGNATION_KEY.OTHER_DESIGNATION]: OTHER_DESIGNATION_CODES,
   [PARK_DESIGNATION_KEY.INTERNATIONAL_HISTORIC_SITE]: ["sacr"],
 };
+
+export const PARK_LENGTH_OFFSET = 3;
 
 export const LAKE_CHELAN_NRA = {
   id: '1',
