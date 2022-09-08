@@ -19,21 +19,21 @@ type Image = {
 };
 
 export type Park = {
-  addresses: Address[];
-  activities: ParkActivities[];
-  description: string;
+  addresses?: Address[];
+  activities?: ParkActivities[];
+  description?: string;
   designation: string;
-  directionsInfo: string;
-  directionsUrl: string;
+  directionsInfo?: string;
+  directionsUrl?: string;
   fullName: string;
   id: string;
   images: Image[];
   latitude: string;
-  latLong: string;
+  latLong?: string;
   longitude: string;
   name: string;
-  parkCode: string;
+  parkCode?: string;
   states: string;
   url: string;
-  weather: string;
+  weather?: string;
 };

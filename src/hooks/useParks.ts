@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Park } from "../types";
 import { PARK_CODES, NPS_API, API_KEY } from "../constants";
-import { sortParks } from "../helpers";
+import { formatParks, sortParks } from "../helpers";
 
 function useParks(selectedItem: string) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +17,7 @@ function useParks(selectedItem: string) {
           `${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`
         );
         const json = await res.json();
-        const sorted = sortParks(json.data);
+        const sorted = sortParks(formatParks(json.data, selectedItem));
         setParks(sorted);
         setLoading(false);
       } catch (e) {

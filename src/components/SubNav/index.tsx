@@ -18,16 +18,14 @@ const SubNav = ({
   );
   return (
     <div className={styles.container}>
+      <span className={styles.count}>
+        <strong>{selectedParks.length}</strong> out of {total}
+      </span>
       <Dropdown
         list={LIST_OPTIONS}
         selectedItem={selectedDropdownItem}
         handleClick={handleListItemChange}
       />
-      <div className={styles.count}>
-        <span>
-          <strong>{selectedParks.length}</strong> out of {total}
-        </span>
-      </div>
     </div>
   );
 };
