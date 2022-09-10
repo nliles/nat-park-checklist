@@ -79,7 +79,6 @@ export const NAT_PARK_CODES = [
   "redw",
   "romo",
   "sagu",
-  "seki",
   "shen",
   "thro",
   "viis",

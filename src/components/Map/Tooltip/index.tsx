@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { Park } from "../../../types";
-//import DefaultImage from "public/np.svg"
 import styles from "../index.module.scss";
 
 type TooltipType = {
@@ -8,6 +8,7 @@ type TooltipType = {
 };
 
 const Tooltip = ({ park, coords }: TooltipType) => {
+  const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
   const statesArr = park.states?.split(",");
   const states = `State${statesArr.length > 1 ? "s" : ""}: ${statesArr.join(
@@ -15,11 +16,18 @@ const Tooltip = ({ park, coords }: TooltipType) => {
   )}`;
   const x = coords?.[0] - 100; // x - half tooltip width to center
   const y = coords?.[1];
+
+  const handleImgError = () => {
+    setImageErr(true);
+  };
+
+  const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
+
   return (
     <foreignObject className={styles.tooltip} x={x} y={y}>
       <div className={styles.content}>
         <div className={styles.imgContainer}>
-          <img src={image?.url || "np.svg"} alt={image?.altText} />
+          <img src={imageSrc} alt={image?.altText} onError={handleImgError} />
         </div>
         <div className={styles.text}>
           <h1>{park.fullName}</h1>
