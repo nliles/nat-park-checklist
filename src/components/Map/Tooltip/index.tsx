@@ -22,15 +22,12 @@ const Tooltip = ({ park, coords }: TooltipType) => {
   };
 
   const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
-  const altTxt = imageErr
-    ? "No image displayed"
-    : image?.altText || "No image displayed";
 
   return (
     <foreignObject className={styles.tooltip} x={x} y={y}>
       <div className={styles.content}>
         <div className={styles.imgContainer}>
-          <img src={imageSrc} alt={altTxt} onError={handleImgError} />
+          <img src={imageSrc} alt={image?.altText} onError={handleImgError} />
         </div>
         <div className={styles.text}>
           <h1>{park.fullName}</h1>
