@@ -146,3 +146,8 @@ export const PARK_INFO = {
     formattedParks: [],
   },
 };
+
+export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
+  (acc, element) => acc + element.codes.length + element.formattedParks.length,
+  0
+);
