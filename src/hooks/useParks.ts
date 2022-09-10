@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Park } from "../types";
-import { PARK_CODES, NPS_API, API_KEY } from "../constants";
+import { PARK_INFO, NPS_API, API_KEY } from "../constants";
 import { formatParks, sortParks } from "../helpers";
 
 function useParks(selectedItem: string) {
@@ -10,7 +10,7 @@ function useParks(selectedItem: string) {
 
   useEffect(() => {
     const fetchParks = async () => {
-      const codes = PARK_CODES[selectedItem];
+      const codes = PARK_INFO[selectedItem].codes;
       setLoading(true);
       try {
         const res = await fetch(

@@ -1,5 +1,5 @@
 import Dropdown from "../ui/Dropdown";
-import { LIST_OPTIONS, PARK_CODES, FORMATTED_PARKS } from "../../constants";
+import { LIST_OPTIONS, PARK_INFO } from "../../constants";
 import styles from "./index.module.scss";
 
 type SubNavType = {
@@ -12,14 +12,16 @@ const SubNav = ({
   selectedDropdownItem,
   handleListItemChange,
 }: SubNavType) => {
-  const total = [
-    ...Object.values(PARK_CODES),
-    ...Object.values(FORMATTED_PARKS),
-  ].reduce((acc, element) => acc + element.length, 0);
+  const total = [...Object.values(PARK_INFO)].reduce(
+    (acc, element) =>
+      acc + element.codes.length + element.formattedParks.length,
+    0
+  );
+  Object.values(PARK_INFO);
   return (
     <div className={styles.container}>
       <span className={styles.count}>
-        <strong>{selectedParks.length}</strong> out of {total}
+        Total: <strong>{selectedParks.length}</strong> out of {total}
       </span>
       <Dropdown
         list={LIST_OPTIONS}

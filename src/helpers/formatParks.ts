@@ -1,5 +1,5 @@
 import { Park } from "../types";
-import { PARK_DESIGNATION_KEY, FORMATTED_PARKS } from "../constants";
+import { PARK_DESIGNATION_KEY, PARK_INFO } from "../constants";
 
 const SEQUOIA_KINGS_CANYON = "Sequoia & Kings Canyon";
 const CHACO_CULTURE = "Chaco Culture";
@@ -23,8 +23,11 @@ const formatParks = (parks: Park[], selectedItem: string) => {
   if (chaco) {
     chaco.images = [chaco.images[3]];
   }
-  if (FORMATTED_PARKS[selectedItem]) {
-    formattedParks = [...FORMATTED_PARKS[selectedItem], ...formattedParks];
+  if (PARK_INFO[selectedItem].formattedParks) {
+    formattedParks = [
+      ...PARK_INFO[selectedItem].formattedParks,
+      ...formattedParks,
+    ];
   }
   return formattedParks;
 };

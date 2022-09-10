@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
-import { PARK_CODES, FORMATTED_PARKS } from "../../../constants";
+import { PARK_INFO } from "../../../constants";
 import { removeDashes } from "../../../helpers";
 import styles from "./index.module.scss";
 import cn from "classnames";
@@ -29,7 +29,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
 
   const formatListItem = (item: string) => {
     const count =
-      PARK_CODES[item].length + (FORMATTED_PARKS[item]?.length || 0);
+      PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
     return `${removeDashes(item)}s (${count})`;
   };
 
