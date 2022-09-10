@@ -29,6 +29,7 @@ import {
   LAKE_ROSS_NRA,
   LAKE_CHELAN_NRA,
   HOHOKAM_NAT_MONUMENT,
+  SEQUOIA_NAT_PARK,
 } from "./formattedParks";
 export const API_KEY = "coWPLtsaQYAhRKBnWEEOKcnnNXgKwGHDBn7vLl1c";
 export const NPS_API = "https://developer.nps.gov/api/v1";
@@ -61,7 +62,7 @@ export const LIST_OPTIONS = [...Object.values(PARK_DESIGNATION_KEY)];
 export const PARK_INFO = {
   [PARK_DESIGNATION_KEY.NAT_PARK]: {
     codes: NAT_PARK_CODES,
-    formattedParks: [KINGS_CANYON_NAT_PARK],
+    formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
   },
   [PARK_DESIGNATION_KEY.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,

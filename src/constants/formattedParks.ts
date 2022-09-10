@@ -1,6 +1,24 @@
 const generateId = () =>
   Math.floor(1000000000 + Math.random() * 9000000000).toString();
 
+export const SEQUOIA_NAT_PARK = {
+  id: generateId(),
+  images: [
+    {
+      altText:
+        "A guardrail encircles people along a narrow walkway with wide views",
+      url: "https://www.nps.gov/common/uploads/structured_data/3C7A2E1B-1DD8-B71B-0B4D563CB47FA60F.jpg",
+    },
+  ],
+  name: "Sequoia National Park",
+  fullName: "Sequoia National Park",
+  states: "CA",
+  latitude: "36.485625",
+  longitude: "-118.466728",
+  designation: "National Parks",
+  url: "https://www.nps.gov/seki/index.htm",
+};
+
 export const KINGS_CANYON_NAT_PARK = {
   id: generateId(),
   images: [
