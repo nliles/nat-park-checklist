@@ -1,4 +1,5 @@
 import { Park } from "../../../types";
+//import DefaultImage from "public/np.svg"
 import styles from "../index.module.scss";
 
 type TooltipType = {
@@ -18,7 +19,7 @@ const Tooltip = ({ park, coords }: TooltipType) => {
     <foreignObject className={styles.tooltip} x={x} y={y}>
       <div className={styles.content}>
         <div className={styles.imgContainer}>
-          <img src={image.url} alt={image.altText} />
+          <img src={image?.url || "np.svg"} alt={image?.altText} />
         </div>
         <div className={styles.text}>
           <h1>{park.fullName}</h1>

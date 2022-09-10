@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
-import { PARK_CODES } from "../../../constants";
+import { PARK_CODES, FORMATTED_PARKS } from "../../../constants";
 import { removeDashes } from "../../../helpers";
 import styles from "./index.module.scss";
 import cn from "classnames";
@@ -27,8 +27,11 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
     }
   };
 
-  const formatListItem = (item: string) =>
-    `${removeDashes(item)}s (${PARK_CODES[item].length})`;
+  const formatListItem = (item: string) => {
+    const count =
+      PARK_CODES[item].length + (FORMATTED_PARKS[item]?.length || 0);
+    return `${removeDashes(item)}s (${count})`;
+  };
 
   const handleOpen = () => {
     setIsOpen(!isOpen);

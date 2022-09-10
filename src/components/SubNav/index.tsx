@@ -1,5 +1,5 @@
 import Dropdown from "../ui/Dropdown";
-import { LIST_OPTIONS, PARK_CODES, PARK_LENGTH_OFFSET } from "../../constants";
+import { LIST_OPTIONS, PARK_CODES, FORMATTED_PARKS } from "../../constants";
 import styles from "./index.module.scss";
 
 type SubNavType = {
@@ -12,10 +12,10 @@ const SubNav = ({
   selectedDropdownItem,
   handleListItemChange,
 }: SubNavType) => {
-  const total = Object.values(PARK_CODES).reduce(
-    (acc, element) => acc + element.length,
-    0
-  ) + PARK_LENGTH_OFFSET;
+  const total = [
+    ...Object.values(PARK_CODES),
+    ...Object.values(FORMATTED_PARKS),
+  ].reduce((acc, element) => acc + element.length, 0);
   return (
     <div className={styles.container}>
       <span className={styles.count}>
