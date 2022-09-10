@@ -26,7 +26,7 @@ const ParkView = ({
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
-        <h1 className={styles.header}>{`US ${removeDashes(
+        <h1 className={styles.header}>{`${removeDashes(
           selectedDropdownItem
         )}s`}</h1>
       </nav>

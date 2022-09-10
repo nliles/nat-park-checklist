@@ -14,7 +14,18 @@ const SubNav = ({
 }: SubNavType) => (
   <div className={styles.container}>
     <span className={styles.count}>
-      Total: <strong>{selectedParks.length}</strong> out of {TOTAL_UNITS}
+      Total: <strong>{selectedParks.length}</strong> out of{" "}
+      <a
+        className={styles.link}
+        target="_blank"
+        rel="noopener"
+        href="https://www.nps.gov/aboutus/national-park-system.htm"
+      >
+        {TOTAL_UNITS}
+        <span className={styles.screenReader}>
+          Link to national park info in new tab
+        </span>
+      </a>
     </span>
     <Dropdown
       list={LIST_OPTIONS}
