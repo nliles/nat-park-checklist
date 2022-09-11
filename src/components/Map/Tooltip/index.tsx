@@ -9,7 +9,12 @@ type TooltipType = {
   setTooltipContent: Dispatch<SetStateAction<Park | undefined>>;
 };
 
-const Tooltip = ({ park, coords, tooltipId, setTooltipContent }: TooltipType) => {
+const Tooltip = ({
+  park,
+  coords,
+  tooltipId,
+  setTooltipContent,
+}: TooltipType) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
   const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
@@ -25,10 +30,10 @@ const Tooltip = ({ park, coords, tooltipId, setTooltipContent }: TooltipType) =>
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setTooltipContent(undefined)
+    if (e.key === "Escape") {
+      setTooltipContent(undefined);
     }
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);

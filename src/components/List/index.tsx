@@ -16,14 +16,14 @@ const List = ({
   selectedDropdownItem,
   selectedParks = [],
   handleChange,
-  handleSubmit
+  handleSubmit,
 }: ListType) => {
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    handleSubmit()
-  }
+    handleSubmit();
+  };
 
   return (
     <div className={styles.container}>
@@ -32,19 +32,21 @@ const List = ({
         <Total count={count} total={parks.length} styleName={styles.count} />
       </div>
       <form onSubmit={handleOnSubmit}>
-      <div className={styles.listContainer}>
-        {parks &&
-          parks.map((park: any, i: number) => (
-            <ListItem
-              selectedParks={selectedParks}
-              key={park.fullName}
-              index={i}
-              park={park}
-              handleChange={handleChange}
-            />
-          ))}
-      </div>
-      <button className={styles.button} type="submit">Save</button>
+        <div className={styles.listContainer}>
+          {parks &&
+            parks.map((park: any, i: number) => (
+              <ListItem
+                selectedParks={selectedParks}
+                key={park.fullName}
+                index={i}
+                park={park}
+                handleChange={handleChange}
+              />
+            ))}
+        </div>
+        <button className={styles.button} type="submit">
+          Save
+        </button>
       </form>
     </div>
   );

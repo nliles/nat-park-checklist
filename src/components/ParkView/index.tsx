@@ -23,7 +23,7 @@ const ParkView = ({
   selectedDropdownItem,
   handleListItemChange,
   handleSelected,
-  handleSaveData
+  handleSaveData,
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
