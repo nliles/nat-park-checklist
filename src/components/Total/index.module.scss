@@ -1,0 +1,21 @@
+@import "../../styles/colors.scss";
+
+.count {
+  position: absolute;
+  right: 0;
+  color: $green;
+  font-size: 18px;
+
+  @media (max-width: 540px) {
+    position: relative;
+  }
+}
+
+.link {
+  color: $green;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

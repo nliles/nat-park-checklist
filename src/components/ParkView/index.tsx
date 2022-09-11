@@ -1,8 +1,8 @@
-import List from "src/components/List";
+import List from "../List";
 import Map from "../Map";
-import Spinner from "src/components/ui/Spinner";
-import SubNav from "src/components/SubNav";
-import NavBar from "src/components/NavBar";
+import Spinner from "../ui/Spinner";
+import SubNav from "../SubNav";
+import NavBar from "../NavBar";
 import { Park } from "../../types";
 import { removeDashes } from "../../helpers";
 import styles from "./index.module.scss";
@@ -43,6 +43,7 @@ const ParkView = ({
           <Map parks={parks} selectedParks={selectedParks} />
           <List
             parks={parks}
+            selectedDropdownItem={selectedDropdownItem}
             selectedParks={selectedParks}
             handleChange={handleSelected}
           />

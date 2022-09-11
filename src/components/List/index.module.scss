@@ -10,20 +10,28 @@
   }
 }
 
-h2 {
-  font-family: "Nanum Myeongjo", serif;
-  text-transform: uppercasse;
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: $green;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 400;
-  padding-bottom: 10px;
   border-bottom: 2px solid $green;
-  letter-spacing: 8px;
+  margin-bottom: 2rem;
+
+  h2 {
+   font-family: "Nanum Myeongjo", serif;
+   text-transform: capitalize;
+   font-size: 28px;
+   font-weight: 400;
+   letter-spacing: 8px;
+  }
 }
 
 .count {
-  font-size: 12px;
+  position: absolute;
+  right: 0;
+  font-size: 18px;
   letter-spacing: normal;
   white-space: nowrap;
 }

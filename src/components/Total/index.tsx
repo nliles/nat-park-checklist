@@ -1,12 +1,15 @@
 import { TOTAL_UNITS } from "../../constants";
 import ScreenReaderText from "../ui/ScreenReaderText"
 import styles from "./index.module.scss";
+import cn from "classnames";
 
 type TotalType = {
   count: number;
+  total: number;
+  styleName?: string;
 };
-const Total = ({ count }: TotalType) => (
-  <span className={styles.count}>
+const Total = ({ count, total, styleName }: TotalType) => (
+  <span className={cn(styles.count, styleName)}>
     Total: <strong>{count}</strong> out of{" "}
     <a
       className={styles.link}
@@ -14,7 +17,7 @@ const Total = ({ count }: TotalType) => (
       rel="noopener"
       href="https://www.nps.gov/aboutus/national-park-system.htm"
     >
-      {TOTAL_UNITS}
+      {total}
       <ScreenReaderText text="Link to national park info in new tab"/>
     </a>
   </span>
