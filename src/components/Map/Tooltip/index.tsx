@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Park } from "types";
 import styles from "./index.module.scss";
 
@@ -6,11 +6,13 @@ type TooltipType = {
   coords: number[];
   park: Park;
   tooltipId: string;
+  setTooltipContent: Dispatch<SetStateAction<Park | undefined>>;
 };
 
-const Tooltip = ({ park, coords, tooltipId }: TooltipType) => {
+const Tooltip = ({ park, coords, tooltipId, setTooltipContent }: TooltipType) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
+  const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
   const statesArr = park.states?.split(",");
   const states = `State${statesArr.length > 1 ? "s" : ""}: ${statesArr.join(
     ", "
@@ -22,7 +24,16 @@ const Tooltip = ({ park, coords, tooltipId }: TooltipType) => {
     setImageErr(true);
   };
 
-  const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setTooltipContent(undefined)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  });
 
   return (
     <foreignObject className={styles.tooltip} x={x} y={y}>
