@@ -29,11 +29,11 @@
 }
 
 .checkboxWrapper:hover input ~ .checkmark {
-  background-color: $lightTan;
+  background-color: $tanOutline;
 }
 
 .checkboxWrapper > input:focus + span {
-  background-color: $lightTan;
+  background-color: $tanOutline;
 }
 
 .checkboxWrapper input:checked ~ .checkmark {
