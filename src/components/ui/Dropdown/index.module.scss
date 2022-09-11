@@ -32,7 +32,10 @@
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+  text-align: left;
   white-space: nowrap;
+  background: none;
+	border: none;
 }
 
 .title {
@@ -83,13 +86,7 @@
   text-transform: capitalize;
   cursor: pointer;
 
-  &.selected {
-    background: $tan;
-  }
-
-  &.active,
-  &:focus-visible,
-  &:hover {
+  &.selected, &.highlighted {
     background: $tan;
   }
 

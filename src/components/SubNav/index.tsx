@@ -17,7 +17,7 @@ const SubNav = ({
     <Total count={selectedParks.length} total={TOTAL_UNITS} styleName={styles.countMobile}/>
     <Dropdown
       list={LIST_OPTIONS}
-      selectedItem={selectedDropdownItem}
+      initialSelectedItem={selectedDropdownItem}
       handleClick={handleListItemChange}
       styleName={styles.dropdown}
     />

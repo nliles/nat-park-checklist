@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
+import React, {useEffect, useState } from "react";
 import { PARK_INFO } from "../../../constants";
+import { useSelect } from 'downshift';
 import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
 import cn from "classnames";
@@ -7,118 +8,68 @@ import cn from "classnames";
 type DropdownType = {
   handleClick: (item: string) => void;
   list: string[];
-  selectedItem: string;
+  initialSelectedItem: string;
   styleName?: string;
 };
 
-const Dropdown = ({ handleClick, list, selectedItem, styleName }: DropdownType) => {
-  const myRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeIndex, setActiveIndex] = useState<any>(-1);
+const Dropdown = ({ handleClick, list, initialSelectedItem, styleName }: DropdownType) => {
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  });
+  const {
+  getToggleButtonProps,
+  getLabelProps,
+  getMenuProps,
+  getItemProps,
+  highlightedIndex,
+  isOpen,
+  selectedItem
+} = useSelect({
+  items: list,
+})
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (myRef?.current && !myRef.current.contains(e.target as Node)) {
-      setIsOpen(false);
-      setActiveIndex(-1);
-    }
-  };
+useEffect(() => {
+  if (selectedItem) {
+    handleClick(selectedItem)
+  }
+}, [selectedItem])
 
-  const formatListItem = (item: string) => {
-    const count =
-      PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
-    return `${removeDashes(item)}s (${count})`;
-  };
-
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // Event handler for keydowns
-  const handleListKeyDown = (item: string) => (e: KeyboardEvent) => {
-    switch (e.key) {
-      case " ":
-      case "SpaceBar":
-      case "Enter":
-        e.preventDefault();
-        handleClick(item);
-        setIsOpen(false);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    let newIndex = activeIndex;
-    switch (e.key) {
-      case "Escape":
-        e.preventDefault();
-        setIsOpen(false);
-        break;
-      case " ":
-      case "SpaceBar":
-      case "Enter":
-        e.preventDefault();
-        !isOpen && setIsOpen(true);
-        break;
-      case "ArrowUp":
-        e.preventDefault();
-        newIndex = activeIndex === 0 ? list.length - 1 : activeIndex - 1;
-        setActiveIndex(newIndex);
-        break;
-      case "ArrowDown":
-        e.preventDefault();
-        newIndex = activeIndex === list.length - 1 ? 0 : activeIndex + 1;
-        setActiveIndex(newIndex);
-        break;
-      default:
-        break;
-    }
-  };
+const formatListItem = (item: string) => {
+  const count =
+    PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
+  return `${removeDashes(item)}s (${count})`;
+};
 
   return (
     <div
       className={cn(styles.container, styleName, {
         [styles.isOpen]: isOpen,
       })}
-      ref={myRef}
     >
-      <div
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
+      <button
         className={styles.button}
-        role="button"
-        onClick={handleOpen}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
+        type="button"
+        {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{`${removeDashes(selectedItem)}s`}</span>
+        <span className={styles.title}>{`${removeDashes(selectedItem || initialSelectedItem)}s`}</span>
         <span className={styles.icon}>
           <span className={styles.caret} />
         </span>
-      </div>
+      </button>
       <ul
         className={styles.list}
         role="listbox"
         aria-activedescendant={selectedItem}
+        {...getMenuProps()}
       >
         {list.map((item, index) => (
           <li
             aria-selected={item === selectedItem}
             className={cn(styles.listItem, {
-              [styles.selected]: item === selectedItem,
-              [styles.active]: index === activeIndex,
+              [styles.selected]: item === initialSelectedItem,
+              [styles.highlighted]: index === highlightedIndex
             })}
             id={item}
             key={item}
-            onKeyUp={handleListKeyDown(item)}
-            onClick={() => handleClick(item)}
-            role="option"
+            {...getItemProps({item, index})}
           >
             {formatListItem(item)}
           </li>

@@ -10,7 +10,7 @@ type TotalType = {
 };
 const Total = ({ count, total, styleName }: TotalType) => (
   <span className={cn(styles.count, styleName)}>
-    Total: <strong>{count}</strong> out of{" "}
+    <strong>{count}</strong> out of{" "}
     <a
       className={styles.link}
       target="_blank"
