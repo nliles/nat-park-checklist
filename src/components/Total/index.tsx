@@ -1,5 +1,5 @@
 import { TOTAL_UNITS } from "../../constants";
-import ScreenReaderText from "../ui/ScreenReaderText"
+import ScreenReaderText from "components/ui/ScreenReaderText"
 import styles from "./index.module.scss";
 import cn from "classnames";
 

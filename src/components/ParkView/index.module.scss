@@ -37,11 +37,11 @@ div#app {
   padding-top: 50px;
   letter-spacing: 8px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: $desktop) {
     margin: 0 50px;
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: $mobile-landscape) {
     margin: 25px 25px;
     font-size: 1.5rem;
   }

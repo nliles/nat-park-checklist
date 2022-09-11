@@ -1,6 +1,6 @@
-import ListItem from "../ListItem";
-import { Park } from "../../types";
-import Total from "../Total";
+import ListItem from "components/ListItem";
+import { Park } from "types";
+import Total from "components/Total";
 import styles from "./index.module.scss";
 
 type ListType = {

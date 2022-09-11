@@ -29,7 +29,7 @@
    justify-self:center;
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: $mobile-landscape) {
     display: flex;
     justify-content: center;
     flex-direction: column;

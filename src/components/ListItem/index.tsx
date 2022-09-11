@@ -1,5 +1,5 @@
-import { Park } from "../../types";
-import Checkbox from "../ui/Checkbox";
+import { Park } from "types";
+import Checkbox from "components/ui/Checkbox";
 
 type ListItemType = {
   park: Park;

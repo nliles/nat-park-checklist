@@ -1,10 +1,10 @@
-import List from "../List";
-import Map from "../Map";
-import Spinner from "../ui/Spinner";
-import SubNav from "../SubNav";
-import NavBar from "../NavBar";
-import { Park } from "../../types";
-import { removeDashes } from "../../helpers";
+import List from "components/List";
+import Map from "components/Map";
+import Spinner from "components/ui/Spinner";
+import SubNav from "components/SubNav";
+import NavBar from "components/NavBar";
+import { Park } from "types";
+import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
 
 type ParkViewType = {

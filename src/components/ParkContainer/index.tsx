@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import ParkView from "../ParkView";
-import { useParks } from "../../hooks";
+import ParkView from "components/ParkView";
+import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
-import { loadState, saveState } from "../../storage/sessionStorage";
+import { loadState, saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(

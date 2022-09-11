@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Park } from "../types";
+import { Park } from "types";
 import { PARK_INFO, NPS_API, API_KEY } from "../constants";
-import { formatParks, sortParks } from "../helpers";
+import { formatParks, sortParks } from "helpers";
 
 function useParks(selectedItem: string) {
   const [loading, setLoading] = useState<boolean>(false);

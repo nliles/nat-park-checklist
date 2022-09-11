@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
 import { PARK_INFO } from "../../../constants";
-import { removeDashes } from "../../../helpers";
+import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
 import cn from "classnames";
 

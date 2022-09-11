@@ -1,3 +1,5 @@
+@import "../../styles/breakpoints.scss";
+
 .container {
   position: relative;
   margin: 0 100px;
@@ -8,7 +10,7 @@
     margin: 0 50px;
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: $mobile-landscape) {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -29,7 +31,7 @@
 }
 
 .countMobile {
-  @media (min-width: 540px) {
+  @media (min-width: $mobile-landscape) {
     display: none
   }
 }
