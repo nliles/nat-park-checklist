@@ -1,6 +1,5 @@
 import Dropdown from "../ui/Dropdown";
-import { LIST_OPTIONS, TOTAL_UNITS } from "../../constants";
-import Total from "../Total";
+import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
 
 type SubNavType = {

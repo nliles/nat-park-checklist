@@ -16,9 +16,7 @@ type MapType = {
 };
 
 const Map = ({ parks = [], selectedParks = [] }: MapType) => {
-  const [tooltipContent, setTooltipContent] = useState<Park | undefined>(
-    undefined
-  );
+  const [tooltipContent, setTooltipContent] = useState<Park | undefined>();
   const [width] = useWindowResize();
   const height = width / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
@@ -28,7 +26,7 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [width - 40, height],
+      [width - 45, height],
     ],
     usData
   );
@@ -57,6 +55,7 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
       handleMouseOver={handleMouseOverPark}
       handleMouseLeave={handleMouseLeavePark}
       number={i + 1}
+      tooltipName={tooltipContent?.name}
     />
   ));
 
