@@ -11,13 +11,12 @@
 }
 
 .header {
-  position: relative;
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: center;
   color: $green;
   border-bottom: 2px solid $green;
   margin-bottom: 2rem;
+  text-align: center;
 
   h2 {
    font-family: "Nanum Myeongjo", serif;
@@ -25,15 +24,23 @@
    font-size: 28px;
    font-weight: 400;
    letter-spacing: 8px;
+   grid-column-start: 1;
+   grid-row-start: 1;
+   justify-self:center;
+  }
+
+  @media (max-width: 540px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 10px;
   }
 }
 
 .count {
-  position: absolute;
-  right: 0;
-  font-size: 18px;
-  letter-spacing: normal;
-  white-space: nowrap;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  justify-self: right;
 }
 
 .listContainer {

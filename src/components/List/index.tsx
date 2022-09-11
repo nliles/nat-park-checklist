@@ -19,7 +19,7 @@ const List = ({ parks = [], selectedDropdownItem, selectedParks = [], handleChan
       <h2 >
         {`${selectedDropdownItem.replaceAll('-', ' ')} checklist`}
       </h2>
-      <Total count={count} total={parks.length}/>
+      <Total count={count} total={parks.length} styleName={styles.count}/>
     </div>
       <div className={styles.listContainer}>
         {parks &&

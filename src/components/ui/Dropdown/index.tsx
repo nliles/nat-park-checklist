@@ -8,9 +8,10 @@ type DropdownType = {
   handleClick: (item: string) => void;
   list: string[];
   selectedItem: string;
+  styleName?: string;
 };
 
-const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
+const Dropdown = ({ handleClick, list, selectedItem, styleName }: DropdownType) => {
   const myRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<any>(-1);
@@ -82,7 +83,7 @@ const Dropdown = ({ handleClick, list, selectedItem }: DropdownType) => {
 
   return (
     <div
-      className={cn(styles.container, {
+      className={cn(styles.container, styleName, {
         [styles.isOpen]: isOpen,
       })}
       ref={myRef}

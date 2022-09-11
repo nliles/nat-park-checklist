@@ -1,16 +1,41 @@
 .container {
   position: relative;
   margin: 0 100px;
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: center;
 
   @media (max-width: 1024px) {
     margin: 0 50px;
   }
 
   @media (max-width: 540px) {
+    display: flex;
+    justify-content: center;
     flex-direction: column;
     margin: 0;
+  }
+}
+
+.dropdown {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  justify-self: center;
+}
+
+.countMobile, .countDesktop {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  justify-self: right;
+}
+
+.countMobile {
+  @media (min-width: 540px) {
+    display: none
+  }
+}
+
+.countDesktop {
+  @media (max-width: 760px) {
+    display: none
   }
 }
