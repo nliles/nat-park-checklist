@@ -86,9 +86,12 @@
   text-transform: capitalize;
   cursor: pointer;
 
-  &.selected,
-  &.highlighted {
+  &.selected {
     background: $tan;
+  }
+
+  &.highlighted {
+    background: $lightTan;
   }
 
   &:last-child {

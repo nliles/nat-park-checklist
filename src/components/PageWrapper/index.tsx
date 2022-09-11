@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import NavBar from "components/NavBar";
+import styles from "./index.module.scss";
 
 type PageWrapperProps = {
   children: ReactNode;
@@ -7,7 +8,7 @@ type PageWrapperProps = {
 };
 
 const PageWrapper = ({ children, count }: PageWrapperProps) => (
-  <div>
+  <div className={styles.wrapper}>
     <NavBar count={count} />
     <main role="main">{children}</main>
   </div>
