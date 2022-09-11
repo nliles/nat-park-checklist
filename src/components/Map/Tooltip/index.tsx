@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Park } from "../../../types";
-import styles from "../index.module.scss";
+import { Park } from "types";
+import styles from "./index.module.scss";
 
 type TooltipType = {
   coords: number[];
@@ -25,8 +25,8 @@ const Tooltip = ({ park, coords, tooltipId }: TooltipType) => {
   const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
 
   return (
-    <foreignObject className={styles.tooltip} x={x} y={y} role="tooltip" id={tooltipId}>
-      <div className={styles.content}>
+    <foreignObject className={styles.tooltip} x={x} y={y}>
+      <div className={styles.content} role="tooltip" id={tooltipId}>
         <div className={styles.imgContainer}>
           <img src={imageSrc} alt="" onError={handleImgError} />
         </div>

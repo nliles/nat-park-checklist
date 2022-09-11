@@ -10,16 +10,19 @@ type ListType = {
   handleChange: (item: string) => void;
 };
 
-const List = ({ parks = [], selectedDropdownItem, selectedParks = [], handleChange }: ListType) => {
+const List = ({
+  parks = [],
+  selectedDropdownItem,
+  selectedParks = [],
+  handleChange,
+}: ListType) => {
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
   return (
     <div className={styles.container}>
-    <div className={styles.header}>
-      <h2 >
-        {`${selectedDropdownItem.replaceAll('-', ' ')} checklist`}
-      </h2>
-      <Total count={count} total={parks.length} styleName={styles.count}/>
-    </div>
+      <div className={styles.header}>
+        <h2>{`${selectedDropdownItem.replaceAll("-", " ")} checklist`}</h2>
+        <Total count={count} total={parks.length} styleName={styles.count} />
+      </div>
       <div className={styles.listContainer}>
         {parks &&
           parks.map((park: any, i: number) => (

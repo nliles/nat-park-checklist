@@ -19,14 +19,14 @@
   text-align: center;
 
   h2 {
-   font-family: "Nanum Myeongjo", serif;
-   text-transform: capitalize;
-   font-size: 22px;
-   font-weight: 400;
-   letter-spacing: 8px;
-   grid-column-start: 1;
-   grid-row-start: 1;
-   justify-self: center;
+    font-family: "Nanum Myeongjo", serif;
+    text-transform: capitalize;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 8px;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    justify-self: center;
   }
 
   @media (max-width: $mobile-landscape) {

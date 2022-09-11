@@ -5,9 +5,7 @@ type ScreenReaderTextProps = {
 };
 
 const ScreenReaderText = ({ text }: ScreenReaderTextProps) => (
-    <span className={styles.screenReader}>
-      {text}
-    </span>
+  <span className={styles.screenReader}>{text}</span>
 );
 
 export default ScreenReaderText;

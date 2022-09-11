@@ -2,7 +2,6 @@ import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import SubNav from "components/SubNav";
-import NavBar from "components/NavBar";
 import { Park } from "types";
 import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
@@ -26,7 +25,6 @@ const ParkView = ({
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
-      <NavBar/>
       <div className={styles.titleSection}>
         <h2 className={styles.header}>{`${removeDashes(
           selectedDropdownItem

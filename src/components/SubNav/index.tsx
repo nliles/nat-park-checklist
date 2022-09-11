@@ -14,14 +14,11 @@ const SubNav = ({
   handleListItemChange,
 }: SubNavType) => (
   <div className={styles.container}>
-    <Total count={selectedParks.length} total={TOTAL_UNITS} styleName={styles.countMobile} showTotal/>
     <Dropdown
       list={LIST_OPTIONS}
       initialSelectedItem={selectedDropdownItem}
       handleClick={handleListItemChange}
-      styleName={styles.dropdown}
     />
-    <Total count={selectedParks.length} total={TOTAL_UNITS} styleName={styles.countDesktop}/>
   </div>
 );
 

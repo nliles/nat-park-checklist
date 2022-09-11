@@ -1,5 +1,6 @@
 import React from "react";
-import ParkContainer from "./components/ParkContainer";
+import NavBar from "components/NavBar";
+import ParkContainer from "components/ParkContainer";
 
 const App = () => <ParkContainer />;
 

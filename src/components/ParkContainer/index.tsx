@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ParkView from "components/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
+import PageWrapper from "components/PageWrapper";
 import { loadState, saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
@@ -39,14 +40,16 @@ const ParkContainer = () => {
   };
 
   return (
-    <ParkView
-      loading={loading}
-      selectedParks={selectedParks}
-      selectedDropdownItem={selectedDropdownItem}
-      parks={parks}
-      handleSelected={handleSelected}
-      handleListItemChange={handleListItemChange}
-    />
+    <PageWrapper count={selectedParks.length}>
+      <ParkView
+        loading={loading}
+        selectedParks={selectedParks}
+        selectedDropdownItem={selectedDropdownItem}
+        parks={parks}
+        handleSelected={handleSelected}
+        handleListItemChange={handleListItemChange}
+      />
+    </PageWrapper>
   );
 };
 

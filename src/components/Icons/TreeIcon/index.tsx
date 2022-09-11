@@ -1,10 +1,11 @@
 type Icon = {
   fill: string;
+  stroke: string;
 };
 
-const TreeIcon = ({ fill }: Icon) => (
+const TreeIcon = ({ fill, stroke }: Icon) => (
   <svg
-    stroke="#2a3016"
+    stroke={stroke}
     strokeWidth="35"
     width="40px"
     height="40px"

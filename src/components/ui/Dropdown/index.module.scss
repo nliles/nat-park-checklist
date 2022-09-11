@@ -35,7 +35,7 @@
   text-align: left;
   white-space: nowrap;
   background: none;
-	border: none;
+  border: none;
 }
 
 .title {
@@ -86,7 +86,8 @@
   text-transform: capitalize;
   cursor: pointer;
 
-  &.selected, &.highlighted {
+  &.selected,
+  &.highlighted {
     background: $tan;
   }
 

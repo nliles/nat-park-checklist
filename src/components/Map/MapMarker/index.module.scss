@@ -1,0 +1,22 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/breakpoints.scss";
+
+.link {
+  fill: $black;
+  text-decoration: underline;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &.selected {
+    fill: $white;
+  }
+}
+
+.circle {
+  fill: $green;
+  display: none;
+  @media (max-width: $desktop) {
+    display: block;
+  }
+}
