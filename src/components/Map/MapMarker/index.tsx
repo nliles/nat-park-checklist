@@ -1,4 +1,5 @@
 import TreeIcon from "../../Icons/TreeIcon";
+import ScreenReaderText from "../../ui/ScreenReaderText"
 import { Park } from "../../../types";
 import styles from "../index.module.scss";
 
@@ -32,11 +33,12 @@ const MapMarker = ({
         onMouseLeave={() => handleMouseLeave()}
       >
         <TreeIcon fill={fill} />
-        <a className={styles.number} href={park.url}>
+        <a className={styles.number} href={park.url} target="_blank" rel="noopener">
           <text x="20" y="25" textAnchor="middle">
             {number}
           </text>
         </a>
+        <ScreenReaderText text={`Link to ${park.name} info in new tab`}/>
       </svg>
       {coords && (
         <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]} />

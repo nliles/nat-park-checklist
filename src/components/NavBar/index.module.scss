@@ -1,0 +1,38 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.header {
+  height: 3.125rem;
+}
+
+.content {
+  height: 100%;
+  margin-left: 30px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  background: white;
+
+  @media (max-width: 550px) {
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+.img {
+  padding-right: 5px;
+}
+
+.title {
+  color: $green;
+  font-weight: 600;
+  font-size: 1rem;
+}

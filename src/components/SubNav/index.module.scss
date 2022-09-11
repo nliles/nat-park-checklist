@@ -7,6 +7,10 @@
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 1024px) {
+    margin: 0 50px;
+  }
+
   @media (max-width: 540px) {
     flex-direction: column;
     margin: 0;
@@ -31,12 +35,4 @@
   &:hover {
     text-decoration: underline;
   }
-}
-
-.screenReader {
-  position: absolute;
-  width: 1px;
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-  white-space: nowrap;
 }

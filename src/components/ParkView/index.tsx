@@ -1,7 +1,8 @@
-import List from "../List";
+import List from "src/components/List";
 import Map from "../Map";
-import Spinner from "../ui/Spinner";
-import SubNav from "../SubNav";
+import Spinner from "src/components/ui/Spinner";
+import SubNav from "src/components/SubNav";
+import NavBar from "src/components/NavBar";
 import { Park } from "../../types";
 import { removeDashes } from "../../helpers";
 import styles from "./index.module.scss";
@@ -25,11 +26,12 @@ const ParkView = ({
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
-      <nav className={styles.nav}>
-        <h1 className={styles.header}>{`${removeDashes(
+      <NavBar/>
+      <div className={styles.titleSection}>
+        <h2 className={styles.header}>{`${removeDashes(
           selectedDropdownItem
-        )}s`}</h1>
-      </nav>
+        )}s`}</h2>
+      </div>
       {loading && <Spinner />}
       {!loading && (
         <>
