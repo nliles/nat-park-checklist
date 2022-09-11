@@ -28,7 +28,7 @@ const Tooltip = ({ park, coords, tooltipId }: TooltipType) => {
     <foreignObject className={styles.tooltip} x={x} y={y} role="tooltip" id={tooltipId}>
       <div className={styles.content}>
         <div className={styles.imgContainer}>
-          <img src={imageSrc} alt={image?.altText} onError={handleImgError} />
+          <img src={imageSrc} alt="" onError={handleImgError} />
         </div>
         <div className={styles.text}>
           <h1>{park.fullName}</h1>

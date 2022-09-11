@@ -12,7 +12,6 @@ type ListType = {
 
 const List = ({ parks = [], selectedDropdownItem, selectedParks = [], handleChange }: ListType) => {
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
-  const countDisplay = ` out of ${parks.length}`;
   return (
     <div className={styles.container}>
     <div className={styles.header}>

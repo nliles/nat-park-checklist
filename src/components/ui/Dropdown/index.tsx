@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { PARK_INFO } from "../../../constants";
 import { useSelect } from 'downshift';
 import { removeDashes } from "helpers";
@@ -16,7 +16,6 @@ const Dropdown = ({ handleClick, list, initialSelectedItem, styleName }: Dropdow
 
   const {
   getToggleButtonProps,
-  getLabelProps,
   getMenuProps,
   getItemProps,
   highlightedIndex,
@@ -30,7 +29,7 @@ useEffect(() => {
   if (selectedItem) {
     handleClick(selectedItem)
   }
-}, [selectedItem])
+}, [handleClick, selectedItem])
 
 const formatListItem = (item: string) => {
   const count =
@@ -57,12 +56,10 @@ const formatListItem = (item: string) => {
       <ul
         className={styles.list}
         role="listbox"
-        aria-activedescendant={selectedItem}
         {...getMenuProps()}
       >
         {list.map((item, index) => (
           <li
-            aria-selected={item === selectedItem}
             className={cn(styles.listItem, {
               [styles.selected]: item === initialSelectedItem,
               [styles.highlighted]: index === highlightedIndex

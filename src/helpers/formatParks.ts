@@ -1,7 +1,5 @@
 import { Park } from "../types";
-import { PARK_DESIGNATION_KEY, PARK_INFO } from "../constants";
-
-const SEQUOIA_KINGS_CANYON = "Sequoia & Kings Canyon";
+import { PARK_INFO } from "../constants";
 
 const formatParks = (parks: Park[], selectedItem: string) => {
   let formattedParks: Park[] = parks.slice();

@@ -34,7 +34,7 @@ const MapMarker = ({
         onMouseLeave={() => handleMouseLeave()}
       >
         <TreeIcon fill={fill} />
-        <a className={styles.number} href={park.url} target="_blank" rel="noopener">
+        <a className={styles.number} href={park.url} target="_blank" rel="noreferrer">
           <text x="20" y="25" textAnchor="middle">
             {number}
           </text>
