@@ -72,6 +72,7 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
               tooltipContent.longitude,
               tooltipContent.latitude,
             ])}
+            tooltipId={tooltipContent.name}
           />
         )}
       </svg>

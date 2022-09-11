@@ -5,9 +5,10 @@ import styles from "../index.module.scss";
 type TooltipType = {
   coords: number[];
   park: Park;
+  tooltipId: string;
 };
 
-const Tooltip = ({ park, coords }: TooltipType) => {
+const Tooltip = ({ park, coords, tooltipId }: TooltipType) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
   const statesArr = park.states?.split(",");
@@ -24,7 +25,7 @@ const Tooltip = ({ park, coords }: TooltipType) => {
   const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
 
   return (
-    <foreignObject className={styles.tooltip} x={x} y={y}>
+    <foreignObject className={styles.tooltip} x={x} y={y} role="tooltip" id={tooltipId}>
       <div className={styles.content}>
         <div className={styles.imgContainer}>
           <img src={imageSrc} alt={image?.altText} onError={handleImgError} />

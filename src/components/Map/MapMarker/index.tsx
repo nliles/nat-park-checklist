@@ -26,6 +26,7 @@ const MapMarker = ({
   return (
     <>
       <svg
+        aria-describedby={park.name}
         x={x}
         y={y}
         className={styles.icon}
