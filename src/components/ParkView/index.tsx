@@ -13,6 +13,7 @@ type ParkViewType = {
   parks: Park[];
   selectedParks: string[];
   selectedDropdownItem: string;
+  handleSaveData: () => void;
 };
 
 const ParkView = ({
@@ -22,6 +23,7 @@ const ParkView = ({
   selectedDropdownItem,
   handleListItemChange,
   handleSelected,
+  handleSaveData
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
@@ -44,6 +46,7 @@ const ParkView = ({
             selectedDropdownItem={selectedDropdownItem}
             selectedParks={selectedParks}
             handleChange={handleSelected}
+            handleSubmit={handleSaveData}
           />
         </>
       )}

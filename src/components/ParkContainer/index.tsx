@@ -48,6 +48,7 @@ const ParkContainer = () => {
         parks={parks}
         handleSelected={handleSelected}
         handleListItemChange={handleListItemChange}
+        handleSaveData={saveToStorage}
       />
     </PageWrapper>
   );
