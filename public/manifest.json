@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "National Park Checklist",
+  "name": "National Park Checklist",
   "icons": [
     {
       "src": "np.svg",

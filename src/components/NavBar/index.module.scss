@@ -7,6 +7,7 @@
   left: 0;
   width: 100vw;
   z-index: 1;
+  color: $green;
 }
 
 .header {
@@ -14,8 +15,12 @@
   align-items: center;
   justify-content: space-between;
   height: 3.125rem;
-  margin: 0 30px;
+  padding: 0 100px;
   background: $white;
+
+  @media (max-width: $desktop) {
+    padding: 0 50px;
+  }
 }
 
 .content {
@@ -30,12 +35,34 @@
   }
 }
 
+.button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $green;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  color: $green;
+
+  .avatar {
+    margin-left: 1rem;
+    border-radius: 50px;
+    border: 1px solid $green;
+  }
+}
+
 .img {
   padding-right: 5px;
 }
 
 .title {
-  color: $green;
   font-weight: 600;
   font-size: 1rem;
 }

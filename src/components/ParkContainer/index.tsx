@@ -3,6 +3,7 @@ import ParkView from "components/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
 import PageWrapper from "components/PageWrapper";
+import LoginForm from "components/LoginForm";
 import { loadState, saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
@@ -41,6 +42,7 @@ const ParkContainer = () => {
 
   return (
     <PageWrapper count={selectedParks.length}>
+      <LoginForm />
       <ParkView
         loading={loading}
         selectedParks={selectedParks}

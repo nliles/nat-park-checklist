@@ -1,0 +1,57 @@
+@import "../../styles/colors.scss";
+
+.container {
+  width: 420px;
+  margin: 250px auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 400;
+  color: $green;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+
+  button,
+  input {
+    height: 50px;
+    width: 400px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid $green;
+  }
+}
+
+.button {
+  background: $green;
+  color: $white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.registerText {
+  width: 400px;
+  text-align: center;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+}
+
+.label {
+  color: $green;
+  font-weight: 600;
+}
