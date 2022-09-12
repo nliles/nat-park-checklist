@@ -44,6 +44,12 @@
   color: $green;
   font-weight: 600;
   font-size: 1rem;
+  border-radius: 40px;
+  padding-right: 10px;
+}
+
+.total {
+  margin-right: 1rem;
 }
 
 .right {
@@ -52,7 +58,6 @@
   color: $green;
 
   .avatar {
-    margin-left: 1rem;
     border-radius: 50px;
     border: 1px solid $green;
   }

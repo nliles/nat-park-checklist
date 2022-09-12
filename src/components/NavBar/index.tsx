@@ -8,8 +8,6 @@ type NavBarProps = {
 
 const isLoggedIn = false;
 
-// <Total count={count} total={TOTAL_UNITS} />
-
 const NavBar = ({ count }: NavBarProps) => (
   <nav className={styles.nav}>
     <header className={styles.header}>
@@ -18,6 +16,7 @@ const NavBar = ({ count }: NavBarProps) => (
         <h1 className={styles.title}>National Park Unit Checklist</h1>
       </div>
       <div className={styles.right}>
+        <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
         {!isLoggedIn && (
           <button className={styles.button} onClick={() => {}}>
             <img width={30} src="login.svg" alt="" />
