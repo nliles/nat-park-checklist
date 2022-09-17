@@ -1,0 +1,40 @@
+@import "../../../styles/colors.scss";
+
+.overlay {
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: $white;
+  border: 1px solid $gray;
+  border-radius: 20px;
+  padding: 1.25rem;
+  position: relative;
+  height: auto;
+  width: 420px;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
