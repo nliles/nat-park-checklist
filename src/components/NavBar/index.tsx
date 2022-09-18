@@ -35,7 +35,7 @@ const NavBar = ({ count }: NavBarProps) => {
               className={styles.avatar}
               width={30}
               src="yosemite.svg"
-              alt=""
+              alt="Yosemit icon"
             />
           )}
         </div>
