@@ -40,9 +40,7 @@ const ModalRoot = () => {
             <img src="close.svg" width={30} alt="close icon" />
           </button>
         </div>
-        {modal && (
-          <SpecificModal />
-        )}
+        {modal && <SpecificModal />}
       </div>
     </ReactModal>
   );
