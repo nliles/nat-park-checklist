@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "components/ui/Input";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {
@@ -6,36 +7,24 @@ const LoginForm = () => {
   const handleClick = () => {
     setShowRegistration(!showRegistration);
   };
+  const submitTxt = showRegistration ? "Sign in" : "Sign up";
   const btnTxt = showRegistration ? "Sign up" : "Sign in";
-  const handleSubmit = () => {};
   const txt = showRegistration
     ? "Already have an account?"
     : "Don't have an account?";
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Hello, Traveler</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label className={styles.label} htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          autoComplete="email"
-          type="email"
-          placeholder="Email"
-        />
-        <label className={styles.label} htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-        />
+        <Input id="email" label="Email" type="email" autoComplete="email" />
+        <Input id="password" label="Password" type="password" />
         <button type="submit" className={styles.button}>
-          {btnTxt}
+          {submitTxt}
         </button>
       </form>
       <p className={styles.registerText}>
