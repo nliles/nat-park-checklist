@@ -17,8 +17,8 @@ const NavBar = ({ count }: NavBarProps) => {
   const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
   return (
     <nav className={styles.nav}>
-      <header className={styles.header}>
-        <div className={styles.content}>
+      <div className={styles.content}>
+        <div className={styles.header}>
           <img src="np.svg" alt="" width={25} className={styles.img} />
           <h1 className={styles.title}>National Park Unit Checklist</h1>
         </div>
@@ -39,7 +39,7 @@ const NavBar = ({ count }: NavBarProps) => {
             />
           )}
         </div>
-      </header>
+      </div>
     </nav>
   );
 };

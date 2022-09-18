@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "actions";
 import ReactModal from "react-modal";
 import { State } from "reducers/types";
-import { ModalComponents } from "./types";
+import { ModalComponents, ModalContentLabel } from "./types";
 import styles from "./index.module.scss";
 
-const ModalRoot = () => {
+const Modal = () => {
   const modal = useSelector((state: State) => state.modal);
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ const ModalRoot = () => {
       overlayClassName={styles.overlay}
       onRequestClose={closeModal}
       className={styles.modal}
-      contentLabel="Log in"
+      contentLabel={ModalContentLabel[modal]}
     >
       <div>
         <div className={styles.header}>
@@ -30,7 +30,7 @@ const ModalRoot = () => {
             className={styles.avatar}
             width={50}
             src="yosemite.svg"
-            alt="logo"
+            alt="Yosemite icon"
           />
           <button
             type="button"
@@ -47,4 +47,4 @@ const ModalRoot = () => {
   );
 };
 
-export default ModalRoot;
+export default Modal;

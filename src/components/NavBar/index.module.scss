@@ -10,7 +10,7 @@
   color: $green;
 }
 
-.header {
+.content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,7 +23,7 @@
   }
 }
 
-.content {
+.header {
   height: 100%;
   width: auto;
   display: flex;
