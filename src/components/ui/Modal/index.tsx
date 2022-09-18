@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "actions";
+import ReactModal from "react-modal";
 import { State } from "reducers/types";
 import { ModalComponents } from "./types";
 import styles from "./index.module.scss";
@@ -9,33 +9,21 @@ const ModalRoot = () => {
   const modal = useSelector((state: State) => state.modal);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (modal) {
-      document.body.classList.add("showModal");
-    } else {
-      document.body.classList.remove("showModal");
-    }
-    return () => document.body.classList.remove("showModal");
-  }, [modal]);
-
-  if (!modal) {
-    return null;
-  }
-
-  const SpecificModal = ModalComponents[modal];
-
   const closeModal = () => {
     dispatch(hideModal());
   };
 
+  const SpecificModal = ModalComponents[modal];
+
   return (
-    <div
-      className={styles.overlay}
-      role="dialog"
-      aria-labelledby="dialog-title"
-      aria-describedby="dialog-description"
+    <ReactModal
+      appElement={document.getElementById("app") as HTMLElement}
+      isOpen={!!modal}
+      overlayClassName={styles.overlay}
+      onRequestClose={closeModal}
+      className={styles.modal}
     >
-      <div className={styles.modal}>
+      <div>
         <div className={styles.header}>
           <img
             className={styles.avatar}
@@ -52,9 +40,11 @@ const ModalRoot = () => {
             <img src="close.svg" width={30} alt="close icon" />
           </button>
         </div>
-        <SpecificModal />
+        {modal && (
+          <SpecificModal />
+        )}
       </div>
-    </div>
+    </ReactModal>
   );
 };
 
