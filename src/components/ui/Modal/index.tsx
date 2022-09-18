@@ -22,6 +22,7 @@ const ModalRoot = () => {
       overlayClassName={styles.overlay}
       onRequestClose={closeModal}
       className={styles.modal}
+      contentLabel="Log in"
     >
       <div>
         <div className={styles.header}>
