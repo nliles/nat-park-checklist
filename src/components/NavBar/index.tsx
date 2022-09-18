@@ -27,7 +27,7 @@ const NavBar = ({ count }: NavBarProps) => {
           {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
-              <span>Sign in</span>
+              <span className={styles.logIn}>Sign in</span>
             </button>
           )}
           {isLoggedIn && (

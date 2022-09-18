@@ -21,12 +21,13 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
   const height = width / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
   const padding = width > 540 ? 30 : 0;
+  const offsetWidth = 50;
   const bottomPadding = width > 768 ? 100 : 0;
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [width - 45, height],
+      [width - offsetWidth, height],
     ],
     usData
   );

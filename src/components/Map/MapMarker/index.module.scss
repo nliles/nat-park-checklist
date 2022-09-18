@@ -20,3 +20,10 @@
     display: block;
   }
 }
+
+.icon {
+  display: none;
+  @media (min-width: $mobile-landscape) {
+    display: block;
+  }
+}

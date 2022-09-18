@@ -11,10 +11,3 @@
   fill: $tan;
   stroke: $tanOutline;
 }
-
-.icon {
-  display: none;
-  @media (min-width: $mobile-landscape) {
-    display: block;
-  }
-}
