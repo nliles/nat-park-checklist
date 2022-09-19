@@ -1,4 +1,4 @@
-import React from "react";
+import { FormEvent } from "react";
 import styles from "./index.module.scss";
 
 type InputType = {
@@ -8,7 +8,7 @@ type InputType = {
   autoComplete?: string;
   required?: boolean;
   value?: string;
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (e: FormEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({
