@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.4",
@@ -12,6 +13,7 @@
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "@types/topojson": "^3.2.3",
+    "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "d3-composite-projections": "^1.4.0",
     "d3-geo": "^3.0.1",

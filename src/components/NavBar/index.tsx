@@ -10,7 +10,7 @@ type NavBarProps = {
 };
 
 const isLoggedIn = false;
-const showLogIn = false;
+const showLogIn = true;
 
 const NavBar = ({ count }: NavBarProps) => {
   const dispatch = useDispatch();
