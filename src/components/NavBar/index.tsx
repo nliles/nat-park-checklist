@@ -10,6 +10,7 @@ type NavBarProps = {
 };
 
 const isLoggedIn = false;
+const showLogIn = false;
 
 const NavBar = ({ count }: NavBarProps) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          {!isLoggedIn && (
+          {!isLoggedIn && showLogIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
               <span className={styles.logIn}>Sign in</span>

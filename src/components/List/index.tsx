@@ -11,6 +11,8 @@ type ListType = {
   handleSubmit: () => void;
 };
 
+const isLoggedIn = false;
+
 const List = ({
   parks = [],
   selectedDropdownItem,
@@ -44,9 +46,11 @@ const List = ({
               />
             ))}
         </div>
-        <button className={styles.button} type="submit">
-          Save
-        </button>
+        {isLoggedIn && (
+          <button className={styles.button} type="submit">
+            Save
+          </button>
+        )}
       </form>
     </div>
   );
