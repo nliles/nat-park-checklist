@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import Input from "components/ui/Input";
-import { login } from "services/login.service";
+import { login, register } from "services/login.service";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {
@@ -26,10 +26,19 @@ const LoginForm = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      login();
+      try {
+        let res;
+        if (showRegistration) {
+          await register(email, password);
+        } else {
+          await login(email, password);
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   };
 

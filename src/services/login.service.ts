@@ -1,9 +1,26 @@
-import axios from "axios";
+import { apiClient } from 'services/apiService'
 
-export const login = () => {
-  console.log("here");
-  return axios.post("http://localhost:5000/login", { crossdomain: true });
-};
+export const login = (email: string, password: string) => {
+  return apiClient.post('/auth/login', {
+    email,
+    password
+  },
+        {
+            headers: {
+                crossdomain: true
+            }
+        })
+}
 
-export const register = () =>
-  axios.post("http://localhost:5000/register", { crossdomain: true });
+
+export const register = (email: string, password: string) => {
+  return apiClient.post('/auth/register', {
+    email,
+    password
+  },
+        {
+            headers: {
+                crossdomain: true
+            }
+        })
+}
