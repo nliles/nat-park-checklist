@@ -18,8 +18,12 @@ const Input = ({
   required = false,
 }: InputType) => {
   const [field, meta] = useField(id);
+  const { touched, error } = meta;
+
+  console.log('error', error)
+
   return (
-    <>
+    <div className={styles.wrapper}>
       <label className={styles.label} htmlFor={id}>
         {label}
       </label>
@@ -32,7 +36,17 @@ const Input = ({
         placeholder={label}
         required={required}
       />
-    </>
+      {touched && error && (
+        <div
+          role="alert"
+          aria-live="polite"
+          id={`${id}_error`}
+          className={styles.inputError}
+        >
+          {error}
+        </div>
+      )}
+    </div>
   );
 };
 
