@@ -1,12 +1,14 @@
 import { apiClient } from "services/apiService";
 
-export const login = (email: string, password: string) => {
+type User = {
+  email: string;
+  password: string;
+}
+
+export const login = (user: User) => {
   return apiClient.post(
     "/auth/login",
-    {
-      email,
-      password,
-    },
+     user,
     {
       headers: {
         crossdomain: true,
@@ -15,13 +17,10 @@ export const login = (email: string, password: string) => {
   );
 };
 
-export const register = (email: string, password: string) => {
+export const register = (user: User) => {
   return apiClient.post(
     "/auth/register",
-    {
-      email,
-      password,
-    },
+    user,
     {
       headers: {
         crossdomain: true,

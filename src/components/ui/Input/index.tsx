@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { useField } from 'formik';
 import styles from "./index.module.scss";
 
 type InputType = {
@@ -7,8 +8,6 @@ type InputType = {
   type?: string;
   autoComplete?: string;
   required?: boolean;
-  value?: string;
-  onChange?: (e: FormEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({
@@ -17,24 +16,21 @@ const Input = ({
   type = "text",
   autoComplete,
   required = false,
-  value,
-  onChange,
 }: InputType) => {
+  const [field, meta] = useField(id);
   return (
     <>
       <label className={styles.label} htmlFor={id}>
         {label}
       </label>
       <input
+        {...field}
         id={id}
-        name={id}
         className={styles.input}
         autoComplete={autoComplete}
         type={type}
         placeholder={label}
         required={required}
-        value={value}
-        onChange={onChange}
       />
     </>
   );
