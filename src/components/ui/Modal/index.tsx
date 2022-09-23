@@ -6,7 +6,7 @@ import { ModalComponents, ModalContentLabel } from "./types";
 import styles from "./index.module.scss";
 
 const Modal = () => {
-  const modal = useSelector((state: State) => state.modal);
+  const modal = useSelector((state: State) => state.modal.modalType);
   const dispatch = useDispatch();
 
   const closeModal = () => {

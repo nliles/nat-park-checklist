@@ -1,6 +1,7 @@
 import styles from "./index.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "actions";
-import { useDispatch } from "react-redux";
+import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import Total from "../Total";
@@ -9,13 +10,13 @@ type NavBarProps = {
   count: number;
 };
 
-const isLoggedIn = false;
-const showLogIn = true;
+// const showLogIn = true;
 
 const NavBar = ({ count }: NavBarProps) => {
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector((state: State) => state.auth.authenticated);
   const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
+
   return (
     <nav className={styles.nav}>
       <div className={styles.content}>
@@ -25,7 +26,7 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          {!isLoggedIn && showLogIn && (
+          {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
               <span className={styles.logIn}>Sign in</span>

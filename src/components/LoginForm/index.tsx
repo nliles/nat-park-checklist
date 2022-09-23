@@ -1,14 +1,15 @@
 import { useState, FormEvent } from "react";
+import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { string, object } from 'yup';
+import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import { login, register } from "services/login.service";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign in" : "Sign up";
   const btnTxt = showRegistration ? "Sign up" : "Sign in";
   const txt = showRegistration
@@ -19,28 +20,23 @@ const LoginForm = () => {
     setShowRegistration(!showRegistration);
   };
 
-  const handleOnChange = (name: string, e: FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value;
-    if (name === "email") {
-      setEmail(value);
-    } else {
-      setPassword(value);
-    }
-  };
-
   type User = {
     email: string;
     password: string;
   }
 
   const handleSubmit = async (values: User) => {
-    if (email && password) {
+    if (values.email && values.password) {
       try {
         let res;
         if (showRegistration) {
           await register(values);
+          dispatch(loginSuccess());
+          dispatch(hideModal());
         } else {
           await login(values);
+          dispatch(loginSuccess());
+          dispatch(hideModal());
         }
       } catch (e) {
         console.log(e);

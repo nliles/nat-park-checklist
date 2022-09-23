@@ -1,17 +1,21 @@
 import type { AnyAction } from "redux";
 import { SHOW_MODAL, HIDE_MODAL } from "actions";
-import { State } from "./types";
-import initialState from "./initialState";
+import { ModalState } from "./types";
+import { initialModalState } from "./initialState";
 
 const modalReducer = (
-  state: State = initialState as State,
+  state: ModalState = initialModalState,
   action: AnyAction
 ) => {
   switch (action.type) {
     case SHOW_MODAL:
-      return action.modalType;
+    return {
+      modalType: action.modalType
+    }
     case HIDE_MODAL:
-      return "";
+    return {
+      modalType: ''
+    }
     default:
       return state;
   }

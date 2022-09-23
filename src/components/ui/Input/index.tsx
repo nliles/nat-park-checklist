@@ -20,8 +20,6 @@ const Input = ({
   const [field, meta] = useField(id);
   const { touched, error } = meta;
 
-  console.log('error', error)
-
   return (
     <div className={styles.wrapper}>
       <label className={styles.label} htmlFor={id}>
