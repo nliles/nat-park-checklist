@@ -6,7 +6,7 @@ import initialState from "./initialState";
 
 const appReducer = combineReducers({
   auth,
-  modal
+  modal,
 });
 
 const rootReducer = (

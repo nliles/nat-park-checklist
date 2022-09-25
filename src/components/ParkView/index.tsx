@@ -2,8 +2,10 @@ import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import SubNav from "components/SubNav";
+import Dropdown from "../ui/Dropdown";
 import { Park } from "types";
 import { removeDashes } from "helpers";
+import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
 
 type ParkViewType = {
@@ -35,11 +37,13 @@ const ParkView = ({
       {loading && <Spinner />}
       {!loading && (
         <>
-          <SubNav
-            selectedParks={selectedParks}
-            selectedDropdownItem={selectedDropdownItem}
-            handleListItemChange={handleListItemChange}
-          />
+          <div className={styles.dropdownWrapper}>
+            <Dropdown
+              list={LIST_OPTIONS}
+              initialSelectedItem={selectedDropdownItem}
+              handleClick={handleListItemChange}
+            />
+          </div>
           <Map parks={parks} selectedParks={selectedParks} />
           <List
             parks={parks}

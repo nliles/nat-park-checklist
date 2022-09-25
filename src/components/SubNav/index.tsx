@@ -1,24 +1,48 @@
-import Dropdown from "../ui/Dropdown";
-import { LIST_OPTIONS } from "../../constants";
+import { useRef, useEffect } from "react";
 import styles from "./index.module.scss";
+import cn from "classnames";
 
-type SubNavType = {
-  handleListItemChange: (item: string) => void;
-  selectedParks: string[];
-  selectedDropdownItem: string;
-};
 const SubNav = ({
-  selectedParks,
-  selectedDropdownItem,
-  handleListItemChange,
-}: SubNavType) => (
-  <div className={styles.container}>
-    <Dropdown
-      list={LIST_OPTIONS}
-      initialSelectedItem={selectedDropdownItem}
-      handleClick={handleListItemChange}
-    />
-  </div>
-);
+  showMenu,
+  onClick,
+}: {
+  showMenu: boolean;
+  onClick: () => void;
+}) => {
+  const myRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    const isAvatarClick =
+      (e.target as HTMLElement).getAttribute("id") === "avatar";
+    if (
+      myRef?.current &&
+      !myRef.current.contains(e.target as Node) &&
+      !isAvatarClick
+    ) {
+      onClick();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  });
+
+  return (
+    <nav
+      aria-label="Main"
+      ref={myRef}
+      className={cn(styles.container, {
+        [styles.show]: showMenu,
+      })}
+    >
+      <ul className={styles.list}>
+        <li className={styles.listItem}>
+          <button type="button">Logout</button>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default SubNav;

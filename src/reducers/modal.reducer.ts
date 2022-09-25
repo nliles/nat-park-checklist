@@ -9,13 +9,13 @@ const modalReducer = (
 ) => {
   switch (action.type) {
     case SHOW_MODAL:
-    return {
-      modalType: action.modalType
-    }
+      return {
+        modalType: action.modalType,
+      };
     case HIDE_MODAL:
-    return {
-      modalType: ''
-    }
+      return {
+        modalType: "",
+      };
     default:
       return state;
   }

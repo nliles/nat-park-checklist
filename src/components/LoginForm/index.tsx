@@ -1,17 +1,17 @@
 import { useState, FormEvent } from "react";
-import { useDispatch } from 'react-redux';
-import { Formik, Form } from 'formik';
-import { string, object } from 'yup';
+import { useDispatch } from "react-redux";
+import { Formik, Form } from "formik";
+import { string, object } from "yup";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
-import { login, register } from "services/login.service";
+import { login, register } from "services/auth.service";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState(false);
   const dispatch = useDispatch();
-  const submitTxt = showRegistration ? "Sign in" : "Sign up";
-  const btnTxt = showRegistration ? "Sign up" : "Sign in";
+  const submitTxt = showRegistration ? "Sign up" : "Sign in";
+  const btnTxt = showRegistration ? "Sign in" : "Sign up";
   const txt = showRegistration
     ? "Already have an account?"
     : "Don't have an account?";
@@ -23,14 +23,15 @@ const LoginForm = () => {
   type User = {
     email: string;
     password: string;
-  }
+  };
 
   const handleSubmit = async (values: User) => {
     if (values.email && values.password) {
       try {
         let res;
         if (showRegistration) {
-          await register(values);
+          const { token } = await register(values);
+          sessionStorage.setItem("jwtToken", token);
           dispatch(loginSuccess());
           dispatch(hideModal());
         } else {
@@ -45,54 +46,50 @@ const LoginForm = () => {
   };
 
   const initialValues = {
-      email: '',
-      password: '',
-  }
+    email: "",
+    password: "",
+  };
 
   const validationSchema = object().shape({
     email: string()
-      .required('Email required. Please fill out this field')
-      .min(5, 'Email must be longer than 5 characters.'),
+      .required("Email required. Please fill out this field")
+      .min(5, "Email must be longer than 5 characters."),
     password: string()
-      .required('Password required. Please fill out this field')
-      .min(8, 'Password must have at least 8 characters'),
+      .required("Password required. Please fill out this field")
+      .min(8, "Password must have at least 8 characters"),
   });
 
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Hello, Traveler</h1>
       <Formik
-				onSubmit={handleSubmit}
-				initialValues={initialValues}
+        onSubmit={handleSubmit}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         enableReinitialize
-			>
-				{({ values, isValid, dirty, isSubmitting }) => {
-        return (
-      <Form className={styles.form}>
-        <Input
-          id="email"
-          label="Email"
-          type="email"
-          autoComplete="email"
-          required
-        />
-        <Input
-          id="password"
-          label="Password"
-          type="password"
-          required
-        />
-        <button
-          disabled={isSubmitting || !dirty || !isValid}
-          type="submit"
-          className={styles.button}
-        >
-          {submitTxt}
-        </button>
-        </Form>
-      )}}
-    </Formik>
+      >
+        {({ values, isValid, dirty, isSubmitting }) => {
+          return (
+            <Form className={styles.form}>
+              <Input
+                id="email"
+                label="Email"
+                type="email"
+                autoComplete="email"
+                required
+              />
+              <Input id="password" label="Password" type="password" required />
+              <button
+                disabled={isSubmitting || !dirty || !isValid}
+                type="submit"
+                className={styles.button}
+              >
+                {submitTxt}
+              </button>
+            </Form>
+          );
+        }}
+      </Formik>
       <p className={styles.registerText}>
         {txt}
         <button type="button" onClick={handleClick}>

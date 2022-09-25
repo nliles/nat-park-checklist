@@ -15,15 +15,11 @@
   align-items: center;
   justify-content: space-between;
   height: 3.125rem;
-  padding: 0 6.25rem;
+  padding: 0 3rem;
   background: $white;
 
-  @media (max-width: $desktop) {
-    padding: 0 50px;
-  }
-
   @media (max-width: $mobile-landscape) {
-    padding: 0 25px;
+    padding: 0 1.5625rem;
   }
 }
 
@@ -40,6 +36,16 @@
   }
 }
 
+.test {
+  height: 3.125rem;
+  display: flex;
+  border-bottom: 5px solid transparent;
+
+  &.active {
+    border-bottom: 5px solid $green;
+  }
+}
+
 .button {
   display: flex;
   align-items: center;
@@ -49,8 +55,8 @@
   color: $green;
   font-weight: 600;
   font-size: 1rem;
-  border-radius: 40px;
   padding-right: 10px;
+  padding-top: 5px;
 
   img {
     @media (max-width: $mobile-landscape) {

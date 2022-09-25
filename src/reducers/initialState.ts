@@ -1,14 +1,14 @@
 export const initialAuthState = {
-  authenticated: false
-}
+  authenticated: false,
+};
 
 export const initialModalState = {
-  modalType: ''
-}
+  modalType: "",
+};
 
 const initialState = {
   auth: initialAuthState,
-  modal: initialModalState
+  modal: initialModalState,
 };
 
 export default initialState;

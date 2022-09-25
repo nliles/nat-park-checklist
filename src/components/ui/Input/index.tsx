@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useField } from 'formik';
+import { useField } from "formik";
 import styles from "./index.module.scss";
 
 type InputType = {
