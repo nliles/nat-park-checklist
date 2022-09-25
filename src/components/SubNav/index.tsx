@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { logout } from "services/auth.service";
 import styles from "./index.module.scss";
 import cn from "classnames";
 
@@ -28,6 +29,14 @@ const SubNav = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
 
+  const handleClick = async () => {
+    try {
+      await logout();
+    } catch (e) {
+      // handle error
+    }
+  };
+
   return (
     <nav
       aria-label="Main"
@@ -38,7 +47,9 @@ const SubNav = ({
     >
       <ul className={styles.list}>
         <li className={styles.listItem}>
-          <button type="button">Logout</button>
+          <button type="button" onClick={handleClick}>
+            Logout
+          </button>
         </li>
       </ul>
     </nav>
