@@ -10,6 +10,9 @@ import styles from "./index.module.scss";
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
+  const [formPasswordError, setFormPasswordError] = useState<
+    string | undefined
+  >();
   const [formError, setFormError] = useState<string | undefined>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
@@ -44,20 +47,25 @@ const LoginForm = () => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data.error === "Invalid Password") {
-          setFormError("Wrong password. Please try again.");
+        console.log("here", e);
+        if (e.data?.error === "Invalid Password") {
+          setFormPasswordError("Wrong password. Please try again.");
+        } else {
+          setFormError("Something went wrong. Please try again later.");
         }
       }
     }
   };
 
   const handleChange = () => {
-    if (formError) {
-      setFormError(undefined);
+    if (formPasswordError) {
+      setFormPasswordError(undefined);
     }
   };
 
   const validationSchema = getValidationSchema(showRegistration);
+
+  console.log(formError);
 
   return (
     <div className={styles.container}>
@@ -83,7 +91,7 @@ const LoginForm = () => {
                 label="Password"
                 type="password"
                 required
-                formError={formError}
+                formError={formPasswordError}
               />
               <Button
                 disabled={isSubmitting || !dirty || !isValid}

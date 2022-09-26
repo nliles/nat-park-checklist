@@ -13,7 +13,7 @@ type NavBarProps = {
   count: number;
 };
 
-const showLogIn = false;
+const showLogIn = true;
 
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);

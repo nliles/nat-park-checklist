@@ -15,7 +15,7 @@ type ListType = {
   handleSubmit: () => void;
 };
 
-const showLogIn = false;
+const showLogIn = true;
 
 const List = ({
   parks = [],
