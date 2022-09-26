@@ -13,6 +13,7 @@ const ParkContainer = () => {
     PARK_DESIGNATION_KEY.NAT_PARK
   );
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
+  const [saveError, setSaveError]= useState<string | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
@@ -25,11 +26,19 @@ const ParkContainer = () => {
     saveState(selectedParks);
   };
 
+  const handleSubmit = async () => {
+    try {
+      await updateParks(selectedParks);
+    } catch (err: any) {
+      setSaveError('Your changes could not be saved. Please try again later.')
+    }
+  };
+
   const handleListItemChange = (item: string) => {
     setSelectedDropdownItem(item);
     // save to storage or save data
     if (isLoggedIn) {
-      updateParks(selectedParks);
+      handleSubmit();
     } else {
       saveToStorage();
     }
@@ -37,10 +46,6 @@ const ParkContainer = () => {
 
   const handleChange = (parks: string[]) => {
     setSelectedParks(parks);
-  };
-
-  const handleSubmit = async () => {
-    await updateParks(selectedParks);
   };
 
   return (
@@ -54,6 +59,7 @@ const ParkContainer = () => {
         handleListItemChange={handleListItemChange}
         handleSaveData={saveToStorage}
         handleSubmit={handleSubmit}
+        saveError={saveError}
       />
     </PageWrapper>
   );
