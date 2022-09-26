@@ -1,19 +1,21 @@
 import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
-import SubNav from "components/SubNav";
+import Dropdown from "../ui/Dropdown";
 import { Park } from "types";
 import { removeDashes } from "helpers";
+import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
 
 type ParkViewType = {
   handleListItemChange: (item: string) => void;
-  handleSelected: (item: string) => void;
+  handleChange: (items: string[]) => void;
   loading: boolean;
   parks: Park[];
   selectedParks: string[];
   selectedDropdownItem: string;
   handleSaveData: () => void;
+  handleSubmit: () => void;
 };
 
 const ParkView = ({
@@ -22,8 +24,9 @@ const ParkView = ({
   selectedParks,
   selectedDropdownItem,
   handleListItemChange,
-  handleSelected,
+  handleChange,
   handleSaveData,
+  handleSubmit,
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
@@ -35,18 +38,20 @@ const ParkView = ({
       {loading && <Spinner />}
       {!loading && (
         <>
-          <SubNav
-            selectedParks={selectedParks}
-            selectedDropdownItem={selectedDropdownItem}
-            handleListItemChange={handleListItemChange}
-          />
+          <div className={styles.dropdownWrapper}>
+            <Dropdown
+              list={LIST_OPTIONS}
+              initialSelectedItem={selectedDropdownItem}
+              handleClick={handleListItemChange}
+            />
+          </div>
           <Map parks={parks} selectedParks={selectedParks} />
           <List
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
             selectedParks={selectedParks}
-            handleChange={handleSelected}
-            handleSubmit={handleSaveData}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
           />
         </>
       )}

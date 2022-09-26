@@ -1,19 +1,49 @@
 @import "../../styles/breakpoints.scss";
 
 .container {
-  margin: 0 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
+  position: absolute;
+  border: 1px solid #dee3e3;
+  background: white;
+  z-index: 1;
+  top: 50px;
+  right: 3rem;
 
-  @media (max-width: 1024px) {
-    margin: 0 50px;
+  .list {
+    margin: 0 2rem;
+    padding: 0;
   }
 
-  @media (max-width: $mobile-landscape) {
+  .listItem {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0;
+    list-style: none;
+    height: 45px;
+    border-bottom: 1px solid #dee3e3;
+    padding: 0 2rem;
+    font-size: 1rem;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .listItem {
+    display: flex;
+    list-style: none;
+    height: 45px;
+    border-bottom: 1px solid #dee3e3;
+    padding: 0 2rem;
+    font-size: 1rem;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  &.show {
+    display: block;
   }
 }

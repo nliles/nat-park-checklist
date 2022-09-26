@@ -1,5 +1,14 @@
 import { ModalNameType } from "components/ui/Modal/types";
 
+export type AuthState = {
+  token: string;
+};
+
+export type ModalState = {
+  modalType: ModalNameType;
+};
+
 export type State = {
-  modal: ModalNameType;
+  auth: AuthState;
+  modal: ModalState;
 };

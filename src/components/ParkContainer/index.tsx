@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { updateParks } from "services/park.service";
+import { State } from "reducers/types";
 import ParkView from "components/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
@@ -11,6 +14,7 @@ const ParkContainer = () => {
   );
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const { loading, parks } = useParks(selectedDropdownItem);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
   useEffect(() => {
     const stored = loadState() || [];
@@ -23,20 +27,20 @@ const ParkContainer = () => {
 
   const handleListItemChange = (item: string) => {
     setSelectedDropdownItem(item);
-    saveToStorage();
+    // save to storage or save data
+    if (isLoggedIn) {
+      updateParks(selectedParks);
+    } else {
+      saveToStorage();
+    }
   };
 
-  const handleSelected = (parkId: string) => {
-    const isSelected = selectedParks.includes(parkId);
-    const newItems = [...selectedParks];
-    if (isSelected) {
-      const index = selectedParks.indexOf(parkId);
-      newItems.splice(index, 1);
-      setSelectedParks(newItems);
-    } else {
-      newItems.push(parkId);
-      setSelectedParks(newItems);
-    }
+  const handleChange = (parks: string[]) => {
+    setSelectedParks(parks);
+  };
+
+  const handleSubmit = async () => {
+    await updateParks(selectedParks);
   };
 
   return (
@@ -46,9 +50,10 @@ const ParkContainer = () => {
         selectedParks={selectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
-        handleSelected={handleSelected}
+        handleChange={handleChange}
         handleListItemChange={handleListItemChange}
         handleSaveData={saveToStorage}
+        handleSubmit={handleSubmit}
       />
     </PageWrapper>
   );

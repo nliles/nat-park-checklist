@@ -1,5 +1,9 @@
-import ListItem from "components/ListItem";
+import { Formik, Form } from "formik";
+import { useSelector } from "react-redux";
+import { State } from "reducers/types";
 import { Park } from "types";
+import Button from "components/ui/Button";
+import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import styles from "./index.module.scss";
 
@@ -7,11 +11,11 @@ type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
   selectedParks: string[];
-  handleChange: (item: string) => void;
+  handleChange: (items: string[]) => void;
   handleSubmit: () => void;
 };
 
-const isLoggedIn = false;
+const showLogIn = false;
 
 const List = ({
   parks = [],
@@ -20,11 +24,23 @@ const List = ({
   handleChange,
   handleSubmit,
 }: ListType) => {
+  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
 
-  const handleOnSubmit = (e: any) => {
-    e.preventDefault();
-    handleSubmit();
+  type Values = {
+    parkData: string[];
+  };
+
+  const handleOnChange = (values: Values) => {
+    handleChange(values.parkData);
+  };
+
+  const initialValues = {
+    parkData: [],
+  };
+
+  const handleOnSubmit = async () => {
+    await handleSubmit();
   };
 
   return (
@@ -33,25 +49,38 @@ const List = ({
         <h2>{`${selectedDropdownItem.replaceAll("-", " ")} checklist`}</h2>
         <Total count={count} total={parks.length} styleName={styles.count} />
       </div>
-      <form onSubmit={handleOnSubmit}>
-        <div className={styles.listContainer}>
-          {parks &&
-            parks.map((park: any, i: number) => (
-              <ListItem
-                selectedParks={selectedParks}
-                key={park.fullName}
-                index={i}
-                park={park}
-                handleChange={handleChange}
-              />
-            ))}
-        </div>
-        {isLoggedIn && (
-          <button className={styles.button} type="submit">
-            Save
-          </button>
-        )}
-      </form>
+      <Formik
+        onSubmit={handleOnSubmit}
+        initialValues={initialValues}
+        enableReinitialize
+      >
+        {({ values, isValid, dirty, isSubmitting }) => {
+          return (
+            <Form onChange={() => handleOnChange(values)}>
+              <div className={styles.listContainer}>
+                {parks &&
+                  parks.map((park: any, i: number) => (
+                    <Checkbox
+                      key={park.fullName}
+                      label={`${i + 1}. ${park.fullName}`}
+                      id={park.id}
+                      name="parkData"
+                    />
+                  ))}
+              </div>
+              {isLoggedIn && showLogIn && (
+                <Button
+                  sizeSm
+                  disabled={isSubmitting || !dirty || !isValid}
+                  txt="Save"
+                  type="submit"
+                  styleName={styles.button}
+                />
+              )}
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 };

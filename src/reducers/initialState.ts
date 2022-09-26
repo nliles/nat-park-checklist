@@ -1,5 +1,14 @@
+export const initialAuthState = {
+  token: sessionStorage.getItem("token") || "",
+};
+
+export const initialModalState = {
+  modalType: "",
+};
+
 const initialState = {
-  modal: "",
+  auth: initialAuthState,
+  modal: initialModalState,
 };
 
 export default initialState;

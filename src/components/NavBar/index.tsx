@@ -1,21 +1,30 @@
+import { useState } from "react";
+import cn from "classnames";
 import styles from "./index.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "actions";
-import { useDispatch } from "react-redux";
+import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
+import SubNav from "components/SubNav";
 import Total from "../Total";
 
 type NavBarProps = {
   count: number;
 };
 
-const isLoggedIn = false;
 const showLogIn = false;
 
 const NavBar = ({ count }: NavBarProps) => {
+  const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
+
+  const toggleClose = (action: boolean) => {
+    setShowMenu(action);
+  };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.content}>
@@ -31,13 +40,28 @@ const NavBar = ({ count }: NavBarProps) => {
               <span className={styles.logIn}>Sign in</span>
             </button>
           )}
-          {isLoggedIn && (
-            <img
-              className={styles.avatar}
-              width={30}
-              src="yosemite.svg"
-              alt="Yosemit icon"
-            />
+          {isLoggedIn && showLogIn && (
+            <>
+              <div
+                className={cn(styles.test, {
+                  [styles.active]: showMenu,
+                })}
+              >
+                <button
+                  className={styles.button}
+                  onClick={() => toggleClose(!showMenu)}
+                >
+                  <img
+                    id="avatar"
+                    className={styles.avatar}
+                    width={30}
+                    src="yosemite.svg"
+                    alt="Yosemit icon"
+                  />
+                </button>
+              </div>
+              <SubNav showMenu={showMenu} onClick={() => toggleClose(false)} />
+            </>
           )}
         </div>
       </div>
