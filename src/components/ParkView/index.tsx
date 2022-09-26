@@ -16,6 +16,7 @@ type ParkViewType = {
   selectedDropdownItem: string;
   handleSaveData: () => void;
   handleSubmit: () => void;
+  saveError?: string;
 };
 
 const ParkView = ({
@@ -27,6 +28,7 @@ const ParkView = ({
   handleChange,
   handleSaveData,
   handleSubmit,
+  saveError
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
@@ -52,6 +54,7 @@ const ParkView = ({
             selectedParks={selectedParks}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            saveError={saveError}
           />
         </>
       )}

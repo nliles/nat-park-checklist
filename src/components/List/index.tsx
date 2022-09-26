@@ -5,6 +5,7 @@ import { Park } from "types";
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
+import FormError from "components/ui/FormError";
 import styles from "./index.module.scss";
 
 type ListType = {
@@ -13,6 +14,7 @@ type ListType = {
   selectedParks: string[];
   handleChange: (items: string[]) => void;
   handleSubmit: () => void;
+  saveError?: string;
 };
 
 const showLogIn = false;
@@ -23,6 +25,7 @@ const List = ({
   selectedParks = [],
   handleChange,
   handleSubmit,
+  saveError
 }: ListType) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
@@ -69,13 +72,15 @@ const List = ({
                   ))}
               </div>
               {isLoggedIn && showLogIn && (
+              <div className={styles.buttonWrapper}>
                 <Button
                   sizeSm
                   disabled={isSubmitting || !dirty || !isValid}
                   txt="Save"
                   type="submit"
-                  styleName={styles.button}
                 />
+                <FormError id="form" error={saveError}/>
+                </div>
               )}
             </Form>
           );

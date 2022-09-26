@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import FormError from "components/ui/FormError";
 import styles from "./index.module.scss";
 
 type InputType = {
@@ -35,16 +36,7 @@ const Input = ({
         placeholder={label}
         required={required}
       />
-      {touched && (error || formError) && (
-        <div
-          role="alert"
-          aria-live="polite"
-          id={`${id}_error`}
-          className={styles.inputError}
-        >
-          {error || formError}
-        </div>
-      )}
+      {touched && <FormError id={id} error={error || formError} />}
     </div>
   );
 };

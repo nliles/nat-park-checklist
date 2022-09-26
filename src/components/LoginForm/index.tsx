@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
+import FormError from "components/ui/FormError";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
@@ -8,8 +9,20 @@ import { login, register } from "services/auth.service";
 import { initialValues, getValidationSchema } from "./validation";
 import styles from "./index.module.scss";
 
+const ERROR = {
+  PASSWORD: "Wrong password. Please try again.",
+  EMAIL: "User Already Exist. Please Login",
+  GENERAL: "Something went wrong. Please try again later."
+}
+
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
+  const [formPasswordError, setFormPasswordError] = useState<
+    string | undefined
+  >();
+  const [formEmailError, setFormEmailError] = useState<
+    string | undefined
+  >();
   const [formError, setFormError] = useState<string | undefined>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
@@ -37,23 +50,28 @@ const LoginForm = () => {
       try {
         if (showRegistration) {
           const { user } = await register(values);
-          console.log(user);
           handleSuccess(user.token);
         } else {
           const { user } = await login(values);
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data.error === "Invalid Password") {
-          setFormError("Wrong password. Please try again.");
+        if (e.data?.error === ERROR.PASSWORD) {
+          setFormPasswordError(ERROR.PASSWORD);
+        } else if (e.data?.error === ERROR.EMAIL) {
+          setFormEmailError(ERROR.EMAIL);
+        }else {
+          setFormError(ERROR.GENERAL);
         }
       }
     }
   };
 
   const handleChange = () => {
-    if (formError) {
-      setFormError(undefined);
+    if (formPasswordError) {
+      setFormPasswordError(undefined);
+      setFormEmailError(undefined)
+      setFormError(undefined)
     }
   };
 
@@ -77,19 +95,21 @@ const LoginForm = () => {
                 type="email"
                 autoComplete="email"
                 required
+                formError={formEmailError}
               />
               <Input
                 id="password"
                 label="Password"
                 type="password"
                 required
-                formError={formError}
+                formError={formPasswordError}
               />
               <Button
                 disabled={isSubmitting || !dirty || !isValid}
                 type="submit"
                 txt={submitTxt}
               />
+              <FormError id="form" error={formError}/>
             </Form>
           );
         }}

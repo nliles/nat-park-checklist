@@ -56,7 +56,8 @@
   }
 }
 
-.button {
-  float: right;
-  // width: 50px;
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }

@@ -6,7 +6,7 @@
   background: $green;
   color: $white;
   padding: 1rem 0;
-  margin: 10px 0 2rem;
+  margin: 10px 0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -17,7 +17,7 @@
 
   &:disabled,
   &[disabled] {
-    background-color: #bec9a7;
+    background-color: $disabledGreen;
     cursor: not-allowed;
   }
 }

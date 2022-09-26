@@ -1,0 +1,13 @@
+@import "../../../styles/colors.scss";
+
+.inputError {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  margin-top: 5px;
+  left: 0;
+  font-size: 0.725rem;
+  color: $error;
+  text-align: left;
+}
