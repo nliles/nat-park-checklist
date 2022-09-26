@@ -5,7 +5,6 @@ export const HIDE_MODAL = "HIDE_MODAL";
 
 export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
-export const USER_LOGOUT = "USER_LOGOUT";
 
 export const openModal = (modalType: ModalNameType) => ({
   type: SHOW_MODAL,
@@ -16,10 +15,11 @@ export const hideModal = () => ({
   type: HIDE_MODAL,
 });
 
-export function loginSuccess() {
-  return { type: IS_AUTHENTICATED };
-}
+export const loginSuccess = (token: string) => ({
+  type: IS_AUTHENTICATED,
+  token,
+});
 
-function setLogout() {
-  return { type: USER_LOGOUT };
-}
+export const logoutSuccess = () => ({
+  type: NOT_AUTHENTICATED,
+});

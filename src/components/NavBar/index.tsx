@@ -13,12 +13,12 @@ type NavBarProps = {
   count: number;
 };
 
-const showLogIn = true;
+const showLogIn = false;
 
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: State) => state.auth.authenticated);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
 
   const toggleClose = (action: boolean) => {
@@ -34,13 +34,13 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          {!isLoggedIn && !showLogIn && (
+          {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
               <span className={styles.logIn}>Sign in</span>
             </button>
           )}
-          {showLogIn && (
+          {isLoggedIn && (
             <>
               <div
                 className={cn(styles.test, {

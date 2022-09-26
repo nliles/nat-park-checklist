@@ -1,5 +1,5 @@
 export const initialAuthState = {
-  authenticated: false,
+  token: localStorage.getItem("token") || "",
 };
 
 export const initialModalState = {

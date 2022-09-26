@@ -1,14 +1,15 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
-import { string, object } from "yup";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import { login, register } from "services/auth.service";
+import { initialValues, getValidationSchema } from "./validation";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {
-  const [showRegistration, setShowRegistration] = useState(false);
+  const [showRegistration, setShowRegistration] = useState<boolean>(false);
+  const [formError, setFormError] = useState<string | undefined>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
   const btnTxt = showRegistration ? "Sign in" : "Sign up";
@@ -25,39 +26,37 @@ const LoginForm = () => {
     password: string;
   };
 
+  const handleSuccess = (token: string) => {
+    dispatch(loginSuccess(token));
+    dispatch(hideModal());
+  };
+
   const handleSubmit = async (values: User) => {
     if (values.email && values.password) {
       try {
-        let res;
         if (showRegistration) {
-          const { token } = await register(values);
-          sessionStorage.setItem("jwtToken", token);
-          dispatch(loginSuccess());
-          dispatch(hideModal());
+          const { user } = await register(values);
+          console.log(user);
+          handleSuccess(user.token);
         } else {
-          await login(values);
-          dispatch(loginSuccess());
-          dispatch(hideModal());
+          const { user } = await login(values);
+          handleSuccess(user.token);
         }
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        if (e.data.error === "Invalid Password") {
+          setFormError("Wrong password. Please try again.");
+        }
       }
     }
   };
 
-  const initialValues = {
-    email: "",
-    password: "",
+  const handleChange = () => {
+    if (formError) {
+      setFormError(undefined);
+    }
   };
 
-  const validationSchema = object().shape({
-    email: string()
-      .required("Email required. Please fill out this field")
-      .min(5, "Email must be longer than 5 characters."),
-    password: string()
-      .required("Password required. Please fill out this field")
-      .min(8, "Password must have at least 8 characters"),
-  });
+  const validationSchema = getValidationSchema(showRegistration);
 
   return (
     <div className={styles.container}>
@@ -70,7 +69,7 @@ const LoginForm = () => {
       >
         {({ values, isValid, dirty, isSubmitting }) => {
           return (
-            <Form className={styles.form}>
+            <Form className={styles.form} onChange={handleChange}>
               <Input
                 id="email"
                 label="Email"
@@ -78,7 +77,13 @@ const LoginForm = () => {
                 autoComplete="email"
                 required
               />
-              <Input id="password" label="Password" type="password" required />
+              <Input
+                id="password"
+                label="Password"
+                type="password"
+                required
+                formError={formError}
+              />
               <button
                 disabled={isSubmitting || !dirty || !isValid}
                 type="submit"

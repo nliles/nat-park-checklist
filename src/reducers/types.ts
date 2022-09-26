@@ -1,7 +1,7 @@
 import { ModalNameType } from "components/ui/Modal/types";
 
 export type AuthState = {
-  authenticated: boolean;
+  token: string;
 };
 
 export type ModalState = {

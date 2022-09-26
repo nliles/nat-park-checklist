@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
-import { logout } from "services/auth.service";
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "actions";
 import styles from "./index.module.scss";
 import cn from "classnames";
 
@@ -11,6 +12,7 @@ const SubNav = ({
   onClick: () => void;
 }) => {
   const myRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
   const handleClickOutside = (e: MouseEvent) => {
     const isAvatarClick =
@@ -29,12 +31,8 @@ const SubNav = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
 
-  const handleClick = async () => {
-    try {
-      await logout();
-    } catch (e) {
-      // handle error
-    }
+  const handleClick = () => {
+    dispatch(logoutSuccess());
   };
 
   return (

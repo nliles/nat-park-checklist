@@ -5,9 +5,13 @@ type User = {
   password: string;
 };
 
-type UserInfo = {
-  user: Partial<User>;
+type UserResponse = {
+  email: string;
   token: string;
+};
+
+type UserInfo = {
+  user: UserResponse;
 };
 
 export const register = (user: User): Promise<UserInfo> => {
@@ -24,12 +28,4 @@ export const login = (user: User): Promise<UserInfo> => {
       crossdomain: true,
     },
   });
-};
-
-export const logout = () => {
-  // return apiClient.post("/auth/logout", user, {
-  //   headers: {
-  //     crossdomain: true,
-  //   },
-  // });
 };

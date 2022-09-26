@@ -8,6 +8,7 @@ type InputType = {
   type?: string;
   autoComplete?: string;
   required?: boolean;
+  formError?: string;
 };
 
 const Input = ({
@@ -16,6 +17,7 @@ const Input = ({
   type = "text",
   autoComplete,
   required = false,
+  formError,
 }: InputType) => {
   const [field, meta] = useField(id);
   const { touched, error } = meta;
@@ -34,14 +36,14 @@ const Input = ({
         placeholder={label}
         required={required}
       />
-      {touched && error && (
+      {touched && (error || formError) && (
         <div
           role="alert"
           aria-live="polite"
           id={`${id}_error`}
           className={styles.inputError}
         >
-          {error}
+          {error || formError}
         </div>
       )}
     </div>
