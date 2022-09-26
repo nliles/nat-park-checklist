@@ -1,3 +1,5 @@
+@import "../../../styles/colors.scss";
+
 .inputError {
   display: flex;
   align-items: center;
@@ -6,6 +8,6 @@
   margin-top: 5px;
   left: 0;
   font-size: 0.725rem;
-  color: #cb4c48;
+  color: $error;
   text-align: left;
 }

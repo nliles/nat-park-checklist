@@ -17,7 +17,7 @@
 
   &:disabled,
   &[disabled] {
-    background-color: #bec9a7;
+    background-color: $disabledGreen;
     cursor: not-allowed;
   }
 }
