@@ -10,6 +10,11 @@ export type RequestType = typeof Request[keyof typeof Request];
 // Main API base
 export const apiClient = axios.create({
   baseURL: "http://localhost:5000",
+  headers: {
+    crossdomain: true,
+    'Authorization': sessionStorage.getItem("token") || "",
+    'Content-Type': 'application/json'
+  }
 });
 
 const handleError = (error: AxiosError) => {

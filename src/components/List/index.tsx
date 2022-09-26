@@ -17,7 +17,7 @@ type ListType = {
   saveError?: string;
 };
 
-const showLogIn = false;
+const showLogIn = true;
 
 const List = ({
   parks = [],

@@ -5,17 +5,9 @@ type Park = {
 };
 
 export const getParks = (): Promise<Park> => {
-  return apiClient.get("/parks", {
-    headers: {
-      crossdomain: true,
-    },
-  });
+  return apiClient.get("/parks");
 };
 
 export const updateParks = (parks: string[]): Promise<Park> => {
-  return apiClient.post("/parks", parks, {
-    headers: {
-      crossdomain: true,
-    },
-  });
+  return apiClient.post("/parks", parks);
 };

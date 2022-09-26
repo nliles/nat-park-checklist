@@ -15,17 +15,9 @@ type UserInfo = {
 };
 
 export const register = (user: User): Promise<UserInfo> => {
-  return apiClient.post("/auth/register", user, {
-    headers: {
-      crossdomain: true,
-    },
-  });
+  return apiClient.post("/auth/register", user);
 };
 
 export const login = (user: User): Promise<UserInfo> => {
-  return apiClient.post("/auth/login", user, {
-    headers: {
-      crossdomain: true,
-    },
-  });
+  return apiClient.post("/auth/login", user);
 };
