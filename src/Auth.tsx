@@ -9,9 +9,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isExpired) {
-      localStorage.setItem("token", "");
+      sessionStorage.setItem("token", "");
     } else {
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
     }
   }, [token, isExpired]);
 
