@@ -16,7 +16,7 @@ const regValidationSchema = object().shape({
 
 const loginValidationSchema = object().shape({
   email: string().required("Email required. Please fill out this field"),
-  password: string(),
+  password: string().required("Password required. Please fill out this field"),
 });
 
 export const getValidationSchema = (showRegistration: boolean) =>

@@ -1,4 +1,4 @@
-import axios, { AxiosAdapter, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 export const Request = {
   PATCH: "patch",

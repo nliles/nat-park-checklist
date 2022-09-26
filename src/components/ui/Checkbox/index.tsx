@@ -1,14 +1,28 @@
 import React from "react";
+import { useField, useFormikContext } from "formik";
 import styles from "./index.module.scss";
 
 type CheckboxType = {
-  checked: boolean;
-  handleChange: (id: string) => void;
   id: string;
   label: string;
+  name: string;
 };
 
-const Checkbox = ({ id, handleChange, label, checked }: CheckboxType) => {
+const Checkbox = ({ id, label, name }: CheckboxType) => {
+  const [field] = useField(name);
+  const values = field.value || [];
+  const { setFieldValue } = useFormikContext();
+  const checked = values.includes(id);
+
+  const handleOnChange = (id: string) => {
+    const filteredValues = values.filter((v: string) => v !== id);
+    if (values.includes(id)) {
+      setFieldValue(name, filteredValues);
+    } else {
+      setFieldValue(name, [...filteredValues, id]);
+    }
+  };
+
   return (
     <div>
       <label className={styles.checkboxWrapper} htmlFor={id}>
@@ -16,10 +30,10 @@ const Checkbox = ({ id, handleChange, label, checked }: CheckboxType) => {
         <input
           className={styles.checkbox}
           checked={checked}
-          onChange={() => handleChange(id)}
+          onChange={() => handleOnChange(id)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              handleChange(id);
+              handleOnChange(id);
             }
           }}
           type="checkbox"

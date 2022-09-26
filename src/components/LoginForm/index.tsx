@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
+import Button from "components/ui/Button";
 import { login, register } from "services/auth.service";
 import { initialValues, getValidationSchema } from "./validation";
 import styles from "./index.module.scss";
@@ -84,13 +85,11 @@ const LoginForm = () => {
                 required
                 formError={formError}
               />
-              <button
+              <Button
                 disabled={isSubmitting || !dirty || !isValid}
                 type="submit"
-                className={styles.button}
-              >
-                {submitTxt}
-              </button>
+                txt={submitTxt}
+              />
             </Form>
           );
         }}
