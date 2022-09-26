@@ -1,4 +1,3 @@
-import { useField } from "formik";
 import styles from "./index.module.scss";
 
 type ErrorProps = {
