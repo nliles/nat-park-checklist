@@ -47,6 +47,7 @@ const List = ({
 
   const error = saveFormRes === 'error' ? 'Your data was not saved. Please try again' : ''
   const success = saveFormRes === 'success' ? 'Saved!' : ''
+  const describedby = error ? 'form_error' : 'form_helper'
 
   const handleFormChange = () => {
     if (saveFormRes) {
@@ -69,7 +70,7 @@ const List = ({
           return (
           <>
            <FormikEffect initialValues={selectedParks || []} onChange={handleOnChange}/>
-            <Form onChange={handleFormChange}>
+            <Form onChange={handleFormChange} aria-describedby={describedby}>
               <div className={styles.listContainer}>
                 {parks &&
                   parks.map((park: any, i: number) => (

@@ -30,6 +30,7 @@ const Input = ({
       <input
         {...field}
         id={id}
+        aria-describedby={`${id}_error`}
         className={styles.input}
         autoComplete={autoComplete}
         type={type}

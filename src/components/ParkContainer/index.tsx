@@ -26,7 +26,7 @@ const ParkContainer = () => {
           const { parks } = await getParks();
           setInitialValues(parks);
         } catch (e) {
-          // do something
+          // TODO: handle error
         }
       } else {
         const stored = loadState() || [];
