@@ -1,6 +1,5 @@
 import { useState } from "react";
 import cn from "classnames";
-import styles from "./index.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "actions";
 import { State } from "reducers/types";
@@ -8,6 +7,7 @@ import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
 import Total from "../Total";
+import styles from "./index.module.scss";
 
 type NavBarProps = {
   count: number;
