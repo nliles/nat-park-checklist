@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types";
+import FormikEffect from './FormikEffect'
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
@@ -12,7 +13,7 @@ type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
   selectedParks: string[];
-  handleChange: (items: string[]) => void;
+  handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
   saveError?: string;
 };
@@ -22,8 +23,8 @@ const showLogIn = true;
 const List = ({
   parks = [],
   selectedDropdownItem,
+  handleOnChange,
   selectedParks = [],
-  handleChange,
   handleSubmit,
   saveError
 }: ListType) => {
@@ -34,12 +35,8 @@ const List = ({
     parkData: string[];
   };
 
-  const handleOnChange = (values: Values) => {
-    handleChange(values.parkData);
-  };
-
   const initialValues = {
-    parkData: [],
+    parkData: selectedParks || [],
   };
 
   const handleOnSubmit = async () => {
@@ -59,7 +56,9 @@ const List = ({
       >
         {({ values, isValid, dirty, isSubmitting }) => {
           return (
-            <Form onChange={() => handleOnChange(values)}>
+          <>
+           <FormikEffect initialValues={selectedParks || []} onChange={handleOnChange}/>
+            <Form>
               <div className={styles.listContainer}>
                 {parks &&
                   parks.map((park: any, i: number) => (
@@ -83,6 +82,7 @@ const List = ({
                 </div>
               )}
             </Form>
+          </>
           );
         }}
       </Formik>

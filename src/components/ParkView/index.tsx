@@ -9,12 +9,11 @@ import styles from "./index.module.scss";
 
 type ParkViewType = {
   handleListItemChange: (item: string) => void;
-  handleChange: (items: string[]) => void;
   loading: boolean;
   parks: Park[];
   selectedParks: string[];
   selectedDropdownItem: string;
-  handleSaveData: () => void;
+  handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
   saveError?: string;
 };
@@ -25,8 +24,7 @@ const ParkView = ({
   selectedParks,
   selectedDropdownItem,
   handleListItemChange,
-  handleChange,
-  handleSaveData,
+  handleOnChange,
   handleSubmit,
   saveError
 }: ParkViewType) => {
@@ -52,7 +50,7 @@ const ParkView = ({
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
             selectedParks={selectedParks}
-            handleChange={handleChange}
+            handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}
             saveError={saveError}
           />

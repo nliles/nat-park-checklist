@@ -1,13 +1,13 @@
 import { apiClient } from "services/apiService";
 
-type Park = {
-  data: string[];
+type Parks = {
+  parks: string[];
 };
 
-export const getParks = (): Promise<Park> => {
-  return apiClient.get("/parks");
+export const getParks = (): Promise<Parks> => {
+  return apiClient.get("/park");
 };
 
-export const updateParks = (parks: string[]): Promise<Park> => {
-  return apiClient.post("/parks", parks);
+export const updateParks = (parks: string[]): Promise<Parks> => {
+  return apiClient.post("/park", { parks });
 };
