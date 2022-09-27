@@ -12,17 +12,15 @@ import styles from "./index.module.scss";
 const ERROR = {
   PASSWORD: "Wrong password. Please try again.",
   EMAIL: "User Already Exist. Please Login",
-  GENERAL: "Something went wrong. Please try again later."
-}
+  GENERAL: "Something went wrong. Please try again later.",
+};
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
   const [formPasswordError, setFormPasswordError] = useState<
     string | undefined
   >();
-  const [formEmailError, setFormEmailError] = useState<
-    string | undefined
-  >();
+  const [formEmailError, setFormEmailError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
@@ -60,7 +58,7 @@ const LoginForm = () => {
           setFormPasswordError(ERROR.PASSWORD);
         } else if (e.data?.error === ERROR.EMAIL) {
           setFormEmailError(ERROR.EMAIL);
-        }else {
+        } else {
           setFormError(ERROR.GENERAL);
         }
       }
@@ -70,8 +68,8 @@ const LoginForm = () => {
   const handleChange = () => {
     if (formPasswordError) {
       setFormPasswordError(undefined);
-      setFormEmailError(undefined)
-      setFormError(undefined)
+      setFormEmailError(undefined);
+      setFormError(undefined);
     }
   };
 
@@ -109,7 +107,7 @@ const LoginForm = () => {
                 type="submit"
                 txt={submitTxt}
               />
-              <FormHelper id="form" error={formError}/>
+              <FormHelper id="form" error={formError} />
             </Form>
           );
         }}

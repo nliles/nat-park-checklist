@@ -38,4 +38,4 @@ export type Park = {
   weather?: string;
 };
 
-export type Response = 'error' | 'success'
+export type Response = "error" | "success";

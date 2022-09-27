@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch } from "react";
 import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
@@ -31,7 +31,7 @@ const ParkView = ({
   handleOnChange,
   handleSubmit,
   saveFormRes,
-  setSaveFormRes
+  setSaveFormRes,
 }: ParkViewType) => {
   return (
     <div className={styles.container}>

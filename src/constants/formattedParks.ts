@@ -1,6 +1,5 @@
-
 export const SEQUOIA_NAT_PARK = {
-  id: 'sequoia-nat-park',
+  id: "sequoia-nat-park",
   images: [
     {
       altText:
@@ -18,7 +17,7 @@ export const SEQUOIA_NAT_PARK = {
 };
 
 export const KINGS_CANYON_NAT_PARK = {
-  id: 'kings-canyon-nat-park',
+  id: "kings-canyon-nat-park",
   images: [
     {
       altText: "A deep canyon with a forested floor and steep granite cliffs",
@@ -35,7 +34,7 @@ export const KINGS_CANYON_NAT_PARK = {
 };
 
 export const GREAT_SAND_DUNES_PRESERVE = {
-  id: 'great-sand-dunes-nat-park',
+  id: "great-sand-dunes-nat-park",
   images: [
     {
       altText: "Grasslands, large dunes, and snow-capped peaks at sunset",
@@ -52,7 +51,7 @@ export const GREAT_SAND_DUNES_PRESERVE = {
 };
 
 export const GLACIER_BAY_PRESERVE = {
-  id: 'glacier-bay-preserve',
+  id: "glacier-bay-preserve",
   images: [
     {
       altText:
@@ -70,7 +69,7 @@ export const GLACIER_BAY_PRESERVE = {
 };
 
 export const GATES_OF_ARCTIC_PRESERVE = {
-  id: 'gates-of-arctic-preserve',
+  id: "gates-of-arctic-preserve",
   images: [
     {
       altText: "Alpenglow on the granite cliffs of mountains",
@@ -87,7 +86,7 @@ export const GATES_OF_ARCTIC_PRESERVE = {
 };
 
 export const DENALI_NATIONAL_PRESERVE = {
-  id: 'denali-national-preserve',
+  id: "denali-national-preserve",
   images: [
     {
       altText: "Three brown bears walking along a dirt road",
@@ -104,7 +103,7 @@ export const DENALI_NATIONAL_PRESERVE = {
 };
 
 export const JDR_MEMORIAL_PARKWAY = {
-  id: 'jdr-memorial-parkway',
+  id: "jdr-memorial-parkway",
   images: [
     {
       altText: "Winter sunrise on snow-covered Teton Range",
@@ -121,7 +120,7 @@ export const JDR_MEMORIAL_PARKWAY = {
 };
 
 export const LAKE_ROSS_NRA = {
-  id: 'lake-ross-nra',
+  id: "lake-ross-nra",
   images: [
     {
       altText: "Tents set up in a wooded area.",
@@ -138,7 +137,7 @@ export const LAKE_ROSS_NRA = {
 };
 
 export const LAKE_CHELAN_NRA = {
-  id: 'lake-chelan-nra',
+  id: "lake-chelan-nra",
   images: [
     {
       altText: "boats on the water with mountains and trees surrounding",
@@ -155,7 +154,7 @@ export const LAKE_CHELAN_NRA = {
 };
 
 export const FORT_CAROLINE_NAT_MEMORIAL = {
-  id: 'fort-caroline-nat-memorial',
+  id: "fort-caroline-nat-memorial",
   images: [
     {
       altText: "Fort gate",
@@ -172,7 +171,7 @@ export const FORT_CAROLINE_NAT_MEMORIAL = {
 };
 
 export const HOHOKAM_NAT_MONUMENT = {
-  id: 'hohokam-nat-monument',
+  id: "hohokam-nat-monument",
   images: [],
   name: "Hohokam Pima National Monument",
   fullName: "Hohokam Pima National Monument",

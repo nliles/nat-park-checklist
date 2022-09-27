@@ -15,7 +15,7 @@ const ParkContainer = () => {
   );
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
-  const [saveFormRes, setSaveFormRes]= useState<Response | undefined>();
+  const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
@@ -32,8 +32,8 @@ const ParkContainer = () => {
         const stored = loadState() || [];
         setSelectedParks(stored);
       }
-    }
-    fetchParks()
+    };
+    fetchParks();
   }, []);
 
   const saveToStorage = () => {
@@ -43,9 +43,9 @@ const ParkContainer = () => {
   const handleSubmit = async () => {
     try {
       await updateParks(selectedParks);
-      setSaveFormRes('success')
+      setSaveFormRes("success");
     } catch (err) {
-      setSaveFormRes('error')
+      setSaveFormRes("error");
     }
   };
 
@@ -61,7 +61,7 @@ const ParkContainer = () => {
 
   const handleOnChange = (values: string[]) => {
     setSelectedParks(values);
-  }
+  };
 
   return (
     <PageWrapper count={selectedParks.length}>

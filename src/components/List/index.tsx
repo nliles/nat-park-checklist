@@ -1,10 +1,10 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch } from "react";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types";
 import { Response } from "types";
-import FormikEffect from './FormikEffect'
+import FormikEffect from "./FormikEffect";
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
@@ -32,7 +32,7 @@ const List = ({
   selectedParks = [],
   handleSubmit,
   saveFormRes,
-  setSaveFormRes
+  setSaveFormRes,
 }: ListType) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
@@ -45,15 +45,16 @@ const List = ({
     await handleSubmit();
   };
 
-  const error = saveFormRes === 'error' ? 'Your data was not saved. Please try again' : ''
-  const success = saveFormRes === 'success' ? 'Saved!' : ''
-  const describedby = error ? 'form_error' : 'form_helper'
+  const error =
+    saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
+  const success = saveFormRes === "success" ? "Saved!" : "";
+  const describedby = error ? "form_error" : "form_helper";
 
   const handleFormChange = () => {
     if (saveFormRes) {
-      setSaveFormRes(undefined)
+      setSaveFormRes(undefined);
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -68,33 +69,36 @@ const List = ({
       >
         {({ dirty, isSubmitting }) => {
           return (
-          <>
-           <FormikEffect initialValues={selectedParks || []} onChange={handleOnChange}/>
-            <Form onChange={handleFormChange} aria-describedby={describedby}>
-              <div className={styles.listContainer}>
-                {parks &&
-                  parks.map((park: any, i: number) => (
-                    <Checkbox
-                      key={park.fullName}
-                      label={`${i + 1}. ${park.fullName}`}
-                      id={park.id}
-                      name="parkData"
-                    />
-                  ))}
-              </div>
-              {isLoggedIn && showLogIn && (
-              <div className={styles.buttonWrapper}>
-                <Button
-                  sizeSm
-                  disabled={isSubmitting || !dirty}
-                  txt="Save"
-                  type="submit"
-                />
-                <FormHelper id="form" error={error} success={success}/>
+            <>
+              <FormikEffect
+                initialValues={selectedParks || []}
+                onChange={handleOnChange}
+              />
+              <Form onChange={handleFormChange} aria-describedby={describedby}>
+                <div className={styles.listContainer}>
+                  {parks &&
+                    parks.map((park: any, i: number) => (
+                      <Checkbox
+                        key={park.fullName}
+                        label={`${i + 1}. ${park.fullName}`}
+                        id={park.id}
+                        name="parkData"
+                      />
+                    ))}
                 </div>
-              )}
-            </Form>
-          </>
+                {isLoggedIn && showLogIn && (
+                  <div className={styles.buttonWrapper}>
+                    <Button
+                      sizeSm
+                      disabled={isSubmitting || !dirty}
+                      txt="Save"
+                      type="submit"
+                    />
+                    <FormHelper id="form" error={error} success={success} />
+                  </div>
+                )}
+              </Form>
+            </>
           );
         }}
       </Formik>
