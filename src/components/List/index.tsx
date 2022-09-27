@@ -12,6 +12,7 @@ import styles from "./index.module.scss";
 type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
+  initialParkValues: string[];
   selectedParks: string[];
   handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
@@ -22,6 +23,7 @@ const showLogIn = true;
 
 const List = ({
   parks = [],
+  initialParkValues,
   selectedDropdownItem,
   handleOnChange,
   selectedParks = [],
@@ -36,7 +38,7 @@ const List = ({
   };
 
   const initialValues = {
-    parkData: selectedParks || [],
+    parkData: initialParkValues || [],
   };
 
   const handleOnSubmit = async () => {
@@ -54,7 +56,7 @@ const List = ({
         initialValues={initialValues}
         enableReinitialize
       >
-        {({ values, isValid, dirty, isSubmitting }) => {
+        {({ dirty, isSubmitting }) => {
           return (
           <>
            <FormikEffect initialValues={selectedParks || []} onChange={handleOnChange}/>
@@ -74,7 +76,7 @@ const List = ({
               <div className={styles.buttonWrapper}>
                 <Button
                   sizeSm
-                  disabled={isSubmitting || !dirty || !isValid}
+                  disabled={isSubmitting || !dirty}
                   txt="Save"
                   type="submit"
                 />

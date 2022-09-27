@@ -12,6 +12,7 @@ const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
     PARK_DESIGNATION_KEY.NAT_PARK
   );
+  const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [saveError, setSaveError]= useState<string | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
@@ -22,7 +23,7 @@ const ParkContainer = () => {
       if (isLoggedIn) {
         try {
           const { parks } = await getParks();
-          setSelectedParks(parks);
+          setInitialValues(parks);
         } catch (e) {
           // do something
         }
@@ -64,6 +65,7 @@ const ParkContainer = () => {
     <PageWrapper count={selectedParks.length}>
       <ParkView
         loading={loading}
+        initialValues={initialValues}
         selectedParks={selectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}

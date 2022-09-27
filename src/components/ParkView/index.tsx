@@ -11,6 +11,7 @@ type ParkViewType = {
   handleListItemChange: (item: string) => void;
   loading: boolean;
   parks: Park[];
+  initialValues: string[];
   selectedParks: string[];
   selectedDropdownItem: string;
   handleOnChange: (values: string[]) => void;
@@ -22,6 +23,7 @@ const ParkView = ({
   loading,
   parks,
   selectedParks,
+  initialValues,
   selectedDropdownItem,
   handleListItemChange,
   handleOnChange,
@@ -49,6 +51,7 @@ const ParkView = ({
           <List
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
+            initialParkValues={initialValues}
             selectedParks={selectedParks}
             handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}
