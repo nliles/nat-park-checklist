@@ -13,8 +13,6 @@ type NavBarProps = {
   count: number;
 };
 
-const showLogIn = true;
-
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
@@ -34,13 +32,13 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          {!isLoggedIn && showLogIn && (
+          {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
               <span className={styles.logIn}>Sign in</span>
             </button>
           )}
-          {isLoggedIn && showLogIn && (
+          {isLoggedIn && (
             <>
               <div
                 className={cn(styles.test, {

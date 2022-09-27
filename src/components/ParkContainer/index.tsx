@@ -20,6 +20,14 @@ const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      setInitialValues([]);
+      setSelectedParks([]);
+      setSaveFormRes(undefined);
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     const fetchParks = async () => {
       if (isLoggedIn) {
         try {
@@ -34,7 +42,7 @@ const ParkContainer = () => {
       }
     };
     fetchParks();
-  }, []);
+  }, [isLoggedIn]);
 
   const saveToStorage = () => {
     saveState(selectedParks);

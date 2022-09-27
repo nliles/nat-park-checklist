@@ -22,8 +22,6 @@ type ListType = {
   setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
 
-const showLogIn = true;
-
 const List = ({
   parks = [],
   initialParkValues,
@@ -86,7 +84,7 @@ const List = ({
                       />
                     ))}
                 </div>
-                {isLoggedIn && showLogIn && (
+                {isLoggedIn && (
                   <div className={styles.buttonWrapper}>
                     <Button
                       sizeSm

@@ -13,20 +13,19 @@ const FormHelper = ({ id, error, success }: FormHelperProps) => {
 
   return (
     <>
-      {error ||
-        (success && (
-          <div
-            role="alert"
-            aria-live="polite"
-            id={helperId}
-            className={cn(styles.alert, {
-              [styles.error]: !!error,
-              [styles.helper]: !!success,
-            })}
-          >
-            {text}
-          </div>
-        ))}
+      {(error || success) && (
+        <div
+          role="alert"
+          aria-live="polite"
+          id={helperId}
+          className={cn(styles.alert, {
+            [styles.error]: !!error,
+            [styles.helper]: !!success,
+          })}
+        >
+          {text}
+        </div>
+      )}
     </>
   );
 };
