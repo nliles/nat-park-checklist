@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
-import FormError from "components/ui/FormError";
+import FormHelper from "components/ui/FormHelper";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
@@ -109,7 +109,7 @@ const LoginForm = () => {
                 type="submit"
                 txt={submitTxt}
               />
-              <FormError id="form" error={formError}/>
+              <FormHelper id="form" error={formError}/>
             </Form>
           );
         }}

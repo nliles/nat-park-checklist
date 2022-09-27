@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
+import { Response } from "types";
 import ParkView from "components/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
@@ -14,7 +15,7 @@ const ParkContainer = () => {
   );
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
-  const [saveError, setSaveError]= useState<string | undefined>();
+  const [saveFormRes, setSaveFormRes]= useState<Response | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
@@ -42,8 +43,9 @@ const ParkContainer = () => {
   const handleSubmit = async () => {
     try {
       await updateParks(selectedParks);
+      setSaveFormRes('success')
     } catch (err) {
-      setSaveError('Your changes could not be saved. Please try again later.')
+      setSaveFormRes('error')
     }
   };
 
@@ -72,7 +74,8 @@ const ParkContainer = () => {
         handleListItemChange={handleListItemChange}
         handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
-        saveError={saveError}
+        saveFormRes={saveFormRes}
+        setSaveFormRes={setSaveFormRes}
       />
     </PageWrapper>
   );

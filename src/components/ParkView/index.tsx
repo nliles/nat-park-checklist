@@ -1,8 +1,9 @@
+import React, { Dispatch } from 'react';
 import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "../ui/Dropdown";
-import { Park } from "types";
+import { Response, Park } from "types";
 import { removeDashes } from "helpers";
 import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
@@ -16,7 +17,8 @@ type ParkViewType = {
   selectedDropdownItem: string;
   handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
-  saveError?: string;
+  saveFormRes?: string;
+  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
 
 const ParkView = ({
@@ -28,7 +30,8 @@ const ParkView = ({
   handleListItemChange,
   handleOnChange,
   handleSubmit,
-  saveError
+  saveFormRes,
+  setSaveFormRes
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
@@ -55,7 +58,8 @@ const ParkView = ({
             selectedParks={selectedParks}
             handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}
-            saveError={saveError}
+            saveFormRes={saveFormRes}
+            setSaveFormRes={setSaveFormRes}
           />
         </>
       )}

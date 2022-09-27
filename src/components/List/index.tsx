@@ -1,12 +1,14 @@
+import React, { Dispatch } from 'react';
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types";
+import { Response } from "types";
 import FormikEffect from './FormikEffect'
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
-import FormError from "components/ui/FormError";
+import FormHelper from "components/ui/FormHelper";
 import styles from "./index.module.scss";
 
 type ListType = {
@@ -16,7 +18,8 @@ type ListType = {
   selectedParks: string[];
   handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
-  saveError?: string;
+  saveFormRes?: string;
+  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
 
 const showLogIn = true;
@@ -28,14 +31,11 @@ const List = ({
   handleOnChange,
   selectedParks = [],
   handleSubmit,
-  saveError
+  saveFormRes,
+  setSaveFormRes
 }: ListType) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
-
-  type Values = {
-    parkData: string[];
-  };
 
   const initialValues = {
     parkData: initialParkValues || [],
@@ -44,6 +44,15 @@ const List = ({
   const handleOnSubmit = async () => {
     await handleSubmit();
   };
+
+  const error = saveFormRes === 'error' ? 'Your data was not saved. Please try again' : ''
+  const success = saveFormRes === 'success' ? 'Saved!' : ''
+
+  const handleFormChange = () => {
+    if (saveFormRes) {
+      setSaveFormRes(undefined)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -60,7 +69,7 @@ const List = ({
           return (
           <>
            <FormikEffect initialValues={selectedParks || []} onChange={handleOnChange}/>
-            <Form>
+            <Form onChange={handleFormChange}>
               <div className={styles.listContainer}>
                 {parks &&
                   parks.map((park: any, i: number) => (
@@ -80,7 +89,7 @@ const List = ({
                   txt="Save"
                   type="submit"
                 />
-                <FormError id="form" error={saveError}/>
+                <FormHelper id="form" error={error} success={success}/>
                 </div>
               )}
             </Form>
