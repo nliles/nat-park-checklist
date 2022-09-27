@@ -50,7 +50,8 @@ const ParkContainer = () => {
 
   const handleSubmit = async () => {
     try {
-      await updateParks(selectedParks);
+      const { parks }= await updateParks(selectedParks);
+      setSelectedParks(parks);
       setSaveFormRes("success");
     } catch (err) {
       setSaveFormRes("error");
