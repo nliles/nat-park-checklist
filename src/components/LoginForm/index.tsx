@@ -46,12 +46,16 @@ const LoginForm = () => {
 
   const handleSubmit = async (values: User) => {
     if (values.email && values.password) {
+      const formattedValues = {
+        email: values.email.trim().toLowerCase(),
+        password: values.password.trim()
+      }
       try {
         if (showRegistration) {
-          const { user } = await register(values);
+          const { user } = await register(formattedValues);
           handleSuccess(user.token);
         } else {
-          const { user } = await login(values);
+          const { user } = await login(formattedValues);
           handleSuccess(user.token);
         }
       } catch (e: any) {
