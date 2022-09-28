@@ -43,7 +43,7 @@ const ParkContainer = () => {
       }
     };
     fetchParks();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, selectedDropdownItem]);
 
   const saveToStorage = () => {
     saveState(selectedParks);
