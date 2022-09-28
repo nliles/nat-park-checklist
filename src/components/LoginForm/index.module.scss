@@ -20,6 +20,12 @@
   color: $green;
 }
 
+.txt {
+  margin: 0;
+  color: $black;
+  font-size: 12px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
