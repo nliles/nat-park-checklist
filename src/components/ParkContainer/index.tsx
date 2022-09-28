@@ -34,6 +34,7 @@ const ParkContainer = () => {
           const { parks } = await getParks();
           setInitialValues(parks);
         } catch (e) {
+          console.log('error', e)
           // TODO: handle error
         }
       } else {
@@ -50,8 +51,7 @@ const ParkContainer = () => {
 
   const handleSubmit = async () => {
     try {
-      const { parks } = await updateParks(selectedParks);
-      setSelectedParks(parks);
+      await updateParks(selectedParks);
       setSaveFormRes("success");
     } catch (err) {
       setSaveFormRes("error");

@@ -39,6 +39,7 @@ const LoginForm = () => {
   };
 
   const handleSuccess = (token: string) => {
+    sessionStorage.setItem("token", token);
     dispatch(loginSuccess(token));
     dispatch(hideModal());
   };

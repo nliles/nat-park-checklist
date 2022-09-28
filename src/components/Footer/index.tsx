@@ -23,7 +23,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.links}>
         {icons.map((i) => (
-          <a href={i.link}>
+          <a href={i.link} key={i.link}>
             <FontAwesomeIcon icon={i.icon} />
           </a>
         ))}
