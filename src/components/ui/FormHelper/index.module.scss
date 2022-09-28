@@ -1,6 +1,6 @@
 @import "../../../styles/colors.scss";
 
-.inputError {
+.alert {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -8,6 +8,13 @@
   margin-top: 5px;
   left: 0;
   font-size: 0.725rem;
-  color: $error;
   text-align: left;
+
+  &.error {
+    color: $error;
+  }
+
+  &.helper {
+    color: $gray;
+  }
 }

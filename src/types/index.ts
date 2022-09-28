@@ -37,3 +37,5 @@ export type Park = {
   url: string;
   weather?: string;
 };
+
+export type Response = "error" | "success";

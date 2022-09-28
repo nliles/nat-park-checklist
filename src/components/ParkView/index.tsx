@@ -1,34 +1,37 @@
+import React, { Dispatch } from "react";
 import List from "components/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "../ui/Dropdown";
-import { Park } from "types";
+import { Response, Park } from "types";
 import { removeDashes } from "helpers";
 import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
 
 type ParkViewType = {
   handleListItemChange: (item: string) => void;
-  handleChange: (items: string[]) => void;
   loading: boolean;
   parks: Park[];
+  initialValues: string[];
   selectedParks: string[];
   selectedDropdownItem: string;
-  handleSaveData: () => void;
+  handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
-  saveError?: string;
+  saveFormRes?: string;
+  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
 
 const ParkView = ({
   loading,
   parks,
   selectedParks,
+  initialValues,
   selectedDropdownItem,
   handleListItemChange,
-  handleChange,
-  handleSaveData,
+  handleOnChange,
   handleSubmit,
-  saveError
+  saveFormRes,
+  setSaveFormRes,
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
@@ -51,10 +54,12 @@ const ParkView = ({
           <List
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
+            initialParkValues={initialValues}
             selectedParks={selectedParks}
-            handleChange={handleChange}
+            handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}
-            saveError={saveError}
+            saveFormRes={saveFormRes}
+            setSaveFormRes={setSaveFormRes}
           />
         </>
       )}

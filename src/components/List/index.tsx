@@ -1,49 +1,57 @@
+import React, { Dispatch } from "react";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types";
+import { Response } from "types";
+import FormikEffect from "./FormikEffect";
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
-import FormError from "components/ui/FormError";
+import FormHelper from "components/ui/FormHelper";
 import styles from "./index.module.scss";
 
 type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
+  initialParkValues: string[];
   selectedParks: string[];
-  handleChange: (items: string[]) => void;
+  handleOnChange: (values: string[]) => void;
   handleSubmit: () => void;
-  saveError?: string;
+  saveFormRes?: string;
+  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
-
-const showLogIn = false;
 
 const List = ({
   parks = [],
+  initialParkValues,
   selectedDropdownItem,
+  handleOnChange,
   selectedParks = [],
-  handleChange,
   handleSubmit,
-  saveError
+  saveFormRes,
+  setSaveFormRes,
 }: ListType) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
 
-  type Values = {
-    parkData: string[];
-  };
-
-  const handleOnChange = (values: Values) => {
-    handleChange(values.parkData);
-  };
-
   const initialValues = {
-    parkData: [],
+    parkData: initialParkValues || [],
   };
 
   const handleOnSubmit = async () => {
     await handleSubmit();
+  };
+
+  const error =
+    saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
+  const success = saveFormRes === "success" ? "Saved!" : "";
+  const describedby = error ? "form_error" : "form_helper";
+
+  const handleFormChange = () => {
+    if (saveFormRes) {
+      setSaveFormRes(undefined);
+    }
   };
 
   return (
@@ -57,32 +65,38 @@ const List = ({
         initialValues={initialValues}
         enableReinitialize
       >
-        {({ values, isValid, dirty, isSubmitting }) => {
+        {({ dirty, isSubmitting }) => {
           return (
-            <Form onChange={() => handleOnChange(values)}>
-              <div className={styles.listContainer}>
-                {parks &&
-                  parks.map((park: any, i: number) => (
-                    <Checkbox
-                      key={park.fullName}
-                      label={`${i + 1}. ${park.fullName}`}
-                      id={park.id}
-                      name="parkData"
-                    />
-                  ))}
-              </div>
-              {isLoggedIn && showLogIn && (
-              <div className={styles.buttonWrapper}>
-                <Button
-                  sizeSm
-                  disabled={isSubmitting || !dirty || !isValid}
-                  txt="Save"
-                  type="submit"
-                />
-                <FormError id="form" error={saveError}/>
+            <>
+              <FormikEffect
+                initialValues={selectedParks || []}
+                onChange={handleOnChange}
+              />
+              <Form onChange={handleFormChange} aria-describedby={describedby}>
+                <div className={styles.listContainer}>
+                  {parks &&
+                    parks.map((park: any, i: number) => (
+                      <Checkbox
+                        key={park.fullName}
+                        label={`${i + 1}. ${park.fullName}`}
+                        id={park.id}
+                        name="parkData"
+                      />
+                    ))}
                 </div>
-              )}
-            </Form>
+                {isLoggedIn && (
+                  <div className={styles.buttonWrapper}>
+                    <Button
+                      sizeSm
+                      disabled={isSubmitting || !dirty}
+                      txt="Save"
+                      type="submit"
+                    />
+                    <FormHelper id="form" error={error} success={success} />
+                  </div>
+                )}
+              </Form>
+            </>
           );
         }}
       </Formik>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
-import FormError from "components/ui/FormError";
+import FormHelper from "components/ui/FormHelper";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
@@ -12,17 +12,15 @@ import styles from "./index.module.scss";
 const ERROR = {
   PASSWORD: "Wrong password. Please try again.",
   EMAIL: "User Already Exist. Please Login",
-  GENERAL: "Something went wrong. Please try again later."
-}
+  GENERAL: "Something went wrong. Please try again later.",
+};
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
   const [formPasswordError, setFormPasswordError] = useState<
     string | undefined
   >();
-  const [formEmailError, setFormEmailError] = useState<
-    string | undefined
-  >();
+  const [formEmailError, setFormEmailError] = useState<string | undefined>();
   const [formError, setFormError] = useState<string | undefined>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
@@ -41,6 +39,7 @@ const LoginForm = () => {
   };
 
   const handleSuccess = (token: string) => {
+    sessionStorage.setItem("token", token);
     dispatch(loginSuccess(token));
     dispatch(hideModal());
   };
@@ -60,7 +59,7 @@ const LoginForm = () => {
           setFormPasswordError(ERROR.PASSWORD);
         } else if (e.data?.error === ERROR.EMAIL) {
           setFormEmailError(ERROR.EMAIL);
-        }else {
+        } else {
           setFormError(ERROR.GENERAL);
         }
       }
@@ -70,8 +69,8 @@ const LoginForm = () => {
   const handleChange = () => {
     if (formPasswordError) {
       setFormPasswordError(undefined);
-      setFormEmailError(undefined)
-      setFormError(undefined)
+      setFormEmailError(undefined);
+      setFormError(undefined);
     }
   };
 
@@ -80,6 +79,7 @@ const LoginForm = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Hello, Traveler</h1>
+      <p className={styles.txt}>{`${submitTxt} to save your progress.` }</p>
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
@@ -109,7 +109,7 @@ const LoginForm = () => {
                 type="submit"
                 txt={submitTxt}
               />
-              <FormError id="form" error={formError}/>
+              <FormHelper id="form" error={formError} />
             </Form>
           );
         }}

@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import FormError from "components/ui/FormError";
+import FormHelper from "components/ui/FormHelper";
 import styles from "./index.module.scss";
 
 type InputType = {
@@ -30,13 +30,14 @@ const Input = ({
       <input
         {...field}
         id={id}
+        aria-describedby={`${id}_error`}
         className={styles.input}
         autoComplete={autoComplete}
         type={type}
         placeholder={label}
         required={required}
       />
-      {touched && <FormError id={id} error={error || formError} />}
+      {touched && <FormHelper id={id} error={error || formError} />}
     </div>
   );
 };

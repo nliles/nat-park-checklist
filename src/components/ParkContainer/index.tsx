@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { updateParks } from "services/park.service";
+import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
+import { Response } from "types";
 import ParkView from "components/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../constants";
@@ -12,15 +13,37 @@ const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
     PARK_DESIGNATION_KEY.NAT_PARK
   );
+  const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
-  const [saveError, setSaveError]= useState<string | undefined>();
+  const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
   useEffect(() => {
-    const stored = loadState() || [];
-    setSelectedParks(stored);
-  }, []);
+    if (!isLoggedIn) {
+      setInitialValues([]);
+      setSelectedParks([]);
+      setSaveFormRes(undefined);
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const fetchParks = async () => {
+      if (isLoggedIn) {
+        try {
+          const { parks } = await getParks();
+          setInitialValues(parks);
+        } catch (e) {
+          console.log('error', e)
+          // TODO: handle error
+        }
+      } else {
+        const stored = loadState() || [];
+        setSelectedParks(stored);
+      }
+    };
+    fetchParks();
+  }, [isLoggedIn]);
 
   const saveToStorage = () => {
     saveState(selectedParks);
@@ -29,8 +52,9 @@ const ParkContainer = () => {
   const handleSubmit = async () => {
     try {
       await updateParks(selectedParks);
-    } catch (err: any) {
-      setSaveError('Your changes could not be saved. Please try again later.')
+      setSaveFormRes("success");
+    } catch (err) {
+      setSaveFormRes("error");
     }
   };
 
@@ -44,22 +68,23 @@ const ParkContainer = () => {
     }
   };
 
-  const handleChange = (parks: string[]) => {
-    setSelectedParks(parks);
+  const handleOnChange = (values: string[]) => {
+    setSelectedParks(values);
   };
 
   return (
     <PageWrapper count={selectedParks.length}>
       <ParkView
         loading={loading}
+        initialValues={initialValues}
         selectedParks={selectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
-        handleChange={handleChange}
         handleListItemChange={handleListItemChange}
-        handleSaveData={saveToStorage}
+        handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
-        saveError={saveError}
+        saveFormRes={saveFormRes}
+        setSaveFormRes={setSaveFormRes}
       />
     </PageWrapper>
   );
