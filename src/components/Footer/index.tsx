@@ -1,22 +1,19 @@
 import styles from "./index.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGithub,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const icons = [
   {
-    icon: faLinkedin,
+    icon: 'linkedIn',
     link: "https://www.linkedin.com/in/nliles/",
   },
-  { icon: faGithub, link: "https://github.com/nliles" },
+  { icon: 'github', link: "https://github.com/nliles" },
   {
-    icon: faInstagram,
+    icon: 'instagram',
     link: "https://www.instagram.com/natalieliles/",
   },
 ];
+
+const Insta = () => <FaInstagram/>
 
 const Footer = () => {
   return (
@@ -24,7 +21,9 @@ const Footer = () => {
       <div className={styles.links}>
         {icons.map((i) => (
           <a href={i.link} key={i.link}>
-            <FontAwesomeIcon icon={i.icon} />
+            {i.icon === 'linkedIn' && <FaLinkedin/>}
+            {i.icon === 'github' && <FaGithub/>}
+            {i.icon === 'instagram' && <FaInstagram/>}
           </a>
         ))}
       </div>
