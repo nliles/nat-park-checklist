@@ -27,16 +27,16 @@ const Button = ({
       })}
       type={type}
     >
-    <span className={styles.text}>
     {isLoading && (
-      <span className={styles.spinner}>
+      <span className={styles.spinnerWrapper}>
           <FaSpinner
           className={cn({
-            "fa-spin": isLoading,
+            [styles.spinner]: isLoading,
           })}
         />
       </span>
     )}
+    <span className={styles.text}>
     {txt}
     </span>
     </button>

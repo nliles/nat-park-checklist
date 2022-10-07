@@ -89,6 +89,7 @@ const List = ({
                     <Button
                       sizeSm
                       disabled={isSubmitting || !dirty}
+                      isLoading={isSubmitting}
                       txt="Save"
                       type="submit"
                     />
