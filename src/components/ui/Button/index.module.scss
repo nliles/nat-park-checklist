@@ -21,3 +21,12 @@
     cursor: not-allowed;
   }
 }
+
+.text {
+  position: relative;
+}
+
+.spinner {
+  position: absolute;
+  left: -25px;
+}
