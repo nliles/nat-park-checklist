@@ -13,8 +13,6 @@ const icons = [
   },
 ];
 
-const Insta = () => <FaInstagram/>
-
 const Footer = () => {
   return (
     <footer className={styles.footer}>
