@@ -110,6 +110,7 @@ const LoginForm = () => {
               />
               <Button
                 disabled={isSubmitting || !dirty || !isValid}
+                isLoading={isSubmitting}
                 type="submit"
                 txt={submitTxt}
               />
