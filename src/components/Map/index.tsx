@@ -29,7 +29,7 @@ const Map = ({
   const height = usedWidth / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
   const padding = usedWidth > 540 ? 30 : 0;
-  const circleSize = usedWidth > 540 ? 2 : 1;
+  const circleSize = 2;
   const offsetWidth = 50;
   const bottomPadding = usedWidth > 768 ? 100 : 0;
 
