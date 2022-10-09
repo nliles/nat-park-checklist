@@ -1,5 +1,4 @@
-@import "../../styles/colors.scss";
-@import "../../styles/breakpoints.scss";
+@import "../../../styles/breakpoints.scss";
 
 html,
 body,
@@ -20,29 +19,6 @@ div#app,
 
 .titleSection {
   margin-top: 2rem;
-}
-
-.header {
-  font-family: "Nanum Myeongjo", serif;
-  text-transform: uppercase;
-  color: $green;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 400;
-  padding-bottom: 10px;
-  border-bottom: 2px solid $green;
-  margin: 0 100px;
-  padding-top: 50px;
-  letter-spacing: 8px;
-
-  @media (max-width: $desktop) {
-    margin: 0 50px;
-  }
-
-  @media (max-width: $mobile-landscape) {
-    margin: 25px 25px;
-    font-size: 1.5rem;
-  }
 }
 
 .dropdownWrapper {

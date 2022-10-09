@@ -12,6 +12,8 @@ type MapMarkerType = {
   handleMouseLeave: () => void;
   number: number;
   tooltipName?: string;
+  showTree?: boolean;
+  circleSize?: number;
 };
 
 const MapMarker = ({
@@ -22,6 +24,8 @@ const MapMarker = ({
   handleMouseLeave,
   number,
   tooltipName,
+  showTree,
+  circleSize = 2,
 }: MapMarkerType) => {
   const x = coords?.[0] - 20; // subtract half the height
   const y = coords?.[1] - 40; // subtract full height
@@ -30,33 +34,43 @@ const MapMarker = ({
   const describedBy = tooltipName === park.name ? park.name : "";
   return (
     <>
-      {x && 7 && (
-        <svg
-          aria-describedby={describedBy}
-          x={x}
-          y={y}
-          className={styles.icon}
-          onMouseEnter={() => handleMouseOver(park)}
-          onMouseLeave={() => handleMouseLeave()}
-        >
-          <TreeIcon fill={fill} stroke={stroke} />
-          <a
-            className={cn(styles.link, {
-              [styles.selected]: isSelected,
-            })}
-            href={park.url}
-            target="_blank"
-            rel="noreferrer"
+      {x && y && showTree && (
+        <>
+          <svg
+            aria-describedby={describedBy}
+            x={x}
+            y={y}
+            className={styles.icon}
+            onMouseEnter={() => handleMouseOver(park)}
+            onMouseLeave={() => handleMouseLeave()}
           >
-            <text x="20" y="25" textAnchor="middle">
-              {number}
-            </text>
-          </a>
-          <ScreenReaderText text={`Link to ${park.name} info in new tab`} />
-        </svg>
+            <TreeIcon fill={fill} stroke={stroke} />
+            <a
+              className={cn(styles.link, {
+                [styles.selected]: isSelected,
+              })}
+              href={park.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <text x="20" y="25" textAnchor="middle">
+                {number}
+              </text>
+            </a>
+            <ScreenReaderText text={`Link to ${park.name} info in new tab`} />
+          </svg>
+        </>
       )}
       {coords && (
-        <circle className={styles.circle} r="2" cx={coords[0]} cy={coords[1]} />
+        <circle
+          className={cn(styles.circle, {
+            [styles.isSelected]: isSelected,
+            [styles.showTree]: showTree,
+          })}
+          r={circleSize}
+          cx={coords[0]}
+          cy={coords[1]}
+        />
       )}
     </>
   );

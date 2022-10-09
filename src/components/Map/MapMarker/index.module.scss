@@ -14,10 +14,17 @@
 }
 
 .circle {
-  fill: $green;
-  display: none;
-  @media (max-width: $desktop) {
-    display: block;
+  fill: $lightGreen;
+
+  &.isSelected {
+    fill: $green;
+  }
+
+  &.showTree {
+    display: none;
+    @media (max-width: $desktop) {
+      display: block;
+    }
   }
 }
 

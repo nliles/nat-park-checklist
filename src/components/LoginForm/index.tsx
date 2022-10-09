@@ -48,8 +48,8 @@ const LoginForm = () => {
     if (values.email && values.password) {
       const formattedValues = {
         email: values.email.trim().toLowerCase(),
-        password: values.password.trim()
-      }
+        password: values.password.trim(),
+      };
       try {
         if (showRegistration) {
           const { user } = await register(formattedValues);
@@ -83,7 +83,7 @@ const LoginForm = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Hello, Traveler</h1>
-      <p className={styles.txt}>{`${submitTxt} to save your progress.` }</p>
+      <p className={styles.txt}>{`${submitTxt} to save your progress.`}</p>
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}

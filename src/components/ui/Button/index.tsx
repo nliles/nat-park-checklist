@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner } from "react-icons/fa";
 import styles from "./index.module.scss";
 
 type ButtonType = {
@@ -27,18 +27,16 @@ const Button = ({
       })}
       type={type}
     >
-    {isLoading && (
-      <span className={styles.spinnerWrapper}>
+      {isLoading && (
+        <span className={styles.spinnerWrapper}>
           <FaSpinner
-          className={cn({
-            [styles.spinner]: isLoading,
-          })}
-        />
-      </span>
-    )}
-    <span className={styles.text}>
-    {txt}
-    </span>
+            className={cn({
+              [styles.spinner]: isLoading,
+            })}
+          />
+        </span>
+      )}
+      <span className={styles.text}>{txt}</span>
     </button>
   );
 };

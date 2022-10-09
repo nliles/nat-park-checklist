@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import { Response } from "types";
-import ParkView from "components/ParkView";
+import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
-import { PARK_DESIGNATION_KEY } from "../../constants";
+import { PARK_DESIGNATION_KEY } from "../../../constants";
 import PageWrapper from "components/PageWrapper";
 import { loadState, saveState } from "storage/sessionStorage";
 
@@ -34,7 +34,6 @@ const ParkContainer = () => {
           const { parks } = await getParks();
           setInitialValues(parks);
         } catch (e) {
-          console.log('error', e)
           // TODO: handle error
         }
       } else {
