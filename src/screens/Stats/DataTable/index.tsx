@@ -1,5 +1,4 @@
-import cn from "classnames";
-import { TOTAL_UNITS, LIST_OPTIONS, PARK_INFO } from "../../constants";
+import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
 import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
 
@@ -30,7 +29,7 @@ const DataTable = ({ count }: { count: number }) => {
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        <tfoot className={styles.tfoot}>
           <tr>
             <th className={styles.th}>Total</th>
             <td></td>

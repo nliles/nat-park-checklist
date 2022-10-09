@@ -1,5 +1,4 @@
-import cn from "classnames";
-import { TOTAL_UNITS, LIST_OPTIONS, PARK_INFO } from "../../constants";
+import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
 import ProgressBar from "components/ui/ProgressBar";
 import { removeDashes } from "helpers";
 import styles from "./index.module.scss";

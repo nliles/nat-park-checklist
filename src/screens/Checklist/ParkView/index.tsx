@@ -1,12 +1,12 @@
 import React, { Dispatch } from "react";
-import List from "components/List";
+import List from "screens/Checklist/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
-import Dropdown from "../ui/Dropdown";
+import Dropdown from "components/ui/Dropdown";
 import { Response, Park } from "types";
 import Header from "components/Header";
 import { removeDashes } from "helpers";
-import { LIST_OPTIONS } from "../../constants";
+import { LIST_OPTIONS } from "../../../constants";
 import styles from "./index.module.scss";
 
 type ParkViewType = {

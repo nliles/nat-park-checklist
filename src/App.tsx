@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Auth, { ProtectedRoute } from "Auth";
 import store from "store";
 import Modal from "components/ui/Modal";
-import ParkContainer from "components/ParkContainer";
-import StatsContainer from "components/StatsContainer";
+import ParkContainer from "screens/Checklist/ParkContainer";
+import StatsContainer from "screens/Stats/StatsContainer";
 import "./App.scss";
 
 const App = () => {

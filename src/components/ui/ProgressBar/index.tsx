@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import cn from "classnames";
 import styles from "./index.module.scss";
 
 export interface IProgressBar {

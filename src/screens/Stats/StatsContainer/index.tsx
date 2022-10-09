@@ -1,9 +1,6 @@
 import PageWrapper from "components/PageWrapper";
 import { useParks, useSelectedParks } from "hooks";
-import StatsPage from "components/StatsPage";
-import Header from "components/Header";
-import CircularProgressBar from "components/CircularProgressBar";
-import DataTable from "components/DataTable";
+import StatsPage from "screens/Stats/StatsPage";
 
 const StatsContainer = () => {
   const { parks } = useParks();

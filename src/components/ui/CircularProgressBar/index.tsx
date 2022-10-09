@@ -1,7 +1,5 @@
-import cn from "classnames";
-import { TOTAL_UNITS, LIST_OPTIONS, PARK_INFO } from "../../constants";
+import { TOTAL_UNITS } from "../../../constants";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { removeDashes } from "helpers";
 import styles from "./index.module.scss";
 
 const CircularProgressBar = ({ count }: { count: number }) => {

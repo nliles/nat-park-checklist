@@ -1,12 +1,10 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import PageWrapper from "components/PageWrapper";
-import { useSelectedParks, useWindowResize } from "hooks";
-import { TOTAL_UNITS, LIST_OPTIONS, PARK_INFO } from "../../constants";
+import { useWindowResize } from "hooks";
+import { TOTAL_UNITS } from "../../../constants";
 import Header from "components/Header";
-import { CircularProgressbar } from "react-circular-progressbar";
-import CircularProgressBar from "components/CircularProgressBar";
-import DataTable from "components/DataTable";
-import DataBars from "components/DataBars";
+import CircularProgressBar from "components/ui/CircularProgressBar";
+import DataTable from "screens/Stats/DataTable";
+import DataBars from "screens/Stats/DataBars";
 import { Park } from "types";
 import Count from "./Count";
 import Map from "components/Map";
@@ -39,15 +37,25 @@ const StatsPage = ({
           <div className={styles.progress}>
             <CircularProgressBar count={count} />
           </div>
+          <div className={styles.mobile}>
+            <Map
+              fixedWidth={columnWidth}
+              selectedParks={selected}
+              parks={parks}
+              showTree={false}
+            />
+          </div>
           <DataBars />
         </div>
         <div className={styles.columnTwo} ref={columnRef}>
-          <Map
-            fixedWidth={columnWidth}
-            selectedParks={selected}
-            parks={parks}
-            showTree={false}
-          />
+          <div className={styles.desktop}>
+            <Map
+              fixedWidth={columnWidth}
+              selectedParks={selected}
+              parks={parks}
+              showTree={false}
+            />
+          </div>
           <DataTable count={count} />
         </div>
       </div>
