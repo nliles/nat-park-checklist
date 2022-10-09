@@ -28,7 +28,9 @@ const NavBar = ({ count }: NavBarProps) => {
       <div className={styles.content}>
         <div className={styles.header}>
           <img src="np.svg" alt="" width={25} className={styles.img} />
-          <h1 className={styles.title}>National Park Unit Checklist</h1>
+          <h1 className={styles.title}>
+            <a href="/">National Park Unit Checklist</a>
+          </h1>
         </div>
         <div className={styles.right}>
           <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />

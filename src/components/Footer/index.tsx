@@ -3,12 +3,12 @@ import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const icons = [
   {
-    icon: 'linkedIn',
+    icon: "linkedIn",
     link: "https://www.linkedin.com/in/nliles/",
   },
-  { icon: 'github', link: "https://github.com/nliles" },
+  { icon: "github", link: "https://github.com/nliles" },
   {
-    icon: 'instagram',
+    icon: "instagram",
     link: "https://www.instagram.com/natalieliles/",
   },
 ];
@@ -19,9 +19,9 @@ const Footer = () => {
       <div className={styles.links}>
         {icons.map((i) => (
           <a href={i.link} key={i.link}>
-            {i.icon === 'linkedIn' && <FaLinkedin/>}
-            {i.icon === 'github' && <FaGithub/>}
-            {i.icon === 'instagram' && <FaInstagram/>}
+            {i.icon === "linkedIn" && <FaLinkedin />}
+            {i.icon === "github" && <FaGithub />}
+            {i.icon === "instagram" && <FaInstagram />}
           </a>
         ))}
       </div>

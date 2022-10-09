@@ -4,6 +4,7 @@ import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "../ui/Dropdown";
 import { Response, Park } from "types";
+import Header from "components/Header";
 import { removeDashes } from "helpers";
 import { LIST_OPTIONS } from "../../constants";
 import styles from "./index.module.scss";
@@ -35,11 +36,7 @@ const ParkView = ({
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
-      <div className={styles.titleSection}>
-        <h2 className={styles.header}>{`${removeDashes(
-          selectedDropdownItem
-        )}s`}</h2>
-      </div>
+      <Header title={`${removeDashes(selectedDropdownItem)}s`} />
       {loading && <Spinner />}
       {!loading && (
         <>

@@ -1,0 +1,22 @@
+@import "../../styles/colors.scss";
+
+.container {
+  width: 100%;
+}
+
+.progress {
+  padding: 10px 0;
+  width: 95%;
+  text-transform: capitalize;
+  line-height: 2rem;
+}
+
+.perc {
+  color: $green;
+  font-weight: 600;
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+}

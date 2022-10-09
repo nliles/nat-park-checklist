@@ -1,0 +1,40 @@
+@import "../../styles/colors.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.thead {
+  text-align: left;
+  color: $green;
+}
+
+.row {
+  border-top: 2px solid $green;
+  border-bottom: 1px solid $green;
+}
+
+.tr {
+  border-bottom: 1px solid $lightGray;
+}
+
+.th,
+.td {
+  padding: 16px;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.th,
+.td {
+  &:first-of-type {
+    width: 450px;
+  }
+}

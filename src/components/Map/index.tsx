@@ -12,22 +12,32 @@ import styles from "./index.module.scss";
 
 type MapType = {
   parks: Park[];
-  selectedParks: string[];
+  selectedParks?: string[];
+  fixedWidth?: number;
+  showTree?: boolean;
+  circleSize?: number;
 };
 
-const Map = ({ parks = [], selectedParks = [] }: MapType) => {
+const Map = ({
+  parks = [],
+  selectedParks = [],
+  fixedWidth,
+  showTree = true,
+  circleSize,
+}: MapType) => {
   const [tooltipContent, setTooltipContent] = useState<Park | undefined>();
   const [width] = useWindowResize();
-  const height = width / 2;
+  const usedWidth = fixedWidth || width;
+  const height = usedWidth / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
-  const padding = width > 540 ? 30 : 0;
+  const padding = usedWidth > 540 && !fixedWidth ? 30 : 0;
   const offsetWidth = 50;
-  const bottomPadding = width > 768 ? 100 : 0;
+  const bottomPadding = usedWidth > 768 && !fixedWidth ? 100 : 0;
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [width - offsetWidth, height],
+      [usedWidth - offsetWidth, height],
     ],
     usData
   );
@@ -57,12 +67,14 @@ const Map = ({ parks = [], selectedParks = [] }: MapType) => {
       handleMouseLeave={handleMouseLeavePark}
       number={i + 1}
       tooltipName={tooltipContent?.name}
+      showTree={showTree}
+      circleSize={circleSize}
     />
   ));
 
   return (
     <div className={styles.mapContainer}>
-      <svg width={width} height={height + bottomPadding}>
+      <svg width={usedWidth} height={height + bottomPadding}>
         {states}
         {natParks}
         {tooltipContent && (

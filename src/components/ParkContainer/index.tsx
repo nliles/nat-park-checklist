@@ -34,7 +34,6 @@ const ParkContainer = () => {
           const { parks } = await getParks();
           setInitialValues(parks);
         } catch (e) {
-          console.log('error', e)
           // TODO: handle error
         }
       } else {

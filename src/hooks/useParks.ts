@@ -3,21 +3,28 @@ import { Park } from "types";
 import { PARK_INFO, NPS_API, API_KEY } from "../constants";
 import { formatParks, sortParks } from "helpers";
 
-function useParks(selectedItem: string) {
+function useParks(selectedItem?: string) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
+  const mappedParks = Object.values(PARK_INFO).map((obj) => obj.codes);
+  const allCodes = Array.prototype.concat.apply([], mappedParks);
 
   useEffect(() => {
     const fetchParks = async () => {
-      const codes = PARK_INFO[selectedItem].codes;
+      let codes: any = [];
+      if (selectedItem) {
+        codes = PARK_INFO[selectedItem].codes;
+      } else {
+        codes = allCodes;
+      }
       setLoading(true);
       try {
         const res = await fetch(
           `${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`
         );
         const json = await res.json();
-        const sorted = sortParks(formatParks(json.data, selectedItem));
+        const sorted = sortParks(formatParks(json.data, selectedItem || ""));
         setParks(sorted);
         setLoading(false);
       } catch (e) {
@@ -25,9 +32,7 @@ function useParks(selectedItem: string) {
         setLoading(false);
       }
     };
-    if (selectedItem) {
-      fetchParks();
-    }
+    fetchParks();
   }, [selectedItem]);
 
   return {
