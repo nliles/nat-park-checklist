@@ -15,7 +15,6 @@ type MapType = {
   selectedParks?: string[];
   fixedWidth?: number;
   showTree?: boolean;
-  circleSize?: number;
 };
 
 const Map = ({
@@ -23,16 +22,16 @@ const Map = ({
   selectedParks = [],
   fixedWidth,
   showTree = true,
-  circleSize,
 }: MapType) => {
   const [tooltipContent, setTooltipContent] = useState<Park | undefined>();
   const [width] = useWindowResize();
   const usedWidth = fixedWidth || width;
   const height = usedWidth / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
-  const padding = usedWidth > 540 && !fixedWidth ? 30 : 0;
+  const padding = usedWidth > 540 ? 30 : 0;
+  const circleSize = usedWidth > 540 ? 2 : 1;
   const offsetWidth = 50;
-  const bottomPadding = usedWidth > 768 && !fixedWidth ? 100 : 0;
+  const bottomPadding = usedWidth > 768 ? 100 : 0;
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
