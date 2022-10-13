@@ -47,7 +47,7 @@ const ParkView = ({
               handleClick={handleListItemChange}
             />
           </div>
-          <Map parks={parks} selectedParks={selectedParks} />
+          <Map parks={parks} selectedParks={selectedParks} styleName={styles.map}/>
           <List
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}

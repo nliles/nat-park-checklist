@@ -38,3 +38,9 @@ div#app,
     margin: 0;
   }
 }
+
+.map {
+  @media (max-width: $mobile-landscape) {
+    margin: 50px 0;
+  }
+}

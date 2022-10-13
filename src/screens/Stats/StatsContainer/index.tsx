@@ -5,7 +5,6 @@ import StatsPage from "screens/Stats/StatsPage";
 const StatsContainer = () => {
   const { parks } = useParks();
   const { selectedParks } = useSelectedParks();
-
   return (
     <PageWrapper count={selectedParks.length}>
       <StatsPage selected={selectedParks} parks={parks} />

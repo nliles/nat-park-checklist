@@ -33,9 +33,11 @@ const StatsPage = ({
       <Header title="My Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
-          <Count count={count} total={TOTAL_UNITS} />
-          <div className={styles.progress}>
-            <CircularProgressBar count={count} />
+         <div className={styles.total}>
+            <Count count={count} total={TOTAL_UNITS} />
+            <div className={styles.progress}>
+              <CircularProgressBar count={count} />
+            </div>
           </div>
           <div className={styles.mobile}>
             <Map
@@ -43,6 +45,7 @@ const StatsPage = ({
               selectedParks={selected}
               parks={parks}
               showTree={false}
+              styleName={styles.mapMobile}
             />
           </div>
           <DataBars />
@@ -54,6 +57,7 @@ const StatsPage = ({
               selectedParks={selected}
               parks={parks}
               showTree={false}
+              styleName={styles.map}
             />
           </div>
           <DataTable count={count} />

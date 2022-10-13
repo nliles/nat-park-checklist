@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cn from "classnames";
 import { useWindowResize } from "hooks";
 import usMapData from "./us";
 import { geoPath } from "d3-geo";
@@ -15,6 +16,7 @@ type MapType = {
   selectedParks?: string[];
   fixedWidth?: number;
   showTree?: boolean;
+  styleName?: string;
 };
 
 const Map = ({
@@ -22,6 +24,7 @@ const Map = ({
   selectedParks = [],
   fixedWidth,
   showTree = true,
+  styleName
 }: MapType) => {
   const [tooltipContent, setTooltipContent] = useState<Park | undefined>();
   const [width] = useWindowResize();
@@ -72,7 +75,7 @@ const Map = ({
   ));
 
   return (
-    <div className={styles.mapContainer}>
+    <div className={cn(styles.mapContainer, styleName)}>
       <svg width={usedWidth} height={height + bottomPadding}>
         {states}
         {natParks}
