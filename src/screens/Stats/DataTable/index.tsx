@@ -1,8 +1,14 @@
-import { LIST_OPTIONS } from "../../../constants";
+import { LIST_OPTIONS, TOTAL_UNITS, PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
 import getTotal from "helpers/getTotal";
 import { Parks } from "types";
 import styles from "./index.module.scss";
+
+const getTotalUnits = (park: string) => {
+  const parkCount = Object.values(PARK_INFO[park]);
+  const arr =  Array.prototype.concat.apply([], parkCount);
+  return arr.length
+}
 
 const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
   return (
@@ -20,7 +26,7 @@ const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
             <tr key={option} className={styles.tr}>
               <td className={styles.td}>{startCase(option)}</td>
               <td className={styles.td}>{selected[option]?.length || 0}</td>
-              <td className={styles.td}>{getTotal(option)}</td>
+              <td className={styles.td}>{getTotalUnits(option)}</td>
             </tr>
           ))}
         </tbody>
@@ -30,7 +36,7 @@ const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
             <td className={styles.td}>
               <strong>{count}</strong>
             </td>
-            <td></td>
+            <td>{TOTAL_UNITS}</td>
           </tr>
         </tfoot>
       </table>

@@ -7,6 +7,7 @@ import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
 import getTotal from "helpers/getTotal";
+import getAllParks from "helpers/getAllParks";
 import PageWrapper from "components/PageWrapper";
 import { loadState, saveState } from "storage/sessionStorage";
 
@@ -35,8 +36,9 @@ const ParkContainer = () => {
         try {
           const { parks } = await getParks();
           const selectedParks = parks[selectedDropdownItem];
-          const total = getTotal(selectedDropdownItem);
-          setSelectedCount(total);
+          const total = getAllParks(parks);
+          console.log(parks, total)
+          setSelectedParks(total);
           setInitialValues(selectedParks);
         } catch (e) {
           // TODO: handle error
@@ -77,7 +79,7 @@ const ParkContainer = () => {
   };
 
   return (
-    <PageWrapper count={selectedCount}>
+    <PageWrapper count={selectedParks.length}>
       <ParkView
         loading={loading}
         initialValues={initialValues}
