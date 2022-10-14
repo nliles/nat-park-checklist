@@ -32,27 +32,32 @@ const ParkContainer = () => {
 
   useEffect(() => {
     const fetchParks = async () => {
-      if (isLoggedIn) {
         try {
-          const { parks } = await getParks();
-          const currentSelectedParks = parks[selectedDropdownItem];
-          const total = getAllParks(parks);
+          let data;
+          if (isLoggedIn) {
+             const { parks } = await getParks();
+             data = parks;
+          } else {
+            const stored = loadState() || {};
+            data = stored;
+          }
+          const currentSelectedParks = data[selectedDropdownItem] || [];
+          const total = getAllParks(data);
           setSelectedCount(total.length - currentSelectedParks.length);
           setInitialValues(currentSelectedParks);
           setSelectedParks(currentSelectedParks);
         } catch (e) {
           // TODO: handle error
         }
-      } else {
-        const stored = loadState() || [];
-        setSelectedParks(stored);
-      }
     };
     fetchParks();
   }, [isLoggedIn, selectedDropdownItem]);
 
   const saveToStorage = () => {
-    saveState(selectedParks);
+    const parks = {
+      [selectedDropdownItem]: selectedParks
+    }
+    saveState(parks);
   };
 
   const handleSubmit = async () => {
@@ -65,13 +70,13 @@ const ParkContainer = () => {
   };
 
   const handleListItemChange = (item: string) => {
-    setSelectedDropdownItem(item);
     // save to storage or save data
     if (isLoggedIn) {
       handleSubmit();
     } else {
       saveToStorage();
     }
+    setSelectedDropdownItem(item);
   };
 
   const handleOnChange = (values: string[]) => {

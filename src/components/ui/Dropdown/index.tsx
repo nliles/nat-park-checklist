@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PARK_INFO } from "../../../constants";
 import { useSelect } from "downshift";
 import startCase from "lodash/startCase";
@@ -27,13 +27,12 @@ const Dropdown = ({
     selectedItem,
   } = useSelect({
     items: list,
-  });
-
-  useEffect(() => {
-    if (selectedItem) {
-      handleClick(selectedItem);
+    onStateChange: ({ selectedItem }) => {
+      if (selectedItem) {
+        handleClick(selectedItem);
+      }
     }
-  }, [handleClick, selectedItem]);
+  });
 
   const formatListItem = (item: string) => {
     const count =
