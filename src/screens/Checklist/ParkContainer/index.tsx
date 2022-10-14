@@ -6,7 +6,6 @@ import { Response } from "types";
 import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
-import getTotal from "helpers/getTotal";
 import getAllParks from "helpers/getAllParks";
 import PageWrapper from "components/PageWrapper";
 import { loadState, saveState } from "storage/sessionStorage";
@@ -16,7 +15,6 @@ const ParkContainer = () => {
     PARK_DESIGNATION_KEY.NAT_PARK
   );
   const [initialValues, setInitialValues] = useState<string[]>([]);
-  const [selectedCount, setSelectedCount] = useState<number>(0);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
@@ -37,7 +35,7 @@ const ParkContainer = () => {
           const { parks } = await getParks();
           const selectedParks = parks[selectedDropdownItem];
           const total = getAllParks(parks);
-          console.log(parks, total)
+          console.log(parks, total);
           setSelectedParks(total);
           setInitialValues(selectedParks);
         } catch (e) {

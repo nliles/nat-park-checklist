@@ -1,4 +1,3 @@
-import { PARK_INFO } from "../constants";
 import { Parks } from "types";
 
 const getAllParks = (parks: Parks) => {

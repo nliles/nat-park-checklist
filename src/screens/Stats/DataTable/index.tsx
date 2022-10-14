@@ -1,14 +1,13 @@
 import { LIST_OPTIONS, TOTAL_UNITS, PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
-import getTotal from "helpers/getTotal";
 import { Parks } from "types";
 import styles from "./index.module.scss";
 
 const getTotalUnits = (park: string) => {
   const parkCount = Object.values(PARK_INFO[park]);
-  const arr =  Array.prototype.concat.apply([], parkCount);
-  return arr.length
-}
+  const arr = Array.prototype.concat.apply([], parkCount);
+  return arr.length;
+};
 
 const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
   return (
