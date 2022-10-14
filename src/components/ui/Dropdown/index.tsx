@@ -31,7 +31,7 @@ const Dropdown = ({
       if (selectedItem) {
         handleClick(selectedItem);
       }
-    }
+    },
   });
 
   const formatListItem = (item: string) => {

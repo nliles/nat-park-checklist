@@ -32,31 +32,31 @@ const ParkContainer = () => {
 
   useEffect(() => {
     const fetchParks = async () => {
-        try {
-          let data;
-          if (isLoggedIn) {
-             const { parks } = await getParks();
-             data = parks;
-          } else {
-            const stored = loadState() || {};
-            data = stored;
-          }
-          const currentSelectedParks = data[selectedDropdownItem] || [];
-          const total = getAllParks(data);
-          setSelectedCount(total.length - currentSelectedParks.length);
-          setInitialValues(currentSelectedParks);
-          setSelectedParks(currentSelectedParks);
-        } catch (e) {
-          // TODO: handle error
+      try {
+        let data;
+        if (isLoggedIn) {
+          const { parks } = await getParks();
+          data = parks;
+        } else {
+          const stored = loadState() || {};
+          data = stored;
         }
+        const currentSelectedParks = data[selectedDropdownItem] || [];
+        const total = getAllParks(data);
+        setSelectedCount(total.length - currentSelectedParks.length);
+        setInitialValues(currentSelectedParks);
+        setSelectedParks(currentSelectedParks);
+      } catch (e) {
+        // TODO: handle error
+      }
     };
     fetchParks();
   }, [isLoggedIn, selectedDropdownItem]);
 
   const saveToStorage = () => {
     const parks = {
-      [selectedDropdownItem]: selectedParks
-    }
+      [selectedDropdownItem]: selectedParks,
+    };
     saveState(parks);
   };
 
