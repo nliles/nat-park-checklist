@@ -60,7 +60,11 @@
 }
 
 .map {
-  margin: 20px 0 50px;
+  margin-top: 20px;
+
+  @media (max-width: 1300px) {
+    margin-bottom: 50px;
+  }
 }
 
 .mapMobile {

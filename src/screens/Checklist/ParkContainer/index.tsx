@@ -16,6 +16,7 @@ const ParkContainer = () => {
   );
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
+  const [selectedCount, setSelectedCount] = useState<number>(0);
   const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
@@ -33,11 +34,11 @@ const ParkContainer = () => {
       if (isLoggedIn) {
         try {
           const { parks } = await getParks();
-          const selectedParks = parks[selectedDropdownItem];
+          const currentSelectedParks = parks[selectedDropdownItem];
           const total = getAllParks(parks);
-          console.log(parks, total);
-          setSelectedParks(total);
-          setInitialValues(selectedParks);
+          setSelectedCount(total.length - currentSelectedParks.length);
+          setInitialValues(currentSelectedParks);
+          setSelectedParks(currentSelectedParks);
         } catch (e) {
           // TODO: handle error
         }
@@ -77,7 +78,7 @@ const ParkContainer = () => {
   };
 
   return (
-    <PageWrapper count={selectedParks.length}>
+    <PageWrapper count={selectedCount + selectedParks.length}>
       <ParkView
         loading={loading}
         initialValues={initialValues}

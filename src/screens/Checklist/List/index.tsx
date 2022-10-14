@@ -1,6 +1,7 @@
 import React, { Dispatch } from "react";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
+import startCase from "lodash/startCase";
 import { State } from "reducers/types";
 import { Park } from "types";
 import { Response } from "types";
@@ -15,9 +16,8 @@ type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
   initialParkValues: string[];
-  selectedParks: string[];
   handleOnChange: (values: string[]) => void;
-  handleSubmit: () => void;
+  handleSubmit: (values: string[]) => void;
   saveFormRes?: string;
   setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
@@ -27,20 +27,18 @@ const List = ({
   initialParkValues,
   selectedDropdownItem,
   handleOnChange,
-  selectedParks = [],
   handleSubmit,
   saveFormRes,
   setSaveFormRes,
 }: ListType) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
-  const count = parks.filter((p: any) => selectedParks.includes(p.id)).length;
 
   const initialValues = {
     parkData: initialParkValues || [],
   };
 
-  const handleOnSubmit = async () => {
-    await handleSubmit();
+  const handleOnSubmit = async (values: { parkData: string[] }) => {
+    await handleSubmit(values.parkData);
   };
 
   const error =
@@ -56,20 +54,24 @@ const List = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h2>{`${selectedDropdownItem.replaceAll("-", " ")} checklist`}</h2>
-        <Total count={count} total={parks.length} styleName={styles.count} />
-      </div>
       <Formik
         onSubmit={handleOnSubmit}
         initialValues={initialValues}
         enableReinitialize
       >
-        {({ dirty, isSubmitting }) => {
+        {({ dirty, isSubmitting, values }) => {
           return (
             <>
+              <div className={styles.header}>
+                <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
+                <Total
+                  count={values.parkData.length}
+                  total={parks.length}
+                  styleName={styles.count}
+                />
+              </div>
               <FormikEffect
-                initialValues={selectedParks || []}
+                initialValues={initialParkValues}
                 onChange={handleOnChange}
               />
               <Form onChange={handleFormChange} aria-describedby={describedby}>

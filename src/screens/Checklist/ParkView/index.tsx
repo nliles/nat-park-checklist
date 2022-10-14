@@ -17,7 +17,7 @@ type ParkViewType = {
   selectedParks: string[];
   selectedDropdownItem: string;
   handleOnChange: (values: string[]) => void;
-  handleSubmit: () => void;
+  handleSubmit: (values: string[]) => void;
   saveFormRes?: string;
   setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
@@ -56,7 +56,6 @@ const ParkView = ({
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
             initialParkValues={initialValues}
-            selectedParks={selectedParks}
             handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}
             saveFormRes={saveFormRes}
