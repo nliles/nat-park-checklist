@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { PARK_INFO } from "../../../constants";
 import { useSelect } from "downshift";
-import startCase from 'lodash/startCase';
+import startCase from "lodash/startCase";
 import styles from "./index.module.scss";
 import cn from "classnames";
 

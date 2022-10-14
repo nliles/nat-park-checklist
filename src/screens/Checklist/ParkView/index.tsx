@@ -5,7 +5,7 @@ import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
 import { Response, Park } from "types";
 import Header from "components/Header";
-import startCase from 'lodash/startCase';
+import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import styles from "./index.module.scss";
 
@@ -47,7 +47,11 @@ const ParkView = ({
               handleClick={handleListItemChange}
             />
           </div>
-          <Map parks={parks} selectedParks={selectedParks} styleName={styles.map}/>
+          <Map
+            parks={parks}
+            selectedParks={selectedParks}
+            styleName={styles.map}
+          />
           <List
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}

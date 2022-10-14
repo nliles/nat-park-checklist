@@ -34,7 +34,7 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           {count !== undefined && count > -1 && (
-              <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+            <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
           )}
           {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>

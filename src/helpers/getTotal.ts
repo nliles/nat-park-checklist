@@ -7,4 +7,4 @@ const getTotal = (park: string) => {
   );
 };
 
-export default getTotal
+export default getTotal;

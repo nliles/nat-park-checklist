@@ -1,10 +1,10 @@
 import { LIST_OPTIONS } from "../../../constants";
-import startCase from 'lodash/startCase';
-import getTotal from 'helpers/getTotal'
-import { Parks } from 'types'
+import startCase from "lodash/startCase";
+import getTotal from "helpers/getTotal";
+import { Parks } from "types";
 import styles from "./index.module.scss";
 
-const DataTable = ({ count, selected }: { count: number, selected: Parks }) => {
+const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
   return (
     <div className={styles.container}>
       <table className={styles.table}>

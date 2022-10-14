@@ -1,7 +1,7 @@
 import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
 import ProgressBar from "components/ui/ProgressBar";
-import startCase from 'lodash/startCase';
-import { Parks } from 'types'
+import startCase from "lodash/startCase";
+import { Parks } from "types";
 import styles from "./index.module.scss";
 
 const getTotal = (park: string) => {
@@ -11,12 +11,12 @@ const getTotal = (park: string) => {
   );
 };
 
-const DataBars = ({ selected}: { selected: Parks}) => {
+const DataBars = ({ selected }: { selected: Parks }) => {
   return (
     <div className={styles.container}>
       {LIST_OPTIONS.map((option) => {
         const total = getTotal(option);
-        const completed = selected[option]?.length || 0
+        const completed = selected[option]?.length || 0;
         const percentage = Math.round((completed / total) * 100);
         return (
           <div className={styles.progress} key={option}>

@@ -24,7 +24,7 @@ const Map = ({
   selectedParks = [],
   fixedWidth,
   showTree = true,
-  styleName
+  styleName,
 }: MapType) => {
   const [tooltipContent, setTooltipContent] = useState<Park | undefined>();
   const [width] = useWindowResize();

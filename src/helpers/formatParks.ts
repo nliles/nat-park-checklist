@@ -11,12 +11,9 @@ const formatParks = (parks: Park[], selectedItem?: string) => {
       ];
     }
   } else {
-    const formatted = Object.values(PARK_INFO).map((obj) => obj.formattedParks)
+    const formatted = Object.values(PARK_INFO).map((obj) => obj.formattedParks);
     const parks = Array.prototype.concat.apply([], formatted);
-    formattedParks = [
-      ...parks,
-      ...formattedParks,
-    ];
+    formattedParks = [...parks, ...formattedParks];
   }
   return formattedParks;
 };

@@ -8,16 +8,10 @@ import DataBars from "screens/Stats/DataBars";
 import { Park } from "types";
 import Count from "./Count";
 import Map from "components/Map";
-import { Parks } from 'types'
+import { Parks } from "types";
 import styles from "./index.module.scss";
 
-const StatsPage = ({
-  selected,
-  parks,
-}: {
-  selected: Parks;
-  parks: Park[];
-}) => {
+const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
   const columnRef = useRef<HTMLDivElement>(null);
   const [columnWidth, setColumnWidth] = useState(0);
   const [width] = useWindowResize();
@@ -34,7 +28,7 @@ const StatsPage = ({
       <Header title="My Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
-         <div className={styles.total}>
+          <div className={styles.total}>
             <Count count={total.length} total={TOTAL_UNITS} />
             <div className={styles.progress}>
               <CircularProgressBar count={total.length} />
@@ -49,7 +43,7 @@ const StatsPage = ({
               styleName={styles.mapMobile}
             />
           </div>
-          <DataBars selected={selected}/>
+          <DataBars selected={selected} />
         </div>
         <div className={styles.columnTwo} ref={columnRef}>
           <div className={styles.desktop}>
@@ -61,7 +55,7 @@ const StatsPage = ({
               styleName={styles.map}
             />
           </div>
-          <DataTable count={total.length} selected={selected}/>
+          <DataTable count={total.length} selected={selected} />
         </div>
       </div>
     </div>
