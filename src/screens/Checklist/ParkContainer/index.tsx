@@ -25,7 +25,7 @@ const ParkContainer = () => {
     if (!isLoggedIn) {
       setInitialValues([]);
       setSelectedParks([]);
-      setSelectedCount(0)
+      setSelectedCount(0);
       setSaveFormRes(undefined);
     }
   }, [isLoggedIn]);

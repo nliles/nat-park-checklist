@@ -11,9 +11,7 @@ type PageWrapperProps = {
 const PageWrapper = ({ children, count }: PageWrapperProps) => (
   <div className={styles.wrapper}>
     <NavBar count={count} />
-    <main role="main">
-    {children}
-    </main>
+    <main role="main">{children}</main>
     <Footer />
   </div>
 );

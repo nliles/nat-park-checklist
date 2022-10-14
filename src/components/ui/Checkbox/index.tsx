@@ -19,11 +19,11 @@ const Checkbox = ({ id, label, name, handleChange }: CheckboxType) => {
     const filteredValues = values.filter((v: string) => v !== id);
     if (values.includes(id)) {
       setFieldValue(name, filteredValues);
-      handleChange(filteredValues)
+      handleChange(filteredValues);
     } else {
-      const newValues = [...filteredValues, id]
+      const newValues = [...filteredValues, id];
       setFieldValue(name, newValues);
-      handleChange(newValues)
+      handleChange(newValues);
     }
   };
 
