@@ -6,9 +6,10 @@ type CheckboxType = {
   id: string;
   label: string;
   name: string;
+  handleChange: (values: string[]) => void;
 };
 
-const Checkbox = ({ id, label, name }: CheckboxType) => {
+const Checkbox = ({ id, label, name, handleChange }: CheckboxType) => {
   const [field] = useField(name);
   const values = field.value || [];
   const { setFieldValue } = useFormikContext();
@@ -18,8 +19,11 @@ const Checkbox = ({ id, label, name }: CheckboxType) => {
     const filteredValues = values.filter((v: string) => v !== id);
     if (values.includes(id)) {
       setFieldValue(name, filteredValues);
+      handleChange(filteredValues)
     } else {
-      setFieldValue(name, [...filteredValues, id]);
+      const newValues = [...filteredValues, id]
+      setFieldValue(name, newValues);
+      handleChange(newValues)
     }
   };
 

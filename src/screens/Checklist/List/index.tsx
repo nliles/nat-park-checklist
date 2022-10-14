@@ -5,7 +5,6 @@ import startCase from "lodash/startCase";
 import { State } from "reducers/types";
 import { Park } from "types";
 import { Response } from "types";
-import FormikEffect from "./FormikEffect";
 import Button from "components/ui/Button";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
@@ -70,10 +69,6 @@ const List = ({
                   styleName={styles.count}
                 />
               </div>
-              <FormikEffect
-                initialValues={initialParkValues}
-                onChange={handleOnChange}
-              />
               <Form onChange={handleFormChange} aria-describedby={describedby}>
                 <div className={styles.listContainer}>
                   {parks &&
@@ -83,6 +78,7 @@ const List = ({
                         label={`${i + 1}. ${park.fullName}`}
                         id={park.id}
                         name="parkData"
+                        handleChange={handleOnChange}
                       />
                     ))}
                 </div>
