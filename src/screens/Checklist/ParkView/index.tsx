@@ -5,7 +5,7 @@ import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
 import { Response, Park } from "types";
 import Header from "components/Header";
-import { removeDashes } from "helpers";
+import startCase from 'lodash/startCase';
 import { LIST_OPTIONS } from "../../../constants";
 import styles from "./index.module.scss";
 
@@ -36,7 +36,7 @@ const ParkView = ({
 }: ParkViewType) => {
   return (
     <div className={styles.container}>
-      <Header title={`${removeDashes(selectedDropdownItem)}s`} />
+      <Header title={`${startCase(selectedDropdownItem)}s`} />
       {loading && <Spinner />}
       {!loading && (
         <>

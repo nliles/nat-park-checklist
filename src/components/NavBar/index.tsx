@@ -10,7 +10,7 @@ import Total from "../Total";
 import styles from "./index.module.scss";
 
 type NavBarProps = {
-  count: number;
+  count?: number;
 };
 
 const NavBar = ({ count }: NavBarProps) => {
@@ -33,7 +33,9 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+          {count !== undefined && count > -1 && (
+              <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+          )}
           {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />

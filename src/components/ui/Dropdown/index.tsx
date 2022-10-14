@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { PARK_INFO } from "../../../constants";
 import { useSelect } from "downshift";
-import { removeDashes } from "helpers";
+import startCase from 'lodash/startCase';
 import styles from "./index.module.scss";
 import cn from "classnames";
 
@@ -38,7 +38,7 @@ const Dropdown = ({
   const formatListItem = (item: string) => {
     const count =
       PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
-    return `${removeDashes(item)}s (${count})`;
+    return `${startCase(item)}s (${count})`;
   };
 
   return (
@@ -52,7 +52,7 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{`${removeDashes(
+        <span className={styles.title}>{`${startCase(
           selectedItem || initialSelectedItem
         )}s`}</span>
         <span className={styles.icon}>
