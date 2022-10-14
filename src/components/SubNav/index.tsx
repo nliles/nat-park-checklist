@@ -45,6 +45,9 @@ const SubNav = ({
     >
       <ul className={styles.list}>
         <li className={styles.listItem}>
+          <a href="/stats">My Stats</a>
+        </li>
+        <li className={styles.listItem}>
           <button type="button" onClick={handleClick}>
             Logout
           </button>

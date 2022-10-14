@@ -1,15 +1,15 @@
-import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
-import { removeDashes } from "helpers";
+import { LIST_OPTIONS, TOTAL_UNITS, PARK_INFO } from "../../../constants";
+import startCase from "lodash/startCase";
+import { Parks } from "types";
 import styles from "./index.module.scss";
 
-const getTotal = (park: string) => {
-  return [...Object.values(PARK_INFO[park])].reduce(
-    (acc, element) => acc + element.length,
-    0
-  );
+const getTotalUnits = (park: string) => {
+  const parkCount = Object.values(PARK_INFO[park]);
+  const arr = Array.prototype.concat.apply([], parkCount);
+  return arr.length;
 };
 
-const DataTable = ({ count }: { count: number }) => {
+const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -23,19 +23,19 @@ const DataTable = ({ count }: { count: number }) => {
         <tbody className={styles.tbody}>
           {LIST_OPTIONS.map((option) => (
             <tr key={option} className={styles.tr}>
-              <td className={styles.td}>{removeDashes(option)}</td>
-              <td className={styles.td}>0</td>
-              <td className={styles.td}>{getTotal(option)}</td>
+              <td className={styles.td}>{startCase(option)}</td>
+              <td className={styles.td}>{selected[option]?.length || 0}</td>
+              <td className={styles.td}>{getTotalUnits(option)}</td>
             </tr>
           ))}
         </tbody>
         <tfoot className={styles.tfoot}>
           <tr>
             <th className={styles.th}>Total</th>
-            <td></td>
             <td className={styles.td}>
               <strong>{count}</strong>
             </td>
+            <td>{TOTAL_UNITS}</td>
           </tr>
         </tfoot>
       </table>

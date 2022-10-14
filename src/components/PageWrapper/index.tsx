@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 
 type PageWrapperProps = {
   children: ReactNode;
-  count: number;
+  count?: number;
 };
 
 const PageWrapper = ({ children, count }: PageWrapperProps) => (

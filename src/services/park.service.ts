@@ -1,10 +1,7 @@
 import { apiClient } from "services/apiService";
+import { Parks } from "types";
 
-type Parks = {
-  parks: string[];
-};
-
-export const getParks = (): Promise<Parks> => {
+export const getParks = (): Promise<{ parks: Parks }> => {
   return apiClient.get("/park", {
     headers: {
       crossdomain: true,
@@ -14,10 +11,13 @@ export const getParks = (): Promise<Parks> => {
   });
 };
 
-export const updateParks = (parks: string[]): Promise<Parks> => {
+export const updateParks = (
+  designation: string,
+  parks: string[]
+): Promise<Parks> => {
   return apiClient.post(
     "/park",
-    { parks },
+    { designation, parks },
     {
       headers: {
         crossdomain: true,

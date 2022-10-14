@@ -1,3 +1,5 @@
+import { Parks } from "types";
+
 // load state from local storage
 export const loadState = () => {
   try {
@@ -12,9 +14,14 @@ export const loadState = () => {
 };
 
 // save state to local storage
-export const saveState = (selected: string[]) => {
+export const saveState = (selected: Parks) => {
+  const data = loadState();
+  const parks = {
+    ...(data || {}),
+    ...selected,
+  };
   try {
-    const serializedState = JSON.stringify(selected);
+    const serializedState = JSON.stringify(parks);
     sessionStorage.setItem("selected", serializedState);
   } catch {}
 };

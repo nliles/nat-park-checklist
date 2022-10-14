@@ -6,7 +6,7 @@ const StatsContainer = () => {
   const { parks } = useParks();
   const { selectedParks } = useSelectedParks();
   return (
-    <PageWrapper count={selectedParks.length}>
+    <PageWrapper>
       <StatsPage selected={selectedParks} parks={parks} />
     </PageWrapper>
   );

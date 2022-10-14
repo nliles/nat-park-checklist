@@ -1,3 +1,7 @@
+export type Parks = {
+  [index: string]: string[];
+};
+
 type Address = {
   city: string;
   line1: string;
