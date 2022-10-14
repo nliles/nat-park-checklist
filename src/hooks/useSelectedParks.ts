@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
-import { loadState } from "storage/sessionStorage";
 import { Parks } from "types";
 
 function useSelectedParks() {

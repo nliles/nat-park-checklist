@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useEffect, ReactNode } from "react";
 import { useJwt } from "react-jwt";
 import { useSelector } from "react-redux";
