@@ -5,7 +5,7 @@ import store from "store";
 import Modal from "components/ui/Modal";
 import ParkContainer from "screens/Checklist/ParkContainer";
 import StatsContainer from "screens/Stats/StatsContainer";
-import "./App.scss";
+import "./index.scss";
 
 const App = () => {
   return (
