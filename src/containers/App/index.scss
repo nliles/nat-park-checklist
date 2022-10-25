@@ -2,12 +2,11 @@ body.showModal {
   overflow: hidden;
 }
 
-html,body {
-  height: 100%;
+html,
+body {
+  height: calc(100% - 50px);
 }
 
 main {
   min-height: 100%;
-  height: auto !important;
-  height: 100%;
 }

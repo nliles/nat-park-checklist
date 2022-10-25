@@ -2,11 +2,11 @@
 @import "../../styles/breakpoints.scss";
 
 .footer {
-  height: 160px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: auto;
+  // height: auto;
   background: $white;
   width: 100vw;
   z-index: 1;
