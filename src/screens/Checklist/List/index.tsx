@@ -6,7 +6,7 @@ import { State } from "reducers/types";
 import { Park } from "types";
 import { Response } from "types";
 import Button from "components/ui/Button";
-import { ButtonType } from 'components/ui/Button/enum'
+import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";

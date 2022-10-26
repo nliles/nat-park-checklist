@@ -31,7 +31,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
           <div className={styles.total}>
             <Count count={total.length} total={TOTAL_UNITS} />
             <div className={styles.progress}>
-              <CircularProgressBar count={total.length} total={TOTAL_UNITS}/>
+              <CircularProgressBar count={total.length} total={TOTAL_UNITS} />
             </div>
           </div>
           <div className={styles.mobile}>

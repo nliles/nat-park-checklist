@@ -1,7 +1,7 @@
 export enum ButtonType {
-	BUTTON = 'button',
-  SUBMIT = 'submit',
-  RESET = 'reset'
+  BUTTON = "button",
+  SUBMIT = "submit",
+  RESET = "reset",
 }
 
 export type ButtonTypeKey = keyof typeof ButtonType;

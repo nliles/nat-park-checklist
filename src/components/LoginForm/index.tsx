@@ -5,7 +5,7 @@ import FormHelper from "components/ui/FormHelper";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
-import { ButtonType } from 'components/ui/Button/enum'
+import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
 import { initialValues, getValidationSchema } from "./validation";
 import styles from "./index.module.scss";
