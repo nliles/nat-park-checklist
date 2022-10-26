@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 
-export interface IProgressBar {
+export type ProgressBarProps = {
   completed: number;
   total: number;
-}
+};
 
-const ProgressBar = ({ completed, total }: IProgressBar) => {
+const ProgressBar = ({ completed, total }: ProgressBarProps) => {
   const [percentCompleted, setPercentCompleted] = useState(0);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const ProgressBar = ({ completed, total }: IProgressBar) => {
   return (
     <div className={styles.container}>
       <progress
-        data-qaid="progress-bar"
         className={styles.progress}
         value={`${percentCompleted}`}
         max="100"
