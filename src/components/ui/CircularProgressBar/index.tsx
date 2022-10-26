@@ -1,9 +1,8 @@
-import { TOTAL_UNITS } from "../../../constants";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import styles from "./index.module.scss";
 
-const CircularProgressBar = ({ count }: { count: number }) => {
-  const percentage = Math.floor((count / TOTAL_UNITS) * 100);
+const CircularProgressBar = ({ count, total }: { count: number, total: number }) => {
+  const percentage = Math.floor((count / total) * 100);
   return (
     <div className={styles.wrapper}>
       <CircularProgressbar
