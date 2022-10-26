@@ -33,7 +33,7 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          {count !== undefined && count > -1 && (
+          {count !== undefined && (
             <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
           )}
           {!isLoggedIn && (
