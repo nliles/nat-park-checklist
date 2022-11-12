@@ -1,14 +1,8 @@
 import { PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
 import { Parks } from "types";
+import getParkTotal from 'helpers/getParkTotal'
 import styles from "./index.module.scss";
-
-const getItemTotal = (park: string) => {
-  const parkInfo = PARK_INFO?.[park];
-  return (
-    (parkInfo?.codes?.length || 0) + (parkInfo?.formattedParks?.length || 0)
-  );
-};
 
 const DataTable = ({
   count,
@@ -38,7 +32,7 @@ const DataTable = ({
             <tr key={item} className={styles.tr}>
               <td className={styles.td}>{startCase(item)}</td>
               <td className={styles.td}>{items[item].length || 0}</td>
-              <td className={styles.td}>{getItemTotal(item)}</td>
+              <td className={styles.td}>{getParkTotal(item)}</td>
             </tr>
           ))}
         </tbody>
