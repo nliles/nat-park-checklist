@@ -53,7 +53,7 @@ export const PARK_DESIGNATION_KEY = {
   NAT_SCENIC_TRAIL: "nationalScenicTrail",
   NAT_SEASHORE: "nationalSeashore",
   NAT_WILD_AND_SCENIC_RIVER: "nationalWildAndScenicRiver",
-  INTERNATIONAL_HISTORIC_SITE: "internationalHistoricTite",
+  INTERNATIONAL_HISTORIC_SITE: "internationalHistoricSite",
   OTHER_DESIGNATION: "otherDesignation",
 };
 

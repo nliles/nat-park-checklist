@@ -1,32 +1,38 @@
-import { LIST_OPTIONS, TOTAL_UNITS, PARK_INFO } from "../../../constants";
+import { PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
 import { Parks } from "types";
+import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
 
-const getTotalUnits = (park: string) => {
-  const parkCount = Object.values(PARK_INFO[park]);
-  const arr = Array.prototype.concat.apply([], parkCount);
-  return arr.length;
-};
-
-const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
-  const headers = ['Park Category', 'Visited', 'Total']
+const DataTable = ({
+  count,
+  total,
+  items,
+}: {
+  count: number;
+  total: number;
+  items: Parks;
+}) => {
+  const headers = ["Park Category", "Visited", "Total"];
+  const itemKeys = Object.keys(items);
   return (
     <div className={styles.container}>
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr className={styles.row}>
-            {headers.map(header => (
-              <th className={styles.th} key={header}>{header}</th>
+            {headers.map((header) => (
+              <th className={styles.th} key={header}>
+                {header}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody className={styles.tbody}>
-          {LIST_OPTIONS.map((option) => (
-            <tr key={option} className={styles.tr}>
-              <td className={styles.td}>{startCase(option)}</td>
-              <td className={styles.td}>{selected[option]?.length || 0}</td>
-              <td className={styles.td}>{getTotalUnits(option)}</td>
+          {itemKeys?.map((item) => (
+            <tr key={item} className={styles.tr}>
+              <td className={styles.td}>{startCase(item)}</td>
+              <td className={styles.td}>{items[item].length || 0}</td>
+              <td className={styles.td}>{getParkTotal(item)}</td>
             </tr>
           ))}
         </tbody>
@@ -36,7 +42,7 @@ const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
             <td className={styles.td}>
               <strong>{count}</strong>
             </td>
-            <td>{TOTAL_UNITS}</td>
+            <td>{total}</td>
           </tr>
         </tfoot>
       </table>
