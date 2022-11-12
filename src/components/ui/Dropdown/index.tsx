@@ -23,7 +23,7 @@ const Dropdown = ({
     getMenuProps,
     getItemProps,
     highlightedIndex,
-    isOpen
+    isOpen,
   } = useSelect({
     items: list,
     onStateChange: ({ selectedItem }) => {

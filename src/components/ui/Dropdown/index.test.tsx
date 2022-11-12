@@ -1,10 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import {
-  within,
-  render,
-  screen,
-} from "@testing-library/react";
+import { within, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Dropdown from ".";
 
@@ -49,7 +45,7 @@ describe("<Dropdown/>", () => {
       />
     );
     const item = within(screen.getByRole("listbox")).getByText("New York");
-    userEvent.click(item)
+    userEvent.click(item);
     expect(mockClick).toHaveBeenCalledWith("New York");
   });
 });
