@@ -92,7 +92,12 @@ const List = ({
                       txt="Save"
                       type={ButtonType.SUBMIT}
                     />
-                    <FormHelper id="form" error={error} success={success} />
+                    <FormHelper
+                      id="form"
+                      error={error}
+                      success={success}
+                      delay={3}
+                    />
                   </div>
                 )}
               </Form>
