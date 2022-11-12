@@ -5,19 +5,31 @@ import styles from "./index.module.scss";
 
 const getItemTotal = (park: string) => {
   const parkInfo = PARK_INFO?.[park];
-  return (parkInfo?.codes?.length || 0) + (parkInfo?.formattedParks?.length || 0)
+  return (
+    (parkInfo?.codes?.length || 0) + (parkInfo?.formattedParks?.length || 0)
+  );
 };
 
-const DataTable = ({ count, total, items }: { count: number; total: number, items: Parks }) => {
-  const headers = ['Park Category', 'Visited', 'Total']
-  const itemKeys = Object.keys(items)
+const DataTable = ({
+  count,
+  total,
+  items,
+}: {
+  count: number;
+  total: number;
+  items: Parks;
+}) => {
+  const headers = ["Park Category", "Visited", "Total"];
+  const itemKeys = Object.keys(items);
   return (
     <div className={styles.container}>
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr className={styles.row}>
-            {headers.map(header => (
-              <th className={styles.th} key={header}>{header}</th>
+            {headers.map((header) => (
+              <th className={styles.th} key={header}>
+                {header}
+              </th>
             ))}
           </tr>
         </thead>
