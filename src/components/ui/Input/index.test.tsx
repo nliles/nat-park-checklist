@@ -7,7 +7,7 @@ const getForm = () => (
   <Formik enableReinitialize onSubmit={() => {}} initialValues={{}}>
     {() => (
       <Form>
-        <Input id='1' label="Email" formError="Error"/>
+        <Input id="1" label="Email" formError="Error" />
       </Form>
     )}
   </Formik>
