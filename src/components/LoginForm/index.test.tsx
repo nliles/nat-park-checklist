@@ -109,7 +109,7 @@ describe("<LoginForm />", () => {
         .spyOn(authService, "login")
         .mockRejectedValue(new Error("Async error"));
     });
-    it("Returns the correct error message for incorrect password", async () => {
+    it("Returns error message", async () => {
       render(<LoginForm />);
       setup();
       userEvent.click(screen.getByRole("button", { name: "Sign in" }));
