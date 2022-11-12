@@ -17,7 +17,7 @@ const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
         <thead className={styles.thead}>
           <tr className={styles.row}>
             {headers.map(header => (
-              <th className={styles.th}>{header}</th>
+              <th className={styles.th} key={header}>{header}</th>
             ))}
           </tr>
         </thead>
