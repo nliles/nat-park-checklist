@@ -6,7 +6,7 @@ import Dropdown from "components/ui/Dropdown";
 import { Response, Park } from "types";
 import Header from "components/Header";
 import startCase from "lodash/startCase";
-import { LIST_OPTIONS } from "../../../constants";
+import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
 import styles from "./index.module.scss";
 
 type ParkViewType = {
@@ -34,6 +34,12 @@ const ParkView = ({
   saveFormRes,
   setSaveFormRes,
 }: ParkViewType) => {
+  const formatListItem = (item: string) => {
+    const count =
+      PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
+    return `${startCase(item)}s (${count})`;
+  };
+
   return (
     <div className={styles.container}>
       <Header title={`${startCase(selectedDropdownItem)}s`} />
@@ -43,8 +49,9 @@ const ParkView = ({
           <div className={styles.dropdownWrapper}>
             <Dropdown
               list={LIST_OPTIONS}
-              initialSelectedItem={selectedDropdownItem}
+              initialSelectedItem={`${startCase(selectedDropdownItem)}s`}
               handleClick={handleListItemChange}
+              formatListItem={formatListItem}
             />
           </div>
           <Map

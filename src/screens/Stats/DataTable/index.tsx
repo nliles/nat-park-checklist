@@ -10,14 +10,15 @@ const getTotalUnits = (park: string) => {
 };
 
 const DataTable = ({ count, selected }: { count: number; selected: Parks }) => {
+  const headers = ['Park Category', 'Visited', 'Total']
   return (
     <div className={styles.container}>
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr className={styles.row}>
-            <th className={styles.th}>Park Category</th>
-            <th className={styles.th}>Visited</th>
-            <th className={styles.th}>Total</th>
+            {headers.map(header => (
+              <th className={styles.th}>{header}</th>
+            ))}
           </tr>
         </thead>
         <tbody className={styles.tbody}>

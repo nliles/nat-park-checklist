@@ -1,7 +1,5 @@
 import React from "react";
-import { PARK_INFO } from "../../../constants";
 import { useSelect } from "downshift";
-import startCase from "lodash/startCase";
 import styles from "./index.module.scss";
 import cn from "classnames";
 
@@ -10,6 +8,7 @@ type DropdownType = {
   list: string[];
   initialSelectedItem: string;
   styleName?: string;
+  formatListItem: (item: string) => void;
 };
 
 const Dropdown = ({
@@ -17,6 +16,7 @@ const Dropdown = ({
   list,
   initialSelectedItem,
   styleName,
+  formatListItem,
 }: DropdownType) => {
   const {
     getToggleButtonProps,
@@ -24,7 +24,6 @@ const Dropdown = ({
     getItemProps,
     highlightedIndex,
     isOpen,
-    selectedItem,
   } = useSelect({
     items: list,
     onStateChange: ({ selectedItem }) => {
@@ -33,12 +32,6 @@ const Dropdown = ({
       }
     },
   });
-
-  const formatListItem = (item: string) => {
-    const count =
-      PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
-    return `${startCase(item)}s (${count})`;
-  };
 
   return (
     <div
@@ -51,9 +44,7 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{`${startCase(
-          selectedItem || initialSelectedItem
-        )}s`}</span>
+        <span className={styles.title}>{initialSelectedItem}</span>
         <span className={styles.icon}>
           <span className={styles.caret} />
         </span>
