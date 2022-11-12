@@ -1,16 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import * as reactRedux from 'react-redux';
+import * as reactRedux from "react-redux";
 import NavBar from ".";
 
 jest.mock("react-redux", () => ({
-    ...jest.requireActual("react-redux"),
-    useDispatch: jest.fn(),
-    useSelector: jest.fn(),
+  ...jest.requireActual("react-redux"),
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
 }));
 
 describe("<NavBar />", () => {
   it("Displays the correct content", () => {
-    render(<NavBar count={10}/>);
+    render(<NavBar count={10} />);
     expect(screen.getByText("National Park Unit Checklist")).toBeVisible();
     expect(screen.getByText("10")).toBeVisible();
   });
