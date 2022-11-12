@@ -19,10 +19,10 @@ describe("<SubNav />", () => {
   });
 
   it("Displays the correct content when showRegistration is false", async () => {
-    render(<SubNav showMenu onClick={() => {}}/>);
-    userEvent.click(screen.getByRole('button', { name: 'Logout'}));
+    render(<SubNav showMenu onClick={() => {}} />);
+    userEvent.click(screen.getByRole("button", { name: "Logout" }));
     await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledWith({ type: "NOT_AUTHENTICATED"});
+      expect(mockDispatch).toHaveBeenCalledWith({ type: "NOT_AUTHENTICATED" });
     });
   });
 });
