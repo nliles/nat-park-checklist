@@ -30,7 +30,7 @@ describe("<LoginForm />", () => {
     mockUseDispatch.mockReturnValue(mockDispatch);
   });
 
-  it("Displays the correct content when show registration is false", () => {
+  it("Displays the correct content when showRegistration is false", () => {
     render(<LoginForm />);
     expect(screen.getByText("Don't have an account?")).toBeVisible();
     expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign in");
