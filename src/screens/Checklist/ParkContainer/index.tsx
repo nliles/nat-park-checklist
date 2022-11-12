@@ -61,6 +61,7 @@ const ParkContainer = () => {
   };
 
   const handleSubmit = async () => {
+    setSaveFormRes(undefined)
     try {
       const { parks } = await updateParks(selectedDropdownItem, selectedParks);
       const currentSelectedParks = parks[selectedDropdownItem] || [];
