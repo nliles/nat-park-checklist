@@ -62,7 +62,9 @@ const ParkContainer = () => {
 
   const handleSubmit = async () => {
     try {
-      await updateParks(selectedDropdownItem, selectedParks);
+      const { parks } = await updateParks(selectedDropdownItem, selectedParks);
+      const currentSelectedParks = parks[selectedDropdownItem] || [];
+      setInitialValues(currentSelectedParks);
       setSaveFormRes("success");
     } catch (err) {
       setSaveFormRes("error");

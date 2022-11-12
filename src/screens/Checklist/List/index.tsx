@@ -46,12 +46,6 @@ const List = ({
   const success = saveFormRes === "success" ? "Saved!" : "";
   const describedby = error ? "form_error" : "form_helper";
 
-  const handleFormChange = () => {
-    if (saveFormRes) {
-      setSaveFormRes(undefined);
-    }
-  };
-
   return (
     <div className={styles.container}>
       <Formik
@@ -70,7 +64,7 @@ const List = ({
                   styleName={styles.count}
                 />
               </div>
-              <Form onChange={handleFormChange} aria-describedby={describedby}>
+              <Form aria-describedby={describedby}>
                 <div className={styles.listContainer}>
                   {parks &&
                     parks.map((park: any, i: number) => (

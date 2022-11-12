@@ -14,7 +14,7 @@ export const getParks = (): Promise<{ parks: Parks }> => {
 export const updateParks = (
   designation: string,
   parks: string[]
-): Promise<Parks> => {
+): Promise<{ parks: Parks }> => {
   return apiClient.post(
     "/park",
     { designation, parks },
