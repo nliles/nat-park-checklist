@@ -2,10 +2,6 @@ import { act, render, screen } from "@testing-library/react";
 import FormHelper from ".";
 
 describe("<FormHelper />", () => {
-  beforeEach(() => {
-		jest.useFakeTimers();
-	});
-
   it("Displays success message", () => {
     render(<FormHelper id='1' success="Success!"/>);
     expect(screen.getByText("Success!")).toBeVisible();
@@ -17,9 +13,12 @@ describe("<FormHelper />", () => {
   });
 
   it("Clears message after delay", () => {
+    jest.useFakeTimers();
     render(<FormHelper id='1' success="Success!" delay={3}/>);
     expect(screen.getByText("Success!")).toBeVisible();
-    act(() => jest.advanceTimersByTime(3000));
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
     expect(screen.queryByText("Success!")).not.toBeInTheDocument();
   });
 });
