@@ -2,7 +2,7 @@ import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import { Parks } from "types";
-import getParkTotal from 'helpers/getParkTotal'
+import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
 
 const DataBars = ({ selected }: { selected: Parks }) => {

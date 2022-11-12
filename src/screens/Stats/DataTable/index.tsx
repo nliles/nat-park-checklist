@@ -1,7 +1,7 @@
 import { PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
 import { Parks } from "types";
-import getParkTotal from 'helpers/getParkTotal'
+import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
 
 const DataTable = ({

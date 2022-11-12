@@ -13,7 +13,7 @@ describe("sortParks", () => {
         name: "Chiricahua",
         parkCode: "chir",
         states: "AZ",
-        url: ''
+        url: "",
       },
       {
         designation: "National Monument",
@@ -25,7 +25,7 @@ describe("sortParks", () => {
         name: "César E. Chávez",
         states: "CA",
         parkCode: "cech",
-        url: ''
+        url: "",
       },
     ];
     expect(sortParks(parks)).toEqual([
@@ -39,7 +39,7 @@ describe("sortParks", () => {
         name: "César E. Chávez",
         states: "CA",
         parkCode: "cech",
-        url: ''
+        url: "",
       },
       {
         designation: "National Monument",
@@ -51,8 +51,8 @@ describe("sortParks", () => {
         name: "Chiricahua",
         parkCode: "chir",
         states: "AZ",
-        url: ''
-      }
+        url: "",
+      },
     ]);
   });
 });
