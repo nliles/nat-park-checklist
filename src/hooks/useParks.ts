@@ -23,6 +23,7 @@ function useParks(selectedItem?: string) {
           `${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`
         );
         const json = await res.json();
+        console.log(formatParks(json.data, selectedItem));
         const sorted = sortParks(formatParks(json.data, selectedItem));
         setParks(sorted);
         setLoading(false);
