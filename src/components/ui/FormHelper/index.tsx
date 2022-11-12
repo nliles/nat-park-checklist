@@ -17,8 +17,6 @@ const FormHelper = ({ id, error, success, delay }: FormHelperProps) => {
   useEffect(() => {
     if (error || success) {
       setShowMsg(true);
-    } else {
-      setShowMsg(false);
     }
   }, [error, success]);
 
