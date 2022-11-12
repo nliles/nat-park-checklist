@@ -1,7 +1,7 @@
 import sortParks from "helpers/sortParks";
 
 describe("sortParks", () => {
-  it("Ignores punctuation when sortint parks", () => {
+  it("Sorts parks and ignores punctuation", () => {
     const parks = [
       {
         designation: "National Monument",
