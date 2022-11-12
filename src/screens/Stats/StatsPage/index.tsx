@@ -29,7 +29,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
       <div className={styles.section}>
         <div className={styles.columnOne}>
           <div className={styles.total}>
-            <Count count={total.length} total={TOTAL_UNITS} />
+            <Count header="NPS units visited" count={total.length} total={TOTAL_UNITS} />
             <div className={styles.progress}>
               <CircularProgressBar count={total.length} total={TOTAL_UNITS} />
             </div>
@@ -55,7 +55,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
               styleName={styles.map}
             />
           </div>
-          <DataTable count={total.length} selected={selected} />
+          <DataTable count={total.length} total={TOTAL_UNITS} items={selected} />
         </div>
       </div>
     </div>
