@@ -29,6 +29,13 @@ describe("<LoginForm />", () => {
     mockUseDispatch.mockReturnValue(mockDispatch);
   });
 
+  const setup = () => {
+    const emailInput = screen.getByLabelText("Email");
+    const passInput = screen.getByLabelText("Password");
+    userEvent.type(emailInput, "Test@gmail.com");
+    userEvent.type(passInput, "Test12345");
+  };
+
   it("Displays the correct content when showRegistration is false", () => {
     render(<LoginForm />);
     expect(screen.getByText("Don't have an account?")).toBeVisible();
@@ -47,10 +54,7 @@ describe("<LoginForm />", () => {
   it("Disables submit button when email and password are blank", () => {
     render(<LoginForm />);
     expect(screen.getByRole("button", { name: "Sign in" })).toBeDisabled();
-    const emailInput = screen.getByLabelText("Email");
-    const passInput = screen.getByLabelText("Password");
-    userEvent.type(emailInput, "Test@gmail.com");
-    userEvent.type(passInput, "Test12345");
+    setup();
     expect(screen.getByRole("button", { name: "Sign in" })).not.toBeDisabled();
   });
 
@@ -64,13 +68,6 @@ describe("<LoginForm />", () => {
         .mockImplementation(() => Promise.resolve(userRes));
       mockUseDispatch.mockReturnValue(mockDispatch);
     });
-
-    const setup = () => {
-      const emailInput = screen.getByLabelText("Email");
-      const passInput = screen.getByLabelText("Password");
-      userEvent.type(emailInput, "Test@gmail.com");
-      userEvent.type(passInput, "Test12345");
-    };
 
     it("Calls login with the correct values", async () => {
       render(<LoginForm />);
@@ -102,6 +99,24 @@ describe("<LoginForm />", () => {
       expect(mockDispatch).toBeCalledWith({
         token: "123",
         type: "IS_AUTHENTICATED",
+      });
+    });
+  });
+
+  describe("Submit errors", () => {
+    beforeEach(() => {
+      jest
+        .spyOn(authService, "login")
+        .mockRejectedValue(new Error("Async error"));
+    });
+    it("Returns the correct error message for incorrect password", async () => {
+      render(<LoginForm />);
+      setup();
+      userEvent.click(screen.getByRole("button", { name: "Sign in" }));
+      await waitFor(() => {
+        expect(
+          screen.getByText("Something went wrong. Please try again later.")
+        ).toBeVisible();
       });
     });
   });
