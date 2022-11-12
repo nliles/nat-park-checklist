@@ -18,7 +18,7 @@ describe("<SubNav />", () => {
     mockUseDispatch.mockReturnValue(mockDispatch);
   });
 
-  it("Displays the correct content when showRegistration is false", async () => {
+  it("Correctly handles logout", async () => {
     render(<SubNav showMenu onClick={() => {}} />);
     userEvent.click(screen.getByRole("button", { name: "Logout" }));
     await waitFor(() => {
