@@ -29,7 +29,7 @@ describe("<Checkbox />", () => {
     expect(mockOnChange).toHaveBeenCalledWith(["1"]);
   });
 
-  fit("Toggles checkbox", () => {
+  it("Toggles checkbox", () => {
     render(getForm());
     const checkbox = screen.getByLabelText("Park") as HTMLInputElement;
     userEvent.click(checkbox);
