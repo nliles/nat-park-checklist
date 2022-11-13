@@ -6,7 +6,8 @@ import Dropdown from "components/ui/Dropdown";
 import { Response, Park } from "types";
 import Header from "components/Header";
 import startCase from "lodash/startCase";
-import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
+import { LIST_OPTIONS } from "../../../constants";
+import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
 
 type ParkViewType = {
@@ -35,8 +36,7 @@ const ParkView = ({
   setSaveFormRes,
 }: ParkViewType) => {
   const formatListItem = (item: string) => {
-    const count =
-      PARK_INFO[item].codes.length + PARK_INFO[item].formattedParks.length;
+    const count = getParkTotal(item)
     return `${startCase(item)}s (${count})`;
   };
 

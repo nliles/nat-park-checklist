@@ -1,4 +1,4 @@
-import { LIST_OPTIONS, PARK_INFO } from "../../../constants";
+import { LIST_OPTIONS } from "../../../constants";
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import { Parks } from "types";

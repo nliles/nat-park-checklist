@@ -1,4 +1,3 @@
-import { PARK_INFO } from "../../../constants";
 import startCase from "lodash/startCase";
 import { Parks } from "types";
 import getParkTotal from "helpers/getParkTotal";
