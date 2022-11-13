@@ -12,14 +12,12 @@ describe("<DataBars />", () => {
     nationalReserve: ["C59FE971-54EE-447C-9DCE-CB781949B0B8"],
   };
 
-  describe("getParkTotal", () => {
-    it.each([
-      ["National Park", "5%"],
-      ["National Reserve", "50%"],
-    ])("renders the correct data", (name, percentage) => {
-      render(<DataBars items={parkData} />);
-      expect(screen.getByText(name)).toBeVisible();
-      expect(screen.getAllByText(percentage)[0]).toBeVisible();
-    });
+  it.each([
+    ["National Park", "5%"],
+    ["National Reserve", "50%"],
+  ])("renders the correct data", (name, percentage) => {
+    render(<DataBars items={parkData} />);
+    expect(screen.getByText(name)).toBeVisible();
+    expect(screen.getAllByText(percentage)[0]).toBeVisible();
   });
 });
