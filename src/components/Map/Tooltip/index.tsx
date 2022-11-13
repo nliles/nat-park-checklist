@@ -41,19 +41,24 @@ const Tooltip = ({
   });
 
   return (
-  <svg>
-    <foreignObject className={styles.tooltip} x={x} y={y} xmlns="http://www.w3.org/1999/xhtml">
-      <div className={styles.content} role="tooltip" id={tooltipId}>
-        <div className={styles.imgContainer}>
-          <img src={imageSrc} alt="" onError={handleImgError} />
+    <svg>
+      <foreignObject
+        className={styles.tooltip}
+        x={x}
+        y={y}
+        xmlns="http://www.w3.org/1999/xhtml"
+      >
+        <div className={styles.content} role="tooltip" id={tooltipId}>
+          <div className={styles.imgContainer}>
+            <img src={imageSrc} alt="" onError={handleImgError} />
+          </div>
+          <div className={styles.text}>
+            <h1>{park.fullName}</h1>
+            <span>{states}</span>
+          </div>
         </div>
-        <div className={styles.text}>
-          <h1>{park.fullName}</h1>
-          <span>{states}</span>
-        </div>
-      </div>
-    </foreignObject>
-  </svg>
+      </foreignObject>
+    </svg>
   );
 };
 
