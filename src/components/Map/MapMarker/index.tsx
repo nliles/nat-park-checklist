@@ -62,15 +62,17 @@ const MapMarker = ({
         </>
       )}
       {coords && (
-        <circle
-          className={cn(styles.circle, {
-            [styles.isSelected]: isSelected,
-            [styles.showTree]: showTree,
-          })}
-          r={circleSize}
-          cx={coords[0]}
-          cy={coords[1]}
-        />
+        <svg>
+          <circle
+            className={cn(styles.circle, {
+              [styles.isSelected]: isSelected,
+              [styles.showTree]: showTree,
+            })}
+            r={circleSize}
+            cx={coords[0]}
+            cy={coords[1]}
+          />
+        </svg>
       )}
     </>
   );
