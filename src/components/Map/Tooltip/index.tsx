@@ -41,7 +41,8 @@ const Tooltip = ({
   });
 
   return (
-    <foreignObject className={styles.tooltip} x={x} y={y}>
+  <svg>
+    <foreignObject className={styles.tooltip} x={x} y={y} xmlns="http://www.w3.org/1999/xhtml">
       <div className={styles.content} role="tooltip" id={tooltipId}>
         <div className={styles.imgContainer}>
           <img src={imageSrc} alt="" onError={handleImgError} />
@@ -52,6 +53,7 @@ const Tooltip = ({
         </div>
       </div>
     </foreignObject>
+  </svg>
   );
 };
 
