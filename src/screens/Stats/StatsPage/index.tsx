@@ -47,7 +47,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
               styleName={styles.mapMobile}
             />
           </div>
-          <DataBars selected={selected} />
+          <DataBars items={selected}/>
         </div>
         <div className={styles.columnTwo} ref={columnRef}>
           <div className={styles.desktop}>
