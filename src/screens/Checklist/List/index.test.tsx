@@ -44,6 +44,7 @@ describe("<List />", () => {
         initialParkValues={[]}
         handleOnChange={mockFn}
         handleSubmit={() => {}}
+        setSaveFormRes={() => {}}
       />
     );
   };

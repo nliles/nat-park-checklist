@@ -36,8 +36,7 @@ const ParkView = ({
   setSaveFormRes,
 }: ParkViewType) => {
   const formatListItem = (item: string) => {
-    const count = getParkTotal(item);
-    return `${startCase(item)}s (${count})`;
+    return `${startCase(item)}s (${getParkTotal(item)})`;
   };
 
   return (
