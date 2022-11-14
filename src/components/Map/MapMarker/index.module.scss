@@ -22,7 +22,7 @@
 
   &.showTree {
     display: none;
-    @media (max-width: $desktop) {
+    @media (max-width: $tablet) {
       display: block;
     }
   }
@@ -30,7 +30,7 @@
 
 .icon {
   display: none;
-  @media (min-width: $mobile-landscape) {
+  @media (min-width: $tablet) {
     display: block;
   }
 }
