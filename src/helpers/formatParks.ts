@@ -1,4 +1,4 @@
-import { Park } from "../types";
+import { Park } from "types";
 import { PARK_INFO } from "../constants";
 
 const formatParks = (parks: Park[], selectedItem?: string) => {

@@ -43,7 +43,7 @@ const ParkContainer = () => {
         }
         const currentSelectedParks = data[selectedDropdownItem] || [];
         const total = getAllParks(data);
-        setSelectedCount(total.length - currentSelectedParks.length);
+        setSelectedCount(total - currentSelectedParks.length);
         setInitialValues(currentSelectedParks);
         setSelectedParks(currentSelectedParks);
       } catch (e) {

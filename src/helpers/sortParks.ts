@@ -1,4 +1,4 @@
-import { Park } from "../types";
+import { Park } from "types";
 
 const sortParks = (parks: Park[]) => {
   return parks.sort((a, b) =>

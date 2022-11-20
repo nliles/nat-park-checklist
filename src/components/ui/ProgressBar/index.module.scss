@@ -30,13 +30,16 @@
   border-radius: 0px;
   max-width: 100%;
   background-color: $green;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   transition: width 0.5s;
 }
 
 .progress[value]::-moz-progress-bar {
   margin: 1px;
-  height: 0px;
+  height: 16px;
   max-width: 100%;
   background-color: $green;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
