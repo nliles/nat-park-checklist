@@ -16,7 +16,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
   const columnRef = useRef<HTMLDivElement>(null);
   const [columnWidth, setColumnWidth] = useState(0);
   const [width] = useWindowResize();
-  const totalParks = flattenParks(selected)
+  const totalParks = flattenParks(selected);
 
   useLayoutEffect(() => {
     if (columnRef?.current) {
@@ -36,7 +36,10 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
               total={TOTAL_UNITS}
             />
             <div className={styles.progress}>
-              <CircularProgressBar count={totalParks.length} total={TOTAL_UNITS} />
+              <CircularProgressBar
+                count={totalParks.length}
+                total={TOTAL_UNITS}
+              />
             </div>
           </div>
           <div className={styles.mobile}>
