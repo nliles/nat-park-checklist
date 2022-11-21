@@ -1,14 +1,16 @@
 import { apiClient } from "services/apiService";
 import { Parks } from "types";
 
-export const getParks = (): Promise<{ parks: Parks }> => {
-  return apiClient.get("/park", {
+const config = {
     headers: {
       crossdomain: true,
       Authorization: sessionStorage.getItem("token") || "",
       "Content-Type": "application/json",
     },
-  });
+};
+
+export const getParks = (): Promise<{ parks: Parks }> => {
+  return apiClient.get("/park", config);
 };
 
 export const updateParks = (
@@ -18,12 +20,6 @@ export const updateParks = (
   return apiClient.post(
     "/park",
     { designation, parks },
-    {
-      headers: {
-        crossdomain: true,
-        Authorization: sessionStorage.getItem("token") || "",
-        "Content-Type": "application/json",
-      },
-    }
+    config
   );
 };
