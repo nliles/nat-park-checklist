@@ -6,7 +6,7 @@ import { Response } from "types";
 import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
-import getAllParks from "helpers/getAllParks";
+import flattenParks from "helpers/flattenParks";
 import PageWrapper from "components/PageWrapper";
 import { loadState, saveState } from "storage/sessionStorage";
 
@@ -42,7 +42,7 @@ const ParkContainer = () => {
           data = stored;
         }
         const currentSelectedParks = data[selectedDropdownItem] || [];
-        const total = getAllParks(data);
+        const total = flattenParks(data).length;
         setSelectedCount(total - currentSelectedParks.length);
         setInitialValues(currentSelectedParks);
         setSelectedParks(currentSelectedParks);

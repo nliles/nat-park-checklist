@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useWindowResize } from "hooks";
 import { TOTAL_UNITS } from "../../../constants";
+import flattenParks from "helpers/flattenParks";
 import Header from "components/Header";
 import CircularProgressBar from "components/ui/CircularProgressBar";
 import DataTable from "screens/Stats/DataTable";
@@ -15,7 +16,7 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
   const columnRef = useRef<HTMLDivElement>(null);
   const [columnWidth, setColumnWidth] = useState(0);
   const [width] = useWindowResize();
-  const total = Array.prototype.concat.apply([], Object.values(selected));
+  const totalParks = flattenParks(selected)
 
   useLayoutEffect(() => {
     if (columnRef?.current) {
@@ -31,17 +32,17 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
           <div className={styles.total}>
             <Count
               header="NPS units visited"
-              count={total.length}
+              count={totalParks.length}
               total={TOTAL_UNITS}
             />
             <div className={styles.progress}>
-              <CircularProgressBar count={total.length} total={TOTAL_UNITS} />
+              <CircularProgressBar count={totalParks.length} total={TOTAL_UNITS} />
             </div>
           </div>
           <div className={styles.mobile}>
             <Map
               fixedWidth={columnWidth}
-              selectedParks={total}
+              selectedParks={totalParks}
               parks={parks}
               showTree={false}
               styleName={styles.mapMobile}
@@ -53,14 +54,14 @@ const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
           <div className={styles.desktop}>
             <Map
               fixedWidth={columnWidth}
-              selectedParks={total}
+              selectedParks={totalParks}
               parks={parks}
               showTree={false}
               styleName={styles.map}
             />
           </div>
           <DataTable
-            count={total.length}
+            count={totalParks.length}
             total={TOTAL_UNITS}
             items={selected}
           />

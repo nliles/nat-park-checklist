@@ -21,7 +21,7 @@ function useParks(selectedItem?: string) {
       setLoading(true);
       try {
         const res = await fetch(
-          `${NPS_API}/parks?parkCode=${codes}&limit=466&sort=fullName&api_key=${API_KEY}`
+          `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
         );
         const json = await res.json();
         const sorted = sortParks(formatParks(json.data, selectedItem));
