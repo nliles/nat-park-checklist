@@ -1,5 +1,4 @@
 import TreeIcon from "components/Icons/TreeIcon";
-import ScreenReaderText from "components/ui/ScreenReaderText";
 import { Park } from "types";
 import cn from "classnames";
 import styles from "./index.module.scss";
@@ -57,7 +56,6 @@ const MapMarker = ({
                 {number}
               </text>
             </a>
-            <ScreenReaderText text={`Link to ${park.name} info in new tab`} />
           </svg>
         </>
       )}

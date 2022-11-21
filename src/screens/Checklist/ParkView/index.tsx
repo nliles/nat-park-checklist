@@ -10,12 +10,12 @@ import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
 
-type ParkViewType = {
+export type ParkViewType = {
   handleListItemChange: (item: string) => void;
-  loading: boolean;
+  loading?: boolean;
   parks: Park[];
   initialValues: string[];
-  selectedParks: string[];
+  selectedParks?: string[];
   selectedDropdownItem: string;
   handleOnChange: (values: string[]) => void;
   handleSubmit: (values: string[]) => void;
@@ -24,9 +24,9 @@ type ParkViewType = {
 };
 
 const ParkView = ({
-  loading,
+  loading = false,
   parks,
-  selectedParks,
+  selectedParks = [],
   initialValues,
   selectedDropdownItem,
   handleListItemChange,

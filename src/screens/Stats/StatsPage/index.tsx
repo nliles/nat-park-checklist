@@ -12,7 +12,12 @@ import Map from "components/Map";
 import { Parks } from "types";
 import styles from "./index.module.scss";
 
-const StatsPage = ({ selected, parks }: { selected: Parks; parks: Park[] }) => {
+export type StatsPageProps = {
+  selected: Parks;
+  parks: Park[];
+};
+
+const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
   const [columnWidth, setColumnWidth] = useState(0);
   const [width] = useWindowResize();

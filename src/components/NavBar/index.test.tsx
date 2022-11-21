@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import * as reactRedux from "react-redux";
 import NavBar from ".";
 
 jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }));
