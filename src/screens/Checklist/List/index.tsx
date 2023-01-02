@@ -54,7 +54,7 @@ const List = ({
   const error =
     saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
   const success = saveFormRes === "success" ? "Saved!" : "";
-  // const describedby = error ? "form_error" : "form_helper";
+  const describedby = error ? "form_error" : "form_helper";
 
   return (
     <div className={styles.container}>
@@ -63,7 +63,7 @@ const List = ({
         <Total count={count} total={parks.length} styleName={styles.count} />
       </div>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
           <div className={styles.listContainer}>
             {parks &&
               parks.map((park: any, i: number) => (
