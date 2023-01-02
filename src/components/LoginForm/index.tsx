@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Formik, Form } from "formik";
+import { useForm, FormProvider } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
 import { loginSuccess, hideModal } from "actions";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
-import { initialValues, getValidationSchema } from "./validation";
+import { getValidationSchema } from "./validation";
+import { User } from './types'
 import styles from "./index.module.scss";
 
 const ERROR = {
@@ -34,18 +35,13 @@ const LoginForm = () => {
     setShowRegistration(!showRegistration);
   };
 
-  type User = {
-    email: string;
-    password: string;
-  };
-
   const handleSuccess = (token: string) => {
     sessionStorage.setItem("token", token);
     dispatch(loginSuccess(token));
     dispatch(hideModal());
   };
 
-  const handleSubmit = async (values: User) => {
+  const onSubmit = async (values: User) => {
     if (values.email && values.password) {
       const formattedValues = {
         email: values.email.trim().toLowerCase(),
@@ -71,6 +67,19 @@ const LoginForm = () => {
     }
   };
 
+  const methods = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    },
+  });
+
+  const {
+    handleSubmit,
+    formState: { isDirty, isValid, isSubmitting },
+    watch,
+  } = methods;
+
   const handleChange = () => {
     if (formPasswordError) {
       setFormPasswordError(undefined);
@@ -85,15 +94,8 @@ const LoginForm = () => {
     <div className={styles.container}>
       <h1 className={styles.header}>Hello, Traveler</h1>
       <p className={styles.txt}>{`${submitTxt} to save your progress.`}</p>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        enableReinitialize
-      >
-        {({ values, isValid, dirty, isSubmitting }) => {
-          return (
-            <Form className={styles.form} onChange={handleChange}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 id="email"
                 label="Email"
@@ -110,16 +112,14 @@ const LoginForm = () => {
                 formError={formPasswordError}
               />
               <Button
-                disabled={isSubmitting || !dirty || !isValid}
+                disabled={isSubmitting || !isDirty || !isValid}
                 isLoading={isSubmitting}
                 type={ButtonType.SUBMIT}
                 txt={submitTxt}
               />
               <FormHelper id="form" error={formError} />
-            </Form>
-          );
-        }}
-      </Formik>
+            </form>
+      </FormProvider>
       <p className={styles.registerText}>
         {txt}
         <button type="button" onClick={handleClick}>

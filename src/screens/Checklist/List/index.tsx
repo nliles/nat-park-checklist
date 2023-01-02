@@ -12,7 +12,7 @@ import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
 import styles from "./index.module.scss";
 
-type ListType = {
+export type ListType = {
   parks: Park[];
   selectedDropdownItem: string;
   initialParkValues: string[];

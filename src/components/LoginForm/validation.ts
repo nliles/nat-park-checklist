@@ -1,10 +1,5 @@
 import { string, object } from "yup";
 
-export const initialValues = {
-  email: "",
-  password: "",
-};
-
 const regValidationSchema = object().shape({
   email: string()
     .required("Email required. Please fill out this field")
