@@ -46,7 +46,10 @@ const List = ({
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
+    watch,
   } = methods;
+
+  const count = watch().parkData.length
 
   const error =
     saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
@@ -57,7 +60,7 @@ const List = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
-        <Total count={0} total={parks.length} styleName={styles.count} />
+        <Total count={count} total={parks.length} styleName={styles.count} />
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
