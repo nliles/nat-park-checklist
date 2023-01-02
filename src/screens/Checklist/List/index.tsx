@@ -66,7 +66,7 @@ const List = ({
         <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
           <div className={styles.listContainer}>
             {parks &&
-              parks.map((park: any, i: number) => (
+              parks.map((park, i) => (
                 <Checkbox
                   key={park.fullName}
                   label={`${i + 1}. ${park.fullName}`}
