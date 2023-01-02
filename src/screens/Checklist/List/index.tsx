@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import { Formik, Form } from "formik";
+import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import startCase from "lodash/startCase";
 import { State } from "reducers/types";
@@ -17,7 +17,7 @@ type ListType = {
   selectedDropdownItem: string;
   initialParkValues: string[];
   handleOnChange: (values: string[]) => void;
-  handleSubmit: (values: string[]) => void;
+  handleOnSubmit: (values: string[]) => void;
   saveFormRes?: string;
   setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
 };
@@ -27,78 +27,65 @@ const List = ({
   initialParkValues,
   selectedDropdownItem,
   handleOnChange,
-  handleSubmit,
+  handleOnSubmit,
   saveFormRes,
   setSaveFormRes,
 }: ListType) => {
+  const onSubmit = async (data: { parkData: string[] }) => {
+    await handleOnSubmit(data.parkData);
+  };
+
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
-  const initialValues = {
-    parkData: initialParkValues || [],
-  };
+  const methods = useForm({
+    defaultValues: {
+      parkData: initialParkValues || [],
+    },
+  });
 
-  const handleOnSubmit = async (values: { parkData: string[] }) => {
-    await handleSubmit(values.parkData);
-  };
+  const {
+    handleSubmit,
+    formState: { isDirty, isSubmitting },
+  } = methods;
 
   const error =
     saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
   const success = saveFormRes === "success" ? "Saved!" : "";
-  const describedby = error ? "form_error" : "form_helper";
+  // const describedby = error ? "form_error" : "form_helper";
 
   return (
     <div className={styles.container}>
-      <Formik
-        onSubmit={handleOnSubmit}
-        initialValues={initialValues}
-        enableReinitialize
-      >
-        {({ dirty, isSubmitting, values }) => {
-          return (
-            <>
-              <div className={styles.header}>
-                <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
-                <Total
-                  count={values.parkData.length}
-                  total={parks.length}
-                  styleName={styles.count}
+      <div className={styles.header}>
+        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
+        <Total count={0} total={parks.length} styleName={styles.count} />
+      </div>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.listContainer}>
+            {parks &&
+              parks.map((park: any, i: number) => (
+                <Checkbox
+                  key={park.fullName}
+                  label={`${i + 1}. ${park.fullName}`}
+                  id={park.id}
+                  name="parkData"
                 />
-              </div>
-              <Form aria-describedby={describedby}>
-                <div className={styles.listContainer}>
-                  {parks &&
-                    parks.map((park: any, i: number) => (
-                      <Checkbox
-                        key={park.fullName}
-                        label={`${i + 1}. ${park.fullName}`}
-                        id={park.id}
-                        name="parkData"
-                        handleChange={handleOnChange}
-                      />
-                    ))}
-                </div>
-                {isLoggedIn && (
-                  <div className={styles.buttonWrapper}>
-                    <Button
-                      sizeSm
-                      disabled={isSubmitting || !dirty}
-                      isLoading={isSubmitting}
-                      txt="Save"
-                      type={ButtonType.SUBMIT}
-                    />
-                    <FormHelper
-                      id="form"
-                      error={error}
-                      success={success}
-                      delay={3}
-                    />
-                  </div>
-                )}
-              </Form>
-            </>
-          );
-        }}
-      </Formik>
+              ))}
+          </div>
+          {isLoggedIn && (
+            <div className={styles.buttonWrapper}>
+              <Button
+                sizeSm
+                disabled={!isDirty}
+                isLoading={isSubmitting}
+                txt="Save"
+                type={ButtonType.SUBMIT}
+              />
+              <FormHelper id="form" error={error} success={success} delay={3} />
+            </div>
+          )}
+        </form>
+      </FormProvider>
     </div>
   );
 };

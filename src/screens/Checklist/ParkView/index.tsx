@@ -63,7 +63,7 @@ const ParkView = ({
             selectedDropdownItem={selectedDropdownItem}
             initialParkValues={initialValues}
             handleOnChange={handleOnChange}
-            handleSubmit={handleSubmit}
+            handleOnSubmit={handleSubmit}
             saveFormRes={saveFormRes}
             setSaveFormRes={setSaveFormRes}
           />
