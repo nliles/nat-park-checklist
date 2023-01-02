@@ -49,7 +49,7 @@ const List = ({
     watch,
   } = methods;
 
-  const count = watch().parkData.length
+  const count = watch().parkData.length;
 
   const error =
     saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
