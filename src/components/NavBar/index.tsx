@@ -41,7 +41,7 @@ const NavBar = ({ count }: NavBarProps) => {
                 <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
               )}
               <Avatar active={showMenu} handleClose={toggleClose}/>
-              <SubNav showMenu={showMenu} onClick={toggleClose} />
+              <SubNav showMenu={showMenu} onClick={() => setShowMenu(false)} />
             </>
           )}
         </div>
