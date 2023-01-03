@@ -1,6 +1,7 @@
+import { LoginIconProps } from './types';
 import styles from "./index.module.scss";
 
-const LoginIcon = ({ handleClick }: { handleClick: () => void}) => {
+const LoginIcon = ({ handleClick }: LoginIconProps) => {
   return (
     <button className={styles.button} onClick={() => handleClick()}>
       <img width={30} src="login.svg" alt="Login icon" />
