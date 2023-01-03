@@ -1,5 +1,4 @@
 import React from "react";
-import { Formik, Form } from "formik";
 import { within, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Dropdown from ".";

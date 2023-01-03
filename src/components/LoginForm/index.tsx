@@ -112,7 +112,7 @@ const LoginForm = () => {
             disabled={isSubmitting || !isDirty || !isValid}
             isLoading={isSubmitting}
             type={ButtonType.SUBMIT}
-            txt={copy.registrationText(showRegistration)}
+            txt={submitTxt}
           />
           <FormHelper id="form" error={formError} />
         </form>
