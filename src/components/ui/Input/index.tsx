@@ -1,4 +1,4 @@
-import { RegisterOptions, useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
 import { InputProps } from "./types";
 import styles from "./index.module.scss";
@@ -10,14 +10,15 @@ const Input = ({
   autoComplete,
   required = false,
   formError,
+  rules
 }: InputProps) => {
-  const { getFieldState, register, control, formState } = useFormContext();
-  const { error: fieldError, isTouched: touched } = getFieldState(
+  const { getFieldState, register, formState } = useFormContext();
+  const { error, isTouched: touched } = getFieldState(
     id,
     formState
   );
   const normalizedError =
-    typeof fieldError === "string" ? fieldError : fieldError?.message;
+    typeof error === "string" ? error : error?.message;
 
   return (
     <div className={styles.wrapper}>
@@ -25,7 +26,7 @@ const Input = ({
         {label}
       </label>
       <input
-        {...register(id)}
+        {...register(id, rules)}
         id={id}
         aria-describedby={`${id}_error`}
         className={styles.input}

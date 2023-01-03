@@ -7,7 +7,6 @@ import Input from "components/ui/Input";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
-import { getValidationSchema } from "./validation";
 import { User } from "./types";
 import styles from "./index.module.scss";
 
@@ -22,8 +21,8 @@ const LoginForm = () => {
   const [formPasswordError, setFormPasswordError] = useState<
     string | undefined
   >();
-  const [formEmailError, setFormEmailError] = useState<string | undefined>();
-  const [formError, setFormError] = useState<string | undefined>();
+  const [formEmailError, setFormEmailError] = useState<string>();
+  const [formError, setFormError] = useState<string>();
   const dispatch = useDispatch();
   const submitTxt = showRegistration ? "Sign up" : "Sign in";
   const btnTxt = showRegistration ? "Sign in" : "Sign up";
@@ -72,23 +71,13 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
+    mode: 'all',
   });
 
   const {
     handleSubmit,
-    formState: { isDirty, isValid, isSubmitting },
-    watch,
+    formState: { isDirty, isValid, isSubmitting }
   } = methods;
-
-  const handleChange = () => {
-    if (formPasswordError) {
-      setFormPasswordError(undefined);
-      setFormEmailError(undefined);
-      setFormError(undefined);
-    }
-  };
-
-  const validationSchema = getValidationSchema(showRegistration);
 
   return (
     <div className={styles.container}>
@@ -103,6 +92,14 @@ const LoginForm = () => {
             autoComplete="email"
             required
             formError={formEmailError}
+            rules={{
+              required: "Email required. Please fill out this field",
+              validate: (val: string) => {
+                if (showRegistration && val.length < 5) {
+                  return "Email must be longer than 5 characters.";
+                }
+              },
+            }}
           />
           <Input
             id="password"
@@ -110,6 +107,14 @@ const LoginForm = () => {
             type="password"
             required
             formError={formPasswordError}
+            rules={{
+              required: "Password required. Please fill out this field",
+              validate: (val: string) => {
+                if (showRegistration && val.length < 8) {
+                  return "Password must have at least 8 characters";
+                }
+              },
+            }}
           />
           <Button
             disabled={isSubmitting || !isDirty || !isValid}

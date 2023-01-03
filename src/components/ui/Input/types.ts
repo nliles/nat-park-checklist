@@ -1,3 +1,5 @@
+import { RegisterOptions } from 'react-hook-form';
+
 export type InputProps = {
   id: string;
   label: string;
@@ -5,4 +7,5 @@ export type InputProps = {
   autoComplete?: string;
   required?: boolean;
   formError?: string;
+  rules?: RegisterOptions;
 };
