@@ -1,4 +1,4 @@
-export default {
+const copy = {
   headerText: "Hello, Traveler",
   paragraphText: (isRegistration: boolean) =>
     `${isRegistration ? "Sign up" : "Sign in"} to save your progress.`,
@@ -14,3 +14,5 @@ export default {
   registrationText: (isRegistration: boolean) =>
     isRegistration ? "Sign up" : "Sign in",
 };
+
+export default copy;

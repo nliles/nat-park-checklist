@@ -47,10 +47,8 @@ const LoginForm = () => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data?.error === copy.passwordError) {
-          setFormPasswordError(copy.passwordError);
-        } else if (e.data?.error === copy.emailError) {
-          setFormEmailError(copy.emailError);
+        if (e.data?.error === copy.passwordError || e.data?.error === copy.emailError) {
+          setFormPasswordError(e.data?.error);
         } else {
           setFormError(copy.generalError);
         }
@@ -63,7 +61,7 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    mode: "all",
+    mode: "onBlur",
   });
 
   const {
@@ -109,7 +107,7 @@ const LoginForm = () => {
             }}
           />
           <Button
-            disabled={isSubmitting || !isDirty || !isValid}
+            disabled={!isValid}
             isLoading={isSubmitting}
             type={ButtonType.SUBMIT}
             txt={submitTxt}

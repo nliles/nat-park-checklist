@@ -1,22 +1,22 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import userEvent from "@testing-library/user-event";
 import Input from ".";
 
-const getForm = () => {
-  const methods = useForm({ defaultValues: {} });
+const Wrapper = () => {
+  const methods = useForm({ defaultValues: { 'input': '' } });
   return (
     <FormProvider {...methods}>
       <form>
-        <Input id="1" label="Email" formError="Error" />
+        <Input id="input" label="Email" formError="Error" />
       </form>
     </FormProvider>
   );
-};
+}
 
 describe("<Input />", () => {
   it("Displays correct label and placeholder", () => {
-    render(getForm());
+    render(<Wrapper/>);
     expect(screen.getByLabelText("Email")).toBeVisible();
     expect(screen.getByPlaceholderText("Email")).toBeVisible();
   });

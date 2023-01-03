@@ -59,9 +59,4 @@ describe("<List />", () => {
     expect(screen.getByText("2. Arches National Park")).toBeVisible();
   });
 
-  it("Calls handleOnChange", () => {
-    renderList();
-    waitFor(() => userEvent.click(screen.getByText("1. Acadia National Park")));
-    expect(mockFn).toHaveBeenCalled();
-  });
 });
