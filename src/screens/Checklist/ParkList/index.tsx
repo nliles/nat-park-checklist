@@ -37,10 +37,10 @@ const ParkList = ({
     watch,
   } = methods;
 
-  const count = watch().parkData.length;
+  const formData = watch().parkData;
 
   const handleChange = () => {
-    handleOnChange(watch().parkData);
+    handleOnChange(formData);
   }
 
   const error =
@@ -52,7 +52,7 @@ const ParkList = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${selectedDropdownItem} checklist`}</h2>
-        <Total count={count} total={parks.length} styleName={styles.count} />
+        <Total count={formData.length} total={parks.length} styleName={styles.count} />
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
