@@ -15,7 +15,7 @@ const LoginFormContainer = () => {
   const dispatch = useDispatch();
   const paragraphText = copy.paragraphText(showRegistration);
   const btnTxt = copy.registrationText(!showRegistration);
-  const txt = copy.accountText(showRegistration);
+  const registerTxt = copy.accountText(showRegistration);
 
   const handleClick = () => {
     setShowRegistration(!showRegistration);
@@ -59,7 +59,7 @@ const LoginFormContainer = () => {
       <p className={styles.txt}>{paragraphText}</p>
       <LoginForm showRegistration={showRegistration} handleOnSubmit={onSubmit} formError={formError} formEmailError={formEmailError} formPasswordError={formPasswordError}/>
       <p className={styles.registerText}>
-        {txt}
+        {registerTxt}
         <button type="button" onClick={handleClick}>
           <strong>{btnTxt}</strong>
         </button>

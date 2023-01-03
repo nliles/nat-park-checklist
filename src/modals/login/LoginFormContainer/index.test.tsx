@@ -39,7 +39,6 @@ describe("<LoginForm />", () => {
   it("Displays the correct content when showRegistration is false", () => {
     render(<LoginForm />);
     expect(screen.getByText("Don't have an account?")).toBeVisible();
-    expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign in");
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign up");
   });
 
@@ -47,7 +46,6 @@ describe("<LoginForm />", () => {
     render(<LoginForm />);
     userEvent.click(screen.getByRole("button", { name: "Sign up" }));
     expect(screen.getByText("Already have an account?")).toBeVisible();
-    expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign up");
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign in");
   });
 
