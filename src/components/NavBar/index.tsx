@@ -16,9 +16,7 @@ const NavBar = ({ count }: NavBarProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
 
-  const toggleClose = (action: boolean) => {
-    setShowMenu(action);
-  };
+  const toggleClose = () => setShowMenu((prevState) => !prevState);
 
   return (
     <nav className={styles.nav}>
@@ -48,18 +46,18 @@ const NavBar = ({ count }: NavBarProps) => {
               >
                 <button
                   className={styles.button}
-                  onClick={() => toggleClose(!showMenu)}
+                  onClick={toggleClose}
                 >
                   <img
                     id="avatar"
                     className={styles.avatar}
                     width={30}
                     src="yosemite.svg"
-                    alt="Yosemit icon"
+                    alt="Yosemite icon"
                   />
                 </button>
               </div>
-              <SubNav showMenu={showMenu} onClick={() => toggleClose(false)} />
+              <SubNav showMenu={showMenu} onClick={toggleClose} />
             </>
           )}
         </div>
