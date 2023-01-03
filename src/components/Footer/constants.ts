@@ -1,8 +1,4 @@
-export enum Icon {
-	LINKED_IN = "linkedIn",
-	GITHUB = "github",
-	INSTAGRAM = "instagram",
-}
+import Icon from 'enum/Icon';
 
 export const icons = [
   {
