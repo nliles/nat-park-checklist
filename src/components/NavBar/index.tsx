@@ -6,8 +6,8 @@ import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
-import Total from "../Total";
-import Avatar from './Avatar'
+import Total from "components/Total";
+import Avatar from 'components/Avatar'
 import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
 
