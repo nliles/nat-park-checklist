@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
-import { Response } from "types";
 import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
+import Response, { ResponseKey } from 'enum/Response'
 import PageWrapper from "components/PageWrapper";
-import { loadState, saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
@@ -17,7 +16,7 @@ const ParkContainer = () => {
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
-  const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
+  const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
@@ -37,12 +36,9 @@ const ParkContainer = () => {
         if (isLoggedIn) {
           const { parks } = await getParks();
           data = parks;
-        } else {
-          const stored = loadState() || {};
-          data = stored;
         }
-        const currentSelectedParks = data[selectedDropdownItem] || [];
-        const total = flattenParks(data).length;
+        const currentSelectedParks = data?.[selectedDropdownItem] || [];
+        const total = data ? flattenParks(data).length : 0;
         setSelectedCount(total - currentSelectedParks.length);
         setInitialValues(currentSelectedParks);
         setSelectedParks(currentSelectedParks);
@@ -53,31 +49,21 @@ const ParkContainer = () => {
     fetchParks();
   }, [isLoggedIn, selectedDropdownItem]);
 
-  const saveToStorage = () => {
-    const parks = {
-      [selectedDropdownItem]: selectedParks,
-    };
-    saveState(parks);
-  };
-
   const handleSubmit = async () => {
     setSaveFormRes(undefined);
     try {
       const { parks } = await updateParks(selectedDropdownItem, selectedParks);
       const currentSelectedParks = parks[selectedDropdownItem] || [];
       setInitialValues(currentSelectedParks);
-      setSaveFormRes("success");
+      setSaveFormRes(Response.SUCCESS);
     } catch (err) {
-      setSaveFormRes("error");
+      setSaveFormRes(Response.ERROR);
     }
   };
 
   const handleListItemChange = (item: string) => {
-    // save to storage or save data
     if (isLoggedIn) {
       handleSubmit();
-    } else {
-      saveToStorage();
     }
     setSelectedDropdownItem(item);
   };
@@ -98,7 +84,6 @@ const ParkContainer = () => {
         handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
         saveFormRes={saveFormRes}
-        setSaveFormRes={setSaveFormRes}
       />
     </PageWrapper>
   );

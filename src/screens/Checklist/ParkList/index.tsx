@@ -6,6 +6,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
+import Response from 'enum/Response'
 import { ListProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
@@ -17,7 +18,6 @@ const ParkList = ({
   handleOnChange,
   handleOnSubmit,
   saveFormRes,
-  setSaveFormRes,
 }: ListProps) => {
   const onSubmit = async (data: { parkData: string[] }) => {
     await handleOnSubmit(data.parkData);
@@ -37,22 +37,22 @@ const ParkList = ({
     watch,
   } = methods;
 
-  const count = watch().parkData.length;
+  const formData = watch().parkData;
 
   const handleChange = () => {
-    handleOnChange(watch().parkData);
+    handleOnChange(formData);
   }
 
   const error =
-    saveFormRes === "error" ? copy.errorMsg : "";
-  const success = saveFormRes === "success" ? copy.successMsg : "";
+    saveFormRes === Response.ERROR ? copy.errorMsg : "";
+  const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${selectedDropdownItem} checklist`}</h2>
-        <Total count={count} total={parks.length} styleName={styles.count} />
+        <Total count={formData.length} total={parks.length} styleName={styles.count} />
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>

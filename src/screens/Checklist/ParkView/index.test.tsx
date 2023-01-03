@@ -48,7 +48,6 @@ describe("<ParkView />", () => {
         handleOnChange={mockFn}
         handleListItemChange={() => {}}
         handleSubmit={() => {}}
-        setSaveFormRes={() => {}}
         {...props}
       />
     );

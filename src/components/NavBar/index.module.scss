@@ -45,34 +45,6 @@
   }
 }
 
-.test {
-  height: 3.125rem;
-  display: flex;
-  border-bottom: 5px solid transparent;
-
-  &.active {
-    border-bottom: 5px solid $green;
-  }
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: $green;
-  font-weight: 600;
-  font-size: 1rem;
-  padding-right: 10px;
-
-  img {
-    @media (max-width: $mobile-landscape) {
-      width: 40px;
-    }
-  }
-}
-
 .total {
   margin-right: 1rem;
 }
@@ -81,19 +53,13 @@
   display: flex;
   align-items: center;
   color: $green;
-
-  .avatar {
-    border-radius: 50px;
-    border: 1px solid $green;
-  }
 }
 
 .img {
   padding-right: 5px;
 }
 
-.img,
-.logIn {
+.img {
   @media (max-width: $mobile-landscape) {
     display: none;
   }

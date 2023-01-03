@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-import { Response } from "types";
+import { ResponseKey } from 'enum/Response'
 import { Park } from "types/park";
 
 export type ListProps = {
@@ -8,6 +7,5 @@ export type ListProps = {
   initialParkValues: string[];
   handleOnChange: (values: string[]) => void;
   handleOnSubmit: (values: string[]) => void;
-  saveFormRes?: string;
-  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
+  saveFormRes?: ResponseKey;
 };

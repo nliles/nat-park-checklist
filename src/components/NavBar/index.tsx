@@ -1,12 +1,13 @@
 import { useState } from "react";
-import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "actions";
 import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
-import Total from "../Total";
+import Total from "components/Total";
+import Avatar from 'components/Avatar'
+import LoginIcon from 'components/LoginIcon';
 import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
 
@@ -28,36 +29,16 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          {count !== undefined && (
-            <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          )}
           {!isLoggedIn && (
-            <button className={styles.button} onClick={() => handleClick()}>
-              <img width={30} src="login.svg" alt="Login icon" />
-              <span className={styles.logIn}>Sign in</span>
-            </button>
+            <LoginIcon handleClick={handleClick}/>
           )}
           {isLoggedIn && (
             <>
-              <div
-                className={cn(styles.test, {
-                  [styles.active]: showMenu,
-                })}
-              >
-                <button
-                  className={styles.button}
-                  onClick={toggleClose}
-                >
-                  <img
-                    id="avatar"
-                    className={styles.avatar}
-                    width={30}
-                    src="yosemite.svg"
-                    alt="Yosemite icon"
-                  />
-                </button>
-              </div>
-              <SubNav showMenu={showMenu} onClick={toggleClose} />
+              {count !== undefined && (
+                <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+              )}
+              <Avatar active={showMenu} handleClose={toggleClose}/>
+              <SubNav showMenu={showMenu} onClick={() => setShowMenu(false)} />
             </>
           )}
         </div>
