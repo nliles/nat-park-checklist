@@ -18,9 +18,7 @@ const ERROR = {
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
-  const [formPasswordError, setFormPasswordError] = useState<
-    string | undefined
-  >();
+  const [formPasswordError, setFormPasswordError] = useState<string>();
   const [formEmailError, setFormEmailError] = useState<string>();
   const [formError, setFormError] = useState<string>();
   const dispatch = useDispatch();
