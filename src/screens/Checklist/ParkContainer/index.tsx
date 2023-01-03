@@ -8,7 +8,6 @@ import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
 import PageWrapper from "components/PageWrapper";
-import { loadState, saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
@@ -37,12 +36,9 @@ const ParkContainer = () => {
         if (isLoggedIn) {
           const { parks } = await getParks();
           data = parks;
-        } else {
-          const stored = loadState() || {};
-          data = stored;
         }
-        const currentSelectedParks = data[selectedDropdownItem] || [];
-        const total = flattenParks(data).length;
+        const currentSelectedParks = data?.[selectedDropdownItem] || [];
+        const total = data ? flattenParks(data).length : 0;
         setSelectedCount(total - currentSelectedParks.length);
         setInitialValues(currentSelectedParks);
         setSelectedParks(currentSelectedParks);
@@ -52,13 +48,6 @@ const ParkContainer = () => {
     };
     fetchParks();
   }, [isLoggedIn, selectedDropdownItem]);
-
-  const saveToStorage = () => {
-    const parks = {
-      [selectedDropdownItem]: selectedParks,
-    };
-    saveState(parks);
-  };
 
   const handleSubmit = async () => {
     setSaveFormRes(undefined);
@@ -73,11 +62,8 @@ const ParkContainer = () => {
   };
 
   const handleListItemChange = (item: string) => {
-    // save to storage or save data
     if (isLoggedIn) {
       handleSubmit();
-    } else {
-      saveToStorage();
     }
     setSelectedDropdownItem(item);
   };

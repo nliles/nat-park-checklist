@@ -7,6 +7,7 @@ import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
 import Total from "../Total";
+import Avatar from './Avatar'
 import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
 
@@ -28,9 +29,6 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          {count !== undefined && (
-            <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
-          )}
           {!isLoggedIn && (
             <button className={styles.button} onClick={() => handleClick()}>
               <img width={30} src="login.svg" alt="Login icon" />
@@ -39,24 +37,10 @@ const NavBar = ({ count }: NavBarProps) => {
           )}
           {isLoggedIn && (
             <>
-              <div
-                className={cn(styles.test, {
-                  [styles.active]: showMenu,
-                })}
-              >
-                <button
-                  className={styles.button}
-                  onClick={toggleClose}
-                >
-                  <img
-                    id="avatar"
-                    className={styles.avatar}
-                    width={30}
-                    src="yosemite.svg"
-                    alt="Yosemite icon"
-                  />
-                </button>
-              </div>
+              {count !== undefined && (
+                <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+              )}
+              <Avatar active={showMenu} handleClose={toggleClose}/>
               <SubNav showMenu={showMenu} onClick={toggleClose} />
             </>
           )}
