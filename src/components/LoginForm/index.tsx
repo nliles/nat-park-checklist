@@ -8,7 +8,7 @@ import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
 import { User } from "types";
-import copy from './en';
+import copy from "./en";
 import styles from "./index.module.scss";
 
 const LoginForm = () => {

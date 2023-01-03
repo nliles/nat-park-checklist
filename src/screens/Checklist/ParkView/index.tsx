@@ -6,7 +6,7 @@ import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
-import { ParkViewProps } from './types'
+import { ParkViewProps } from "./types";
 import styles from "./index.module.scss";
 
 const ParkView = ({
