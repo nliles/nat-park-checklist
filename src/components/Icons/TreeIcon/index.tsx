@@ -1,9 +1,6 @@
-type Icon = {
-  fill: string;
-  stroke: string;
-};
+import { IconProps } from './types';
 
-const TreeIcon = ({ fill, stroke }: Icon) => (
+const TreeIcon = ({ fill, stroke }: IconProps) => (
   <svg
     stroke={stroke}
     strokeWidth="35"

@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { TotalProps } from "./types";
+import { NAT_PARK_TOTAL_LINK } from '../../constants'
 import styles from "./index.module.scss";
 
 const Total = ({ count, total, styleName }: TotalProps) => {
@@ -10,7 +11,7 @@ const Total = ({ count, total, styleName }: TotalProps) => {
         className={styles.link}
         target="_blank"
         rel="noreferrer"
-        href="https://www.nps.gov/aboutus/national-park-system.htm"
+        href={NAT_PARK_TOTAL_LINK}
       >
         {total}
       </a>

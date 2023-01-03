@@ -1,4 +1,4 @@
-@import "../../styles/colors.scss";
+@import "../../../styles/colors.scss";
 
 .container {
   width: 420px;
@@ -20,18 +20,10 @@
   color: $green;
 }
 
-.txt {
+.paragraphText {
   margin: 0;
   color: $black;
   font-size: 12px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 1rem;
-  width: 90%;
 }
 
 .registerText {

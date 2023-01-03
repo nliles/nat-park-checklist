@@ -8,6 +8,7 @@ import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
 import { ListProps } from "./types";
+import copy from "./en";
 import styles from "./index.module.scss";
 
 const List = ({
@@ -39,9 +40,13 @@ const List = ({
 
   const count = watch().parkData.length;
 
+  const handleChange = () => {
+    handleOnChange(watch().parkData);
+  }
+
   const error =
-    saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
-  const success = saveFormRes === "success" ? "Saved!" : "";
+    saveFormRes === "error" ? copy.errorMsg : "";
+  const success = saveFormRes === "success" ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
 
   return (
@@ -60,6 +65,7 @@ const List = ({
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
                   name="parkData"
+                  handleOnChange={handleChange}
                 />
               ))}
           </div>

@@ -6,16 +6,10 @@ import Header from "components/Header";
 import CircularProgressBar from "components/ui/CircularProgressBar";
 import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
-import { Park } from "types";
 import Count from "./Count";
 import Map from "components/Map";
-import { Parks } from "types";
+import { StatsPageProps } from './types';
 import styles from "./index.module.scss";
-
-export type StatsPageProps = {
-  selected: Parks;
-  parks: Park[];
-};
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const columnRef = useRef<HTMLDivElement>(null);

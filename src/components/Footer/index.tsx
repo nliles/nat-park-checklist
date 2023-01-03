@@ -1,17 +1,6 @@
-import styles from "./index.module.scss";
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-
-const icons = [
-  {
-    icon: "linkedIn",
-    link: "https://www.linkedin.com/in/nliles/",
-  },
-  { icon: "github", link: "https://github.com/nliles" },
-  {
-    icon: "instagram",
-    link: "https://www.instagram.com/natalieliles/",
-  },
-];
+import { Icon, icons } from 'components/Footer/constants';
+import styles from "./index.module.scss";
 
 const Footer = () => {
   return (
@@ -19,9 +8,9 @@ const Footer = () => {
       <div className={styles.links}>
         {icons.map((i) => (
           <a href={i.link} key={i.link}>
-            {i.icon === "linkedIn" && <FaLinkedin />}
-            {i.icon === "github" && <FaGithub />}
-            {i.icon === "instagram" && <FaInstagram />}
+            {i.icon === Icon.LINKED_IN && <FaLinkedin />}
+            {i.icon === Icon.GITHUB && <FaGithub />}
+            {i.icon === Icon.INSTAGRAM && <FaInstagram />}
           </a>
         ))}
       </div>

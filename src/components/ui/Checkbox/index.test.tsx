@@ -8,7 +8,7 @@ const getForm = () => {
   return (
     <FormProvider {...methods}>
       <form>
-        <Checkbox id="1" label="Park" name="Park" />
+        <Checkbox id="1" label="Park" name="Park" handleOnChange={() => {}}/>
       </form>
     </FormProvider>
   );

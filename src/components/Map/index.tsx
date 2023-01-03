@@ -3,9 +3,9 @@ import cn from "classnames";
 import { useWindowResize } from "hooks";
 import usMapData from "./us";
 import { geoPath } from "d3-geo";
-import MapMarker from "./MapMarker";
-import Tooltip from "./Tooltip";
-import { Park } from "types";
+import MapMarker from "components/MapMarker";
+import Tooltip from "components/Tooltip";
+import { Park } from "types/park";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";

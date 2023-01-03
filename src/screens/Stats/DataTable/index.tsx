@@ -1,17 +1,13 @@
 import startCase from "lodash/startCase";
-import { Parks } from "types";
 import getParkTotal from "helpers/getParkTotal";
+import { DataTableProps } from './types';
 import styles from "./index.module.scss";
 
 const DataTable = ({
   count,
   total,
   items,
-}: {
-  count: number;
-  total: number;
-  items: Parks;
-}) => {
+}: DataTableProps) => {
   const headers = ["Park Category", "Visited", "Total"];
   const itemKeys = Object.keys(items);
   return (

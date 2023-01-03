@@ -1,6 +1,7 @@
+import { HeaderProps } from './types';
 import styles from "./index.module.scss";
 
-const ParkView = ({ title }: { title: string }) => {
+const Header = ({ title }: HeaderProps) => {
   return (
     <div className={styles.titleSection}>
       <h2 className={styles.header}>{title}</h2>
@@ -8,4 +9,4 @@ const ParkView = ({ title }: { title: string }) => {
   );
 };
 
-export default ParkView;
+export default Header;
