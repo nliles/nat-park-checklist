@@ -8,6 +8,7 @@ import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
 import { ListProps } from "./types";
+import copy from "./en";
 import styles from "./index.module.scss";
 
 const List = ({
@@ -44,8 +45,8 @@ const List = ({
   }
 
   const error =
-    saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
-  const success = saveFormRes === "success" ? "Saved!" : "";
+    saveFormRes === "error" ? copy.errorMsg : "";
+  const success = saveFormRes === "success" ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
 
   return (
