@@ -1,5 +1,5 @@
 import { Park } from "types/park";
-import { ResponseKey } from 'enum/Response'
+import { ResponseKey } from "enum/Response";
 
 export type ParkViewProps = {
   handleListItemChange: (item: string) => void;

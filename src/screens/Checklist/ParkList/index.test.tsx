@@ -57,5 +57,4 @@ describe("<ParkList />", () => {
     expect(screen.getByText("1. Acadia National Park")).toBeVisible();
     expect(screen.getByText("2. Arches National Park")).toBeVisible();
   });
-
 });

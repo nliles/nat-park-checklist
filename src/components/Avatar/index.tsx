@@ -9,10 +9,7 @@ const Avatar = ({ active, handleClose }: AvatarProps) => {
         [styles.active]: active,
       })}
     >
-      <button
-        className={styles.button}
-        onClick={handleClose}
-      >
+      <button className={styles.button} onClick={handleClose}>
         <img
           id="avatar"
           className={styles.avatar}

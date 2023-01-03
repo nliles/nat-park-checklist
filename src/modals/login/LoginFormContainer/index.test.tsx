@@ -63,7 +63,11 @@ describe("<LoginForm />", () => {
     it("Calls login with the correct values", async () => {
       render(<LoginForm />);
       setup();
-      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
+      await waitFor(() =>
+        expect(
+          screen.getByRole("button", { name: "Sign in" })
+        ).not.toBeDisabled()
+      );
       userEvent.click(screen.getByRole("button", { name: "Sign in" }));
       await waitFor(() =>
         expect(authService.login).toBeCalledWith({
@@ -81,7 +85,11 @@ describe("<LoginForm />", () => {
       render(<LoginForm />);
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       setup();
-      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign up'})).not.toBeDisabled());
+      await waitFor(() =>
+        expect(
+          screen.getByRole("button", { name: "Sign up" })
+        ).not.toBeDisabled()
+      );
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       await waitFor(() =>
         expect(authService.register).toBeCalledWith({
@@ -105,7 +113,11 @@ describe("<LoginForm />", () => {
     it("Returns error message", async () => {
       render(<LoginForm />);
       setup();
-      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
+      await waitFor(() =>
+        expect(
+          screen.getByRole("button", { name: "Sign in" })
+        ).not.toBeDisabled()
+      );
       userEvent.click(screen.getByRole("button", { name: "Sign in" }));
       await waitFor(() => {
         expect(

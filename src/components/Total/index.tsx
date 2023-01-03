@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { TotalProps } from "./types";
-import { NAT_PARK_TOTAL_LINK } from '../../constants'
+import { NAT_PARK_TOTAL_LINK } from "../../constants";
 import styles from "./index.module.scss";
 
 const Total = ({ count, total, styleName }: TotalProps) => {

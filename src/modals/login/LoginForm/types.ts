@@ -6,4 +6,4 @@ export type LoginFormProps = {
   formError?: string;
   formEmailError?: string;
   formPasswordError?: string;
-}
+};

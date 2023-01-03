@@ -1,4 +1,4 @@
-import { ResponseKey } from 'enum/Response'
+import { ResponseKey } from "enum/Response";
 import { Park } from "types/park";
 
 export type ListProps = {
