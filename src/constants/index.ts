@@ -151,3 +151,5 @@ export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
   (acc, element) => acc + element.codes.length + element.formattedParks.length,
   0
 );
+
+export const NAT_PARK_TOTAL_LINK = 'https://www.nps.gov/aboutus/national-park-system.htm'

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { TooltipProps } from "./types";
 import styles from "./index.module.scss";
 
+const NP_ICON = "np.svg"
+
 const Tooltip = ({
   park,
   coords,
@@ -10,7 +12,7 @@ const Tooltip = ({
 }: TooltipProps) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
-  const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";
+  const imageSrc = imageErr ?  NP_ICON : image?.url ||  NP_ICON;
   const statesArr = park.states?.split(",");
   const states = `State${statesArr.length > 1 ? "s" : ""}: ${statesArr.join(
     ", "
