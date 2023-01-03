@@ -1,4 +1,4 @@
-import { Park } from "types";
+import { Park } from "types/park";
 
 export type MapMarkerProps = {
   coords: number[];

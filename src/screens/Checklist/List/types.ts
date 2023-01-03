@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Response } from "types";
-import { Park } from "types";
+import { Park } from "types/park";
 
 export type ListProps = {
   parks: Park[];

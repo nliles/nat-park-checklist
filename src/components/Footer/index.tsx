@@ -1,17 +1,6 @@
 import styles from "./index.module.scss";
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-
-const icons = [
-  {
-    icon: "linkedIn",
-    link: "https://www.linkedin.com/in/nliles/",
-  },
-  { icon: "github", link: "https://github.com/nliles" },
-  {
-    icon: "instagram",
-    link: "https://www.instagram.com/natalieliles/",
-  },
-];
+import { icons } from './const';
 
 const Footer = () => {
   return (

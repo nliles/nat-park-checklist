@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Park } from "types";
+import { Park } from "types/park";
 import { PARK_INFO, NPS_API, API_KEY } from "../constants";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";

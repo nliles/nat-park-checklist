@@ -1,10 +1,10 @@
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
-import { Parks } from "types";
 import getParkTotal from "helpers/getParkTotal";
+import { DataBarsProps } from './types';
 import styles from "./index.module.scss";
 
-const DataBars = ({ items }: { items: Parks }) => {
+const DataBars = ({ items }: DataBarsProps) => {
   const itemKeys = Object.keys(items);
   return (
     <div className={styles.container}>

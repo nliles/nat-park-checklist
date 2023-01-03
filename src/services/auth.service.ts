@@ -1,14 +1,5 @@
-import { User } from "types";
+import { User, UserInfo } from "types/user";
 import { apiClient } from "services/apiService";
-
-type UserResponse = {
-  email: string;
-  token: string;
-};
-
-type UserInfo = {
-  user: UserResponse;
-};
 
 export const register = (user: User): Promise<UserInfo> => {
   return apiClient.post("/auth/register", user);

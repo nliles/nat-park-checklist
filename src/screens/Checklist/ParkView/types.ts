@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { Response, Park } from "types";
+import { Park } from "types/park";
+import { Response } from "types";
 
 export type ParkViewProps = {
   handleListItemChange: (item: string) => void;
