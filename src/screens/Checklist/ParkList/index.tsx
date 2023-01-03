@@ -1,6 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
-import startCase from "lodash/startCase";
 import { State } from "reducers/types";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
@@ -11,7 +10,7 @@ import { ListProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
 
-const List = ({
+const ParkList = ({
   parks = [],
   initialParkValues,
   selectedDropdownItem,
@@ -52,7 +51,7 @@ const List = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
+        <h2>{`${selectedDropdownItem} checklist`}</h2>
         <Total count={count} total={parks.length} styleName={styles.count} />
       </div>
       <FormProvider {...methods}>
@@ -87,4 +86,4 @@ const List = ({
   );
 };
 
-export default List;
+export default ParkList;

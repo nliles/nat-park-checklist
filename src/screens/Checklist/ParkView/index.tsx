@@ -1,4 +1,4 @@
-import List from "screens/Checklist/List";
+import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
@@ -25,16 +25,18 @@ const ParkView = ({
     return `${startCase(item)}s (${getParkTotal(item)})`;
   };
 
+  const dropdownItem = startCase(selectedDropdownItem);
+
   return (
     <div className={styles.container}>
-      <Header title={`${startCase(selectedDropdownItem)}s`} />
+      <Header title={`${dropdownItem}s`} />
       {loading && <Spinner />}
       {!loading && (
         <>
           <div className={styles.dropdownWrapper}>
             <Dropdown
               list={LIST_OPTIONS}
-              initialSelectedItem={`${startCase(selectedDropdownItem)}s`}
+              initialSelectedItem={`${dropdownItem}s`}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}
             />
@@ -44,9 +46,9 @@ const ParkView = ({
             selectedParks={selectedParks}
             styleName={styles.map}
           />
-          <List
+          <ParkList
             parks={parks}
-            selectedDropdownItem={selectedDropdownItem}
+            selectedDropdownItem={dropdownItem}
             initialParkValues={initialValues}
             handleOnChange={handleOnChange}
             handleOnSubmit={handleSubmit}
