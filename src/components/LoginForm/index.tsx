@@ -8,13 +8,8 @@ import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
 import { User } from "types";
+import copy from './en';
 import styles from "./index.module.scss";
-
-const ERROR = {
-  PASSWORD: "Wrong password. Please try again.",
-  EMAIL: "User Already Exist. Please Login",
-  GENERAL: "Something went wrong. Please try again later.",
-};
 
 const LoginForm = () => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
@@ -22,11 +17,10 @@ const LoginForm = () => {
   const [formEmailError, setFormEmailError] = useState<string>();
   const [formError, setFormError] = useState<string>();
   const dispatch = useDispatch();
-  const submitTxt = showRegistration ? "Sign up" : "Sign in";
-  const btnTxt = showRegistration ? "Sign in" : "Sign up";
-  const txt = showRegistration
-    ? "Already have an account?"
-    : "Don't have an account?";
+  const paragraphText = copy.paragraphText(showRegistration);
+  const submitTxt = copy.registrationText(showRegistration);
+  const btnTxt = copy.registrationText(!showRegistration);
+  const txt = copy.accountText(showRegistration);
 
   const handleClick = () => {
     setShowRegistration(!showRegistration);
@@ -53,12 +47,12 @@ const LoginForm = () => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data?.error === ERROR.PASSWORD) {
-          setFormPasswordError(ERROR.PASSWORD);
-        } else if (e.data?.error === ERROR.EMAIL) {
-          setFormEmailError(ERROR.EMAIL);
+        if (e.data?.error === copy.passwordError) {
+          setFormPasswordError(copy.passwordError);
+        } else if (e.data?.error === copy.emailError) {
+          setFormEmailError(copy.emailError);
         } else {
-          setFormError(ERROR.GENERAL);
+          setFormError(copy.generalError);
         }
       }
     }
@@ -79,8 +73,8 @@ const LoginForm = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Hello, Traveler</h1>
-      <p className={styles.txt}>{`${submitTxt} to save your progress.`}</p>
+      <h1 className={styles.header}>{copy.headerText}</h1>
+      <p className={styles.txt}>{paragraphText}</p>
       <FormProvider {...methods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -91,10 +85,10 @@ const LoginForm = () => {
             required
             formError={formEmailError}
             rules={{
-              required: "Email required. Please fill out this field",
+              required: copy.emailRequired,
               validate: (val: string) => {
                 if (showRegistration && val.length < 5) {
-                  return "Email must be longer than 5 characters.";
+                  return copy.emailLength;
                 }
               },
             }}
@@ -106,10 +100,10 @@ const LoginForm = () => {
             required
             formError={formPasswordError}
             rules={{
-              required: "Password required. Please fill out this field",
+              required: copy.passwordRequired,
               validate: (val: string) => {
                 if (showRegistration && val.length < 8) {
-                  return "Password must have at least 8 characters";
+                  return copy.passwordLength;
                 }
               },
             }}
@@ -118,7 +112,7 @@ const LoginForm = () => {
             disabled={isSubmitting || !isDirty || !isValid}
             isLoading={isSubmitting}
             type={ButtonType.SUBMIT}
-            txt={submitTxt}
+            txt={copy.registrationText(showRegistration)}
           />
           <FormHelper id="form" error={formError} />
         </form>
