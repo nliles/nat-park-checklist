@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
-import { Response } from "types";
 import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
+import Response, { ResponseKey } from 'enum/response'
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
@@ -16,7 +16,7 @@ const ParkContainer = () => {
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
-  const [saveFormRes, setSaveFormRes] = useState<Response | undefined>();
+  const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
 
@@ -55,9 +55,9 @@ const ParkContainer = () => {
       const { parks } = await updateParks(selectedDropdownItem, selectedParks);
       const currentSelectedParks = parks[selectedDropdownItem] || [];
       setInitialValues(currentSelectedParks);
-      setSaveFormRes("success");
+      setSaveFormRes(Response.SUCCESS);
     } catch (err) {
-      setSaveFormRes("error");
+      setSaveFormRes(Response.ERROR);
     }
   };
 
@@ -84,7 +84,6 @@ const ParkContainer = () => {
         handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
         saveFormRes={saveFormRes}
-        setSaveFormRes={setSaveFormRes}
       />
     </PageWrapper>
   );

@@ -6,6 +6,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
+import Response from 'enum/response'
 import { ListProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
@@ -17,7 +18,6 @@ const ParkList = ({
   handleOnChange,
   handleOnSubmit,
   saveFormRes,
-  setSaveFormRes,
 }: ListProps) => {
   const onSubmit = async (data: { parkData: string[] }) => {
     await handleOnSubmit(data.parkData);
@@ -44,8 +44,8 @@ const ParkList = ({
   }
 
   const error =
-    saveFormRes === "error" ? copy.errorMsg : "";
-  const success = saveFormRes === "success" ? copy.successMsg : "";
+    saveFormRes === Response.ERROR ? copy.errorMsg : "";
+  const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
 
   return (

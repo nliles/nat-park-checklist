@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
 import { Park } from "types/park";
-import { Response } from "types";
+import { ResponseKey } from 'enum/response'
 
 export type ParkViewProps = {
   handleListItemChange: (item: string) => void;
@@ -11,6 +10,5 @@ export type ParkViewProps = {
   selectedDropdownItem: string;
   handleOnChange: (values: string[]) => void;
   handleSubmit: (values: string[]) => void;
-  saveFormRes?: string;
-  setSaveFormRes: Dispatch<SetStateAction<Response | undefined>>;
+  saveFormRes?: ResponseKey;
 };

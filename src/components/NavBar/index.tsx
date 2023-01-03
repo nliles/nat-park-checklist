@@ -1,5 +1,4 @@
 import { useState } from "react";
-import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "actions";
 import { State } from "reducers/types";

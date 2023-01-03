@@ -45,7 +45,6 @@ describe("<ParkList />", () => {
         initialParkValues={[]}
         handleOnChange={mockFn}
         handleOnSubmit={() => {}}
-        setSaveFormRes={() => {}}
       />
     );
   };
