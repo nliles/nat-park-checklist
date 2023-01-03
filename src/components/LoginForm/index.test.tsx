@@ -32,8 +32,8 @@ describe("<LoginForm />", () => {
   const setup = () => {
     const emailInput = screen.getByLabelText("Email");
     const passInput = screen.getByLabelText("Password");
-    userEvent.type(emailInput, "Test@gmail.com");
-    userEvent.type(passInput, "Test12345");
+    userEvent.paste(emailInput, "Test@gmail.com");
+    userEvent.paste(passInput, "Test12345");
   };
 
   it("Displays the correct content when showRegistration is false", () => {
@@ -55,7 +55,7 @@ describe("<LoginForm />", () => {
     render(<LoginForm />);
     expect(screen.getByRole("button", { name: "Sign in" })).toBeDisabled();
     setup();
-    expect(screen.getByRole("button", { name: "Sign in" })).not.toBeDisabled();
+    waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
   });
 
   describe("Submit button", () => {
@@ -72,6 +72,7 @@ describe("<LoginForm />", () => {
     it("Calls login with the correct values", async () => {
       render(<LoginForm />);
       setup();
+      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
       userEvent.click(screen.getByRole("button", { name: "Sign in" }));
       await waitFor(() =>
         expect(authService.login).toBeCalledWith({
@@ -89,6 +90,7 @@ describe("<LoginForm />", () => {
       render(<LoginForm />);
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       setup();
+      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign up'})).not.toBeDisabled());
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       await waitFor(() =>
         expect(authService.register).toBeCalledWith({
@@ -112,6 +114,7 @@ describe("<LoginForm />", () => {
     it("Returns error message", async () => {
       render(<LoginForm />);
       setup();
+      await waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
       userEvent.click(screen.getByRole("button", { name: "Sign in" }));
       await waitFor(() => {
         expect(
