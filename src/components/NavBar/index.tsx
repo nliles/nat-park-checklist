@@ -7,6 +7,7 @@ import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from 'components/Avatar'
+import LoginIcon from 'components/LoginIcon';
 import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
 
@@ -29,10 +30,7 @@ const NavBar = ({ count }: NavBarProps) => {
         </div>
         <div className={styles.right}>
           {!isLoggedIn && (
-            <button className={styles.button} onClick={() => handleClick()}>
-              <img width={30} src="login.svg" alt="Login icon" />
-              <span className={styles.logIn}>Sign in</span>
-            </button>
+            <LoginIcon handleClick={handleClick}/>
           )}
           {isLoggedIn && (
             <>
