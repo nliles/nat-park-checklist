@@ -1,15 +1,8 @@
 import React from "react";
 import { useSelect } from "downshift";
 import styles from "./index.module.scss";
+import { DropdownProps } from './types';
 import cn from "classnames";
-
-type DropdownType = {
-  handleClick: (item: string) => void;
-  list: string[];
-  initialSelectedItem: string;
-  styleName?: string;
-  formatListItem: (item: string) => void;
-};
 
 const Dropdown = ({
   handleClick,
@@ -17,7 +10,7 @@ const Dropdown = ({
   initialSelectedItem,
   styleName,
   formatListItem,
-}: DropdownType) => {
+}: DropdownProps) => {
   const {
     getToggleButtonProps,
     getMenuProps,
