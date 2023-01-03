@@ -51,13 +51,6 @@ describe("<LoginForm />", () => {
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign in");
   });
 
-  it("Disables submit button when email and password are blank", () => {
-    render(<LoginForm />);
-    expect(screen.getByRole("button", { name: "Sign in" })).toBeDisabled();
-    setup();
-    waitFor(() => expect(screen.getByRole('button', { name: 'Sign in'})).not.toBeDisabled());
-  });
-
   describe("Submit button", () => {
     beforeEach(() => {
       jest

@@ -1,4 +1,4 @@
-import LoginForm from "components/LoginForm";
+import LoginForm from "modals/login/LoginFormContainer";
 
 export const ModalName = {
   LOGIN_MODAL: "LOGIN_MODAL",
