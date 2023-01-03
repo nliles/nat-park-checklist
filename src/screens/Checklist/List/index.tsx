@@ -39,6 +39,10 @@ const List = ({
 
   const count = watch().parkData.length;
 
+  const handleChange = () => {
+    handleOnChange(watch().parkData);
+  }
+
   const error =
     saveFormRes === "error" ? "Your data was not saved. Please try again" : "";
   const success = saveFormRes === "success" ? "Saved!" : "";
@@ -60,6 +64,7 @@ const List = ({
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
                   name="parkData"
+                  handleOnChange={handleChange}
                 />
               ))}
           </div>
