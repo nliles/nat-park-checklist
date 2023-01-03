@@ -1,13 +1,13 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import List from ".";
+import ParkList from "screens/Checklist/ParkList";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
   useSelector: jest.fn(),
 }));
 
-describe("<List />", () => {
+describe("<ParkList />", () => {
   const parks = [
     {
       designation: "National Park",
@@ -39,9 +39,9 @@ describe("<List />", () => {
 
   const renderList = () => {
     render(
-      <List
+      <ParkList
         parks={parks}
-        selectedDropdownItem="nationalPark"
+        selectedDropdownItem="National Park"
         initialParkValues={[]}
         handleOnChange={mockFn}
         handleOnSubmit={() => {}}
