@@ -6,7 +6,7 @@ import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
 import { PARK_DESIGNATION_KEY } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
-import Response, { ResponseKey } from 'enum/response'
+import Response, { ResponseKey } from 'enum/Response'
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {

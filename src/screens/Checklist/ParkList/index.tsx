@@ -6,7 +6,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
-import Response from 'enum/response'
+import Response from 'enum/Response'
 import { ListProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
