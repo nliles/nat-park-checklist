@@ -1,4 +1,4 @@
-import { RegisterOptions } from 'react-hook-form';
+import { RegisterOptions } from "react-hook-form";
 
 export type InputProps = {
   id: string;

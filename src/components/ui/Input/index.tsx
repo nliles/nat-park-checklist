@@ -10,15 +10,11 @@ const Input = ({
   autoComplete,
   required = false,
   formError,
-  rules
+  rules,
 }: InputProps) => {
   const { getFieldState, register, formState } = useFormContext();
-  const { error, isTouched: touched } = getFieldState(
-    id,
-    formState
-  );
-  const normalizedError =
-    typeof error === "string" ? error : error?.message;
+  const { error, isTouched: touched } = getFieldState(id, formState);
+  const normalizedError = typeof error === "string" ? error : error?.message;
 
   return (
     <div className={styles.wrapper}>

@@ -71,12 +71,12 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    mode: 'all',
+    mode: "all",
   });
 
   const {
     handleSubmit,
-    formState: { isDirty, isValid, isSubmitting }
+    formState: { isDirty, isValid, isSubmitting },
   } = methods;
 
   return (

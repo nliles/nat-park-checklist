@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelect } from "downshift";
 import styles from "./index.module.scss";
-import { DropdownProps } from './types';
+import { DropdownProps } from "./types";
 import cn from "classnames";
 
 const Dropdown = ({

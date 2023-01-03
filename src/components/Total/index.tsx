@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { TotalProps } from './types';
+import { TotalProps } from "./types";
 import styles from "./index.module.scss";
 
 const Total = ({ count, total, styleName }: TotalProps) => {

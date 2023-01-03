@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ProgressBarProps } from './types'
+import { ProgressBarProps } from "./types";
 import styles from "./index.module.scss";
 
 const ProgressBar = ({ completed, total }: ProgressBarProps) => {

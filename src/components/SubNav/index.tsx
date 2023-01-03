@@ -1,16 +1,11 @@
 import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logoutSuccess } from "actions";
+import { SubNavProps } from "./types";
 import styles from "./index.module.scss";
 import cn from "classnames";
 
-const SubNav = ({
-  showMenu,
-  onClick,
-}: {
-  showMenu: boolean;
-  onClick: () => void;
-}) => {
+const SubNav = ({ showMenu, onClick }: SubNavProps) => {
   const myRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 

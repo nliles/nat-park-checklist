@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import { FormHelperProps } from './types';
+import { FormHelperProps } from "./types";
 import cn from "classnames";
 
 const FormHelper = ({ id, error, success, delay }: FormHelperProps) => {
