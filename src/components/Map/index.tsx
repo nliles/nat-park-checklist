@@ -9,15 +9,8 @@ import { Park } from "types";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
+import { MapProps } from "./types";
 import styles from "./index.module.scss";
-
-type MapType = {
-  parks: Park[];
-  selectedParks?: string[];
-  fixedWidth?: number;
-  showTree?: boolean;
-  styleName?: string;
-};
 
 const Map = ({
   parks = [],
@@ -25,7 +18,7 @@ const Map = ({
   fixedWidth,
   showTree = true,
   styleName,
-}: MapType) => {
+}: MapProps) => {
   const [tooltipContent, setTooltipContent] = useState<Park>();
   const [width] = useWindowResize();
   const usedWidth = fixedWidth || width;
