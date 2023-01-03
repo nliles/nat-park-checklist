@@ -1,7 +1,8 @@
-import React, { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Response } from "types";
 import { Park } from "types";
 
-export type ListType = {
+export type ListProps = {
   parks: Park[];
   selectedDropdownItem: string;
   initialParkValues: string[];

@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useForm, FormProvider } from "react-hook-form";
-import Checkbox from '.'
+import Checkbox from ".";
 
 const getForm = () => {
   const methods = useForm({ defaultValues: [] });

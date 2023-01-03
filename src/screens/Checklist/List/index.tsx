@@ -1,26 +1,14 @@
-import React, { Dispatch } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import startCase from "lodash/startCase";
 import { State } from "reducers/types";
-import { Park } from "types";
-import { Response } from "types";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
+import { ListProps } from './types';
 import styles from "./index.module.scss";
-
-export type ListType = {
-  parks: Park[];
-  selectedDropdownItem: string;
-  initialParkValues: string[];
-  handleOnChange: (values: string[]) => void;
-  handleOnSubmit: (values: string[]) => void;
-  saveFormRes?: string;
-  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
-};
 
 const List = ({
   parks = [],
@@ -30,7 +18,7 @@ const List = ({
   handleOnSubmit,
   saveFormRes,
   setSaveFormRes,
-}: ListType) => {
+}: ListProps) => {
   const onSubmit = async (data: { parkData: string[] }) => {
     await handleOnSubmit(data.parkData);
   };

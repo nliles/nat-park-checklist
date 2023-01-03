@@ -1,27 +1,13 @@
-import React, { Dispatch } from "react";
 import List from "screens/Checklist/List";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
-import { Response, Park } from "types";
 import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
+import { ParkViewProps } from './types'
 import styles from "./index.module.scss";
-
-export type ParkViewType = {
-  handleListItemChange: (item: string) => void;
-  loading?: boolean;
-  parks: Park[];
-  initialValues: string[];
-  selectedParks?: string[];
-  selectedDropdownItem: string;
-  handleOnChange: (values: string[]) => void;
-  handleSubmit: (values: string[]) => void;
-  saveFormRes?: string;
-  setSaveFormRes: Dispatch<React.SetStateAction<Response | undefined>>;
-};
 
 const ParkView = ({
   loading = false,
@@ -34,7 +20,7 @@ const ParkView = ({
   handleSubmit,
   saveFormRes,
   setSaveFormRes,
-}: ParkViewType) => {
+}: ParkViewProps) => {
   const formatListItem = (item: string) => {
     return `${startCase(item)}s (${getParkTotal(item)})`;
   };
