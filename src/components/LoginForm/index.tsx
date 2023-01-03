@@ -47,8 +47,10 @@ const LoginForm = () => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data?.error === copy.passwordError || e.data?.error === copy.emailError) {
-          setFormPasswordError(e.data?.error);
+        if (e.data?.error === copy.emailError) {
+          setFormEmailError(copy.emailError)
+        } else if (e.data?.error === copy.passwordError) {
+          setFormPasswordError(copy.passwordError);
         } else {
           setFormError(copy.generalError);
         }
@@ -66,7 +68,7 @@ const LoginForm = () => {
 
   const {
     handleSubmit,
-    formState: { isDirty, isValid, isSubmitting },
+    formState: { isValid, isSubmitting },
   } = methods;
 
   return (
