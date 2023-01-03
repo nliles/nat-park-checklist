@@ -7,7 +7,7 @@ import Input from "components/ui/Input";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
-import { User } from "./types";
+import { User } from "types";
 import styles from "./index.module.scss";
 
 const ERROR = {

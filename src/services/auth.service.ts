@@ -1,9 +1,5 @@
+import { User } from "types";
 import { apiClient } from "services/apiService";
-
-type User = {
-  email: string;
-  password: string;
-};
 
 type UserResponse = {
   email: string;

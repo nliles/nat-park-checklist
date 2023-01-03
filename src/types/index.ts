@@ -43,3 +43,8 @@ export type Park = {
 };
 
 export type Response = "error" | "success";
+
+export type User = {
+  email: string;
+  password: string;
+};
