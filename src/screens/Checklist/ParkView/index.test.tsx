@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ParkView, { ParkViewType } from ".";
+import { ParkViewProps } from './types'
+import ParkView from ".";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
@@ -37,7 +38,7 @@ describe("<ParkView />", () => {
 
   const mockFn = jest.fn();
 
-  const renderParkView = (props?: Partial<ParkViewType>) => {
+  const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
       <ParkView
         parks={parks}

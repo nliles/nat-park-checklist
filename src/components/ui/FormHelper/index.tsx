@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
+import { FormHelperProps } from "./types";
 import cn from "classnames";
-
-type FormHelperProps = {
-  id: string;
-  error?: string;
-  success?: string;
-  delay?: number;
-};
 
 const FormHelper = ({ id, error, success, delay }: FormHelperProps) => {
   const [showMsg, setShowMsg] = useState(false);

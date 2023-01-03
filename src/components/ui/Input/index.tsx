@@ -1,15 +1,7 @@
-import { useField } from "formik";
+import { useFormContext } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
+import { InputProps } from "./types";
 import styles from "./index.module.scss";
-
-type InputType = {
-  id: string;
-  label: string;
-  type?: string;
-  autoComplete?: string;
-  required?: boolean;
-  formError?: string;
-};
 
 const Input = ({
   id,
@@ -18,9 +10,11 @@ const Input = ({
   autoComplete,
   required = false,
   formError,
-}: InputType) => {
-  const [field, meta] = useField(id);
-  const { touched, error } = meta;
+  rules,
+}: InputProps) => {
+  const { getFieldState, register, formState } = useFormContext();
+  const { error, isTouched: touched } = getFieldState(id, formState);
+  const normalizedError = typeof error === "string" ? error : error?.message;
 
   return (
     <div className={styles.wrapper}>
@@ -28,7 +22,7 @@ const Input = ({
         {label}
       </label>
       <input
-        {...field}
+        {...register(id, rules)}
         id={id}
         aria-describedby={`${id}_error`}
         className={styles.input}
@@ -37,7 +31,7 @@ const Input = ({
         placeholder={label}
         required={required}
       />
-      {touched && <FormHelper id={id} error={error || formError} />}
+      {touched && <FormHelper id={id} error={normalizedError || formError} />}
     </div>
   );
 };

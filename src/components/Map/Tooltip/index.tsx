@@ -1,20 +1,13 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Park } from "types";
+import { useState, useEffect } from "react";
+import { TooltipProps } from "./types";
 import styles from "./index.module.scss";
-
-type TooltipType = {
-  coords: number[];
-  park: Park;
-  tooltipId: string;
-  setTooltipContent: Dispatch<SetStateAction<Park | undefined>>;
-};
 
 const Tooltip = ({
   park,
   coords,
   tooltipId,
   setTooltipContent,
-}: TooltipType) => {
+}: TooltipProps) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const image = park.images[0];
   const imageSrc = imageErr ? "np.svg" : image?.url || "np.svg";

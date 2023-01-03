@@ -7,11 +7,8 @@ import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
 import Total from "../Total";
+import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
-
-type NavBarProps = {
-  count?: number;
-};
 
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);

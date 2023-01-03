@@ -1,19 +1,18 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Formik, Form } from "formik";
+import { useForm, FormProvider } from "react-hook-form";
 import Checkbox from ".";
 
-const mockOnChange = jest.fn();
-
-const getForm = () => (
-  <Formik enableReinitialize onSubmit={() => {}} initialValues={{}}>
-    {() => (
-      <Form>
-        <Checkbox id="1" label="Park" name="Park" handleChange={mockOnChange} />
-      </Form>
-    )}
-  </Formik>
-);
+const getForm = () => {
+  const methods = useForm({ defaultValues: [] });
+  return (
+    <FormProvider {...methods}>
+      <form>
+        <Checkbox id="1" label="Park" name="Park" />
+      </form>
+    </FormProvider>
+  );
+};
 
 describe("<Checkbox />", () => {
   afterEach(cleanup);
@@ -21,12 +20,6 @@ describe("<Checkbox />", () => {
   it("Displays the correct label", () => {
     render(getForm());
     expect(screen.getByLabelText("Park")).toBeVisible();
-  });
-
-  it("Call mockOnChange onClick", () => {
-    render(getForm());
-    userEvent.click(screen.getByLabelText("Park"));
-    expect(mockOnChange).toHaveBeenCalledWith(["1"]);
   });
 
   it("Toggles checkbox", () => {

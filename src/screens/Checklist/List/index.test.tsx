@@ -44,7 +44,7 @@ describe("<List />", () => {
         selectedDropdownItem="nationalPark"
         initialParkValues={[]}
         handleOnChange={mockFn}
-        handleSubmit={() => {}}
+        handleOnSubmit={() => {}}
         setSaveFormRes={() => {}}
       />
     );
