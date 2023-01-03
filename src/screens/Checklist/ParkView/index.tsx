@@ -18,7 +18,7 @@ const ParkView = ({
   handleListItemChange,
   handleOnChange,
   handleSubmit,
-  saveFormRes
+  saveFormRes,
 }: ParkViewProps) => {
   const formatListItem = (item: string) => {
     return `${startCase(item)}s (${getParkTotal(item)})`;

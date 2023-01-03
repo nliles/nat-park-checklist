@@ -10,7 +10,7 @@ const Checkbox = ({ id, label, name, handleOnChange }: CheckboxProps) => {
       <label className={styles.checkboxWrapper} htmlFor={id}>
         {label}
         <input
-          {...register(name,{
+          {...register(name, {
             onChange: () => handleOnChange(),
           })}
           className={styles.checkbox}

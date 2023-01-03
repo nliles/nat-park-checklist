@@ -8,7 +8,7 @@ import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
 import Count from "./Count";
 import Map from "components/Map";
-import { StatsPageProps } from './types';
+import { StatsPageProps } from "./types";
 import styles from "./index.module.scss";
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {

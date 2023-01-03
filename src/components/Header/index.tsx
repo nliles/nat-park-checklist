@@ -1,4 +1,4 @@
-import { HeaderProps } from './types';
+import { HeaderProps } from "./types";
 import styles from "./index.module.scss";
 
 const Header = ({ title }: HeaderProps) => {

@@ -1,4 +1,4 @@
-import Icon from 'enum/Icon';
+import Icon from "enum/Icon";
 
 export const icons = [
   {

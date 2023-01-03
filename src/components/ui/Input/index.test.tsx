@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import Input from ".";
 
 const Wrapper = () => {
-  const methods = useForm({ defaultValues: { 'input': '' } });
+  const methods = useForm({ defaultValues: { input: "" } });
   return (
     <FormProvider {...methods}>
       <form>
@@ -12,11 +12,11 @@ const Wrapper = () => {
       </form>
     </FormProvider>
   );
-}
+};
 
 describe("<Input />", () => {
   it("Displays correct label and placeholder", () => {
-    render(<Wrapper/>);
+    render(<Wrapper />);
     expect(screen.getByLabelText("Email")).toBeVisible();
     expect(screen.getByPlaceholderText("Email")).toBeVisible();
   });

@@ -6,8 +6,8 @@ import { TOTAL_UNITS } from "../../constants";
 import { ModalName } from "components/ui/Modal/types";
 import SubNav from "components/SubNav";
 import Total from "components/Total";
-import Avatar from 'components/Avatar'
-import LoginIcon from 'components/LoginIcon';
+import Avatar from "components/Avatar";
+import LoginIcon from "components/LoginIcon";
 import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
 
@@ -29,15 +29,17 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          {!isLoggedIn && (
-            <LoginIcon handleClick={handleClick}/>
-          )}
+          {!isLoggedIn && <LoginIcon handleClick={handleClick} />}
           {isLoggedIn && (
             <>
               {count !== undefined && (
-                <Total count={count} total={TOTAL_UNITS} styleName={styles.total} />
+                <Total
+                  count={count}
+                  total={TOTAL_UNITS}
+                  styleName={styles.total}
+                />
               )}
-              <Avatar active={showMenu} handleClose={toggleClose}/>
+              <Avatar active={showMenu} handleClose={toggleClose} />
               <SubNav showMenu={showMenu} onClick={() => setShowMenu(false)} />
             </>
           )}

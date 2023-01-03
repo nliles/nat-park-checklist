@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess, hideModal } from "actions";
 import { login, register } from "services/auth.service";
 import { User } from "types/user";
-import LoginForm from '../LoginForm'
+import LoginForm from "../LoginForm";
 import copy from "./en";
 import styles from "./index.module.scss";
 
@@ -43,7 +43,7 @@ const LoginFormContainer = () => {
         }
       } catch (e: any) {
         if (e.data?.error === copy.emailError) {
-          setFormEmailError(copy.emailError)
+          setFormEmailError(copy.emailError);
         } else if (e.data?.error === copy.passwordError) {
           setFormPasswordError(copy.passwordError);
         } else {
@@ -57,7 +57,13 @@ const LoginFormContainer = () => {
     <div className={styles.container}>
       <h1 className={styles.header}>{copy.headerText}</h1>
       <p className={styles.paragraphText}>{paragraphText}</p>
-      <LoginForm showRegistration={showRegistration} handleOnSubmit={onSubmit} formError={formError} formEmailError={formEmailError} formPasswordError={formPasswordError}/>
+      <LoginForm
+        showRegistration={showRegistration}
+        handleOnSubmit={onSubmit}
+        formError={formError}
+        formEmailError={formEmailError}
+        formPasswordError={formPasswordError}
+      />
       <p className={styles.registerText}>
         {registerTxt}
         <button type="button" onClick={handleClick}>

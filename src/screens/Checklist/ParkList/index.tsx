@@ -6,7 +6,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
 import FormHelper from "components/ui/FormHelper";
-import Response from 'enum/Response'
+import Response from "enum/Response";
 import { ListProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
@@ -41,10 +41,9 @@ const ParkList = ({
 
   const handleChange = () => {
     handleOnChange(formData);
-  }
+  };
 
-  const error =
-    saveFormRes === Response.ERROR ? copy.errorMsg : "";
+  const error = saveFormRes === Response.ERROR ? copy.errorMsg : "";
   const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
 
@@ -52,7 +51,11 @@ const ParkList = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${selectedDropdownItem} checklist`}</h2>
-        <Total count={formData.length} total={parks.length} styleName={styles.count} />
+        <Total
+          count={formData.length}
+          total={parks.length}
+          styleName={styles.count}
+        />
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>

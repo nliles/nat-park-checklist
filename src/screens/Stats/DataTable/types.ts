@@ -4,4 +4,4 @@ export type DataTableProps = {
   count: number;
   total: number;
   items: Parks;
-}
+};
