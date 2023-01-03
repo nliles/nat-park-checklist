@@ -8,7 +8,7 @@ import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import { login, register } from "services/auth.service";
 import { getValidationSchema } from "./validation";
-import { User } from './types'
+import { User } from "./types";
 import styles from "./index.module.scss";
 
 const ERROR = {
@@ -69,8 +69,8 @@ const LoginForm = () => {
 
   const methods = useForm({
     defaultValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
   });
 
@@ -95,30 +95,30 @@ const LoginForm = () => {
       <h1 className={styles.header}>Hello, Traveler</h1>
       <p className={styles.txt}>{`${submitTxt} to save your progress.`}</p>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-              <Input
-                id="email"
-                label="Email"
-                type="email"
-                autoComplete="email"
-                required
-                formError={formEmailError}
-              />
-              <Input
-                id="password"
-                label="Password"
-                type="password"
-                required
-                formError={formPasswordError}
-              />
-              <Button
-                disabled={isSubmitting || !isDirty || !isValid}
-                isLoading={isSubmitting}
-                type={ButtonType.SUBMIT}
-                txt={submitTxt}
-              />
-              <FormHelper id="form" error={formError} />
-            </form>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            id="email"
+            label="Email"
+            type="email"
+            autoComplete="email"
+            required
+            formError={formEmailError}
+          />
+          <Input
+            id="password"
+            label="Password"
+            type="password"
+            required
+            formError={formPasswordError}
+          />
+          <Button
+            disabled={isSubmitting || !isDirty || !isValid}
+            isLoading={isSubmitting}
+            type={ButtonType.SUBMIT}
+            txt={submitTxt}
+          />
+          <FormHelper id="form" error={formError} />
+        </form>
       </FormProvider>
       <p className={styles.registerText}>
         {txt}
