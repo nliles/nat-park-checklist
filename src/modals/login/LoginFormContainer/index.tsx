@@ -56,7 +56,7 @@ const LoginFormContainer = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>{copy.headerText}</h1>
-      <p className={styles.txt}>{paragraphText}</p>
+      <p className={styles.paragraphText}>{paragraphText}</p>
       <LoginForm showRegistration={showRegistration} handleOnSubmit={onSubmit} formError={formError} formEmailError={formEmailError} formPasswordError={formPasswordError}/>
       <p className={styles.registerText}>
         {registerTxt}
