@@ -15,11 +15,15 @@ export const updateParks = (
   designation: string,
   parks: string[]
 ): Promise<{ parks: Parks }> => {
-  return apiClient.post("/park", { designation, parks }, {
-    headers: {
-      crossdomain: true,
-      Authorization: sessionStorage.getItem("token") || "",
-      "Content-Type": "application/json",
-    },
-  });
+  return apiClient.post(
+    "/park",
+    { designation, parks },
+    {
+      headers: {
+        crossdomain: true,
+        Authorization: sessionStorage.getItem("token") || "",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
