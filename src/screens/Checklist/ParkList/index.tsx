@@ -41,7 +41,7 @@ const ParkList = ({
 
   useEffect(() => {
     reset({ parkData: initialParkValues });
-  }, [initialParkValues]);
+  }, [initialParkValues, reset]);
 
   const formData = watch().parkData;
 
