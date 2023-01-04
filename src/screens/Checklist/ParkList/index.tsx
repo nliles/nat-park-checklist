@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
@@ -13,7 +14,7 @@ import styles from "./index.module.scss";
 
 const ParkList = ({
   parks = [],
-  initialParkValues,
+  initialParkValues = [],
   selectedDropdownItem,
   handleOnChange,
   handleOnSubmit,
@@ -27,7 +28,7 @@ const ParkList = ({
 
   const methods = useForm({
     defaultValues: {
-      parkData: initialParkValues || [],
+      parkData: initialParkValues,
     },
   });
 
@@ -35,7 +36,12 @@ const ParkList = ({
     handleSubmit,
     formState: { isDirty, isSubmitting },
     watch,
+    reset,
   } = methods;
+
+  useEffect(() => {
+    reset({ parkData: initialParkValues });
+  }, [initialParkValues]);
 
   const formData = watch().parkData;
 
