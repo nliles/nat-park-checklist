@@ -32,13 +32,9 @@ const ParkContainer = () => {
   useEffect(() => {
     const fetchParks = async () => {
       try {
-        let data;
-        if (isLoggedIn) {
-          const { parks } = await getParks();
-          data = parks;
-        }
-        const currentSelectedParks = data?.[selectedDropdownItem] || [];
-        const total = data ? flattenParks(data).length : 0;
+        const { parks } = await getParks();
+        const currentSelectedParks = parks?.[selectedDropdownItem] || [];
+        const total = flattenParks(parks).length;
         setSelectedCount(total - currentSelectedParks.length);
         setInitialValues(currentSelectedParks);
         setSelectedParks(currentSelectedParks);
@@ -46,7 +42,9 @@ const ParkContainer = () => {
         // TODO: handle error
       }
     };
-    fetchParks();
+    if (isLoggedIn) {
+      fetchParks();
+    }
   }, [isLoggedIn, selectedDropdownItem]);
 
   const handleSubmit = async () => {
