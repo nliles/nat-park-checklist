@@ -11,7 +11,7 @@ const Checkbox = ({ id, label, name, handleOnChange }: CheckboxProps) => {
         {label}
         <input
           {...register(name, {
-            onChange: () => handleOnChange(),
+            onChange: (e) => handleOnChange(e.target.value, e.target.checked),
           })}
           className={styles.checkbox}
           type="checkbox"

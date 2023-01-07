@@ -66,8 +66,12 @@ const ParkContainer = () => {
     setSelectedDropdownItem(item);
   };
 
-  const handleOnChange = (values: string[]) => {
-    setSelectedParks(values);
+  const handleOnChange = (value: string, checked: boolean) => {
+    if (checked) {
+      setSelectedParks(parks => [...parks, value])
+    } else {
+      setSelectedParks(parks => parks.filter(p => p !== value))
+    }
   };
 
   return (

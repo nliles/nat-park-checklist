@@ -8,7 +8,7 @@ export type ParkViewProps = {
   initialValues: string[];
   selectedParks?: string[];
   selectedDropdownItem: string;
-  handleOnChange: (values: string[]) => void;
+  handleOnChange: (value: string, checked: boolean) => void;
   handleSubmit: (values: string[]) => void;
   saveFormRes?: ResponseKey;
 };

@@ -45,10 +45,6 @@ const ParkList = ({
 
   const formData = watch().parkData;
 
-  const handleChange = () => {
-    handleOnChange(formData);
-  };
-
   const error = saveFormRes === Response.ERROR ? copy.errorMsg : "";
   const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
   const describedby = error ? "form_error" : "form_helper";
@@ -73,7 +69,7 @@ const ParkList = ({
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
                   name="parkData"
-                  handleOnChange={handleChange}
+                  handleOnChange={handleOnChange}
                 />
               ))}
           </div>
