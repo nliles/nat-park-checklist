@@ -1,28 +1,30 @@
-import { useDispatch, useSelector } from "react-redux";
-import { hideModal } from "actions";
+import { useEffect, useState } from 'react';
 import ReactModal from "react-modal";
-import { State } from "reducers/types";
-import { ModalComponents, ModalContentLabel } from "./types";
+import { createPortal } from 'react-dom';
+import { ModalProps } from './types';
 import styles from "./index.module.scss";
 
-const Modal = () => {
-  const modal = useSelector((state: State) => state.modal.modalType);
-  const dispatch = useDispatch();
+const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
+  const [modalRoot, setModalRoot] = useState<HTMLElement | null>();
 
-  const closeModal = () => {
-    dispatch(hideModal());
-  };
+  useEffect(() => {
+    const el = document.getElementById('modal-root');
+    setModalRoot(el);
+  }, []);
 
-  const SpecificModal = ModalComponents[modal];
+  if (!modalRoot) {
+    return null;
+  }
 
   return (
+  createPortal(
     <ReactModal
       appElement={document.getElementById("app") as HTMLElement}
-      isOpen={!!modal}
+      isOpen
       overlayClassName={styles.overlay}
-      onRequestClose={closeModal}
+      onRequestClose={onClose}
       className={styles.modal}
-      contentLabel={ModalContentLabel[modal]}
+      contentLabel={'test'}
     >
       <div>
         <div className={styles.header}>
@@ -36,14 +38,16 @@ const Modal = () => {
             type="button"
             aria-label="Close Navigation"
             className={styles.close}
-            onClick={closeModal}
+            onClick={onClose}
           >
             <img src="close.svg" width={30} alt="close icon" />
           </button>
         </div>
-        {modal && <SpecificModal />}
+        {children}
       </div>
-    </ReactModal>
+    </ReactModal>,
+    modalRoot
+  )
   );
 };
 

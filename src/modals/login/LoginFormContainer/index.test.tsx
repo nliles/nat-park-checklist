@@ -36,14 +36,18 @@ describe("<LoginForm />", () => {
     userEvent.paste(passInput, "Test12345");
   };
 
+  const renderForm = () => {
+    render(<LoginForm onClose={jest.fn()}/>);
+  }
+
   it("Displays the correct content when showRegistration is false", () => {
-    render(<LoginForm />);
+    renderForm();
     expect(screen.getByText("Don't have an account?")).toBeVisible();
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign up");
   });
 
   it("Toggles registration text", () => {
-    render(<LoginForm />);
+    renderForm();
     userEvent.click(screen.getByRole("button", { name: "Sign up" }));
     expect(screen.getByText("Already have an account?")).toBeVisible();
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign in");
@@ -61,7 +65,7 @@ describe("<LoginForm />", () => {
     });
 
     it("Calls login with the correct values", async () => {
-      render(<LoginForm />);
+      renderForm();
       setup();
       await waitFor(() =>
         expect(
@@ -82,7 +86,7 @@ describe("<LoginForm />", () => {
     });
 
     it("Calls register with the correct values", async () => {
-      render(<LoginForm />);
+      renderForm();
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       setup();
       await waitFor(() =>
@@ -111,7 +115,7 @@ describe("<LoginForm />", () => {
         .mockRejectedValue(new Error("Async error"));
     });
     it("Returns error message", async () => {
-      render(<LoginForm />);
+      renderForm();
       setup();
       await waitFor(() =>
         expect(
