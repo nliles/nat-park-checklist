@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
-import { createPortal } from 'react-dom';
-import { ModalProps } from './types';
+import { createPortal } from "react-dom";
+import { ModalProps } from "./types";
 import styles from "./index.module.scss";
 
 const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
   const [modalRoot, setModalRoot] = useState<HTMLElement | null>();
 
   useEffect(() => {
-    const el = document.getElementById('modal-root');
+    const el = document.getElementById("modal-root");
     setModalRoot(el);
   }, []);
 
@@ -16,15 +16,14 @@ const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
     return null;
   }
 
-  return (
-  createPortal(
+  return createPortal(
     <ReactModal
       appElement={document.getElementById("app") as HTMLElement}
       isOpen
       overlayClassName={styles.overlay}
       onRequestClose={onClose}
       className={styles.modal}
-      contentLabel={'test'}
+      contentLabel={modalLabel}
     >
       <div>
         <div className={styles.header}>
@@ -47,7 +46,6 @@ const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
       </div>
     </ReactModal>,
     modalRoot
-  )
   );
 };
 

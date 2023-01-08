@@ -37,8 +37,8 @@ describe("<LoginForm />", () => {
   };
 
   const renderForm = () => {
-    render(<LoginForm onClose={jest.fn()}/>);
-  }
+    render(<LoginForm onClose={jest.fn()} />);
+  };
 
   it("Displays the correct content when showRegistration is false", () => {
     renderForm();

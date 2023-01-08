@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
-import LoginFormContainer from "modals/login/LoginFormContainer"
+import LoginModalContainer from "modals/login/LoginModalContainer";
 import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from "components/Avatar";
@@ -44,9 +44,7 @@ const NavBar = ({ count }: NavBarProps) => {
           )}
         </div>
       </div>
-      {showModal && (
-        <LoginFormContainer onClose={toggleModal}/>
-      )}
+      {showModal && <LoginModalContainer onClose={toggleModal} />}
     </nav>
   );
 };

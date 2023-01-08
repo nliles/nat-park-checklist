@@ -68,9 +68,9 @@ const ParkContainer = () => {
 
   const handleOnChange = (value: string, checked: boolean) => {
     if (checked) {
-      setSelectedParks(parks => [...parks, value])
+      setSelectedParks((parks) => [...parks, value]);
     } else {
-      setSelectedParks(parks => parks.filter(p => p !== value))
+      setSelectedParks((parks) => parks.filter((p) => p !== value));
     }
   };
 
