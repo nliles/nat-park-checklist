@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { FormHelperProps } from "./types";
 import cn from "classnames";
 
-const FormHelper = ({ id, error, success, delay }: FormHelperProps) => {
+const FormHelper = ({ id, error, success }: FormHelperProps) => {
   const [showMsg, setShowMsg] = useState(false);
   const helperId = error ? `${id}_error` : `${id}_helper`;
   const text = error ? error : success;
@@ -13,15 +13,6 @@ const FormHelper = ({ id, error, success, delay }: FormHelperProps) => {
       setShowMsg(true);
     }
   }, [error, success]);
-
-  useEffect(() => {
-    if (delay && showMsg) {
-      let timer = setTimeout(() => setShowMsg(false), delay * 1000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [delay, showMsg]);
 
   return (
     <>

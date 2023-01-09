@@ -20,8 +20,8 @@ const ParkList = ({
   handleOnSubmit,
   saveFormRes,
 }: ListProps) => {
-  const onSubmit = async (data: { parkData: string[] }) => {
-    await handleOnSubmit(data.parkData);
+  const onSubmit = async () => {
+    await handleOnSubmit();
   };
 
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
@@ -82,7 +82,7 @@ const ParkList = ({
                 txt="Save"
                 type={ButtonType.SUBMIT}
               />
-              <FormHelper id="form" error={error} success={success} delay={3} />
+              <FormHelper id="form" error={error} success={success}/>
             </div>
           )}
         </form>

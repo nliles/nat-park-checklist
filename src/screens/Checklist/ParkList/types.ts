@@ -6,6 +6,6 @@ export type ListProps = {
   selectedDropdownItem: string;
   initialParkValues: string[];
   handleOnChange: (value: string, checked: boolean) => void;
-  handleOnSubmit: (values: string[]) => void;
+  handleOnSubmit: () => void;
   saveFormRes?: ResponseKey;
 };

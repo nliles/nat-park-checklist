@@ -19,6 +19,7 @@ const ParkContainer = () => {
   const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const delay = 3;
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -28,6 +29,15 @@ const ParkContainer = () => {
       setSaveFormRes(undefined);
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (delay && saveFormRes) {
+      let timer = setTimeout(() => setSaveFormRes(undefined), delay * 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [delay, saveFormRes]);
 
   useEffect(() => {
     const fetchParks = async () => {
@@ -47,21 +57,24 @@ const ParkContainer = () => {
     }
   }, [isLoggedIn, selectedDropdownItem]);
 
-  const handleSubmit = async () => {
-    setSaveFormRes(undefined);
+  const handleSubmit = async (hideSaveFormRes?: boolean) => {
     try {
       const { parks } = await updateParks(selectedDropdownItem, selectedParks);
       const currentSelectedParks = parks[selectedDropdownItem] || [];
       setInitialValues(currentSelectedParks);
-      setSaveFormRes(Response.SUCCESS);
+      if (!hideSaveFormRes) {
+        setSaveFormRes(Response.SUCCESS);
+      }
     } catch (err) {
-      setSaveFormRes(Response.ERROR);
+      if (!hideSaveFormRes) {
+        setSaveFormRes(Response.ERROR);
+      }
     }
   };
 
   const handleListItemChange = (item: string) => {
     if (isLoggedIn) {
-      handleSubmit();
+      handleSubmit(true);
     }
     setSelectedDropdownItem(item);
   };
