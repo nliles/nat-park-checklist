@@ -19,6 +19,7 @@ function useParks(selectedItem?: string) {
         codes = Array.prototype.concat.apply([], mappedParks);
       }
       setLoading(true);
+      setParks([])
       const storageKey = selectedItem ? selectedItem.toString() : "data";
       try {
         let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
