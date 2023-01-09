@@ -4,7 +4,7 @@ import { loginSuccess } from "actions";
 import { login, register } from "services/auth.service";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
-import LoginModal from "../LoginModal";
+import LoginModal from "modals/login/LoginModal";
 import { LoginModalContainerProps } from "./types";
 import copy from "./en";
 
