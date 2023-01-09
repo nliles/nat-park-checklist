@@ -19,13 +19,19 @@ function useParks(selectedItem?: string) {
         codes = Array.prototype.concat.apply([], mappedParks);
       }
       setLoading(true);
+      let data;
+      const storageKey = selectedItem ? selectedItem.toString() : "data";
       try {
-        const res = await fetch(
-          `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
-        );
-        const json = await res.json();
-        const sorted = sortParks(formatParks(json.data, selectedItem));
-        setParks(sorted);
+        let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+        if (!data.length) {
+          const res = await fetch(
+            `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
+          );
+          const json = await res.json();
+          data = sortParks(formatParks(json.data, selectedItem));
+          sessionStorage.setItem(storageKey, JSON.stringify(data));
+        }
+        setParks(data);
         setLoading(false);
       } catch (e) {
         setError(true);
