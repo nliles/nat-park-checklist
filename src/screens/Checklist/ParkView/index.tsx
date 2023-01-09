@@ -35,7 +35,7 @@ const ParkView = ({
           <div className={styles.dropdownWrapper}>
             <Dropdown
               list={LIST_OPTIONS}
-              initialSelectedItem={`${dropdownItem}s`}
+              initialSelectedItem={selectedDropdownItem}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}
             />

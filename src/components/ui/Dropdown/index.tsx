@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelect } from "downshift";
-import styles from "./index.module.scss";
-import { DropdownProps } from "./types";
 import cn from "classnames";
+import { useSelect } from "downshift";
+import startCase from "lodash/startCase";
+import { DropdownProps } from "./types";
+import styles from "./index.module.scss";
 
 const Dropdown = ({
   handleClick,
@@ -26,6 +27,8 @@ const Dropdown = ({
     },
   });
 
+  const formatttedSelectedItem = `${startCase(initialSelectedItem)}s`
+
   return (
     <div
       className={cn(styles.container, styleName, {
@@ -37,7 +40,7 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{initialSelectedItem}</span>
+        <span className={styles.title}>{formatttedSelectedItem}</span>
         <span className={styles.icon}>
           <span className={styles.caret} />
         </span>
