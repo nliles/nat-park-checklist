@@ -19,6 +19,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const handleSuccess = (token: string) => {
     sessionStorage.setItem("token", token);
     dispatch(loginSuccess(token));
+    onClose();
   };
 
   const onSubmit = async (values: User) => {
