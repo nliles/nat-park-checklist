@@ -11,9 +11,9 @@ const Tooltip = ({
   setTooltipContent,
 }: TooltipProps) => {
   const [imageErr, setImageErr] = useState<boolean>(false);
-  const image = park.images[0];
+  const image = park.images?.[0];
   const imageSrc = imageErr ? NP_ICON : image?.url || NP_ICON;
-  const statesArr = park.states?.split(",");
+  const statesArr = park.states?.split(",") || [];
   const states = `State${statesArr.length > 1 ? "s" : ""}: ${statesArr.join(
     ", "
   )}`;

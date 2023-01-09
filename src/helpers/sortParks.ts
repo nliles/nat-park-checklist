@@ -2,7 +2,7 @@ import { Park } from "types/park";
 
 const sortParks = (parks: Park[]) => {
   return parks.sort((a, b) =>
-    a.fullName.localeCompare(b.fullName, "fr", { ignorePunctuation: true })
+    (a?.fullName || '').localeCompare(b?.fullName || '', "fr", { ignorePunctuation: true })
   );
 };
 

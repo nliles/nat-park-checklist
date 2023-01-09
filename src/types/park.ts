@@ -18,22 +18,28 @@ type Image = {
   altText: string;
 };
 
+export type ParkLatLong = {
+  id: string;
+  latitude: string;
+  longitude: string;
+};
+
 export type Park = {
   addresses?: Address[];
   activities?: ParkActivities[];
   description?: string;
-  designation: string;
+  designation?: string;
   directionsInfo?: string;
   directionsUrl?: string;
-  fullName: string;
+  fullName?: string;
   id: string;
-  images: Image[];
+  images?: Image[];
   latitude: string;
-  latLong?: string;
   longitude: string;
-  name: string;
+  latLong?: string;
+  name?: string;
   parkCode?: string;
-  states: string;
-  url: string;
+  states?: string;
+  url?: string;
   weather?: string;
 };
