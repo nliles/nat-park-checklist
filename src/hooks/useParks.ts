@@ -29,7 +29,11 @@ function useParks(selectedItem?: string) {
           );
           const json = await res.json();
           data = sortParks(formatParks(json.data, selectedItem));
-          sessionStorage.setItem(storageKey, JSON.stringify(data));
+          try {
+            sessionStorage.setItem(storageKey, JSON.stringify(data));
+          } catch (e) {
+            // fail silently
+          }
         }
         setParks(data);
         setLoading(false);
