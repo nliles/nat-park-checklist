@@ -19,7 +19,6 @@ function useParks(selectedItem?: string) {
         codes = Array.prototype.concat.apply([], mappedParks);
       }
       setLoading(true);
-      let data;
       const storageKey = selectedItem ? selectedItem.toString() : "data";
       try {
         let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
@@ -28,7 +27,7 @@ function useParks(selectedItem?: string) {
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
-          sortParks(formatParks(json.data, selectedItem));
+          data = sortParks(formatParks(json.data, selectedItem));
           sessionStorage.setItem(storageKey, JSON.stringify(data));
         }
         setParks(data);
