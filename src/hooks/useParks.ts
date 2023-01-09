@@ -4,23 +4,17 @@ import { PARK_INFO, NPS_API, API_KEY } from "../constants";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
 
-function useParks(selectedItem?: string) {
+function useParks(selectedItem: string) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
 
   useEffect(() => {
     const fetchParks = async () => {
-      let codes: any = [];
-      if (selectedItem) {
-        codes = PARK_INFO[selectedItem].codes;
-      } else {
-        const mappedParks = Object.values(PARK_INFO).map((obj) => obj.codes);
-        codes = Array.prototype.concat.apply([], mappedParks);
-      }
+      const codes = PARK_INFO[selectedItem].codes;
       setLoading(true);
       setParks([])
-      const storageKey = selectedItem?.toString() || "";
+      const storageKey = selectedItem.toString();
       try {
         let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
         if (!data.length) {
@@ -30,9 +24,7 @@ function useParks(selectedItem?: string) {
           const json = await res.json();
           data = sortParks(formatParks(json.data, selectedItem));
           try {
-            if (storageKey) {
-              sessionStorage.setItem(storageKey, JSON.stringify(data));
-            }
+            sessionStorage.setItem(storageKey, JSON.stringify(data));
           } catch (e) {
             // fail silently
           }

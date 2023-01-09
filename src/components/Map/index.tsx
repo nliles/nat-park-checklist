@@ -54,7 +54,7 @@ const Map = ({
 
   const natParks = parks.map((p: Park, i: number) => (
     <MapMarker
-      key={p.fullName}
+      key={p.id}
       coords={projection([p.longitude, p.latitude])}
       isSelected={selectedParks.includes(p.id)}
       park={p}
@@ -72,7 +72,7 @@ const Map = ({
       <svg width={usedWidth} height={height + bottomPadding}>
         {states}
         {natParks}
-        {tooltipContent && (
+        {tooltipContent && tooltipContent.name && (
           <Tooltip
             park={tooltipContent}
             coords={projection([
