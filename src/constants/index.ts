@@ -1,3 +1,4 @@
+import { Park } from "types/park";
 import {
   NAT_PARK_CODES,
   NAT_BATTLEFIELD_CODES,
@@ -31,100 +32,111 @@ import {
   HOHOKAM_NAT_MONUMENT,
   SEQUOIA_NAT_PARK,
 } from "./formattedParks";
-export const API_KEY = "coWPLtsaQYAhRKBnWEEOKcnnNXgKwGHDBn7vLl1c";
-export const NPS_API = "https://developer.nps.gov/api/v1";
 
-export const PARK_DESIGNATION_KEY = {
-  NAT_PARK: "nationalPark",
-  NAT_BATTLEFIELD: "nationalBattlefield",
-  NAT_BATTLEFIELD_PARK: "nationalBattlefieldPark",
-  NAT_BATTLEFIELD_SITE: "nationalBattlefieldSite",
-  NAT_MILITARY_PARK: "nationalMilitaryPark",
-  NAT_HISTORIC_PARK: "nationalHistoricPark",
-  NAT_HISTORIC_SITE: "nationalHistoricSite",
-  NAT_LAKESHORE: "nationalLakeshore",
-  NAT_MEMORIAL: "nationalMemorial",
-  NAT_MONUMENT: "nationalMonument",
-  NAT_PARKWAY: "nationalParkway",
-  NAT_PRESERVES: "nationalPreserve",
-  NAT_RESERVES: "nationalReserve",
-  NAT_REC_AREA: "nationalRecreationArea",
-  NAT_RIVER: "nationalRiver",
-  NAT_SCENIC_TRAIL: "nationalScenicTrail",
-  NAT_SEASHORE: "nationalSeashore",
-  NAT_WILD_AND_SCENIC_RIVER: "nationalWildAndScenicRiver",
-  INTERNATIONAL_HISTORIC_SITE: "internationalHistoricSite",
-  OTHER_DESIGNATION: "otherDesignation",
+export enum ParkDesignation {
+  NAT_PARK = "nationalPark",
+  NAT_BATTLEFIELD = "nationalBattlefield",
+  NAT_BATTLEFIELD_PARK = "nationalBattlefieldPark",
+  NAT_BATTLEFIELD_SITE = "nationalBattlefieldSite",
+  NAT_MILITARY_PARK = "nationalMilitaryPark",
+  NAT_HISTORIC_PARK = "nationalHistoricPark",
+  NAT_HISTORIC_SITE = "nationalHistoricSite",
+  NAT_LAKESHORE = "nationalLakeshore",
+  NAT_MEMORIAL = "nationalMemorial",
+  NAT_MONUMENT = "nationalMonument",
+  NAT_PARKWAY=  "nationalParkway",
+  NAT_PRESERVES= "nationalPreserve",
+  NAT_RESERVES= "nationalReserve",
+  NAT_REC_AREA= "nationalRecreationArea",
+  NAT_RIVER= "nationalRiver",
+  NAT_SCENIC_TRAIL= "nationalScenicTrail",
+  NAT_SEASHORE= "nationalSeashore",
+  NAT_WILD_AND_SCENIC_RIVER= "nationalWildAndScenicRiver",
+  INTERNATIONAL_HISTORIC_SITE= "internationalHistoricSite",
+  OTHER_DESIGNATION = "otherDesignation",
 };
 
-export const LIST_OPTIONS = [...Object.values(PARK_DESIGNATION_KEY)];
+export type ParkDesignationKey = keyof typeof ParkDesignation;
 
-export const PARK_INFO = {
-  [PARK_DESIGNATION_KEY.NAT_PARK]: {
+export type ParkDesignationValue = typeof ParkDesignation[ParkDesignationKey];
+
+export const LIST_OPTIONS = [...Object.values(ParkDesignation)];
+
+type ParkInfo = {
+  codes: string[];
+  formattedParks: Park[];
+}
+
+type ParkInfoDict = {
+  [index: string]: ParkInfo
+}
+
+export const PARK_INFO: ParkInfoDict = {
+  [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
     formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
   },
-  [PARK_DESIGNATION_KEY.NAT_BATTLEFIELD]: {
+  [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_BATTLEFIELD_PARK]: {
+  [ParkDesignation.NAT_BATTLEFIELD_PARK]: {
     codes: NAT_BATTLEFIELD_PARK_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_BATTLEFIELD_SITE]: {
+  [ParkDesignation.NAT_BATTLEFIELD_SITE]: {
     codes: ["brcr"],
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_MILITARY_PARK]: {
+  [ParkDesignation.NAT_MILITARY_PARK]: {
     codes: NAT_MILITARY_PARK_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_HISTORIC_PARK]: {
+  [ParkDesignation.NAT_HISTORIC_PARK]: {
     codes: NAT_HISTORIC_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_HISTORIC_SITE]: {
+  [ParkDesignation.NAT_HISTORIC_SITE]: {
     codes: NAT_HISTORIC_SITE_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_MEMORIAL]: {
+  [ParkDesignation.NAT_MEMORIAL]: {
     codes: NAT_MEMORIAL_CODES,
     formattedParks: [FORT_CAROLINE_NAT_MEMORIAL],
   },
-  [PARK_DESIGNATION_KEY.NAT_MONUMENT]: {
+  [ParkDesignation.NAT_MONUMENT]: {
     codes: NAT_MONUMENT_CODES,
     formattedParks: [HOHOKAM_NAT_MONUMENT],
   },
-  [PARK_DESIGNATION_KEY.NAT_SEASHORE]: {
+  [ParkDesignation.NAT_SEASHORE]: {
     codes: NAT_SEASHORE_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_SCENIC_TRAIL]: {
+  [ParkDesignation.NAT_SCENIC_TRAIL]: {
     codes: NAT_SCENIC_TRAIL_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_REC_AREA]: {
+  [ParkDesignation.NAT_REC_AREA]: {
     codes: NAT_REC_AREAS_CODES,
     formattedParks: [LAKE_CHELAN_NRA, LAKE_ROSS_NRA],
   },
-  [PARK_DESIGNATION_KEY.NAT_RIVER]: {
+  [ParkDesignation.NAT_RIVER]: {
     codes: NAT_RIVER_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_LAKESHORE]: {
+  [ParkDesignation.NAT_LAKESHORE]: {
     codes: NAT_LAKESHORE_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_PARKWAY]: {
+  [ParkDesignation.NAT_PARKWAY]: {
     codes: NAT_PARKWAY_CODES,
     formattedParks: [JDR_MEMORIAL_PARKWAY],
   },
-  [PARK_DESIGNATION_KEY.NAT_RESERVES]: {
+  [ParkDesignation.NAT_RESERVES]: {
     codes: NAT_RESERVES_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.NAT_PRESERVES]: {
+  [ParkDesignation.NAT_PRESERVES]: {
     codes: NAT_PRESERVES_CODES,
     formattedParks: [
       DENALI_NATIONAL_PRESERVE,
@@ -133,15 +145,15 @@ export const PARK_INFO = {
       GREAT_SAND_DUNES_PRESERVE,
     ],
   },
-  [PARK_DESIGNATION_KEY.NAT_WILD_AND_SCENIC_RIVER]: {
+  [ParkDesignation.NAT_WILD_AND_SCENIC_RIVER]: {
     codes: NAT_WILD_SCENIC_RIVER_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.OTHER_DESIGNATION]: {
+  [ParkDesignation.OTHER_DESIGNATION]: {
     codes: OTHER_DESIGNATION_CODES,
     formattedParks: [],
   },
-  [PARK_DESIGNATION_KEY.INTERNATIONAL_HISTORIC_SITE]: {
+  [ParkDesignation.INTERNATIONAL_HISTORIC_SITE]: {
     codes: ["sacr"],
     formattedParks: [],
   },

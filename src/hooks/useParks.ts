@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Park } from "types/park";
-import { PARK_INFO, NPS_API, API_KEY } from "../constants";
+import { PARK_INFO } from "../constants";
+import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage"
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
