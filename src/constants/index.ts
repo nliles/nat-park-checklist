@@ -56,10 +56,6 @@ export enum ParkDesignation {
   OTHER_DESIGNATION = "otherDesignation",
 };
 
-export type ParkDesignationKey = keyof typeof ParkDesignation;
-
-export type ParkDesignationValue = typeof ParkDesignation[ParkDesignationKey];
-
 export const LIST_OPTIONS = [...Object.values(ParkDesignation)];
 
 type ParkInfo = {

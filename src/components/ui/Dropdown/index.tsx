@@ -1,7 +1,6 @@
 import React from "react";
 import cn from "classnames";
 import { useSelect } from "downshift";
-import startCase from "lodash/startCase";
 import { DropdownProps } from "./types";
 import styles from "./index.module.scss";
 
@@ -10,7 +9,8 @@ const Dropdown = ({
   list,
   initialSelectedItem,
   styleName,
-  formatListItem,
+  formatListItem = (item: string) => item,
+  formatSelectedItem = (item: string) => item,
 }: DropdownProps) => {
   const {
     getToggleButtonProps,
@@ -27,8 +27,6 @@ const Dropdown = ({
     },
   });
 
-  const formatttedSelectedItem = `${startCase(initialSelectedItem)}s`
-
   return (
     <div
       className={cn(styles.container, styleName, {
@@ -40,7 +38,7 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{formatttedSelectedItem}</span>
+        <span className={styles.title}>{formatSelectedItem(initialSelectedItem)}</span>
         <span className={styles.icon}>
           <span className={styles.caret} />
         </span>
@@ -56,7 +54,7 @@ const Dropdown = ({
             key={item}
             {...getItemProps({ item, index })}
           >
-            {formatListItem(item)}
+            {formatListItem ? formatListItem(item) : item}
           </li>
         ))}
       </ul>

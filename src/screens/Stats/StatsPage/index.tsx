@@ -25,7 +25,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
 
   return (
     <div>
-      <Header title="My Stats" />
+      <Header title="Parks Visited" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
           <div className={styles.total}>
