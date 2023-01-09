@@ -20,7 +20,7 @@ function useParks(selectedItem?: string) {
       }
       setLoading(true);
       setParks([])
-      const storageKey = selectedItem ? selectedItem.toString() : "data";
+      const storageKey = selectedItem?.toString() || "";
       try {
         let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
         if (!data.length) {
