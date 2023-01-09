@@ -25,12 +25,14 @@ function useParks(selectedItem?: string) {
         let data = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
         if (!data.length) {
           const res = await fetch(
-            `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
+            `${NPS_API}/parks?parkCode=${codes}&q=id&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
           data = sortParks(formatParks(json.data, selectedItem));
           try {
-            sessionStorage.setItem(storageKey, JSON.stringify(data));
+            if (storageKey) {
+              sessionStorage.setItem(storageKey, JSON.stringify(data));
+            }
           } catch (e) {
             // fail silently
           }
