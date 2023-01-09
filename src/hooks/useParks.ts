@@ -28,7 +28,7 @@ function useParks(selectedItem?: string) {
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
-          data = sortParks(formatParks(json.data, selectedItem));
+          sortParks(formatParks(json.data, selectedItem));
           sessionStorage.setItem(storageKey, JSON.stringify(data));
         }
         setParks(data);
