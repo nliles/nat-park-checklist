@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "actions";
+import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
-import { ModalName } from "components/ui/Modal/types";
+import LoginModalContainer from "modals/login/LoginModalContainer";
 import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from "components/Avatar";
@@ -13,11 +12,11 @@ import styles from "./index.module.scss";
 
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
-  const handleClick = () => dispatch(openModal(ModalName.LOGIN_MODAL));
 
   const toggleClose = () => setShowMenu((prevState) => !prevState);
+  const toggleModal = () => setShowModal((prevState) => !prevState);
 
   return (
     <nav className={styles.nav}>
@@ -29,7 +28,7 @@ const NavBar = ({ count }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-          {!isLoggedIn && <LoginIcon handleClick={handleClick} />}
+          {!isLoggedIn && <LoginIcon handleClick={toggleModal} />}
           {isLoggedIn && (
             <>
               {count !== undefined && (
@@ -45,6 +44,7 @@ const NavBar = ({ count }: NavBarProps) => {
           )}
         </div>
       </div>
+      {showModal && <LoginModalContainer onClose={toggleModal} />}
     </nav>
   );
 };

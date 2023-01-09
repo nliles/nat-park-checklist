@@ -1,12 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import * as reactRedux from "react-redux";
-import * as authService from "services/auth.service";
+import LoginForm from "modals/login/LoginForm";
 import { LoginFormProps } from "./types";
-import LoginForm from ".";
 
 describe("<LoginForm />", () => {
-  const mockSubmit = jest.fn(() => console.log("mock!!!"));
+  const mockSubmit = jest.fn(() => {});
 
   const setup = () => {
     const emailInput = screen.getByLabelText("Email");

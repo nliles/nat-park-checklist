@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as reactRedux from "react-redux";
 import * as authService from "services/auth.service";
-import LoginForm from ".";
+import LoginModalContainer from "modals/login/LoginModalContainer";
 
 jest.mock("services/auth.service");
 
@@ -11,7 +11,7 @@ jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));
 
-describe("<LoginForm />", () => {
+describe("<LoginModalContainer />", () => {
   const userRes = {
     user: {
       email: "test@test.com",
@@ -36,15 +36,14 @@ describe("<LoginForm />", () => {
     userEvent.paste(passInput, "Test12345");
   };
 
-  it("Displays the correct content when showRegistration is false", () => {
-    render(<LoginForm />);
-    expect(screen.getByText("Don't have an account?")).toBeVisible();
-    expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign up");
-  });
+  const renderForm = () => {
+    render(<LoginModalContainer onClose={jest.fn()} />);
+  };
 
   it("Toggles registration text", () => {
-    render(<LoginForm />);
+    renderForm();
     userEvent.click(screen.getByRole("button", { name: "Sign up" }));
+    expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign up");
     expect(screen.getByText("Already have an account?")).toBeVisible();
     expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign in");
   });
@@ -61,7 +60,7 @@ describe("<LoginForm />", () => {
     });
 
     it("Calls login with the correct values", async () => {
-      render(<LoginForm />);
+      renderForm();
       setup();
       await waitFor(() =>
         expect(
@@ -82,7 +81,7 @@ describe("<LoginForm />", () => {
     });
 
     it("Calls register with the correct values", async () => {
-      render(<LoginForm />);
+      renderForm();
       userEvent.click(screen.getByRole("button", { name: "Sign up" }));
       setup();
       await waitFor(() =>
@@ -111,7 +110,7 @@ describe("<LoginForm />", () => {
         .mockRejectedValue(new Error("Async error"));
     });
     it("Returns error message", async () => {
-      render(<LoginForm />);
+      renderForm();
       setup();
       await waitFor(() =>
         expect(
