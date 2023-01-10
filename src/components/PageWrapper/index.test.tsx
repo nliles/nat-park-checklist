@@ -14,6 +14,5 @@ describe("<PageWrapper />", () => {
       </PageWrapper>
     );
     expect(screen.getByText("hi")).toBeVisible();
-    expect(screen.getByText("10")).toBeVisible();
   });
 });

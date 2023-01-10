@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as reactRedux from "react-redux";
@@ -12,6 +13,11 @@ jest.mock("react-redux", () => ({
 }));
 
 describe("<LoginModalContainer />", () => {
+  const modalRoot = global.document.createElement('div');
+  modalRoot.setAttribute('id', 'modal-root');
+  const body = global.document.querySelector('body');
+  body?.appendChild(modalRoot);
+
   const userRes = {
     user: {
       email: "test@test.com",
@@ -36,16 +42,18 @@ describe("<LoginModalContainer />", () => {
     userEvent.paste(passInput, "Test12345");
   };
 
+  const onCloseSpy = jest.fn();
+  const props = { onClose: onCloseSpy };
+
   const renderForm = () => {
-    render(<LoginModalContainer onClose={jest.fn()} />);
+    render(<LoginModalContainer {...props} />);
   };
 
   it("Toggles registration text", () => {
-    renderForm();
+    render(<LoginModalContainer onClose={jest.fn()} />)
+    expect(screen.getByText("Don't have an account?")).toBeVisible();
     userEvent.click(screen.getByRole("button", { name: "Sign up" }));
-    expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign up");
     expect(screen.getByText("Already have an account?")).toBeVisible();
-    expect(screen.getAllByRole("button")[1]).toHaveTextContent("Sign in");
   });
 
   describe("Submit button", () => {

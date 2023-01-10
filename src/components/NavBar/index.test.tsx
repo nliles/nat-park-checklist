@@ -13,9 +13,7 @@ describe("<NavBar />", () => {
       "href",
       "/"
     );
-    // expect(screen.getByText("National Park Unit Checklist")).toBeVisible();
     // expect(screen.getByText("10")).toBeVisible();
-
   });
 
   it("Displays the correct content when user not logged in", () => {
