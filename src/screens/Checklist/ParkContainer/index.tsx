@@ -7,13 +7,12 @@ import { useParks } from "hooks";
 import ParkDesignation from "enum/ParkDesignation";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
-import { ParkDesignationType } from 'enum/ParkDesignation'
+import { ParkDesignationType } from "enum/ParkDesignation";
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
-  const [selectedDropdownItem, setSelectedDropdownItem] = useState<ParkDesignationType>(
-    ParkDesignation.NAT_PARK
-  );
+  const [selectedDropdownItem, setSelectedDropdownItem] =
+    useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);

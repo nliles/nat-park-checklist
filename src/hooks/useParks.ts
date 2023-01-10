@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Park } from "types/park";
-import { ParkDesignationType } from 'enum/ParkDesignation'
+import { ParkDesignationType } from "enum/ParkDesignation";
 import { PARK_INFO } from "../constants";
 import { NPS_API, API_KEY } from "hooks/constants";
-import { loadState, saveState } from "storage/sessionStorage"
+import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
 
@@ -16,7 +16,7 @@ function useParks(selectedItem: ParkDesignationType) {
     const fetchParks = async () => {
       const codes = PARK_INFO[selectedItem].codes;
       setLoading(true);
-      setParks([])
+      setParks([]);
       try {
         let data = loadState(selectedItem);
         if (!data.length) {
@@ -25,7 +25,7 @@ function useParks(selectedItem: ParkDesignationType) {
           );
           const json = await res.json();
           data = sortParks(formatParks(json.data, selectedItem));
-          saveState(selectedItem, data)
+          saveState(selectedItem, data);
         }
         setParks(data);
         setLoading(false);

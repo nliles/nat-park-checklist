@@ -9,7 +9,7 @@ function useSelectedParks() {
     const fetchParks = async () => {
       try {
         const { parks } = await getParks();
-        console.log(parks)
+        console.log(parks);
         setSelectedParks(parks);
       } catch (e) {
         // TODO: handle error

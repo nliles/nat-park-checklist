@@ -38,7 +38,9 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <span className={styles.title}>{formatSelectedItem(initialSelectedItem)}</span>
+        <span className={styles.title}>
+          {formatSelectedItem(initialSelectedItem)}
+        </span>
         <span className={styles.icon}>
           <span className={styles.caret} />
         </span>

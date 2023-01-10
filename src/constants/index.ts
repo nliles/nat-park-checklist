@@ -1,5 +1,5 @@
 import { Park } from "types/park";
-import ParkDesignation from "enum/ParkDesignation"
+import ParkDesignation from "enum/ParkDesignation";
 import {
   NAT_PARK_CODES,
   NAT_BATTLEFIELD_CODES,
@@ -39,11 +39,11 @@ export const LIST_OPTIONS = [...Object.values(ParkDesignation)];
 type ParkInfo = {
   codes: string[];
   formattedParks: Park[];
-}
+};
 
 type ParkInfoDict = {
-  [index: string]: ParkInfo
-}
+  [index: string]: ParkInfo;
+};
 
 export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PARK]: {

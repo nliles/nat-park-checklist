@@ -25,7 +25,7 @@ const ParkView = ({
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
-  const formatSelectedItem = (item: string) => `${startCase(item)}s`
+  const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   return (
     <div className={styles.container}>
