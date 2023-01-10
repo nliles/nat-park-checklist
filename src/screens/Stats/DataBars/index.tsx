@@ -6,12 +6,12 @@ import { DataBarsProps } from "./types";
 import styles from "./index.module.scss";
 
 const DataBars = ({ items }: DataBarsProps) => {
-  const itemKeys = Object.keys(items);
+  const itemKeys = Object.keys(items) as ParkDesignation[];
   return (
     <div className={styles.container}>
       {itemKeys?.map((option) => {
-        const total = getParkTotal(option as ParkDesignation);
-        const completed = items[option as ParkDesignation]?.length || 0;
+        const total = getParkTotal(option);
+        const completed = items[option]?.length || 0;
         const percentage = Math.round((completed / total) * 100);
         return (
           <div className={styles.progress} key={option}>

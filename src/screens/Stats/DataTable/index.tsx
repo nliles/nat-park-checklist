@@ -6,7 +6,7 @@ import styles from "./index.module.scss";
 
 const DataTable = ({ count, total, items }: DataTableProps) => {
   const headers = ["Park Category", "Visited", "Total"];
-  const itemKeys = Object.keys(items);
+  const itemKeys = Object.keys(items) as ParkDesignation[];
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -23,9 +23,9 @@ const DataTable = ({ count, total, items }: DataTableProps) => {
           {itemKeys?.map((item) => (
             <tr key={item} className={styles.tr}>
               <td className={styles.td}>{startCase(item)}</td>
-              <td className={styles.td}>{items[item as ParkDesignation]?.length || 0}</td>
+              <td className={styles.td}>{items[item]?.length || 0}</td>
               <td className={styles.td}>
-                {getParkTotal(item as ParkDesignation)}
+                {getParkTotal(item)}
               </td>
             </tr>
           ))}
