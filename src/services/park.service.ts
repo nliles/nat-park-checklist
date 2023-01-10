@@ -1,4 +1,5 @@
 import { apiClient } from "services/apiService";
+import { ParkDesignationType } from "enum/ParkDesignation";
 import { Parks } from "types";
 
 export const getParks = (): Promise<{ parks: Parks }> => {
@@ -12,7 +13,7 @@ export const getParks = (): Promise<{ parks: Parks }> => {
 };
 
 export const updateParks = (
-  designation: string,
+  designation: ParkDesignationType,
   parks: string[]
 ): Promise<{ parks: Parks }> => {
   return apiClient.post(
