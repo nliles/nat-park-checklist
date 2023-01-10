@@ -11,7 +11,7 @@ const DataBars = ({ items }: DataBarsProps) => {
     <div className={styles.container}>
       {itemKeys?.map((option) => {
         const total = getParkTotal(option as ParkDesignation);
-        const completed = items[option]?.length || 0;
+        const completed = items[option as ParkDesignation]?.length || 0;
         const percentage = Math.round((completed / total) * 100);
         return (
           <div className={styles.progress} key={option}>

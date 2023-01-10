@@ -1,3 +1,5 @@
+import ParkDesignation from "enum/ParkDesignation";
+
 export type Parks = {
-  [index: string]: string[];
+  [key in ParkDesignation]?: string[];
 };

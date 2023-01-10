@@ -23,7 +23,7 @@ const DataTable = ({ count, total, items }: DataTableProps) => {
           {itemKeys?.map((item) => (
             <tr key={item} className={styles.tr}>
               <td className={styles.td}>{startCase(item)}</td>
-              <td className={styles.td}>{items[item].length || 0}</td>
+              <td className={styles.td}>{items[item as ParkDesignation]?.length || 0}</td>
               <td className={styles.td}>
                 {getParkTotal(item as ParkDesignation)}
               </td>
