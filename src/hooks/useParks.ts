@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Park } from "types/park";
-import { ParkDesignationType } from 'types'
+import { ParkDesignationType } from 'enum/ParkDesignation'
 import { PARK_INFO } from "../constants";
 import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage"

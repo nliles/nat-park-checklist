@@ -1,5 +1,5 @@
 import { Parks } from "types";
-import { ParkDesignationType } from 'types'
+import { ParkDesignationType } from 'enum/ParkDesignation'
 
 // load state from sessionStorage
 export const loadState = (selectedItemKey: ParkDesignationType) => {
