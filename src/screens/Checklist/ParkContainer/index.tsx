@@ -4,13 +4,14 @@ import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import { useParks } from "hooks";
-import { ParkDesignationKey, ParkDesignationValue, ParkDesignation } from "../../../constants";
+import { ParkDesignation } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
+import { ParkDesignationType } from 'types'
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
-  const [selectedDropdownItem, setSelectedDropdownItem] = useState<string>(
+  const [selectedDropdownItem, setSelectedDropdownItem] = useState<ParkDesignationType>(
     ParkDesignation.NAT_PARK
   );
   const [initialValues, setInitialValues] = useState<string[]>([]);
@@ -76,7 +77,7 @@ const ParkContainer = () => {
     if (isLoggedIn) {
       handleSubmit(true);
     }
-    setSelectedDropdownItem(item);
+    setSelectedDropdownItem(item as ParkDesignationType);
   };
 
   const handleOnChange = (value: string, checked: boolean) => {

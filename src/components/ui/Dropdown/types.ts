@@ -3,5 +3,6 @@ export type DropdownProps = {
   list: string[];
   initialSelectedItem: string;
   styleName?: string;
-  formatListItem: (item: string) => void;
+  formatListItem?: (item: string) => string;
+  formatSelectedItem?: (item: string) => string;
 };

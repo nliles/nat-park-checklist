@@ -25,6 +25,7 @@ const ParkView = ({
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
+  const formatSelectedItem = (item: string) => `${startCase(item)}s`
 
   return (
     <div className={styles.container}>
@@ -38,6 +39,7 @@ const ParkView = ({
               initialSelectedItem={selectedDropdownItem}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}
+              formatSelectedItem={formatSelectedItem}
             />
           </div>
           <Map
