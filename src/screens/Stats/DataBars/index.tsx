@@ -1,3 +1,4 @@
+import ParkDesignation from "enum/ParkDesignation";
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import getParkTotal from "helpers/getParkTotal";
@@ -9,7 +10,7 @@ const DataBars = ({ items }: DataBarsProps) => {
   return (
     <div className={styles.container}>
       {itemKeys?.map((option) => {
-        const total = getParkTotal(option);
+        const total = getParkTotal(option as ParkDesignation);
         const completed = items[option]?.length || 0;
         const percentage = Math.round((completed / total) * 100);
         return (

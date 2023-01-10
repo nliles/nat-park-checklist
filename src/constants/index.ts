@@ -42,7 +42,7 @@ type ParkInfo = {
 };
 
 type ParkInfoDict = {
-  [index: string]: ParkInfo;
+  [key in ParkDesignation]: ParkInfo;
 };
 
 export const PARK_INFO: ParkInfoDict = {
