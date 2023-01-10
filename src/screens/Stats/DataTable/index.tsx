@@ -1,4 +1,5 @@
 import startCase from "lodash/startCase";
+import ParkDesignation from "enum/ParkDesignation";
 import getParkTotal from "helpers/getParkTotal";
 import { DataTableProps } from "./types";
 import styles from "./index.module.scss";
@@ -23,7 +24,9 @@ const DataTable = ({ count, total, items }: DataTableProps) => {
             <tr key={item} className={styles.tr}>
               <td className={styles.td}>{startCase(item)}</td>
               <td className={styles.td}>{items[item].length || 0}</td>
-              <td className={styles.td}>{getParkTotal(item)}</td>
+              <td className={styles.td}>
+                {getParkTotal(item as ParkDesignation)}
+              </td>
             </tr>
           ))}
         </tbody>

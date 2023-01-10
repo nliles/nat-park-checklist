@@ -9,10 +9,9 @@ jest.mock("react-redux", () => ({
 describe("<NavBar />", () => {
   it("Displays the correct content", () => {
     render(<NavBar count={10} />);
-    expect(screen.getByText("National Park Unit Checklist").closest("a")).toHaveAttribute(
-      "href",
-      "/"
-    );
+    expect(
+      screen.getByText("National Park Unit Checklist").closest("a")
+    ).toHaveAttribute("href", "/");
     // expect(screen.getByText("10")).toBeVisible();
   });
 

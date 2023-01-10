@@ -3,17 +3,16 @@ import { useSelector } from "react-redux";
 import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
-import { useParks } from "hooks";
-import { ParkDesignation } from "../../../constants";
+import useParks from "hooks/useParks";
+import ParkDesignation from "enum/ParkDesignation";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
-import { ParkDesignationType } from 'types'
+import { ParkDesignationType } from "enum/ParkDesignation";
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
-  const [selectedDropdownItem, setSelectedDropdownItem] = useState<ParkDesignationType>(
-    ParkDesignation.NAT_PARK
-  );
+  const [selectedDropdownItem, setSelectedDropdownItem] =
+    useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedParks, setSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);

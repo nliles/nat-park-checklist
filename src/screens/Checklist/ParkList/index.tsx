@@ -82,7 +82,7 @@ const ParkList = ({
                 txt="Save"
                 type={ButtonType.SUBMIT}
               />
-              <FormHelper id="form" error={error} success={success}/>
+              <FormHelper id="form" error={error} success={success} />
             </div>
           )}
         </form>

@@ -1,3 +1,4 @@
+import ParkDesignation from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
@@ -21,11 +22,11 @@ const ParkView = ({
   saveFormRes,
 }: ParkViewProps) => {
   const formatListItem = (item: string) => {
-    return `${startCase(item)}s (${getParkTotal(item)})`;
+    return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
-  const formatSelectedItem = (item: string) => `${startCase(item)}s`
+  const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   return (
     <div className={styles.container}>
