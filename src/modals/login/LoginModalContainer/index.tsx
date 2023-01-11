@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "actions";
 import { login, register } from "services/auth.service";
+import { saveState } from "storage/sessionStorage";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
 import LoginModal from "modals/login/LoginModal";
@@ -17,7 +18,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const toggleRegistration = () => setShowRegistration((prevVal) => !prevVal);
 
   const handleSuccess = (token: string) => {
-    sessionStorage.setItem("token", token);
+    saveState("token", token)
     dispatch(loginSuccess(token));
     onClose();
   };

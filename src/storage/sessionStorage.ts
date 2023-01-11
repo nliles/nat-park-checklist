@@ -1,10 +1,7 @@
-import { Parks } from "types";
-import { ParkDesignationType } from "enum/ParkDesignation";
-
 // load state from sessionStorage
-export const loadState = (selectedItemKey: ParkDesignationType) => {
+export const loadState = (itemKey: string) => {
   try {
-    const storageState = sessionStorage.getItem(selectedItemKey);
+    const storageState = sessionStorage.getItem(itemKey);
     return JSON.parse(storageState || "[]");
   } catch (err) {
     return undefined;
@@ -13,12 +10,11 @@ export const loadState = (selectedItemKey: ParkDesignationType) => {
 
 // save state to sessionStorage
 export const saveState = (
-  selectedItemKey: ParkDesignationType,
-  parks: Parks[]
+  itemKey: string,
+  itemValue: string,
 ) => {
   try {
-    const serializedState = JSON.stringify(parks);
-    sessionStorage.setItem(selectedItemKey, serializedState);
+    sessionStorage.setItem(itemKey, itemValue);
   } catch (err) {
     return undefined;
   }

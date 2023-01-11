@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useEffect, ReactNode } from "react";
 import { useJwt } from "react-jwt";
 import { useSelector } from "react-redux";
+import { saveState } from "storage/sessionStorage";
 import { State } from "reducers/types";
 
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
@@ -19,9 +20,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isExpired) {
-      sessionStorage.setItem("token", "");
+      sessionStorage.removeItem("token");
     } else {
-      sessionStorage.setItem("token", token);
+      saveState("token", token);
     }
   }, [token, isExpired]);
 

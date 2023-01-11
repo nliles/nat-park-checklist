@@ -25,7 +25,7 @@ function useParks(selectedItem: ParkDesignationType) {
           );
           const json = await res.json();
           data = sortParks(formatParks(json.data, selectedItem));
-          saveState(selectedItem, data);
+          saveState(selectedItem, JSON.stringify(data));
         }
         setParks(data);
         setLoading(false);
