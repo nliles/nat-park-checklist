@@ -27,7 +27,6 @@ const ParkContainer = () => {
   });
 
   const {
-    handleSubmit,
     watch,
     reset,
   } = methods;
@@ -81,9 +80,9 @@ const ParkContainer = () => {
   };
 
   const handleListItemChange = (item: string) => {
-    // if (isLoggedIn) {
-    //   handleSubmit(true);
-    // }
+    if (isLoggedIn) {
+      handleOnSubmit(formData, true);
+    }
     setSelectedDropdownItem(item as ParkDesignationType);
   };
 
