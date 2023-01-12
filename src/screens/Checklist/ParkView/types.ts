@@ -3,6 +3,7 @@ import { ParkDesignationType } from "enum/ParkDesignation";
 import { ResponseKey } from "enum/Response";
 
 export type ParkViewProps = {
+  count: number;
   handleListItemChange: (item: string) => void;
   loading?: boolean;
   parks: Park[];

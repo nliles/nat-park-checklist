@@ -42,6 +42,7 @@ describe("<ParkView />", () => {
   const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
       <ParkView
+        count={0}
         parks={parks}
         loading={false}
         selectedDropdownItem={ParkDesignation.NAT_PARK}

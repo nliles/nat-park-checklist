@@ -1,29 +1,31 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getParks, updateParks } from "services/park.service";
+import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
+import useSelectedParks from "hooks/useSelectedParks";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
-import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] =
     useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
-  const [selectedParks, setSelectedParks] = useState<string[]>([]);
+  const [currentSelectedParks, setCurrentSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
-  const { loading, parks } = useParks(selectedDropdownItem);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const { loading, parks } = useParks(selectedDropdownItem);
+  const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+
   const delay = 3;
 
   useEffect(() => {
     if (!isLoggedIn) {
       setInitialValues([]);
-      setSelectedParks([]);
+      setCurrentSelectedParks([]);
       setSelectedCount(0);
       setSaveFormRes(undefined);
     }
@@ -39,28 +41,19 @@ const ParkContainer = () => {
   }, [delay, saveFormRes]);
 
   useEffect(() => {
-    const fetchParks = async () => {
-      try {
-        const { parks } = await getParks();
-        const currentSelectedParks = parks?.[selectedDropdownItem] || [];
-        const total = flattenParks(parks).length;
-        setSelectedCount(total - currentSelectedParks.length);
-        setInitialValues(currentSelectedParks);
-        setSelectedParks(currentSelectedParks);
-      } catch (e) {
-        // TODO: handle error
-      }
-    };
-    if (isLoggedIn) {
-      fetchParks();
+    if (selectedParks) {
+      const currentParks = selectedParks[selectedDropdownItem] || [];
+      const total = flattenParks(selectedParks).length;
+      setSelectedCount(total - currentParks.length);
+      setInitialValues(currentParks);
+      setCurrentSelectedParks(currentParks);
     }
-  }, [isLoggedIn, selectedDropdownItem]);
+  }, [selectedParks, selectedDropdownItem]);
 
   const handleSubmit = async (hideSaveFormRes?: boolean) => {
     try {
-      const { parks } = await updateParks(selectedDropdownItem, selectedParks);
-      const currentSelectedParks = parks[selectedDropdownItem] || [];
-      setInitialValues(currentSelectedParks);
+      const { parks } = await updateParks(selectedDropdownItem, currentSelectedParks);
+      setSelectedParks(parks)
       if (!hideSaveFormRes) {
         setSaveFormRes(Response.SUCCESS);
       }
@@ -80,18 +73,18 @@ const ParkContainer = () => {
 
   const handleOnChange = (value: string, checked: boolean) => {
     if (checked) {
-      setSelectedParks((parks) => [...parks, value]);
+      setCurrentSelectedParks((parks) => [...parks, value]);
     } else {
-      setSelectedParks((parks) => parks.filter((p) => p !== value));
+      setCurrentSelectedParks((parks) => parks.filter((p) => p !== value));
     }
   };
 
   return (
-    <PageWrapper count={selectedCount + selectedParks.length}>
       <ParkView
+        count={selectedCount + currentSelectedParks.length}
         loading={loading}
         initialValues={initialValues}
-        selectedParks={selectedParks}
+        selectedParks={currentSelectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}
@@ -99,7 +92,6 @@ const ParkContainer = () => {
         handleSubmit={handleSubmit}
         saveFormRes={saveFormRes}
       />
-    </PageWrapper>
   );
 };
 

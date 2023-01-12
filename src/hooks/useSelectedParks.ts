@@ -1,24 +1,36 @@
 import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
+import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
 
-function useSelectedParks() {
+function useSelectedParks(isLoggedIn: boolean) {
   const [selectedParks, setSelectedParks] = useState<Parks>({});
+  const storageKey = "selectedParks"
 
   useEffect(() => {
     const fetchParks = async () => {
       try {
-        const { parks } = await getParks();
-        setSelectedParks(parks);
+        let data = loadState(storageKey);
+        if (!data.length) {
+          const { parks } = await getParks();
+          data = parks;
+          saveState(storageKey, JSON.stringify(data));
+        }
+        setSelectedParks(data);
       } catch (e) {
         // TODO: handle error
       }
     };
-    fetchParks();
-  }, []);
+    if (isLoggedIn) {
+      fetchParks();
+    } else {
+      setSelectedParks({})
+    }
+  }, [isLoggedIn]);
 
   return {
     selectedParks,
+    setSelectedParks
   };
 }
 
