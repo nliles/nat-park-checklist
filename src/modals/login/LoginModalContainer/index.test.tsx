@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as reactRedux from "react-redux";
 import * as authService from "services/auth.service";
+import renderModal from "test-utils/renderModal";
 import LoginModalContainer from "modals/login/LoginModalContainer";
 
 jest.mock("services/auth.service");
@@ -13,10 +14,7 @@ jest.mock("react-redux", () => ({
 }));
 
 describe("<LoginModalContainer />", () => {
-  const modalRoot = global.document.createElement("div");
-  modalRoot.setAttribute("id", "modal-root");
-  const body = global.document.querySelector("body");
-  body?.appendChild(modalRoot);
+  renderModal();
 
   const userRes = {
     user: {
