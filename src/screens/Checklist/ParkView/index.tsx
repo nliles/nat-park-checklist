@@ -34,37 +34,37 @@ const ParkView = ({
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   return (
-  <PageWrapper count={count}>
-    <div className={styles.container}>
-      <Header title={`${dropdownItem}s`} />
-      {loading && <Spinner />}
-      {!loading && (
-        <>
-          <div className={styles.dropdownWrapper}>
-            <Dropdown
-              list={LIST_OPTIONS}
-              initialSelectedItem={selectedDropdownItem}
-              handleClick={handleListItemChange}
-              formatListItem={formatListItem}
-              formatSelectedItem={formatSelectedItem}
+    <PageWrapper count={count}>
+      <div className={styles.container}>
+        <Header title={`${dropdownItem}s`} />
+        {loading && <Spinner />}
+        {!loading && (
+          <>
+            <div className={styles.dropdownWrapper}>
+              <Dropdown
+                list={LIST_OPTIONS}
+                initialSelectedItem={selectedDropdownItem}
+                handleClick={handleListItemChange}
+                formatListItem={formatListItem}
+                formatSelectedItem={formatSelectedItem}
+              />
+            </div>
+            <Map
+              parks={parks}
+              selectedParks={formData}
+              styleName={styles.map}
             />
-          </div>
-          <Map
-            parks={parks}
-            selectedParks={formData}
-            styleName={styles.map}
-          />
-          <ParkList
-            parks={parks}
-            selectedDropdownItem={dropdownItem}
-            initialParkValues={initialValues}
-            handleOnSubmit={handleOnSubmit}
-            saveFormRes={saveFormRes}
-          />
-        </>
-      )}
-    </div>
-  </PageWrapper>
+            <ParkList
+              parks={parks}
+              selectedDropdownItem={dropdownItem}
+              initialParkValues={initialValues}
+              handleOnSubmit={handleOnSubmit}
+              saveFormRes={saveFormRes}
+            />
+          </>
+        )}
+      </div>
+    </PageWrapper>
   );
 };
 

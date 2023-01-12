@@ -18,7 +18,6 @@ const ParkList = ({
   handleOnSubmit,
   saveFormRes,
 }: ListProps) => {
-
   const onSubmit = async (values: any) => {
     await handleOnSubmit(values.parkData);
   };
@@ -29,7 +28,7 @@ const ParkList = ({
     handleSubmit,
     formState: { isDirty, isSubmitting },
     watch,
-  } = useFormContext()
+  } = useFormContext();
 
   const formData = watch().parkData || [];
 
@@ -47,31 +46,31 @@ const ParkList = ({
           styleName={styles.count}
         />
       </div>
-        <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
-          <div className={styles.listContainer}>
-            {parks &&
-              parks.map((park, i) => (
-                <Checkbox
-                  key={park.fullName}
-                  label={`${i + 1}. ${park.fullName}`}
-                  id={park.id}
-                  name="parkData"
-                />
-              ))}
-          </div>
-          {isLoggedIn && (
-            <div className={styles.buttonWrapper}>
-              <Button
-                sizeSm
-                disabled={!isDirty}
-                isLoading={isSubmitting}
-                txt="Save"
-                type={ButtonType.SUBMIT}
+      <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
+        <div className={styles.listContainer}>
+          {parks &&
+            parks.map((park, i) => (
+              <Checkbox
+                key={park.fullName}
+                label={`${i + 1}. ${park.fullName}`}
+                id={park.id}
+                name="parkData"
               />
-              <FormHelper id="form" error={error} success={success} />
-            </div>
-          )}
-        </form>
+            ))}
+        </div>
+        {isLoggedIn && (
+          <div className={styles.buttonWrapper}>
+            <Button
+              sizeSm
+              disabled={!isDirty}
+              isLoading={isSubmitting}
+              txt="Save"
+              type={ButtonType.SUBMIT}
+            />
+            <FormHelper id="form" error={error} success={success} />
+          </div>
+        )}
+      </form>
     </div>
   );
 };

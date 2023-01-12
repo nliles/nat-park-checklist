@@ -26,10 +26,7 @@ const ParkContainer = () => {
     },
   });
 
-  const {
-    watch,
-    reset,
-  } = methods;
+  const { watch, reset } = methods;
 
   useEffect(() => {
     reset({ parkData: initialValues });
@@ -65,10 +62,13 @@ const ParkContainer = () => {
     }
   }, [selectedParks, selectedDropdownItem]);
 
-  const handleOnSubmit = async (values: string[], hideSaveFormRes?: boolean) => {
+  const handleOnSubmit = async (
+    values: string[],
+    hideSaveFormRes?: boolean
+  ) => {
     try {
       const { parks } = await updateParks(selectedDropdownItem, values);
-      setSelectedParks(parks)
+      setSelectedParks(parks);
       if (!hideSaveFormRes) {
         setSaveFormRes(Response.SUCCESS);
       }
@@ -87,7 +87,7 @@ const ParkContainer = () => {
   };
 
   return (
-  <FormProvider {...methods}>
+    <FormProvider {...methods}>
       <ParkView
         count={selectedCount + formData.length}
         loading={loading}
@@ -98,7 +98,7 @@ const ParkContainer = () => {
         handleOnSubmit={handleOnSubmit}
         saveFormRes={saveFormRes}
       />
-  </FormProvider>
+    </FormProvider>
   );
 };
 

@@ -40,18 +40,18 @@ describe("<ParkView />", () => {
 
   const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
-    <FormProviderWrapper>
-      <ParkView
-        count={0}
-        parks={parks}
-        loading={false}
-        selectedDropdownItem={ParkDesignation.NAT_PARK}
-        initialValues={[]}
-        handleListItemChange={() => {}}
-        handleOnSubmit={() => {}}
-        {...props}
-      />
-    </FormProviderWrapper>
+      <FormProviderWrapper>
+        <ParkView
+          count={0}
+          parks={parks}
+          loading={false}
+          selectedDropdownItem={ParkDesignation.NAT_PARK}
+          initialValues={[]}
+          handleListItemChange={() => {}}
+          handleOnSubmit={() => {}}
+          {...props}
+        />
+      </FormProviderWrapper>
     );
   };
 

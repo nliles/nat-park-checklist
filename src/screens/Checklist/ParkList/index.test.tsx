@@ -38,14 +38,14 @@ describe("<ParkList />", () => {
 
   const renderList = () => {
     render(
-    <FormProviderWrapper>
-      <ParkList
-        parks={parks}
-        selectedDropdownItem="National Park"
-        initialParkValues={[]}
-        handleOnSubmit={() => {}}
-      />
-    </FormProviderWrapper>
+      <FormProviderWrapper>
+        <ParkList
+          parks={parks}
+          selectedDropdownItem="National Park"
+          initialParkValues={[]}
+          handleOnSubmit={() => {}}
+        />
+      </FormProviderWrapper>
     );
   };
 

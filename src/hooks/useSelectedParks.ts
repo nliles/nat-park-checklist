@@ -5,7 +5,7 @@ import { Parks } from "types";
 
 function useSelectedParks(isLoggedIn: boolean) {
   const [selectedParks, setSelectedParks] = useState<Parks>({});
-  const storageKey = "selectedParks"
+  const storageKey = "selectedParks";
 
   useEffect(() => {
     const fetchParks = async () => {
@@ -24,14 +24,14 @@ function useSelectedParks(isLoggedIn: boolean) {
     if (isLoggedIn) {
       fetchParks();
     } else {
-      sessionStorage.removeItem(storageKey)
-      setSelectedParks({})
+      sessionStorage.removeItem(storageKey);
+      setSelectedParks({});
     }
   }, [isLoggedIn]);
 
   return {
     selectedParks,
-    setSelectedParks
+    setSelectedParks,
   };
 }
 
