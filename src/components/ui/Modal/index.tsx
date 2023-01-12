@@ -18,7 +18,7 @@ const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
 
   return createPortal(
     <ReactModal
-      appElement={document.getElementById("app") as HTMLElement}
+      appElement={modalRoot}
       isOpen
       overlayClassName={styles.overlay}
       onRequestClose={onClose}
