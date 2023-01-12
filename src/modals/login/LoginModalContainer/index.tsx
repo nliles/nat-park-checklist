@@ -18,7 +18,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const toggleRegistration = () => setShowRegistration((prevVal) => !prevVal);
 
   const handleSuccess = (token: string) => {
-    saveState("token", token)
+    saveState("token", token);
     dispatch(loginSuccess(token));
     onClose();
   };

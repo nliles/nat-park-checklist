@@ -9,10 +9,7 @@ export const loadState = (itemKey: string) => {
 };
 
 // save state to sessionStorage
-export const saveState = (
-  itemKey: string,
-  itemValue: string,
-) => {
+export const saveState = (itemKey: string, itemValue: string) => {
   try {
     sessionStorage.setItem(itemKey, itemValue);
   } catch (err) {

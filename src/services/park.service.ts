@@ -8,8 +8,5 @@ export const updateParks = (
   designation: ParkDesignationType,
   parks: string[]
 ): Promise<{ parks: Parks }> => {
-  return apiClient.post(
-    "/park",
-    { designation, parks }
-  );
+  return apiClient.post("/park", { designation, parks });
 };
