@@ -24,6 +24,7 @@ function useSelectedParks(isLoggedIn: boolean) {
     if (isLoggedIn) {
       fetchParks();
     } else {
+      sessionStorage.removeItem(storageKey)
       setSelectedParks({})
     }
   }, [isLoggedIn]);
