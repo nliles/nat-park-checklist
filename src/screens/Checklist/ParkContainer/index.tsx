@@ -19,7 +19,7 @@ const ParkContainer = () => {
   const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const { loading, parks } = useParks(selectedDropdownItem);
-  const { selectedParks } = useSelectedParks(isLoggedIn);
+  const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
 
   const delay = 3;
 
@@ -54,8 +54,7 @@ const ParkContainer = () => {
   const handleSubmit = async (hideSaveFormRes?: boolean) => {
     try {
       const { parks } = await updateParks(selectedDropdownItem, currentSelectedParks);
-      const currentParks = parks[selectedDropdownItem] || [];
-      setInitialValues(currentParks);
+      setSelectedParks(parks)
       if (!hideSaveFormRes) {
         setSaveFormRes(Response.SUCCESS);
       }
