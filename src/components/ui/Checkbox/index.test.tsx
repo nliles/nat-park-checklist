@@ -8,7 +8,7 @@ import Checkbox from ".";
 const getForm = () => {
   render(
     <FormWrapper>
-      <Checkbox id="1" label="Park" name="Park" handleOnChange={() => {}} />
+      <Checkbox id="1" label="Park" name="Park" />
     </FormWrapper>
   );
 };

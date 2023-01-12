@@ -35,15 +35,12 @@ describe("<ParkList />", () => {
     },
   ];
 
-  const mockFn = jest.fn();
-
   const renderList = () => {
     render(
       <ParkList
         parks={parks}
         selectedDropdownItem="National Park"
         initialParkValues={[]}
-        handleOnChange={mockFn}
         handleOnSubmit={() => {}}
       />
     );

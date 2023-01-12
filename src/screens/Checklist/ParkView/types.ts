@@ -10,7 +10,6 @@ export type ParkViewProps = {
   initialValues: string[];
   selectedParks?: string[];
   selectedDropdownItem: ParkDesignationType;
-  handleOnChange: (value: string, checked: boolean) => void;
-  handleSubmit: (hideSaveFormRes?: boolean) => void;
+  handleOnSubmit: (values: string[], hideSaveFormRes?: boolean) => void;
   saveFormRes?: ResponseKey;
 };

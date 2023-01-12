@@ -37,8 +37,6 @@ describe("<ParkView />", () => {
     },
   ];
 
-  const mockFn = jest.fn();
-
   const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
       <ParkView
@@ -47,9 +45,8 @@ describe("<ParkView />", () => {
         loading={false}
         selectedDropdownItem={ParkDesignation.NAT_PARK}
         initialValues={[]}
-        handleOnChange={mockFn}
         handleListItemChange={() => {}}
-        handleSubmit={() => {}}
+        handleOnSubmit={() => {}}
         {...props}
       />
     );

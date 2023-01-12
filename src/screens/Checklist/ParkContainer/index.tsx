@@ -1,3 +1,4 @@
+import { useForm, FormProvider } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { updateParks } from "services/park.service";
@@ -19,6 +20,24 @@ const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const { loading, parks } = useParks(selectedDropdownItem);
   const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+
+  const methods = useForm({
+    defaultValues: {
+      parkData: initialValues,
+    },
+  });
+
+  const {
+    handleSubmit,
+    watch,
+    reset,
+  } = methods;
+
+  useEffect(() => {
+    reset({ parkData: initialValues });
+  }, [initialValues, reset]);
+
+  const formData = watch().parkData;
 
   const delay = 3;
 
@@ -50,9 +69,9 @@ const ParkContainer = () => {
     }
   }, [selectedParks, selectedDropdownItem]);
 
-  const handleSubmit = async (hideSaveFormRes?: boolean) => {
+  const handleOnSubmit = async (values: string[], hideSaveFormRes?: boolean) => {
     try {
-      const { parks } = await updateParks(selectedDropdownItem, currentSelectedParks);
+      const { parks } = await updateParks(selectedDropdownItem, values);
       setSelectedParks(parks)
       if (!hideSaveFormRes) {
         setSaveFormRes(Response.SUCCESS);
@@ -65,33 +84,25 @@ const ParkContainer = () => {
   };
 
   const handleListItemChange = (item: string) => {
-    if (isLoggedIn) {
-      handleSubmit(true);
-    }
+    // if (isLoggedIn) {
+    //   handleSubmit(true);
+    // }
     setSelectedDropdownItem(item as ParkDesignationType);
   };
 
-  const handleOnChange = (value: string, checked: boolean) => {
-    if (checked) {
-      setCurrentSelectedParks((parks) => [...parks, value]);
-    } else {
-      setCurrentSelectedParks((parks) => parks.filter((p) => p !== value));
-    }
-  };
-
   return (
+  <FormProvider {...methods}>
       <ParkView
         count={selectedCount + currentSelectedParks.length}
         loading={loading}
         initialValues={initialValues}
-        selectedParks={currentSelectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}
-        handleOnChange={handleOnChange}
-        handleSubmit={handleSubmit}
+        handleOnSubmit={handleOnSubmit}
         saveFormRes={saveFormRes}
       />
+  </FormProvider>
   );
 };
 
