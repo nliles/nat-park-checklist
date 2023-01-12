@@ -8,7 +8,6 @@ import useSelectedParks from "hooks/useSelectedParks";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
-import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] =
@@ -81,8 +80,8 @@ const ParkContainer = () => {
   };
 
   return (
-    <PageWrapper count={selectedCount + currentSelectedParks.length}>
       <ParkView
+        count={selectedCount + currentSelectedParks.length}
         loading={loading}
         initialValues={initialValues}
         selectedParks={currentSelectedParks}
@@ -93,7 +92,6 @@ const ParkContainer = () => {
         handleSubmit={handleSubmit}
         saveFormRes={saveFormRes}
       />
-    </PageWrapper>
   );
 };
 

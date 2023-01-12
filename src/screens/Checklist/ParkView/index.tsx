@@ -1,3 +1,4 @@
+import PageWrapper from "components/PageWrapper";
 import ParkDesignation from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
@@ -11,6 +12,7 @@ import { ParkViewProps } from "./types";
 import styles from "./index.module.scss";
 
 const ParkView = ({
+  count,
   loading = false,
   parks,
   selectedParks = [],
@@ -29,6 +31,7 @@ const ParkView = ({
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   return (
+  <PageWrapper count={count}>
     <div className={styles.container}>
       <Header title={`${dropdownItem}s`} />
       {loading && <Spinner />}
@@ -59,6 +62,7 @@ const ParkView = ({
         </>
       )}
     </div>
+  </PageWrapper>
   );
 };
 
