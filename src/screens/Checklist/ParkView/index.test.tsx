@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ParkDesignation from "enum/ParkDesignation";
+import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import { ParkViewProps } from "./types";
 import ParkView from ".";
 
@@ -39,6 +40,7 @@ describe("<ParkView />", () => {
 
   const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
+    <FormProviderWrapper>
       <ParkView
         count={0}
         parks={parks}
@@ -49,6 +51,7 @@ describe("<ParkView />", () => {
         handleOnSubmit={() => {}}
         {...props}
       />
+    </FormProviderWrapper>
     );
   };
 
