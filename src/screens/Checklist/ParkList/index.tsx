@@ -31,7 +31,7 @@ const ParkList = ({
     watch,
   } = useFormContext()
 
-  const formData = watch().parkData;
+  const formData = watch().parkData || [];
 
   const error = saveFormRes === Response.ERROR ? copy.errorMsg : "";
   const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";

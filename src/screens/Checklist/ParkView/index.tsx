@@ -24,7 +24,7 @@ const ParkView = ({
 }: ParkViewProps) => {
   const { watch } = useFormContext();
 
-  const formData = watch().parkData;
+  const formData = watch().parkData || [];
 
   const formatListItem = (item: string) => {
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
