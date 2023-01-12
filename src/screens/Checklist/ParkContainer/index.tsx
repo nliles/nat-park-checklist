@@ -4,10 +4,9 @@ import { getParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
-import ParkDesignation from "enum/ParkDesignation";
 import flattenParks from "helpers/flattenParks";
 import Response, { ResponseKey } from "enum/Response";
-import { ParkDesignationType } from "enum/ParkDesignation";
+import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import PageWrapper from "components/PageWrapper";
 
 const ParkContainer = () => {

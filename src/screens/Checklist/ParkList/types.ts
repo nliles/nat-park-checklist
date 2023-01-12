@@ -1,5 +1,6 @@
 import { ResponseKey } from "enum/Response";
 import { Park } from "types/park";
+import { ParkDesignationType } from "enum/ParkDesignation";
 
 export type ListProps = {
   parks: Park[];

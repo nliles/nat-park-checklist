@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import ParkDesignation from "enum/ParkDesignation";
 import { ParkViewProps } from "./types";
 import ParkView from ".";
 
@@ -43,7 +44,7 @@ describe("<ParkView />", () => {
       <ParkView
         parks={parks}
         loading={false}
-        selectedDropdownItem="nationalPark"
+        selectedDropdownItem={ParkDesignation.NAT_PARK}
         initialValues={[]}
         handleOnChange={mockFn}
         handleListItemChange={() => {}}
