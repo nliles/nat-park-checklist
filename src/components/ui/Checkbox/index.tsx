@@ -3,16 +3,14 @@ import { useFormContext } from "react-hook-form";
 import { CheckboxProps } from "./types";
 import styles from "./index.module.scss";
 
-const Checkbox = ({ id, label, name, handleOnChange }: CheckboxProps) => {
+const Checkbox = ({ id, label, name }: CheckboxProps) => {
   const { register } = useFormContext();
   return (
     <div>
       <label className={styles.checkboxWrapper} htmlFor={id}>
         {label}
         <input
-          {...register(name, {
-            onChange: (e) => handleOnChange(e.target.value, e.target.checked),
-          })}
+          {...register(name)}
           className={styles.checkbox}
           type="checkbox"
           id={id}

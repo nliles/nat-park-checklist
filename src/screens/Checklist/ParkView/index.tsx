@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import PageWrapper from "components/PageWrapper";
 import ParkDesignation from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
@@ -15,14 +16,16 @@ const ParkView = ({
   count,
   loading = false,
   parks,
-  selectedParks = [],
   initialValues,
   selectedDropdownItem,
   handleListItemChange,
-  handleOnChange,
-  handleSubmit,
+  handleOnSubmit,
   saveFormRes,
 }: ParkViewProps) => {
+  const { watch } = useFormContext();
+
+  const formData = watch().parkData || [];
+
   const formatListItem = (item: string) => {
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
@@ -48,15 +51,14 @@ const ParkView = ({
           </div>
           <Map
             parks={parks}
-            selectedParks={selectedParks}
+            selectedParks={formData}
             styleName={styles.map}
           />
           <ParkList
             parks={parks}
             selectedDropdownItem={dropdownItem}
             initialParkValues={initialValues}
-            handleOnChange={handleOnChange}
-            handleOnSubmit={handleSubmit}
+            handleOnSubmit={handleOnSubmit}
             saveFormRes={saveFormRes}
           />
         </>

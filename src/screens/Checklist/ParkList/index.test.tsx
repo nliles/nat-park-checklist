@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import ParkList from "screens/Checklist/ParkList";
 
 jest.mock("react-redux", () => ({
@@ -35,17 +36,16 @@ describe("<ParkList />", () => {
     },
   ];
 
-  const mockFn = jest.fn();
-
   const renderList = () => {
     render(
+    <FormProviderWrapper>
       <ParkList
         parks={parks}
         selectedDropdownItem="National Park"
         initialParkValues={[]}
-        handleOnChange={mockFn}
         handleOnSubmit={() => {}}
       />
+    </FormProviderWrapper>
     );
   };
 

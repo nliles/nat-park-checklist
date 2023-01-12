@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useForm, FormProvider } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import Button from "components/ui/Button";
@@ -16,34 +15,23 @@ const ParkList = ({
   parks = [],
   initialParkValues = [],
   selectedDropdownItem,
-  handleOnChange,
   handleOnSubmit,
   saveFormRes,
 }: ListProps) => {
-  const onSubmit = async () => {
-    await handleOnSubmit();
+
+  const onSubmit = async (values: any) => {
+    await handleOnSubmit(values.parkData);
   };
 
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
-
-  const methods = useForm({
-    defaultValues: {
-      parkData: initialParkValues,
-    },
-  });
 
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
     watch,
-    reset,
-  } = methods;
+  } = useFormContext()
 
-  useEffect(() => {
-    reset({ parkData: initialParkValues });
-  }, [initialParkValues, reset]);
-
-  const formData = watch().parkData;
+  const formData = watch().parkData || [];
 
   const error = saveFormRes === Response.ERROR ? copy.errorMsg : "";
   const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
@@ -59,7 +47,6 @@ const ParkList = ({
           styleName={styles.count}
         />
       </div>
-      <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
           <div className={styles.listContainer}>
             {parks &&
@@ -69,7 +56,6 @@ const ParkList = ({
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
                   name="parkData"
-                  handleOnChange={handleOnChange}
                 />
               ))}
           </div>
@@ -86,7 +72,6 @@ const ParkList = ({
             </div>
           )}
         </form>
-      </FormProvider>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ParkDesignation from "enum/ParkDesignation";
+import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import { ParkViewProps } from "./types";
 import ParkView from ".";
 
@@ -37,21 +38,20 @@ describe("<ParkView />", () => {
     },
   ];
 
-  const mockFn = jest.fn();
-
   const renderParkView = (props?: Partial<ParkViewProps>) => {
     render(
+    <FormProviderWrapper>
       <ParkView
         count={0}
         parks={parks}
         loading={false}
         selectedDropdownItem={ParkDesignation.NAT_PARK}
         initialValues={[]}
-        handleOnChange={mockFn}
         handleListItemChange={() => {}}
-        handleSubmit={() => {}}
+        handleOnSubmit={() => {}}
         {...props}
       />
+    </FormProviderWrapper>
     );
   };
 

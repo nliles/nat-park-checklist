@@ -1,3 +1,4 @@
+import { useForm, FormProvider } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { updateParks } from "services/park.service";
@@ -13,19 +14,34 @@ const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] =
     useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
-  const [currentSelectedParks, setCurrentSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
   const { loading, parks } = useParks(selectedDropdownItem);
   const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
 
+  const methods = useForm({
+    defaultValues: {
+      parkData: initialValues,
+    },
+  });
+
+  const {
+    watch,
+    reset,
+  } = methods;
+
+  useEffect(() => {
+    reset({ parkData: initialValues });
+  }, [initialValues, reset]);
+
+  const formData = watch().parkData;
+
   const delay = 3;
 
   useEffect(() => {
     if (!isLoggedIn) {
       setInitialValues([]);
-      setCurrentSelectedParks([]);
       setSelectedCount(0);
       setSaveFormRes(undefined);
     }
@@ -46,13 +62,12 @@ const ParkContainer = () => {
       const total = flattenParks(selectedParks).length;
       setSelectedCount(total - currentParks.length);
       setInitialValues(currentParks);
-      setCurrentSelectedParks(currentParks);
     }
   }, [selectedParks, selectedDropdownItem]);
 
-  const handleSubmit = async (hideSaveFormRes?: boolean) => {
+  const handleOnSubmit = async (values: string[], hideSaveFormRes?: boolean) => {
     try {
-      const { parks } = await updateParks(selectedDropdownItem, currentSelectedParks);
+      const { parks } = await updateParks(selectedDropdownItem, values);
       setSelectedParks(parks)
       if (!hideSaveFormRes) {
         setSaveFormRes(Response.SUCCESS);
@@ -66,32 +81,24 @@ const ParkContainer = () => {
 
   const handleListItemChange = (item: string) => {
     if (isLoggedIn) {
-      handleSubmit(true);
+      handleOnSubmit(formData, true);
     }
     setSelectedDropdownItem(item as ParkDesignationType);
   };
 
-  const handleOnChange = (value: string, checked: boolean) => {
-    if (checked) {
-      setCurrentSelectedParks((parks) => [...parks, value]);
-    } else {
-      setCurrentSelectedParks((parks) => parks.filter((p) => p !== value));
-    }
-  };
-
   return (
+  <FormProvider {...methods}>
       <ParkView
-        count={selectedCount + currentSelectedParks.length}
+        count={selectedCount + formData.length}
         loading={loading}
         initialValues={initialValues}
-        selectedParks={currentSelectedParks}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}
-        handleOnChange={handleOnChange}
-        handleSubmit={handleSubmit}
+        handleOnSubmit={handleOnSubmit}
         saveFormRes={saveFormRes}
       />
+  </FormProvider>
   );
 };
 
