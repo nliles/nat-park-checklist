@@ -14,7 +14,6 @@ const ParkContainer = () => {
   const [selectedDropdownItem, setSelectedDropdownItem] =
     useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
-  const [currentSelectedParks, setCurrentSelectedParks] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [saveFormRes, setSaveFormRes] = useState<ResponseKey>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
@@ -44,7 +43,6 @@ const ParkContainer = () => {
   useEffect(() => {
     if (!isLoggedIn) {
       setInitialValues([]);
-      setCurrentSelectedParks([]);
       setSelectedCount(0);
       setSaveFormRes(undefined);
     }
@@ -65,7 +63,6 @@ const ParkContainer = () => {
       const total = flattenParks(selectedParks).length;
       setSelectedCount(total - currentParks.length);
       setInitialValues(currentParks);
-      setCurrentSelectedParks(currentParks);
     }
   }, [selectedParks, selectedDropdownItem]);
 
@@ -93,7 +90,7 @@ const ParkContainer = () => {
   return (
   <FormProvider {...methods}>
       <ParkView
-        count={selectedCount + currentSelectedParks.length}
+        count={selectedCount + formData.length}
         loading={loading}
         initialValues={initialValues}
         selectedDropdownItem={selectedDropdownItem}
