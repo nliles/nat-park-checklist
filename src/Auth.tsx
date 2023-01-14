@@ -13,7 +13,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       sessionStorage.removeItem("token");
       dispatch(logoutSuccess());
     }
-  }, [token, isExpired]);
+  }, [token, isExpired, dispatch]);
 
   return <>{children}</>;
 };
