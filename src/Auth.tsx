@@ -1,18 +1,17 @@
 import { useEffect, ReactNode } from "react";
 import { useJwt } from "react-jwt";
-import { useSelector } from "react-redux";
-import { saveState } from "storage/sessionStorage";
-import { State } from "reducers/types";
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "actions";
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const token = useSelector((state: State) => state.auth.token);
+  const token = sessionStorage.getItem("token");
   const { isExpired } = useJwt(token || "");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isExpired) {
+    if (token && isExpired) {
       sessionStorage.removeItem("token");
-    } else {
-      saveState("token", token);
+      dispatch(logoutSuccess());
     }
   }, [token, isExpired]);
 
