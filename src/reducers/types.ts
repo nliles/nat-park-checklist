@@ -1,5 +1,5 @@
 export type AuthState = {
-  token: string;
+  token: string | null;
 };
 
 export type State = {
