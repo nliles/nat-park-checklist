@@ -11,7 +11,7 @@ const auth = (state: AuthState = initialAuthState, action: AnyAction) => {
       };
     case NOT_AUTHENTICATED:
       return {
-        token: "",
+        token: null,
       };
     default:
       return state;
