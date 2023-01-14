@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "Auth";
-import ProtectedRoute from "ProtectedRoute";
+import ProtectedRoute from "components/ProtectedRoute";
 import store from "store";
 import ParkContainer from "screens/Checklist/ParkContainer";
 import StatsContainer from "screens/Stats/StatsContainer";
