@@ -20,7 +20,6 @@ const ParkView = ({
   selectedDropdownItem,
   handleListItemChange,
   handleOnSubmit,
-  saveFormRes,
 }: ParkViewProps) => {
   const { watch } = useFormContext();
 
@@ -59,7 +58,6 @@ const ParkView = ({
               selectedDropdownItem={dropdownItem}
               initialParkValues={initialValues}
               handleOnSubmit={handleOnSubmit}
-              saveFormRes={saveFormRes}
             />
           </>
         )}

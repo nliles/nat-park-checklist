@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ToasterAlert from "components/ui/ToasterAlert";
 import Auth from "Auth";
 import ProtectedRoute from "components/ProtectedRoute";
 import store from "store";
@@ -25,6 +26,7 @@ const App = () => {
           </Routes>
           <div id="modal-root" />
         </BrowserRouter>
+        <ToasterAlert />
       </Auth>
     </Provider>
   );

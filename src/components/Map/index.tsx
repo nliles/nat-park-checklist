@@ -1,6 +1,6 @@
 import { useState } from "react";
 import cn from "classnames";
-import { useWindowResize } from "hooks";
+import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";

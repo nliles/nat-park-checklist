@@ -1,6 +1,5 @@
 import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
-import { ResponseKey } from "enum/Response";
 
 export type ParkViewProps = {
   count: number;
@@ -10,6 +9,5 @@ export type ParkViewProps = {
   initialValues: string[];
   selectedParks?: string[];
   selectedDropdownItem: ParkDesignationType;
-  handleOnSubmit: (values: string[], hideSaveFormRes?: boolean) => void;
-  saveFormRes?: ResponseKey;
+  handleOnSubmit: (values: string[]) => void;
 };

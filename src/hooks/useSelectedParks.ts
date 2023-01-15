@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
+import toast from "react-hot-toast";
 import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
+import copy from "./en";
 
 function useSelectedParks(isLoggedIn: boolean) {
   const [selectedParks, setSelectedParks] = useState<Parks>({});
@@ -18,7 +20,7 @@ function useSelectedParks(isLoggedIn: boolean) {
         }
         setSelectedParks(data);
       } catch (e) {
-        // TODO: handle error
+        toast.error(copy.selectedParksError);
       }
     };
     if (isLoggedIn) {

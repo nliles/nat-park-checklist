@@ -3,8 +3,8 @@ const copy = {
   emailLength: "Email must be longer than 5 characters.",
   passwordRequired: "Password required. Please fill out this field",
   passwordLength: "Password must have at least 8 characters",
-  registrationText: (isRegistration: boolean) =>
-    isRegistration ? "Sign up" : "Sign in",
+  signUpText: "Sign up",
+  signInText: "Sign in",
 };
 
 export default copy;

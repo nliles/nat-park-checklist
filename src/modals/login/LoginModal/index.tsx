@@ -11,9 +11,11 @@ const LoginModalContainer = ({
   formPasswordError,
   formError,
 }: LoginModalProps) => {
-  const paragraphText = copy.paragraphText(showRegistration);
-  const btnTxt = copy.registrationText(!showRegistration);
-  const registerTxt = copy.accountText(showRegistration);
+  const btnTxt = showRegistration ? copy.signInText : copy.signUpText;
+  const paragraphText = copy.paragraphText(btnTxt);
+  const registerTxt = showRegistration
+    ? copy.accountRegistrationText
+    : copy.accountLoginText;
 
   return (
     <div className={styles.container}>

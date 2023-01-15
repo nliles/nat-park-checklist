@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { useWindowResize } from "hooks";
+import useWindowResize from "hooks/useWindowResize";
 import { TOTAL_UNITS } from "../../../constants";
 import flattenParks from "helpers/flattenParks";
 import Header from "components/Header";

@@ -5,10 +5,7 @@ import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
-import FormHelper from "components/ui/FormHelper";
-import Response from "enum/Response";
 import { ListProps } from "./types";
-import copy from "./en";
 import styles from "./index.module.scss";
 
 const ParkList = ({
@@ -16,7 +13,6 @@ const ParkList = ({
   initialParkValues = [],
   selectedDropdownItem,
   handleOnSubmit,
-  saveFormRes,
 }: ListProps) => {
   const onSubmit = async (values: any) => {
     await handleOnSubmit(values.parkData);
@@ -32,10 +28,6 @@ const ParkList = ({
 
   const formData = watch().parkData || [];
 
-  const error = saveFormRes === Response.ERROR ? copy.errorMsg : "";
-  const success = saveFormRes === Response.SUCCESS ? copy.successMsg : "";
-  const describedby = error ? "form_error" : "form_helper";
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -46,7 +38,7 @@ const ParkList = ({
           styleName={styles.count}
         />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} aria-describedby={describedby}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => (
@@ -67,7 +59,6 @@ const ParkList = ({
               txt="Save"
               type={ButtonType.SUBMIT}
             />
-            <FormHelper id="form" error={error} success={success} />
           </div>
         )}
       </form>
