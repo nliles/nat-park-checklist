@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
+import toast from "react-hot-toast";
 import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
 
@@ -18,7 +19,9 @@ function useSelectedParks(isLoggedIn: boolean) {
         }
         setSelectedParks(data);
       } catch (e) {
-        // TODO: handle error
+        toast.error(
+          "Sorry, we were unable to load your saved parks. Please try again later"
+        );
       }
     };
     if (isLoggedIn) {
