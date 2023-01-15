@@ -20,6 +20,8 @@ const Tooltip = ({
   const x = coords?.[0] - 100; // x - half tooltip width to center
   const y = coords?.[1];
 
+  console.log(park)
+
   const handleImgError = () => {
     setImageErr(true);
   };
@@ -48,7 +50,7 @@ const Tooltip = ({
             <img src={imageSrc} alt="" onError={handleImgError} />
           </div>
           <div className={styles.text}>
-            <h1>{park.fullName}</h1>
+            <h1 className={styles.header}>{park.fullName}</h1>
             <span>{states}</span>
           </div>
         </div>
