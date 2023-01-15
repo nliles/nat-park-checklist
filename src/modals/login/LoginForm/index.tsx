@@ -14,7 +14,7 @@ const LoginForm = ({
   formEmailError,
   formPasswordError,
 }: LoginFormProps) => {
-  const submitTxt = copy.registrationText(showRegistration);
+  const submitTxt = showRegistration ? copy.signUpText : copy.signInText;
 
   const methods = useForm({
     defaultValues: {
