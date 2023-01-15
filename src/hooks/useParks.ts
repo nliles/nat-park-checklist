@@ -32,9 +32,7 @@ function useParks(selectedItem: ParkDesignationType) {
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        toast.error(
-          copy.loadParksError
-        );
+        toast.error(copy.loadParksError);
       }
     };
     fetchParks();

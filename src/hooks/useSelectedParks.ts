@@ -20,9 +20,7 @@ function useSelectedParks(isLoggedIn: boolean) {
         }
         setSelectedParks(data);
       } catch (e) {
-        toast.error(
-          copy.selectedParksError
-        );
+        toast.error(copy.selectedParksError);
       }
     };
     if (isLoggedIn) {

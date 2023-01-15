@@ -13,7 +13,9 @@ const LoginModalContainer = ({
 }: LoginModalProps) => {
   const btnTxt = showRegistration ? copy.signInText : copy.signUpText;
   const paragraphText = copy.paragraphText(btnTxt);
-  const registerTxt = showRegistration ? copy.accountRegistrationText : copy.accountLoginText;
+  const registerTxt = showRegistration
+    ? copy.accountRegistrationText
+    : copy.accountLoginText;
 
   return (
     <div className={styles.container}>

@@ -27,7 +27,7 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
   });
 
   const handleClick = () => {
-    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("token");
     dispatch(logoutSuccess());
   };
 
