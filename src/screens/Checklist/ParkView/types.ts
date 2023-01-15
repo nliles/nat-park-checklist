@@ -1,6 +1,5 @@
 import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
-import { ResponseKey } from "enum/Response";
 
 export type ParkViewProps = {
   count: number;

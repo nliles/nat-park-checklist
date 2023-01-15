@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
 import { PARK_INFO } from "../constants";
@@ -6,10 +7,10 @@ import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
+import copy from "./en";
 
 function useParks(selectedItem: ParkDesignationType) {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
 
   useEffect(() => {
@@ -30,15 +31,16 @@ function useParks(selectedItem: ParkDesignationType) {
         setParks(data);
         setLoading(false);
       } catch (e) {
-        setError(true);
         setLoading(false);
+        toast.error(
+          copy.loadParksError
+        );
       }
     };
     fetchParks();
   }, [selectedItem]);
 
   return {
-    error,
     loading,
     parks,
   };

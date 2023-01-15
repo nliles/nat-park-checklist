@@ -38,6 +38,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
+        console.log(e)
         if (e.data?.error === copy.emailError) {
           setFormEmailError(copy.emailError);
         } else if (e.data?.error === copy.passwordError) {

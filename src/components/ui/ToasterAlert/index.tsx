@@ -8,14 +8,14 @@ const ToasterAlert = () => (
         "aria-live": "polite",
       },
       error: {
-        duration: 3000,
+        duration: 4000,
         iconTheme: {
           primary: "#FF7276",
           secondary: "#fff",
         },
       },
       success: {
-        duration: 3000,
+        duration: 2000,
         theme: {
           primary: "#4b5e26",
           secondary: "#fff",
