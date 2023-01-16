@@ -1,24 +1,30 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import kebabCase from "lodash/kebabCase"
+import camelCase from "lodash/camelCase"
 import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
 import useSelectedParks from "hooks/useSelectedParks";
+import useQuery from "hooks/useQuery";
 import flattenParks from "helpers/flattenParks";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./en";
 
 const ParkContainer = () => {
-  const [selectedDropdownItem, setSelectedDropdownItem] =
-    useState<ParkDesignationType>(ParkDesignation.NAT_PARK);
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const query = useQuery();
+  const designation = query.get("designation") || ParkDesignation.NAT_PARK
+  const selectedDropdownItem = camelCase(designation) as ParkDesignationType
   const { loading, parks } = useParks(selectedDropdownItem);
   const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+  const navigate = useNavigate();
 
   const methods = useForm({
     defaultValues: {
@@ -68,7 +74,7 @@ const ParkContainer = () => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit(formData);
     }
-    setSelectedDropdownItem(item as ParkDesignationType);
+    navigate(`/?designation=${kebabCase(item)}`);
   };
 
   return (
