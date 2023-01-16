@@ -20,8 +20,6 @@ const Tooltip = ({
   const x = coords?.[0] - 100; // x - half tooltip width to center
   const y = coords?.[1];
 
-  console.log(park)
-
   const handleImgError = () => {
     setImageErr(true);
   };
