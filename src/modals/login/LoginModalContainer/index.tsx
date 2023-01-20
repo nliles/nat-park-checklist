@@ -36,13 +36,8 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        console.log(e)
-        const errorMsg = e?.data?.message;
-        if (errorMsg) {
-          setFormError(errorMsg);
-        } else {
-          setFormError(copy.generalError);
-        }
+        const errorMsg = e?.data?.message || copy.generalError;
+        setFormError(errorMsg);
       }
     }
   };
