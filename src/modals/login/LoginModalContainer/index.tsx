@@ -13,7 +13,11 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
   const [formError, setFormError] = useState<string>();
   const dispatch = useDispatch();
-  const toggleRegistration = () => setShowRegistration((prevVal) => !prevVal);
+
+  const toggleRegistration = () => {
+    setShowRegistration((prevVal) => !prevVal);
+    setFormError(undefined);
+  }
 
   const handleSuccess = (token: string) => {
     saveState("token", token);
