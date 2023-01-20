@@ -37,6 +37,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
           handleSuccess(user.token);
         } else {
           const { user } = await login(formattedValues);
+          console.log('here', user)
           handleSuccess(user.token);
         }
       } catch (e: any) {

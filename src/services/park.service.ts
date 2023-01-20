@@ -3,11 +3,7 @@ import { ParkDesignationType } from "enum/ParkDesignation";
 import { Parks } from "types";
 
 export const getParks = (): Promise<{ parks: Parks }> => {
-  return apiClient.get("/park", {
-    headers: {
-      Authorization: sessionStorage.getItem("token") || "",
-    },
-  });
+  return apiClient.get("/park");
 };
 
 export const updateParks = (
@@ -16,11 +12,6 @@ export const updateParks = (
 ): Promise<{ parks: Parks }> => {
   return apiClient.post(
     "/park",
-    { designation, parks },
-    {
-      headers: {
-        Authorization: sessionStorage.getItem("token") || "",
-      },
-    }
+    { designation, parks }
   );
 };
