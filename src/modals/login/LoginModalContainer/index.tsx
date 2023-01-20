@@ -11,8 +11,6 @@ import copy from "./en";
 
 const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
-  const [formPasswordError, setFormPasswordError] = useState<string>();
-  const [formEmailError, setFormEmailError] = useState<string>();
   const [formError, setFormError] = useState<string>();
   const dispatch = useDispatch();
   const toggleRegistration = () => setShowRegistration((prevVal) => !prevVal);
@@ -38,10 +36,10 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
           handleSuccess(user.token);
         }
       } catch (e: any) {
-        if (e.data?.error === copy.emailError) {
-          setFormEmailError(copy.emailError);
-        } else if (e.data?.error === copy.passwordError) {
-          setFormPasswordError(copy.passwordError);
+        console.log(e)
+        const errorMsg = e?.data?.message;
+        if (errorMsg) {
+          setFormError(errorMsg);
         } else {
           setFormError(copy.generalError);
         }
@@ -56,8 +54,6 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
         handleButtonClick={toggleRegistration}
         showRegistration={showRegistration}
         formError={formError}
-        formPasswordError={formPasswordError}
-        formEmailError={formEmailError}
       />
     </Modal>
   );
