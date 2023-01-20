@@ -12,7 +12,8 @@ const LoginModalContainer = ({
   formError,
 }: LoginModalProps) => {
   const btnTxt = showRegistration ? copy.signInText : copy.signUpText;
-  const paragraphText = copy.paragraphText(btnTxt);
+  const copyVar = showRegistration ? copy.signUpText : copy.signInText;
+  const paragraphText = copy.paragraphText(copyVar);
   const registerTxt = showRegistration
     ? copy.accountRegistrationText
     : copy.accountLoginText;
