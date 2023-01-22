@@ -5,6 +5,4 @@ export type LoginModalProps = {
   handleButtonClick: () => void;
   showRegistration: boolean;
   formError?: string;
-  formEmailError?: string;
-  formPasswordError?: string;
 };

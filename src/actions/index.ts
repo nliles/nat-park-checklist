@@ -1,9 +1,9 @@
 export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
 
-export const loginSuccess = (token: string) => ({
+export const loginSuccess = (user: string) => ({
   type: IS_AUTHENTICATED,
-  token,
+  user,
 });
 
 export const logoutSuccess = () => ({

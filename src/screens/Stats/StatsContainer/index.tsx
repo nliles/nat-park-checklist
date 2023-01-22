@@ -6,7 +6,7 @@ import latLong from "data/latLong";
 import StatsPage from "screens/Stats/StatsPage";
 
 const StatsContainer = () => {
-  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const { selectedParks } = useSelectedParks(isLoggedIn);
   return (
     <PageWrapper>

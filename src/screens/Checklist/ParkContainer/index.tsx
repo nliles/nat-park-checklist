@@ -18,7 +18,7 @@ import copy from "./en";
 const ParkContainer = () => {
   const [initialValues, setInitialValues] = useState<string[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
-  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType
@@ -65,8 +65,10 @@ const ParkContainer = () => {
       const { parks } = await updateParks(selectedDropdownItem, values);
       setSelectedParks(parks);
       toast.success(copy.updateSuccess);
-    } catch (err) {
-      toast.error(copy.updateError);
+    } catch (err: any) {
+      if (err?.status !== 401) {
+        toast.error(copy.updateError);
+      }
     }
   };
 

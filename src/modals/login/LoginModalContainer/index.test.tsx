@@ -19,7 +19,7 @@ describe("<LoginModalContainer />", () => {
   const userRes = {
     user: {
       email: "test@test.com",
-      token: "123",
+      id: "123",
     },
   };
 
@@ -81,7 +81,7 @@ describe("<LoginModalContainer />", () => {
         })
       );
       expect(mockDispatch).toBeCalledWith({
-        token: "123",
+        user: "123",
         type: "IS_AUTHENTICATED",
       });
     });
@@ -103,7 +103,7 @@ describe("<LoginModalContainer />", () => {
         })
       );
       expect(mockDispatch).toBeCalledWith({
-        token: "123",
+        user: "123",
         type: "IS_AUTHENTICATED",
       });
     });

@@ -1,6 +1,8 @@
 import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 import { logoutSuccess } from "actions";
+import { logout } from "services/auth.service";
 import { SubNavProps } from "./types";
 import styles from "./index.module.scss";
 import cn from "classnames";
@@ -26,9 +28,15 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
 
-  const handleClick = () => {
-    sessionStorage.removeItem("token");
-    dispatch(logoutSuccess());
+  const handleClick = async () => {
+    try {
+      logout()
+      localStorage.removeItem("user");
+      dispatch(logoutSuccess());
+      toast.success("Successfully logged out.");
+    } catch (e) {
+      toast.error("Sorry, we couldn't log you out. Please try again later.");
+    }
   };
 
   return (

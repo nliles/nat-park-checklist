@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "actions";
 import { login, register } from "services/auth.service";
-import { saveState } from "storage/sessionStorage";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
 import LoginModal from "modals/login/LoginModal";
@@ -19,9 +18,9 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
     setFormError(undefined);
   }
 
-  const handleSuccess = (token: string) => {
-    saveState("token", token);
-    dispatch(loginSuccess(token));
+  const handleSuccess = (userId: string) => {
+    localStorage.setItem("user", userId)
+    dispatch(loginSuccess(userId));
     onClose();
   };
 
@@ -34,11 +33,10 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
       try {
         if (showRegistration) {
           const { user } = await register(formattedValues);
-          handleSuccess(user.token);
+          handleSuccess(user.id);
         } else {
           const { user } = await login(formattedValues);
-          console.log('here', user)
-          handleSuccess(user.token);
+          handleSuccess(user.id);
         }
       } catch (e: any) {
         const errorMsg = e?.data?.message || copy.generalError;

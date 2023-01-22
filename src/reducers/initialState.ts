@@ -1,5 +1,5 @@
 export const initialAuthState = {
-  token: sessionStorage.getItem("token") || null,
+  user: localStorage.getItem("user") || null,
 };
 
 const initialState = {

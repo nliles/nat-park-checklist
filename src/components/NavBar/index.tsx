@@ -13,7 +13,7 @@ import styles from "./index.module.scss";
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.user);
 
   const toggleClose = () => setShowMenu((prevState) => !prevState);
   const toggleModal = () => setShowModal((prevState) => !prevState);

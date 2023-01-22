@@ -18,7 +18,7 @@ const ParkList = ({
     await handleOnSubmit(values.parkData);
   };
 
-  const isLoggedIn = useSelector((state: State) => !!state.auth.token);
+  const isLoggedIn = useSelector((state: State) => !!state.auth.user);
 
   const {
     handleSubmit,
