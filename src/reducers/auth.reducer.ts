@@ -7,11 +7,11 @@ const auth = (state: AuthState = initialAuthState, action: AnyAction) => {
   switch (action.type) {
     case IS_AUTHENTICATED:
       return {
-        token: action.token,
+        user: action.user,
       };
     case NOT_AUTHENTICATED:
       return {
-        token: null,
+        user: null,
       };
     default:
       return state;

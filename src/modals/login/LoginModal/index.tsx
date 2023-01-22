@@ -7,8 +7,6 @@ const LoginModalContainer = ({
   handleOnSubmit,
   handleButtonClick,
   showRegistration,
-  formEmailError,
-  formPasswordError,
   formError,
 }: LoginModalProps) => {
   const btnTxt = showRegistration ? copy.signInText : copy.signUpText;
@@ -26,8 +24,6 @@ const LoginModalContainer = ({
         showRegistration={showRegistration}
         handleOnSubmit={handleOnSubmit}
         formError={formError}
-        formEmailError={formEmailError}
-        formPasswordError={formPasswordError}
       />
       <p className={styles.registerText}>
         {registerTxt}

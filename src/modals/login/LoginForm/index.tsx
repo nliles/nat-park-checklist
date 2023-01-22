@@ -11,8 +11,6 @@ const LoginForm = ({
   showRegistration,
   handleOnSubmit,
   formError,
-  formEmailError,
-  formPasswordError,
 }: LoginFormProps) => {
   const submitTxt = showRegistration ? copy.signUpText : copy.signInText;
 
@@ -38,7 +36,6 @@ const LoginForm = ({
           type="email"
           autoComplete="email"
           required
-          formError={formEmailError}
           rules={{
             required: copy.emailRequired,
             validate: (val: string) => {
@@ -53,7 +50,6 @@ const LoginForm = ({
           label="Password"
           type="password"
           required
-          formError={formPasswordError}
           rules={{
             required: copy.passwordRequired,
             validate: (val: string) => {

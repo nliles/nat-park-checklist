@@ -8,3 +8,7 @@ export const register = (user: User): Promise<UserInfo> => {
 export const login = (user: User): Promise<UserInfo> => {
   return apiClient.post("/auth/login", user);
 };
+
+export const logout = () => {
+  return apiClient.post("/auth/logout");
+};

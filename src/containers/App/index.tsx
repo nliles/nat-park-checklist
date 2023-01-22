@@ -1,7 +1,6 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ToasterAlert from "components/ui/ToasterAlert";
-import Auth from "Auth";
 import ProtectedRoute from "components/ProtectedRoute";
 import store from "store";
 import ParkContainer from "screens/Checklist/ParkContainer";
@@ -11,7 +10,6 @@ import "./index.scss";
 const App = () => {
   return (
     <Provider store={store}>
-      <Auth>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<ParkContainer />} />
@@ -27,7 +25,6 @@ const App = () => {
           <div id="modal-root" />
         </BrowserRouter>
         <ToasterAlert />
-      </Auth>
     </Provider>
   );
 };

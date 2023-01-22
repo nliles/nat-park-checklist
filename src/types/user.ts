@@ -1,13 +1,13 @@
-type UserResponse = {
+export type User = {
   email: string;
-  token: string;
+  password: string;
+};
+
+type UserResponse = {
+  id: string;
+  email: string;
 };
 
 export type UserInfo = {
   user: UserResponse;
-};
-
-export type User = {
-  email: string;
-  password: string;
 };

@@ -19,8 +19,10 @@ function useSelectedParks(isLoggedIn: boolean) {
           saveState(storageKey, JSON.stringify(data));
         }
         setSelectedParks(data);
-      } catch (e) {
-        toast.error(copy.selectedParksError);
+      } catch (err: any) {
+        if (err?.status !== 401) {
+          toast.error(copy.selectedParksError);
+        }
       }
     };
     if (isLoggedIn) {

@@ -27,7 +27,7 @@ describe("<NavBar />", () => {
   });
 
   it("Displays count when a user is logged in", () => {
-    useSelectorMock.mockReturnValue({ auth: { token: "123" } });
+    useSelectorMock.mockReturnValue({ auth: { user: "123" } });
     render(<NavBar count={10} />);
     expect(screen.getByText("10")).toBeVisible();
   });
