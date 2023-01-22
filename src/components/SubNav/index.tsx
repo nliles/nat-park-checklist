@@ -30,7 +30,7 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
 
   const handleClick = async () => {
     try {
-      logout()
+      await logout()
       localStorage.removeItem("user");
       dispatch(logoutSuccess());
       toast.success("Successfully logged out.");

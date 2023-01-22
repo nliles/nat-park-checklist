@@ -3,7 +3,7 @@ import { logoutSuccess } from "actions";
 import toast from "react-hot-toast";
 import store from 'store';
 
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 axios.defaults.headers.common.crossdomain = true;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
