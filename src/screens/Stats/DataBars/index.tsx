@@ -2,8 +2,12 @@ import ParkDesignation from "enum/ParkDesignation";
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import getParkTotal from "helpers/getParkTotal";
-import { DataBarsProps } from "./types";
+import { Parks } from "types";
 import styles from "./index.module.scss";
+
+type DataBarsProps = {
+  items: Parks;
+};
 
 const DataBars = ({ items }: DataBarsProps) => {
   const itemKeys = Object.keys(items) as ParkDesignation[];
