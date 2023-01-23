@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "actions";
+import toast from "react-hot-toast";
 import { login, register } from "services/auth.service";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
 import LoginModal from "modals/login/LoginModal";
-import { LoginModalContainerProps } from "./types";
-import copy from "./en";
+import copy from "modals/login/en";
+
+type LoginModalContainerProps = {
+  onClose: () => void;
+};
 
 const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
@@ -34,6 +38,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
         if (showRegistration) {
           const { user } = await register(formattedValues);
           handleSuccess(user.id);
+          toast.success(copy.registrationSuccess)
         } else {
           const { user } = await login(formattedValues);
           handleSuccess(user.id);

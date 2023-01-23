@@ -1,7 +1,14 @@
 import LoginForm from "../LoginForm";
-import copy from "./en";
-import { LoginModalProps } from "./types";
+import { User } from "types/user";
+import copy from "modals/login/en";
 import styles from "./index.module.scss";
+
+export type LoginModalProps = {
+  handleOnSubmit: (values: User) => void;
+  handleButtonClick: () => void;
+  showRegistration: boolean;
+  formError?: string;
+};
 
 const LoginModalContainer = ({
   handleOnSubmit,

@@ -1,8 +1,14 @@
 import startCase from "lodash/startCase";
+import { Parks } from "types";
 import ParkDesignation from "enum/ParkDesignation";
 import getParkTotal from "helpers/getParkTotal";
-import { DataTableProps } from "./types";
 import styles from "./index.module.scss";
+
+type DataTableProps = {
+  count: number;
+  total: number;
+  items: Parks;
+};
 
 const DataTable = ({ count, total, items }: DataTableProps) => {
   const headers = ["Park Category", "Visited", "Total"];

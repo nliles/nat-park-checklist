@@ -15,7 +15,7 @@ const ToasterAlert = () => (
         },
       },
       success: {
-        duration: 2000,
+        duration: 4000,
         iconTheme: {
           primary: "#4b5e26",
           secondary: "#fff",

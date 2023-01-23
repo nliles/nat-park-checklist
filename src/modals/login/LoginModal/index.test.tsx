@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { LoginModalProps } from "./types";
-import LoginModal from "modals/login/LoginModal";
+import LoginModal, { LoginModalProps } from "modals/login/LoginModal";
 
 describe("<LoginModal />", () => {
   const baseProps = {

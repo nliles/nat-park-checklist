@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ParkDesignation from "enum/ParkDesignation";
 import FormProviderWrapper from "test-utils/FormProviderWrapper";
-import { ParkViewProps } from "./types";
+import { ParkViewProps } from ".";
 import ParkView from ".";
 
 jest.mock("react-redux", () => ({

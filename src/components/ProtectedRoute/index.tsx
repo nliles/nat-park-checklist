@@ -6,9 +6,12 @@ import { State } from "reducers/types";
 export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
+    return (
+      <Navigate to="/" replace />
+    )
+  } else {
+    return <>{children}</>;
   }
-  return <>{children}</>;
 };
 
 export default ProtectedRoute;

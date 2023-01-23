@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import useWindowResize from "hooks/useWindowResize";
 import { TOTAL_UNITS } from "../../../constants";
+import { Park } from "types/park";
+import { Parks } from "types";
 import flattenParks from "helpers/flattenParks";
 import Header from "components/Header";
 import CircularProgressBar from "components/ui/CircularProgressBar";
@@ -8,8 +10,12 @@ import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
 import Count from "./Count";
 import Map from "components/Map";
-import { StatsPageProps } from "./types";
 import styles from "./index.module.scss";
+
+type StatsPageProps = {
+  selected: Parks;
+  parks: Park[];
+};
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
