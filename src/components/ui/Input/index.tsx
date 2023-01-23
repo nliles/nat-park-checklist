@@ -1,7 +1,16 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, RegisterOptions } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
-import { InputProps } from "./types";
 import styles from "./index.module.scss";
+
+type InputProps = {
+  id: string;
+  label: string;
+  type?: string;
+  autoComplete?: string;
+  required?: boolean;
+  formError?: string;
+  rules?: RegisterOptions;
+};
 
 const Input = ({
   id,
