@@ -1,8 +1,16 @@
 import cn from "classnames";
 import { FaSpinner } from "react-icons/fa";
-import { ButtonType } from "components/ui/Button/enum";
-import { ButtonProps } from "./types";
+import { ButtonType, ButtonTypeValue } from "components/ui/Button/enum";
 import styles from "./index.module.scss";
+
+type ButtonProps = {
+  txt: string;
+  disabled?: boolean;
+  isLoading?: boolean;
+  type?: ButtonTypeValue;
+  sizeSm?: boolean;
+  styleName?: string;
+};
 
 const Button = ({
   type = ButtonType.BUTTON,

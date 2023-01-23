@@ -9,8 +9,15 @@ import { Park } from "types/park";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
-import { MapProps } from "./types";
 import styles from "./index.module.scss";
+
+type MapProps = {
+  parks: Park[];
+  selectedParks?: string[];
+  fixedWidth?: number;
+  showTree?: boolean;
+  styleName?: string;
+};
 
 const Map = ({
   parks = [],

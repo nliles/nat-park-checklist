@@ -3,13 +3,15 @@ import { logoutSuccess } from "actions";
 import toast from "react-hot-toast";
 import store from 'store';
 
+const baseURL = "https://nat-park-checklist.herokuapp.com/";
+
 axios.defaults.withCredentials = true
 axios.defaults.headers.common.crossdomain = true;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
 // Main API base
 export const apiClient = axios.create({
-  baseURL: "https://nat-park-checklist.herokuapp.com/",
+  baseURL,
 });
 
 const handleError = (error: AxiosError) => {

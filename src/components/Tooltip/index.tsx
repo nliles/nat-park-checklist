@@ -1,8 +1,15 @@
-import { useState, useEffect } from "react";
-import { TooltipProps } from "./types";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Park } from "types/park";
 import styles from "./index.module.scss";
 
 const NP_ICON = "np.svg";
+
+type TooltipProps = {
+  coords: number[];
+  park: Park;
+  tooltipId: string;
+  setTooltipContent: Dispatch<SetStateAction<Park | undefined>>;
+};
 
 const Tooltip = ({
   park,

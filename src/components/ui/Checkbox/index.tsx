@@ -1,7 +1,12 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { CheckboxProps } from "./types";
 import styles from "./index.module.scss";
+
+export type CheckboxProps = {
+  id: string;
+  label: string;
+  name: string;
+};
 
 const Checkbox = ({ id, label, name }: CheckboxProps) => {
   const { register } = useFormContext();

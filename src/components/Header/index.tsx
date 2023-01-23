@@ -1,5 +1,8 @@
-import { HeaderProps } from "./types";
 import styles from "./index.module.scss";
+
+type HeaderProps = {
+  title: string;
+};
 
 const Header = ({ title }: HeaderProps) => {
   return (

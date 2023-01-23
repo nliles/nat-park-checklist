@@ -1,7 +1,12 @@
 import cn from "classnames";
-import { TotalProps } from "./types";
 import { NAT_PARK_TOTAL_LINK } from "../../constants";
 import styles from "./index.module.scss";
+
+type TotalProps = {
+  count: number;
+  total: number;
+  styleName?: string;
+};
 
 const Total = ({ count, total, styleName }: TotalProps) => {
   return (

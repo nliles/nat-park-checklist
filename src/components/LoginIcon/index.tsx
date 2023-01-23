@@ -1,5 +1,8 @@
-import { LoginIconProps } from "./types";
 import styles from "./index.module.scss";
+
+type LoginIconProps = {
+  handleClick: () => void;
+};
 
 const LoginIcon = ({ handleClick }: LoginIconProps) => {
   return (
