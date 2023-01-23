@@ -6,6 +6,10 @@ const NP_ICON = "np.svg";
 
 // show tooltip when hovering over a region
 export const handleMouseOver = function (park: Park) {
+  console.log(park)
+  // const x = coords?.[0] - 100; // x - half tooltip width to center
+  // const y = coords?.[1];
+
   const image = park.images?.[0];
   const imageSrc = image?.url || NP_ICON;
   const statesArr = park.states?.split(",") || [];
