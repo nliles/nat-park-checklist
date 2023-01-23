@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import PageWrapper from "components/PageWrapper";
-import ParkDesignation from "enum/ParkDesignation";
+import { Park } from "types/park";
+import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Spinner from "components/ui/Spinner";
@@ -9,8 +10,18 @@ import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
-import { ParkViewProps } from "./types";
 import styles from "./index.module.scss";
+
+export type ParkViewProps = {
+  count: number;
+  handleListItemChange: (item: string) => void;
+  loading?: boolean;
+  parks: Park[];
+  initialValues: string[];
+  selectedParks?: string[];
+  selectedDropdownItem: ParkDesignationType;
+  handleOnSubmit: (values: string[]) => void;
+};
 
 const ParkView = ({
   count,
