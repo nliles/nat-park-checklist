@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
+import * as d3 from "d3";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
 import Tooltip from "components/Tooltip";
 import { Park } from "types/park";
+import { handleMouseOver, handleMouseOut, handleMouseMove } from './handleTooltip';
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -36,6 +38,19 @@ const Map = ({
   const offsetWidth = 50;
   const bottomPadding = usedWidth > 768 ? 100 : 0;
 
+  useEffect(() => {
+    /// tooltip creation
+    d3.select("body")
+      .append("div")
+      .attr("id", "tooltip")
+      .attr("class", styles.tooltip)
+      .enter()
+      .append("h1")
+      .enter()
+      .append("span")
+    ///
+  }, []);
+
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
@@ -44,14 +59,6 @@ const Map = ({
     usData
   );
   const pathGenerator = geoPath().projection(projection);
-
-  const handleMouseOverPark = (park: Park) => {
-    setTooltipContent(park);
-  };
-
-  const handleMouseLeavePark = () => {
-    setTooltipContent(undefined);
-  };
 
   // @ts-expect-error
   const states = usData.features.map((d) => (
@@ -65,10 +72,10 @@ const Map = ({
       coords={projection([p.longitude, p.latitude])}
       isSelected={selectedParks.includes(p.id)}
       park={p}
-      handleMouseOver={handleMouseOverPark}
-      handleMouseLeave={handleMouseLeavePark}
+      onMouseMove={(e) => handleMouseMove(e)}
+      onMouseOver={() => handleMouseOver(p)}
+      onMouseOut={() => handleMouseOut()}
       number={i + 1}
-      tooltipName={tooltipContent?.name}
       showTree={showTree}
       circleSize={circleSize}
     />
@@ -79,17 +86,6 @@ const Map = ({
       <svg width={usedWidth} height={height + bottomPadding}>
         {states}
         {natParks}
-        {tooltipContent && tooltipContent.name && (
-          <Tooltip
-            park={tooltipContent}
-            coords={projection([
-              tooltipContent.longitude,
-              tooltipContent.latitude,
-            ])}
-            tooltipId={tooltipContent.name}
-            setTooltipContent={setTooltipContent}
-          />
-        )}
       </svg>
     </div>
   );

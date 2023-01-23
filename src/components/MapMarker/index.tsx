@@ -1,3 +1,4 @@
+import React from "react";
 import TreeIcon from "components/Icons/TreeIcon";
 import cn from "classnames";
 import { Park } from "types/park";
@@ -7,8 +8,9 @@ export type MapMarkerProps = {
   coords: number[];
   park: Park;
   isSelected: boolean;
-  handleMouseOver: (park: Park) => void;
-  handleMouseLeave: () => void;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
+  onMouseMove: (e: React.MouseEvent) => void;
   number: number;
   tooltipName?: string;
   showTree?: boolean;
@@ -19,8 +21,9 @@ const MapMarker = ({
   coords,
   park,
   isSelected,
-  handleMouseOver,
-  handleMouseLeave,
+  onMouseOver,
+  onMouseOut,
+  onMouseMove,
   number,
   tooltipName,
   showTree,
@@ -40,8 +43,9 @@ const MapMarker = ({
             x={x}
             y={y}
             className={styles.icon}
-            onMouseEnter={() => handleMouseOver(park)}
-            onMouseLeave={() => handleMouseLeave()}
+            onMouseEnter={onMouseOver}
+            onMouseOut={onMouseOut}
+            onMouseMove={onMouseMove}
           >
             <TreeIcon fill={fill} stroke={stroke} />
             <a
