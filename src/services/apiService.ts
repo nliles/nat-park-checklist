@@ -2,8 +2,7 @@ import axios, { AxiosError } from "axios";
 import { logoutSuccess } from "actions";
 import toast from "react-hot-toast";
 import store from 'store';
-
-const baseURL = "https://nat-park-checklist.herokuapp.com/";
+import { baseURL } from './constants';
 
 axios.defaults.withCredentials = true
 axios.defaults.headers.common.crossdomain = true;
