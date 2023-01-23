@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import ReactModal from "react-modal";
 import { createPortal } from "react-dom";
-import { ModalProps } from "./types";
 import styles from "./index.module.scss";
+
+type ModalProps = {
+  children: ReactNode;
+  onClose: () => void;
+  modalLabel: string;
+};
 
 const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
   const [modalRoot, setModalRoot] = useState<HTMLElement | null>();

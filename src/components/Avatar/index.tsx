@@ -1,6 +1,10 @@
 import cn from "classnames";
-import { AvatarProps } from "./types";
 import styles from "./index.module.scss";
+
+type AvatarProps = {
+  active: boolean;
+  handleClose: () => void;
+};
 
 const Avatar = ({ active, handleClose }: AvatarProps) => {
   return (

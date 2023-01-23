@@ -3,9 +3,13 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { logoutSuccess } from "actions";
 import { logout } from "services/auth.service";
-import { SubNavProps } from "./types";
 import styles from "./index.module.scss";
 import cn from "classnames";
+
+type SubNavProps = {
+  showMenu: boolean;
+  onClick: () => void;
+};
 
 const SubNav = ({ showMenu, onClick }: SubNavProps) => {
   const myRef = useRef<HTMLDivElement>(null);

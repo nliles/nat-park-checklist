@@ -7,8 +7,11 @@ import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from "components/Avatar";
 import LoginIcon from "components/LoginIcon";
-import { NavBarProps } from "./types";
 import styles from "./index.module.scss";
+
+type NavBarProps = {
+  count?: number;
+};
 
 const NavBar = ({ count }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState(false);

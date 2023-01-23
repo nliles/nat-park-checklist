@@ -1,7 +1,19 @@
 import TreeIcon from "components/Icons/TreeIcon";
 import cn from "classnames";
-import { MapMarkerProps } from "./types";
+import { Park } from "types/park";
 import styles from "./index.module.scss";
+
+export type MapMarkerProps = {
+  coords: number[];
+  park: Park;
+  isSelected: boolean;
+  handleMouseOver: (park: Park) => void;
+  handleMouseLeave: () => void;
+  number: number;
+  tooltipName?: string;
+  showTree?: boolean;
+  circleSize?: number;
+};
 
 const MapMarker = ({
   coords,

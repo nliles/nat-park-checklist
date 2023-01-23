@@ -1,4 +1,7 @@
-import { IconProps } from "./types";
+type IconProps = {
+  fill: string;
+  stroke: string;
+};
 
 const TreeIcon = ({ fill, stroke }: IconProps) => (
   <svg
