@@ -1,5 +1,10 @@
-import { CountProps } from "./types";
 import styles from "./index.module.scss";
+
+type CountProps = {
+  header: string;
+  count: number;
+  total: number;
+};
 
 const Count = ({ header, count, total }: CountProps) => {
   return (
