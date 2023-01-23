@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import cn from "classnames";
 import { logoutSuccess } from "actions";
 import { logout } from "services/auth.service";
 import styles from "./index.module.scss";
-import cn from "classnames";
+import copy from "./en";
 
 type SubNavProps = {
   showMenu: boolean;
@@ -35,11 +36,12 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
   const handleClick = async () => {
     try {
       await logout()
+      onClick();
       localStorage.removeItem("user");
       dispatch(logoutSuccess());
-      toast.success("Successfully logged out.");
+      toast.success(copy.logoutSuccess);
     } catch (e) {
-      toast.error("Sorry, we couldn't log you out. Please try again later.");
+      toast.error(copy.logoutError);
     }
   };
 
@@ -53,11 +55,11 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
     >
       <ul className={styles.list}>
         <li className={styles.listItem}>
-          <a href="/stats">My Stats</a>
+          <a href="/stats">{copy.statsLinkText}</a>
         </li>
         <li className={styles.listItem}>
           <button type="button" onClick={handleClick}>
-            Logout
+            {copy.logoutBtnText}
           </button>
         </li>
       </ul>
