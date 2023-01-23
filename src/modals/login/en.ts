@@ -7,6 +7,7 @@ const copy = {
   paragraphText: (signUpText: string) => `${signUpText} to save your progress.`,
   accountRegistrationText: "Already have an account?",
   accountLoginText: "Don't have an account?",
+  registrationSuccess: "Thank you for creating an account!",
   generalError: "Something went wrong. Please try again later.",
   emailRequired: "Email required. Please fill out this field",
   emailLength: "Email must be longer than 5 characters.",
