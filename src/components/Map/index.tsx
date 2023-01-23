@@ -7,7 +7,11 @@ import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
 import Tooltip from "components/Tooltip";
 import { Park } from "types/park";
-import { handleMouseOver, handleMouseOut, handleMouseMove } from './handleTooltip';
+import {
+  handleMouseOver,
+  handleMouseOut,
+  handleMouseMove,
+} from "./handleTooltip";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -40,15 +44,21 @@ const Map = ({
 
   useEffect(() => {
     /// tooltip creation
-    d3.select("body")
+    const tooltip = d3
+      .select("body")
       .append("div")
       .attr("id", "tooltip")
-      .attr("class", styles.tooltip)
-      .enter()
-      .append("h1")
-      .enter()
-      .append("span")
-    ///
+      .attr("class", styles.tooltip);
+
+    const imgContainer = tooltip
+      .append("div")
+      .attr("class", styles.imgContainer);
+    const textContainer = tooltip.append("div").attr("class", styles.text);
+
+    textContainer.append("h1");
+    textContainer.append("span");
+
+    imgContainer.append("img").attr("width", 30).attr("height", 30);
   }, []);
 
   const projection = geoAlbersUsaTerritories().fitExtent(

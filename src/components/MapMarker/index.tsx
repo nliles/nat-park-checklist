@@ -43,7 +43,7 @@ const MapMarker = ({
             x={x}
             y={y}
             className={styles.icon}
-            onMouseEnter={onMouseOver}
+            onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
             onMouseMove={onMouseMove}
           >

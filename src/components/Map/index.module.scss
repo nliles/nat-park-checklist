@@ -11,16 +11,10 @@
   stroke: $tanOutline;
 }
 
-// .tooltip {
-//   width: 200px;
-//   height: 100%;
-//   pointer-events: none;
-// }
-
 .tooltip {
+  display: flex;
   position: absolute;
   opacity: 0;
-  padding: 10px;
   background: white;
   border-radius: 10px;
   border: 1px solid $black;
@@ -55,6 +49,7 @@
 }
 
 .text {
+  max-width: 100px;
   margin: 10px;
   font-weight: normal;
   display: flex;
