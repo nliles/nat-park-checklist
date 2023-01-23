@@ -1,12 +1,19 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
+import { Park } from "types/park";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import Total from "components/Total";
-import { ListProps } from "./types";
 import styles from "./index.module.scss";
+
+type ListProps = {
+  parks: Park[];
+  selectedDropdownItem: string;
+  initialParkValues: string[];
+  handleOnSubmit: (values: string[]) => void;
+};
 
 const ParkList = ({
   parks = [],
