@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "modals/login/LoginForm";
-import { LoginFormProps } from "./types";
+import { LoginFormProps } from ".";
 
 describe("<LoginForm />", () => {
   const mockSubmit = jest.fn(() => {});

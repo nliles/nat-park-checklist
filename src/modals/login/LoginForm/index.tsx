@@ -2,10 +2,16 @@ import { useForm, FormProvider } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
 import Input from "components/ui/Input";
 import Button from "components/ui/Button";
+import { User } from "types/user";
 import { ButtonType } from "components/ui/Button/enum";
-import { LoginFormProps } from "./types";
 import copy from "./en";
 import styles from "./index.module.scss";
+
+export type LoginFormProps = {
+  showRegistration: boolean;
+  handleOnSubmit: (values: User) => void;
+  formError?: string;
+};
 
 const LoginForm = ({
   showRegistration,

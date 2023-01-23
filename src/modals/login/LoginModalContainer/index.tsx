@@ -5,8 +5,11 @@ import { login, register } from "services/auth.service";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
 import LoginModal from "modals/login/LoginModal";
-import { LoginModalContainerProps } from "./types";
 import copy from "./en";
+
+type LoginModalContainerProps = {
+  onClose: () => void;
+};
 
 const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const [showRegistration, setShowRegistration] = useState<boolean>(false);
