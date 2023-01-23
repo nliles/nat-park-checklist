@@ -6,7 +6,7 @@ import styles from "./index.module.scss";
 type PageWrapperProps = {
   children: ReactNode;
   count?: number;
-}
+};
 
 const PageWrapper = ({ children, count }: PageWrapperProps) => (
   <div className={styles.wrapper}>

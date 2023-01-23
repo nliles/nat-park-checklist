@@ -35,7 +35,7 @@ const SubNav = ({ showMenu, onClick }: SubNavProps) => {
 
   const handleClick = async () => {
     try {
-      await logout()
+      await logout();
       onClick();
       localStorage.removeItem("user");
       dispatch(logoutSuccess());
