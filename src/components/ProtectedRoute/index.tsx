@@ -7,9 +7,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   if (!isLoggedIn) {
     return (
-      <>
-        <Navigate to="/" replace />;
-      </>
+      <Navigate to="/" replace />
     )
   } else {
     return <>{children}</>;
