@@ -5,7 +5,6 @@ import usMapData from "data/us";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
-import Tooltip from "components/Tooltip";
 import { Park } from "types/park";
 import {
   handleMouseOver,

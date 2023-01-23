@@ -24,12 +24,13 @@ export const handleMouseOver = function (park: Park) {
 
 // hide tooltip as mouse leaves region
 export const handleMouseOut = function () {
+  d3.select("#tooltip div img").attr("src", "");
   d3.select("#tooltip").style("opacity", 0);
 };
 
 // get mouse location so tooltip tracks cursor
 export const handleMouseMove = function (event: React.MouseEvent) {
   d3.select("#tooltip")
-    .style("left", event.pageX - 20 + "px")
-    .style("top", event.pageY + 10 + "px");
+    .style("left", event.pageX + "px")
+    .style("top", event.pageY + "px");
 };

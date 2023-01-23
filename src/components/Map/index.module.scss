@@ -12,15 +12,17 @@
 }
 
 .tooltip {
-  display: flex;
   position: absolute;
+  display: flex;
+  height: auto;
+  width: auto;
+  max-width: 200px;
+  padding: 10px 0;
   opacity: 0;
   background: white;
   border-radius: 10px;
   border: 1px solid $black;
   font-size: 12px;
-  display: flex;
-  height: 80px;
 
   h1 {
     margin: 0;
@@ -43,12 +45,8 @@
   }
 }
 
-.header {
-  max-height: 50px;
-  overflow: hidden;
-}
-
 .text {
+  width: auto;
   max-width: 100px;
   margin: 10px;
   font-weight: normal;

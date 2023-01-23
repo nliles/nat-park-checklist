@@ -25,8 +25,9 @@ describe("<MapMarker />", () => {
         tooltipName="tooltip"
         showTree
         isSelected
-        handleMouseOver={mockMouseOver}
-        handleMouseLeave={mockMouseLeave}
+        onMouseOver={mockMouseOver}
+        onMouseMove={() => {}}
+        onMouseOut={mockMouseLeave}
       />
     );
   };
