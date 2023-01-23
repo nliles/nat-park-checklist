@@ -1,6 +1,6 @@
 import LoginForm from "../LoginForm";
 import { User } from "types/user";
-import copy from "./en";
+import copy from "modals/login/en";
 import styles from "./index.module.scss";
 
 export type LoginModalProps = {
