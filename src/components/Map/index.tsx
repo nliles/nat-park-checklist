@@ -11,7 +11,7 @@ import {
   handleMouseOut,
   handleMouseMove,
 } from "./handleTooltip";
-import useTooltip from './useTooltip';
+import useTooltip from "./useTooltip";
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";

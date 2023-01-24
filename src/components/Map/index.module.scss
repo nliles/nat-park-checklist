@@ -12,6 +12,7 @@
 }
 
 .tooltip {
+  visibility: hidden;
   position: absolute;
   display: flex;
   max-width: 150px;

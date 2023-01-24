@@ -3,6 +3,11 @@ import * as d3 from "d3";
 import styles from "./index.module.scss";
 
 function useTooltip() {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      d3.select("#tooltip").style("visibility", "hidden");
+    }
+  };
 
   useEffect(() => {
     /// tooltip creation
@@ -10,7 +15,6 @@ function useTooltip() {
       .select("body")
       .append("div")
       .attr("id", "tooltip")
-      .style("visibility", "hidden")
       .attr("class", styles.tooltip);
 
     const imgContainer = tooltip
@@ -21,9 +25,11 @@ function useTooltip() {
     textContainer.append("h1");
     textContainer.append("span");
 
-    imgContainer.append("img").attr("width", 30).attr("height", 30);
-  }, []);
+    imgContainer.append("img");
 
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 }
 
 export default useTooltip;

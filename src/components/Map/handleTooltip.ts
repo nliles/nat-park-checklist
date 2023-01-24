@@ -5,7 +5,7 @@ import { Park } from "types/park";
 const NP_ICON = "np.svg";
 
 // show tooltip when hovering over a region
-export const handleMouseOver = function (park: Park) {
+export const handleMouseOver = (park: Park) => {
   const image = park.images?.[0];
   const imageSrc = image?.url || NP_ICON;
   const statesArr = park.states?.split(",") || [];
@@ -23,13 +23,13 @@ export const handleMouseOver = function (park: Park) {
 };
 
 // hide tooltip as mouse leaves region
-export const handleMouseOut = function () {
+export const handleMouseOut = () => {
   d3.select("#tooltip div img").attr("src", "");
   d3.select("#tooltip").style("visibility", "hidden");
 };
 
 // get mouse location so tooltip tracks cursor
-export const handleMouseMove = function (event: React.MouseEvent) {
+export const handleMouseMove = (event: React.MouseEvent) => {
   d3.select("#tooltip")
     .style("left", event.pageX + "px")
     .style("top", event.pageY + "px");
