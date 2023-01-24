@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import cn from "classnames";
 import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
-import * as d3 from "d3";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
 import { Park } from "types/park";
@@ -32,7 +30,6 @@ const Map = ({
   showTree = true,
   styleName,
 }: MapProps) => {
-  const [tooltipContent, setTooltipContent] = useState<Park>();
   const [width] = useWindowResize();
   useTooltip();
   const usedWidth = fixedWidth || width;

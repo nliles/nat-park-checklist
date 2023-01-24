@@ -33,7 +33,6 @@ export const handleMouseMove = (event: React.MouseEvent) => {
     d3.select("#tooltip")?.node() as HTMLElement
   )?.getBoundingClientRect();
   const width = pos.width;
-  const height = pos.height;
   d3.select("#tooltip")
     .style("left", `${event.pageX - width / 2}px`)
     .style("top", `${event.pageY + 25}px`);
