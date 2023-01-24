@@ -9,6 +9,10 @@ function useTooltip() {
     }
   };
 
+  const handleError = () => {
+    d3.select("#tooltip div img").attr("src", "np.svg");
+  };
+
   useEffect(() => {
     /// tooltip creation
     const tooltip = d3
@@ -25,7 +29,7 @@ function useTooltip() {
     textContainer.append("h1");
     textContainer.append("span");
 
-    imgContainer.append("img");
+    imgContainer.append("img").on("error", handleError);
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
