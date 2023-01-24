@@ -11,6 +11,7 @@ import {
   handleMouseOut,
   handleMouseMove,
 } from "./handleTooltip";
+import useTooltip from './useTooltip';
 // @ts-expect-error
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -33,6 +34,7 @@ const Map = ({
 }: MapProps) => {
   const [tooltipContent, setTooltipContent] = useState<Park>();
   const [width] = useWindowResize();
+  useTooltip();
   const usedWidth = fixedWidth || width;
   const height = usedWidth / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
@@ -41,25 +43,6 @@ const Map = ({
   const offsetWidth = 50;
   const bottomPadding = usedWidth > 768 ? 100 : 0;
 
-  useEffect(() => {
-    /// tooltip creation
-    const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("id", "tooltip")
-      .attr("class", styles.tooltip);
-
-    const imgContainer = tooltip
-      .append("div")
-      .attr("class", styles.imgContainer);
-    const textContainer = tooltip.append("div").attr("class", styles.text);
-
-    textContainer.append("h1");
-    textContainer.append("span");
-
-    imgContainer.append("img").attr("width", 30).attr("height", 30);
-  }, []);
-
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
@@ -67,6 +50,7 @@ const Map = ({
     ],
     usData
   );
+
   const pathGenerator = geoPath().projection(projection);
 
   // @ts-expect-error

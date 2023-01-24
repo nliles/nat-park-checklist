@@ -14,10 +14,10 @@
 .tooltip {
   position: absolute;
   display: flex;
+  max-width: 150px;
   height: auto;
   width: auto;
   padding: 10px;
-  opacity: 0;
   background: white;
   border-radius: 10px;
   border: 1px solid $black;
@@ -45,7 +45,6 @@
 
 .text {
   width: auto;
-  max-width: 100px;
   margin-left: 10px;
   font-weight: normal;
   display: flex;
