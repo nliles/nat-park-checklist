@@ -29,6 +29,7 @@
 }
 
 .icon {
+  position: relative;
   display: none;
   @media (min-width: $tablet) {
     display: block;

@@ -24,7 +24,7 @@ const NavBar = ({ count }: NavBarProps) => {
     if (!isLoggedIn) {
       toggleModal();
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
   return (
     <nav className={styles.nav}>
