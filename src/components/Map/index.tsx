@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import cn from "classnames";
 import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
@@ -34,6 +34,7 @@ const Map = ({
   styleName,
 }: MapProps) => {
   const [width] = useWindowResize();
+  const d3Ref = useRef();
   useTooltip();
   const usedWidth = fixedWidth || width;
   const height = usedWidth / 2;
@@ -43,21 +44,28 @@ const Map = ({
   const offsetWidth = 50;
   const bottomPadding = usedWidth > 768 ? 100 : 0;
 
-  useEffect(() => {
+  const projection = geoAlbersUsaTerritories().fitExtent(
+    [
+      [padding, padding],
+      [usedWidth - offsetWidth, height],
+    ],
+    usData
+  );
+
+  const path = geoPath().projection(projection);
+
+  const draw = () => {
+
     const map = d3.select("#map")
 
-    const projection = geoAlbersUsaTerritories().fitExtent(
-      [
-        [padding, padding],
-        [usedWidth - offsetWidth, height],
-      ],
-      usData
-    );
+    d3.select("g").remove()
 
-    const path = geoPath().projection(projection);
 
     // Draw the map
-    map.append("g")
+    map
+    .attr("width", usedWidth)
+    .attr("height", height + bottomPadding)
+    .append("g")
         .selectAll("path")
         .data(usData.features)
         .enter().append("path")
@@ -73,17 +81,25 @@ const Map = ({
     //  .attr("xlink:href", 'np.svg')
     //  .attr("transform", (d) => "translate(" + projection([d.longitude , d.latitude]) + ")")
 
-     map.selectAll("circles")
-      .data(parks)
-      .enter()
-       .append("circle")
-       .attr("class", styles.circle)
-       .attr("cx", (d) => projection([d.longitude, d.latitude])[0])
-       .attr("cy", (d) => projection([d.longitude, d.latitude])[1])
-       .attr("r", circleSize)
-       .style("fill", (d) => selectedParks.includes(d.id) ? '#a8c686' : '#4b5e26')
+    map.selectAll("circles")
+     .data(parks)
+     .enter()
+      .append("circle")
+      .attr("class", styles.circle)
+      .attr("cx", (d) => projection([d.longitude, d.latitude])[0])
+      .attr("cy", (d) => projection([d.longitude, d.latitude])[1])
+      .attr("r", circleSize)
+      .style("fill", (d) => selectedParks.includes(d.id) ? '#a8c686' : '#4b5e26')
+  }
 
-  }, [usData, usedWidth, height, padding])
+  useEffect(() => {
+    draw()
+  })
+
+  useEffect(() => {
+    window.addEventListener("resize", draw)
+    return () => window.removeEventListener("resize", null)
+  }, [])
 
   // @ts-expect-error
   // const states = usData.features.map((d) => (
@@ -108,7 +124,7 @@ const Map = ({
 
   return (
     <div className={cn(styles.mapContainer, styleName)}>
-      <svg id="map" width={usedWidth} height={height + bottomPadding}>
+      <svg id="map">
       </svg>
     </div>
   );
