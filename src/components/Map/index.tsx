@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import cn from "classnames";
 import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
+import * as d3 from "d3";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
+import TreeIcon from "components/Icons/TreeIcon";
 import { Park } from "types/park";
 import {
   handleMouseOver,
@@ -40,42 +43,72 @@ const Map = ({
   const offsetWidth = 50;
   const bottomPadding = usedWidth > 768 ? 100 : 0;
 
-  const projection = geoAlbersUsaTerritories().fitExtent(
-    [
-      [padding, padding],
-      [usedWidth - offsetWidth, height],
-    ],
-    usData
-  );
+  useEffect(() => {
+    const map = d3.select("#map")
 
-  const pathGenerator = geoPath().projection(projection);
+    const projection = geoAlbersUsaTerritories().fitExtent(
+      [
+        [padding, padding],
+        [usedWidth - offsetWidth, height],
+      ],
+      usData
+    );
+
+    const path = geoPath().projection(projection);
+
+    // Draw the map
+    map.append("g")
+        .selectAll("path")
+        .data(usData.features)
+        .enter().append("path")
+            .attr("class", styles.state)
+            .attr("d", path)
+
+    // map.selectAll("markers")
+    //  .data(parks)
+    //  .enter()
+    //  .append("image")
+    //  .attr('width', 20)
+    //  .attr('height', 20)
+    //  .attr("xlink:href", 'np.svg')
+    //  .attr("transform", (d) => "translate(" + projection([d.longitude , d.latitude]) + ")")
+
+     map.selectAll("circles")
+      .data(parks)
+      .enter()
+       .append("circle")
+       .attr("class", styles.circle)
+       .attr("cx", (d) => projection([d.longitude, d.latitude])[0])
+       .attr("cy", (d) => projection([d.longitude, d.latitude])[1])
+       .attr("r", circleSize)
+       .style("fill", (d) => selectedParks.includes(d.id) ? '#a8c686' : '#4b5e26')
+
+  }, [usData, usedWidth, height, padding])
 
   // @ts-expect-error
-  const states = usData.features.map((d) => (
-    // @ts-expect-error
-    <path key={d.id} d={pathGenerator(d)} className={styles.state} />
-  ));
+  // const states = usData.features.map((d) => (
+  //   // @ts-expect-error
+  //   <path key={d.id} d={path(d)} className={styles.state} />
+  // ));
 
-  const natParks = parks.map((p: Park, i: number) => (
-    <MapMarker
-      key={p.id}
-      coords={projection([p.longitude, p.latitude])}
-      isSelected={selectedParks.includes(p.id)}
-      park={p}
-      onMouseMove={(e) => handleMouseMove(e)}
-      onMouseOver={() => handleMouseOver(p)}
-      onMouseOut={() => handleMouseOut()}
-      number={i + 1}
-      showTree={showTree}
-      circleSize={circleSize}
-    />
-  ));
+  // const natParks = parks.map((p: Park, i: number) => (
+  //   <MapMarker
+  //     key={p.id}
+  //     coords={projection([p.longitude, p.latitude])}
+  //     isSelected={selectedParks.includes(p.id)}
+  //     park={p}
+  //     onMouseMove={(e) => handleMouseMove(e)}
+  //     onMouseOver={() => handleMouseOver(p)}
+  //     onMouseOut={() => handleMouseOut()}
+  //     number={i + 1}
+  //     showTree={showTree}
+  //     circleSize={circleSize}
+  //   />
+  // ));
 
   return (
     <div className={cn(styles.mapContainer, styleName)}>
-      <svg width={usedWidth} height={height + bottomPadding}>
-        {states}
-        {natParks}
+      <svg id="map" width={usedWidth} height={height + bottomPadding}>
       </svg>
     </div>
   );
