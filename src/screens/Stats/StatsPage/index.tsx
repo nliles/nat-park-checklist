@@ -49,7 +49,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
           </div>
           <div className={styles.mobile}>
             <Map
-              fixedWidth={columnWidth}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
@@ -61,7 +60,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         <div className={styles.columnTwo} ref={columnRef}>
           <div className={styles.desktop}>
             <Map
-              fixedWidth={columnWidth}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
