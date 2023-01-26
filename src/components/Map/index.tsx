@@ -30,13 +30,15 @@ const Map = ({
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
 
   const updateDimensions = () => {
-    console.log(mapContainerRef.current && mapContainerRef.current.clientWidth);
-    if (mapContainerRef.current) setWidth(mapContainerRef.current.clientWidth);
+    if (mapContainerRef.current) {
+      const newWidth = mapContainerRef.current.clientWidth
+      setWidth(newWidth);
+      setHeight(newWidth / 2)
+    }
   };
-
-  console.log(width)
 
   useEffect(() => {
     updateDimensions();
@@ -44,18 +46,18 @@ const Map = ({
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  const height = width / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
   const padding = width > 540 ? 30 : 0;
   const circleSize = 2;
   const offsetWidth = 50;
-  const bottomPadding = width > 768 ? 100 : 0;
+  const bottomPadding = width > 768 ? 80 : 0;
+
   useTooltip();
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [width - offsetWidth, height],
+      [width - offsetWidth, ((width - offsetWidth) / 2)],
     ],
     usData
   );
