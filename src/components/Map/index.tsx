@@ -1,5 +1,5 @@
+import { useRef, useState, useEffect } from "react";
 import cn from "classnames";
-import useWindowResize from "hooks/useWindowResize";
 import usMapData from "data/us";
 import { geoPath } from "d3-geo";
 import MapMarker from "components/MapMarker";
@@ -18,7 +18,6 @@ import styles from "./index.module.scss";
 type MapProps = {
   parks: Park[];
   selectedParks?: string[];
-  fixedWidth?: number;
   showTree?: boolean;
   styleName?: string;
 };
@@ -26,24 +25,39 @@ type MapProps = {
 const Map = ({
   parks = [],
   selectedParks = [],
-  fixedWidth,
   showTree = true,
   styleName,
 }: MapProps) => {
-  const [width] = useWindowResize();
-  useTooltip();
-  const usedWidth = fixedWidth || width;
-  const height = usedWidth / 2;
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+
+  const updateDimensions = () => {
+    if (mapContainerRef.current) {
+      const newWidth = mapContainerRef.current.clientWidth
+      setWidth(newWidth);
+      setHeight(newWidth / 2)
+    }
+  };
+
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   const usData = topojson.feature(usMapData, usMapData.objects.states);
-  const padding = usedWidth > 540 ? 30 : 0;
+  const padding = width > 540 ? 30 : 0;
   const circleSize = 2;
   const offsetWidth = 50;
-  const bottomPadding = usedWidth > 768 ? 100 : 0;
+  const bottomPadding = width > 768 ? 80 : 0;
+
+  useTooltip();
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [padding, padding],
-      [usedWidth - offsetWidth, height],
+      [width - offsetWidth, ((width - offsetWidth) / 2)],
     ],
     usData
   );
@@ -72,8 +86,8 @@ const Map = ({
   ));
 
   return (
-    <div className={cn(styles.mapContainer, styleName)}>
-      <svg width={usedWidth} height={height + bottomPadding}>
+    <div ref={mapContainerRef} className={cn(styles.mapContainer, styleName)}>
+      <svg width={width} height={height + bottomPadding}>
         {states}
         {natParks}
       </svg>

@@ -1,5 +1,3 @@
-import { useLayoutEffect, useRef, useState } from "react";
-import useWindowResize from "hooks/useWindowResize";
 import { TOTAL_UNITS } from "../../../constants";
 import { Park } from "types/park";
 import { Parks } from "types";
@@ -18,16 +16,7 @@ type StatsPageProps = {
 };
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
-  const columnRef = useRef<HTMLDivElement>(null);
-  const [columnWidth, setColumnWidth] = useState(0);
-  const [width] = useWindowResize();
   const totalParks = flattenParks(selected);
-
-  useLayoutEffect(() => {
-    if (columnRef?.current) {
-      setColumnWidth(columnRef.current.offsetWidth);
-    }
-  }, [width]);
 
   return (
     <div>
@@ -49,7 +38,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
           </div>
           <div className={styles.mobile}>
             <Map
-              fixedWidth={columnWidth}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
@@ -58,10 +46,9 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
           </div>
           <DataBars items={selected} />
         </div>
-        <div className={styles.columnTwo} ref={columnRef}>
+        <div className={styles.columnTwo}>
           <div className={styles.desktop}>
             <Map
-              fixedWidth={columnWidth}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
