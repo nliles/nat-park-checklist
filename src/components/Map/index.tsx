@@ -28,16 +28,21 @@ const Map = ({
   showTree = true,
   styleName,
 }: MapProps) => {
-  const mapContainerRef = useRef<any>();
-  const [width, setwidth] = useState(0)
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0)
+
+  const updateDimensions = () => {
+    console.log(mapContainerRef.current && mapContainerRef.current.clientWidth);
+    if (mapContainerRef.current) setWidth(mapContainerRef.current.clientWidth);
+  };
+
+  console.log(width)
 
   useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      setwidth(entries[0].contentRect.width)
-    })
-    observer.observe(mapContainerRef.current)
-    return () => mapContainerRef.current && observer.unobserve(mapContainerRef.current)
-  }, [])
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
 
   const height = width / 2;
   const usData = topojson.feature(usMapData, usMapData.objects.states);
