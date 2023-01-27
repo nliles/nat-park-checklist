@@ -36,14 +36,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               />
             </div>
           </div>
-          <div className={styles.mobile}>
-            <Map
-              selectedParks={totalParks}
-              parks={parks}
-              showTree={false}
-              styleName={styles.mapMobile}
-            />
-          </div>
           <DataBars items={selected} />
         </div>
         <div className={styles.columnTwo}>

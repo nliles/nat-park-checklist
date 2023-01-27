@@ -66,11 +66,37 @@
   }
 }
 
-.text {
+.imgText {
   width: auto;
   margin-left: 10px;
   font-weight: normal;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.mobileCircle {
+  display: none;
+  @media (max-width: $tablet) {
+    display: block;
+  }
+}
+
+.treeIcon {
+  display: none;
+  @media (min-width: $tablet) {
+    display: block;
+  }
+
+  &:hover {
+    .treeLink {
+      text-decoration: underline;
+    }
+  }
+}
+
+.treeLink {
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
 }

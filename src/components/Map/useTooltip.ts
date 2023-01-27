@@ -24,7 +24,7 @@ function useTooltip() {
     const imgContainer = tooltip
       .append("div")
       .attr("class", styles.imgContainer);
-    const textContainer = tooltip.append("div").attr("class", styles.text);
+    const textContainer = tooltip.append("div").attr("class", styles.imgText);
 
     textContainer.append("h1");
     textContainer.append("span");
