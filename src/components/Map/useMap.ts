@@ -78,6 +78,7 @@ function useMap(
           .attr("r", 2)
           .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#A8C686"));
 
+        // Tree map markers
         if (showTree) {
           // Data for map markers
           const elem = map.selectAll("markers").data(parks);
