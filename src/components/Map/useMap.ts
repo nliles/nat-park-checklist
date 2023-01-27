@@ -89,6 +89,7 @@ function useMap(
             .attr("class", styles.treeIcon)
             .attr("xlink:href", (d) => d.url || "")
             .attr("target", "_blank")
+            .attr("rel", "noreferrer")
             .attr("transform", (d) => {
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 20;
