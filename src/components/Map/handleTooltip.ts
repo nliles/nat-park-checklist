@@ -25,6 +25,7 @@ export const handleMouseOver = (park: Park) => {
 // hide tooltip as mouse leaves region
 export const handleMouseOut = () => {
   d3.select("#tooltip").style("visibility", "hidden");
+  d3.select("#tooltip div img").attr("src", null);
 };
 
 // get mouse location so tooltip tracks cursor
