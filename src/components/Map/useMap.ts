@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
+// @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import usMapData from "data/us";
@@ -49,10 +50,12 @@ function useMap(
         .attr("height", height + bottomPadding)
         .append("g")
         .selectAll("path")
+        // @ts-ignore
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
+        // @ts-ignore
         .attr("d", path);
 
       // Draw Map Markers
