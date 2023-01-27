@@ -20,26 +20,26 @@ function useMap(
   selectedParks: string[],
   showTree: boolean
 ) {
-  const padding = width > 540 ? 30 : 0;
-  const offsetWidth = 50;
-  const bottomPadding = width > 768 ? 80 : 0;
-  const usData = topojson.feature(usMapData, usMapData.objects.states);
-
-  const projection = geoAlbersUsaTerritories().fitExtent(
-    [
-      [padding, padding],
-      [width - offsetWidth, (width - offsetWidth) / 2],
-    ],
-    usData
-  );
-
-  const path = geoPath().projection(projection);
-
-  const getIsSelected = (id: string) => selectedParks.includes(id);
-
   useEffect(() => {
+    const padding = width > 540 ? 30 : 0;
+    const offsetWidth = 50;
+    const bottomPadding = width > 768 ? 80 : 0;
+    const usData = topojson.feature(usMapData, usMapData.objects.states);
+
+    const projection = geoAlbersUsaTerritories().fitExtent(
+      [
+        [padding, padding],
+        [width - offsetWidth, (width - offsetWidth) / 2],
+      ],
+      usData
+    );
+
+    const path = geoPath().projection(projection);
+
+    const getIsSelected = (id: string) => selectedParks.includes(id);
+
     const drawMap = () => {
-      console.log('draw map')
+      console.log("draw map");
       const map = d3.select("#map");
 
       d3.select("g").remove();
@@ -121,7 +121,7 @@ function useMap(
     drawMap();
     window.addEventListener("resize", drawMap);
     return () => window.removeEventListener("resize", drawMap);
-  }, [width, height, parks, selectedParks]);
+  }, [width, height, parks, selectedParks, showTree]);
 }
 
 export default useMap;

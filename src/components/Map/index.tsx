@@ -19,14 +19,14 @@ const Map = ({
   styleName,
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0)
-  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   const updateDimensions = () => {
     if (mapContainerRef.current) {
-      const newWidth = mapContainerRef.current.clientWidth
+      const newWidth = mapContainerRef.current.clientWidth;
       setWidth(newWidth);
-      setHeight(newWidth / 2)
+      setHeight(newWidth / 2);
     }
   };
 
@@ -36,13 +36,12 @@ const Map = ({
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  useMap(width, height, parks, selectedParks, showTree)
+  useMap(width, height, parks, selectedParks, showTree);
   useTooltip();
 
   return (
     <div ref={mapContainerRef} className={cn(styles.mapContainer, styleName)}>
-      <svg id="map">
-      </svg>
+      <svg id="map"></svg>
     </div>
   );
 };
