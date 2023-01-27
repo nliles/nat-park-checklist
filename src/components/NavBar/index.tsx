@@ -14,8 +14,8 @@ type NavBarProps = {
 };
 
 const NavBar = ({ count }: NavBarProps) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const toggleClose = () => setShowMenu((prevState) => !prevState);
   const toggleModal = () => setShowModal((prevState) => !prevState);

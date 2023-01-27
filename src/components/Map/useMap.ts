@@ -39,7 +39,6 @@ function useMap(
     const getIsSelected = (id: string) => selectedParks.includes(id);
 
     const drawMap = () => {
-      console.log("draw map");
       const map = d3.select("#map");
 
       d3.select("g").remove();
@@ -92,7 +91,9 @@ function useMap(
             .attr("target", "_blank")
             .attr("transform", (d) => {
               const p = projection([d.longitude, d.latitude]);
-              return `translate(${p[0] - 20}, ${p[1] - 40})`;
+              const x = (p?.[0] || 0) - 20;
+              const y = (p?.[1] || 0) - 40;
+              return `translate(${x}, ${y})`;
             })
             .on("mouseover", (e, d) => handleMouseOver(d))
             .on("mousemove", handleMouseMove)

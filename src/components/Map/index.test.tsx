@@ -53,8 +53,8 @@ describe("<Map />", () => {
   it("Displays tooltip on mouse over and hides tooltip on mouse leave", () => {
     renderMap();
     fireEvent.mouseOver(screen.getByText("1"));
-    expect(screen.getByText("Acadia National Park")).toBeVisible();
-    fireEvent.mouseLeave(screen.getByText("1"));
-    expect(screen.queryByText("Acadia National Park")).not.toBeInTheDocument();
+    expect(screen.getByText("Acadia")).toBeVisible();
+    fireEvent.mouseOut(screen.getByText("1"));
+    expect(screen.queryByText("Acadia")).not.toBeVisible();
   });
 });
