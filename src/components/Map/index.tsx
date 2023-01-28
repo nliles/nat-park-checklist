@@ -10,6 +10,7 @@ type MapProps = {
   selectedParks?: string[];
   showTree?: boolean;
   styleName?: string;
+  defaultWidth?: number
 };
 
 const Map = ({
@@ -17,10 +18,11 @@ const Map = ({
   selectedParks = [],
   showTree = true,
   styleName,
+  defaultWidth = window.innerWidth
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(defaultWidth);
+  const [height, setHeight] = useState(defaultWidth / 2);
 
   const updateDimensions = () => {
     if (mapContainerRef.current) {

@@ -41,6 +41,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         <div className={styles.columnTwo}>
           <div className={styles.desktop}>
             <Map
+              defaultWidth={0}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
