@@ -10,8 +10,8 @@ import {
   handleMouseOver,
   handleMouseOut,
   handleMouseMove,
-} from "./handleTooltip";
-import styles from "./index.module.scss";
+} from "../handleTooltip";
+import styles from "../index.module.scss";
 
 function useMap(
   width: number,

@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import cn from "classnames";
 import { Park } from "types/park";
-import useMap from "./useMap";
-import useTooltip from "./useTooltip";
+import useMap from "components/Map/hooks/useMap";
+import useTooltip from "components/Map/hooks/useTooltip";
 import styles from "./index.module.scss";
 
 type MapProps = {

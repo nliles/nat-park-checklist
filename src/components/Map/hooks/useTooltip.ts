@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
-import styles from "./index.module.scss";
+import styles from "../index.module.scss";
 
 function useTooltip() {
   const handleKeyDown = (e: KeyboardEvent) => {
