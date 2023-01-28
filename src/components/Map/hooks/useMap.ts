@@ -129,7 +129,7 @@ function useMap(
     drawMap();
     window.addEventListener("resize", drawMap);
     return () => window.removeEventListener("resize", drawMap);
-  }, [width, height, parks, selectedParks, showTree]);
+  }, [width, height, parks, selectedParks, showTree, handleOnClick]);
 }
 
 export default useMap;
