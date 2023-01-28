@@ -30,7 +30,8 @@
   padding: 1.25rem;
   position: relative;
   height: auto;
-  width: 420px;
+  max-width: 420px;
+  width: 100%;
 }
 
 .header {
