@@ -62,7 +62,6 @@ const ParkView = ({
             <Map
               parks={parks}
               selectedParks={formData}
-              styleName={styles.map}
             />
             <ParkList
               parks={parks}

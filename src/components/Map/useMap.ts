@@ -21,7 +21,7 @@ function useMap(
   showTree: boolean
 ) {
   useEffect(() => {
-    const padding = width > 540 ? 30 : 0;
+    const padding = 30;
     const offsetWidth = 50;
     const bottomPadding = width > 768 ? 80 : 0;
     const usData = topojson.feature(usMapData, usMapData.objects.states);
