@@ -11,6 +11,7 @@ type MapProps = {
   showTree?: boolean;
   styleName?: string;
   defaultWidth?: number
+  handleOnClick?: (id: string) => void;
 };
 
 const Map = ({
@@ -18,7 +19,8 @@ const Map = ({
   selectedParks = [],
   showTree = true,
   styleName,
-  defaultWidth = window.innerWidth
+  defaultWidth = window.innerWidth,
+  handleOnClick
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(defaultWidth);
@@ -38,7 +40,7 @@ const Map = ({
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  useMap(width, height, parks, selectedParks, showTree);
+  useMap(width, height, parks, selectedParks, showTree, handleOnClick);
   useTooltip();
 
   return (

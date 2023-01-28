@@ -18,7 +18,8 @@ function useMap(
   height: number,
   parks: Park[],
   selectedParks: string[],
-  showTree: boolean
+  showTree: boolean,
+  handleOnClick?: (id: string) => void
 ) {
   useEffect(() => {
     const padding = 30;
@@ -105,8 +106,13 @@ function useMap(
             .append("image")
             .attr("xlink:href", (d) =>
               getIsSelected(d.id) ? "selectedTree.svg" : "tree.svg"
-            );
-
+            )
+            .on("click", (e, d) => {
+              e.preventDefault();
+              if (handleOnClick) {
+                handleOnClick(d.id)
+              }
+            })
           // add link text
           link
             .append("text")

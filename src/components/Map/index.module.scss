@@ -87,16 +87,14 @@
   @media (min-width: $tablet) {
     display: block;
   }
-
-  &:hover {
-    .treeLink {
-      text-decoration: underline;
-    }
-  }
 }
 
 .treeLink {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

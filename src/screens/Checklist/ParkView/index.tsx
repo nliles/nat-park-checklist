@@ -32,7 +32,7 @@ const ParkView = ({
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const formData = watch().parkData || [];
 
@@ -42,6 +42,16 @@ const ParkView = ({
 
   const dropdownItem = startCase(selectedDropdownItem);
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+
+  const handleClick = (id: string) => {
+    let newData = [...formData];
+    if (formData.includes(id)) {
+      newData = formData.filter((parkId: string) => parkId !== id)
+    } else {
+      newData.push(id)
+    }
+    setValue('parkData', newData, { shouldDirty: true })
+  }
 
   return (
     <PageWrapper count={count}>
@@ -62,6 +72,7 @@ const ParkView = ({
             <Map
               parks={parks}
               selectedParks={formData}
+              handleOnClick={handleClick}
             />
             <ParkList
               parks={parks}
