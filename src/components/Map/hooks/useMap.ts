@@ -60,7 +60,6 @@ function useMap(
 
       // Draw Map Markers
       if (parks.length > 0) {
-        const map = d3.select("#map");
 
         // remove old map markers
         d3.selectAll("#map a").remove();
