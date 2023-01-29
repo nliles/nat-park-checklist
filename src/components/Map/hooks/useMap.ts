@@ -70,7 +70,7 @@ function useMap(
           .data(parks)
           .enter()
           .append("circle")
-          .attr("class", showTree ? styles.mobileCircle : "")
+          .classed(styles.mobileCircle, showTree)
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
