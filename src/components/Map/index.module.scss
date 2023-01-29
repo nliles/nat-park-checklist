@@ -82,14 +82,14 @@
   }
 }
 
-.treeIcon {
+.treeLink {
   display: none;
   @media (min-width: $tablet) {
     display: block;
   }
 }
 
-.treeLink {
+.treeLinkText {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
