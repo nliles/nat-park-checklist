@@ -42,7 +42,7 @@ function useMap(
     const drawMap = () => {
       const map = d3.select("#map");
 
-      d3.select("g").remove();
+      d3.select("#map g").remove();
 
       // Draw the map
       map
@@ -130,7 +130,7 @@ function useMap(
     drawMap();
     window.addEventListener("resize", drawMap);
     return () => window.removeEventListener("resize", drawMap);
-  }, [width, height, parks, selectedParks, showTree, handleOnClick]);
+  });
 }
 
 export default useMap;

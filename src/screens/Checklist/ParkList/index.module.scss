@@ -44,14 +44,20 @@
 }
 
 .listContainer {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
   column-count: 3;
-  column-fill: auto;
+  column-fill: balance;
 
   @media (max-width: $desktop) {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
     column-count: 2;
   }
 
   @media (max-width: $mobile-landscape) {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
     column-count: 1;
   }
 }
