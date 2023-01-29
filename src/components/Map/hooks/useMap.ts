@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
+import { FeatureCollection } from "geojson";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -25,7 +26,7 @@ function useMap(
     const padding = 30;
     const offsetWidth = 50;
     const bottomPadding = width > 768 ? 80 : 0;
-    const usData = topojson.feature(usMapData, usMapData.objects.states);
+    const usData = topojson.feature(usMapData, usMapData.objects.states) as FeatureCollection;
 
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
@@ -50,12 +51,10 @@ function useMap(
         .attr("height", height + bottomPadding)
         .append("g")
         .selectAll("path")
-        // @ts-ignore
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
-        // @ts-ignore
         .attr("d", path);
 
       // Draw Map Markers
