@@ -104,6 +104,7 @@ function useMap(
           // add image to link
           link
             .append("image")
+            .attr("height", "45px")
             .attr("xlink:href", (d) =>
               getIsSelected(d.id) ? "selectedTree.svg" : "tree.svg"
             )
