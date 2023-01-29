@@ -99,19 +99,29 @@ function useMap(
             .on("mousemove", handleMouseMove)
             .on("mouseout", handleMouseOut);
 
-          // add image to link
-          link
-            .append("image")
-            .attr("height", "45px")
-            .attr("xlink:href", (d) =>
-              getIsSelected(d.id) ? "selectedTree.svg" : "tree.svg"
-            )
+          const svg = link
+            .append("svg")
+            .attr("width", 33)
+            .attr("height", 45)
+            .attr("viewBox", "0 0 540.41 736.19")
             .on("click", (e, d) => {
               e.preventDefault();
               if (handleOnClick) {
                 handleOnClick(d.id);
               }
             });
+
+          svg
+            .append("polygon")
+            .attr(
+              "points",
+              "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
+            )
+            .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#a8c686"))
+            .style("fill-rule", "evenodd")
+            .style("stroke", "#231f20")
+            .style("stroke-width", "20px")
+            .style("stroke-miterlimit", "10");
 
           // add link text
           link
