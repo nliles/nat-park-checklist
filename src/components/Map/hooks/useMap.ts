@@ -87,14 +87,14 @@ function useMap(
           const link = elem
             .enter()
             .append("a")
-            .attr("class", styles.treeIcon)
+            .attr("class", styles.treeLink)
             .attr("xlink:href", (d) => d.url || "")
             .attr("target", "_blank")
             .attr("rel", "noreferrer")
             .attr("transform", (d) => {
               const p = projection([d.longitude, d.latitude]);
-              const x = (p?.[0] || 0) - 20;
-              const y = (p?.[1] || 0) - 40;
+              const x = (p?.[0] || 0) - 16.5;
+              const y = (p?.[1] || 0) - 45;
               return `translate(${x}, ${y})`;
             })
             .on("mouseover", (e, d) => handleMouseOver(d))
@@ -104,6 +104,7 @@ function useMap(
           // add image to link
           link
             .append("image")
+            .attr("height", "45px")
             .attr("xlink:href", (d) =>
               getIsSelected(d.id) ? "selectedTree.svg" : "tree.svg"
             )
@@ -117,11 +118,11 @@ function useMap(
           link
             .append("text")
             .text((d, i) => `${i + 1}`)
-            .attr("class", styles.treeLink)
+            .attr("class", styles.treeLinkText)
             .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
             .attr("text-anchor", "middle")
-            .attr("x", 20)
-            .attr("y", 27);
+            .attr("x", 16.5)
+            .attr("y", 30);
         }
       }
     };
