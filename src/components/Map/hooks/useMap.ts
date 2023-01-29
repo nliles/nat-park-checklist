@@ -60,7 +60,6 @@ function useMap(
 
       // Draw Map Markers
       if (parks.length > 0) {
-
         // remove old map markers
         d3.selectAll("#map a").remove();
         d3.selectAll("#map circle").remove();
@@ -110,9 +109,10 @@ function useMap(
             .on("click", (e, d) => {
               e.preventDefault();
               if (handleOnClick) {
-                handleOnClick(d.id)
+                handleOnClick(d.id);
               }
-            })
+            });
+
           // add link text
           link
             .append("text")

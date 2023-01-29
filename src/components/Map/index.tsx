@@ -10,7 +10,7 @@ type MapProps = {
   selectedParks?: string[];
   showTree?: boolean;
   styleName?: string;
-  defaultWidth?: number
+  defaultWidth?: number;
   handleOnClick?: (id: string) => void;
 };
 
@@ -20,7 +20,7 @@ const Map = ({
   showTree = true,
   styleName,
   defaultWidth = window.innerWidth,
-  handleOnClick
+  handleOnClick,
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(defaultWidth);
