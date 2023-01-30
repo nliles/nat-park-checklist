@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import kebabCase from "lodash/kebabCase"
-import camelCase from "lodash/camelCase"
+import kebabCase from "lodash/kebabCase";
+import camelCase from "lodash/camelCase";
 import { createParks, updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
@@ -20,8 +20,8 @@ const ParkContainer = () => {
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
-  const designation = query.get("designation") || ParkDesignation.NAT_PARK
-  const selectedDropdownItem = camelCase(designation) as ParkDesignationType
+  const designation = query.get("designation") || ParkDesignation.NAT_PARK;
+  const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
   const { loading, parks } = useParks(selectedDropdownItem);
   const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
@@ -65,10 +65,10 @@ const ParkContainer = () => {
       let returnedParks;
       if (Object.keys(selectedParks).length === 0) {
         const { parks } = await createParks(selectedDropdownItem, values);
-        returnedParks = parks
+        returnedParks = parks;
       } else {
         const { parks } = await updateParks(selectedDropdownItem, values);
-        returnedParks = parks
+        returnedParks = parks;
       }
       setSelectedParks(returnedParks);
       toast.success(copy.updateSuccess);

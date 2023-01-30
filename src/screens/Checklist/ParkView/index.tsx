@@ -46,12 +46,12 @@ const ParkView = ({
   const handleClick = (id: string) => {
     let newData = [...formData];
     if (formData.includes(id)) {
-      newData = formData.filter((parkId: string) => parkId !== id)
+      newData = formData.filter((parkId: string) => parkId !== id);
     } else {
-      newData.push(id)
+      newData.push(id);
     }
-    setValue('parkData', newData, { shouldDirty: true })
-  }
+    setValue("parkData", newData, { shouldDirty: true });
+  };
 
   return (
     <PageWrapper count={count}>
