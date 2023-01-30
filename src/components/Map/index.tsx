@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import cn from "classnames";
 import { Park } from "types/park";
 import useMap from "components/Map/hooks/useMap";
 import useTooltip from "components/Map/hooks/useTooltip";
