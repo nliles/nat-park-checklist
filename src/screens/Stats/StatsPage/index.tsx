@@ -3,11 +3,11 @@ import { Park } from "types/park";
 import { Parks } from "types";
 import flattenParks from "helpers/flattenParks";
 import Header from "components/Header";
+import Map from "components/Map";
 import CircularProgressBar from "components/ui/CircularProgressBar";
 import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
-import Count from "./Count";
-import Map from "components/Map";
+import Count from "screens/Stats/StatsPage/Count";
 import styles from "./index.module.scss";
 
 type StatsPageProps = {
