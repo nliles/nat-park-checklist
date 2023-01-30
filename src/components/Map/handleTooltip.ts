@@ -25,7 +25,7 @@ export const handleMouseOver = (park: Park) => {
 // hide tooltip
 export const hideTooltip = () => {
   d3.select("#tooltip").style("visibility", "hidden");
-}
+};
 
 // hide tooltip and remove img as mouse leaves region
 export const handleMouseOut = () => {

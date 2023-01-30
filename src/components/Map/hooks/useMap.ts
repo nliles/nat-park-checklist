@@ -24,7 +24,10 @@ function useMap(
 ) {
   useEffect(() => {
     // Map data
-    const usData = topojson.feature(usMapData, usMapData.objects.states) as FeatureCollection;
+    const usData = topojson.feature(
+      usMapData,
+      usMapData.objects.states
+    ) as FeatureCollection;
     const widthTabletDesktop = width >= 768;
     // Map padding
     const paddingLeftRight = 0;

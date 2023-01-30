@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
-import { hideTooltip } from 'components/Map/handleTooltip';
+import { hideTooltip } from "components/Map/handleTooltip";
 import styles from "../index.module.scss";
 
 function useTooltip() {
