@@ -1,0 +1,15 @@
+@import "../../styles/colors.scss";
+
+.count {
+  color: $green;
+  font-size: 18px;
+}
+
+.link {
+  color: $green;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

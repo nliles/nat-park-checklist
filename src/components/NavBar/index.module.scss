@@ -1,0 +1,71 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+  color: $green;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.125rem;
+  padding: 0 3rem;
+  background: $white;
+
+  @media (max-width: $mobile-landscape) {
+    padding: 0 1.5625rem;
+  }
+}
+
+.header {
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: $mobile-landscape) {
+    margin-left: 0;
+    justify-content: center;
+    width: 50%;
+  }
+}
+
+.total {
+  margin-right: 1rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  color: $green;
+}
+
+.img {
+  padding-right: 5px;
+}
+
+.img {
+  @media (max-width: $mobile-landscape) {
+    display: none;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+}

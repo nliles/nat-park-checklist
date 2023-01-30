@@ -1,0 +1,45 @@
+@import "../../../styles/colors.scss";
+
+.container {
+  line-height: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.progress[value],
+.progress[value]::-webkit-progress-bar {
+  height: 18px;
+  background-color: $tan;
+  border-radius: 10px;
+}
+
+.progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  /* Get rid of default border in Firefox. */
+  border: none;
+}
+
+.progress[value]::-webkit-progress-value {
+  margin: 1px;
+  height: 16px;
+  border-radius: 0px;
+  max-width: 100%;
+  background-color: $green;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 0.5s;
+}
+
+.progress[value]::-moz-progress-bar {
+  margin: 1px;
+  height: 16px;
+  max-width: 100%;
+  background-color: $green;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}

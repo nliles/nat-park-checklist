@@ -1,0 +1,20 @@
+@import "../../../styles/colors.scss";
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  margin-top: 5px;
+  left: 0;
+  font-size: 0.725rem;
+  text-align: left;
+
+  &.error {
+    color: $error;
+  }
+
+  &.helper {
+    color: $gray;
+  }
+}

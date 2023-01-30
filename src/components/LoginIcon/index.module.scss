@@ -1,0 +1,31 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $green;
+  font-weight: 600;
+  font-size: 1rem;
+  padding-right: 10px;
+
+  img {
+    @media (max-width: $mobile-landscape) {
+      width: 40px;
+    }
+  }
+}
+
+.img {
+  padding-right: 5px;
+}
+
+.img,
+.logIn {
+  @media (max-width: $mobile-landscape) {
+    display: none;
+  }
+}

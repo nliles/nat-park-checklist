@@ -1,0 +1,48 @@
+@import "../../../styles/colors.scss";
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $green;
+  border-radius: 4px;
+  background: $green;
+  color: $white;
+  padding: 1rem 0;
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &.sm {
+    padding: 5px 10px;
+  }
+
+  &:disabled,
+  &[disabled] {
+    background-color: $disabledGreen;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  animation: spin infinite 2s linear;
+}
+
+.spinnerWrapper {
+  padding-right: 5px;
+  margin-top: 1px;
+}
+
+.text {
+  text-align: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

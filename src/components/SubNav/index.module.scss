@@ -1,0 +1,56 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+
+.container {
+  display: none;
+  position: absolute;
+  border: 1px solid $lightGray;
+  background: white;
+  z-index: 1;
+  top: 50px;
+  right: 3rem;
+
+  .list {
+    margin: 0 2rem;
+    padding: 0;
+  }
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 45px;
+    border-bottom: 1px solid $lightGray;
+    padding: 0 2rem;
+    font-size: 1rem;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .listItem {
+    display: flex;
+    list-style: none;
+    height: 45px;
+    border-bottom: 1px solid $lightGray;
+    padding: 0 2rem;
+    font-size: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  &.show {
+    display: block;
+  }
+}

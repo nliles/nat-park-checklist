@@ -1,0 +1,32 @@
+@import "../../../styles/breakpoints.scss";
+
+.container {
+  height: 100%;
+}
+
+.tree {
+  display: flex;
+  justify-content: center;
+}
+
+.titleSection {
+  margin-top: 2rem;
+}
+
+.dropdownWrapper {
+  margin: 0 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    margin: 0 50px;
+  }
+
+  @media (max-width: $mobile-landscape) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+  }
+}

@@ -1,0 +1,100 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.mapContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.state {
+  fill: $tan;
+  stroke: $tanOutline;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  max-width: 150px;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $black;
+  font-size: 12px;
+
+  &::before {
+    content: " ";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -10.5px;
+    border: 10.5px solid transparent;
+    border-bottom-color: $black;
+  }
+
+  &::after {
+    content: " ";
+    position: absolute;
+    bottom: 99%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: $white;
+  }
+
+  h1 {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: $green;
+  }
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid $black;
+  }
+}
+
+.imgText {
+  width: auto;
+  margin-left: 10px;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mobileCircle {
+  display: none;
+  @media (max-width: $tablet) {
+    display: block;
+  }
+}
+
+.treeLink {
+  display: none;
+  @media (min-width: $tablet) {
+    display: block;
+  }
+}
+
+.treeLinkText {
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

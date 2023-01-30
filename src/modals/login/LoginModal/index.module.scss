@@ -1,0 +1,38 @@
+@import "../../../styles/colors.scss";
+
+.container {
+  width: 100%;
+  background: $white;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 400;
+  color: $green;
+}
+
+.paragraphText {
+  margin: 0;
+  color: $black;
+  font-size: 12px;
+}
+
+.registerText {
+  width: 400px;
+  text-align: center;
+
+  button {
+    font-size: 1rem;
+    background: none;
+    border: none;
+  }
+}
