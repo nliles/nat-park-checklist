@@ -22,7 +22,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      disabled={disabled}
+      disabled={disabled || isLoading}
       className={cn(styles.button, styleName, {
         [styles.sm]: sizeSm,
       })}

@@ -5,7 +5,6 @@ import { Park } from "types/park";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
-import Total from "components/Total";
 import styles from "./index.module.scss";
 
 type ListProps = {
@@ -30,10 +29,7 @@ const ParkList = ({
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
-    watch,
   } = useFormContext();
-
-  const formData = watch().parkData || [];
 
   return (
     <div className={styles.container}>

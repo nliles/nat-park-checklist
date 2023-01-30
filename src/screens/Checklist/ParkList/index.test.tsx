@@ -52,8 +52,6 @@ describe("<ParkList />", () => {
   it("Displays the correct content", () => {
     renderList();
     expect(screen.getByText("National Park checklist")).toBeVisible();
-    expect(screen.getByText("0")).toBeVisible();
-    expect(screen.getByText("2")).toBeVisible();
     expect(screen.getByText("1. Acadia National Park")).toBeVisible();
     expect(screen.getByText("2. Arches National Park")).toBeVisible();
   });
