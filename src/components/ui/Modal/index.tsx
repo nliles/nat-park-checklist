@@ -1,6 +1,7 @@
 import { useEffect, useState, ReactNode } from "react";
 import ReactModal from "react-modal";
 import { createPortal } from "react-dom";
+import Close from "components/icons/Close";
 import styles from "./index.module.scss";
 
 type ModalProps = {
@@ -44,7 +45,7 @@ const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
             className={styles.close}
             onClick={onClose}
           >
-            <img src="close.svg" width={30} alt="close icon" />
+            <Close/>
           </button>
         </div>
         {children}
