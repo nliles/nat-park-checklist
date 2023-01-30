@@ -1,6 +1,6 @@
 const copy = {
   siteTitle: "National Park Unit Checklist",
-  tooltipCopy: "Total number of parks visited which includes all NPS designations."
+  tooltipCopy: "Total number of parks visited (includes all NPS designations)."
 };
 
 export default copy;
