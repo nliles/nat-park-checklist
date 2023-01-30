@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import { useSelect } from "downshift";
+import Caret from 'components/icons/Caret'
 import styles from "./index.module.scss";
 
 type DropdownProps = {
@@ -49,8 +50,10 @@ const Dropdown = ({
         <span className={styles.title}>
           {formatSelectedItem(initialSelectedItem)}
         </span>
-        <span className={styles.icon}>
-          <span className={styles.caret} />
+        <span className={cn(styles.icon, {
+          [styles.isOpen]: isOpen,
+        })}>
+          <Caret />
         </span>
       </button>
       <ul className={styles.list} role="listbox" {...getMenuProps()}>

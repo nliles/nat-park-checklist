@@ -36,6 +36,7 @@
   white-space: nowrap;
   background: none;
   border: none;
+  color: $black;
 }
 
 .title {
@@ -49,15 +50,15 @@
 .icon {
   display: flex;
   align-items: center;
-}
+  -webkit-transition: 0.1s linear;
+  -moz-transition: 0.1s linear;
+  -o-transition: 0.1s linear;
+  transition: 0.1s linear;
 
-.caret {
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid $green;
-  display: block;
+  &.isOpen {
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+  }
 }
 
 .list {
@@ -83,8 +84,8 @@
   padding-left: 10px;
   align-items: center;
   border-bottom: 1px solid $green;
+  color: $black;
   text-transform: capitalize;
-  cursor: pointer;
 
   &.selected {
     background: $tan;

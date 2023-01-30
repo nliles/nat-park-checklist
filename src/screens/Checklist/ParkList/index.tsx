@@ -5,7 +5,6 @@ import { Park } from "types/park";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
-import Total from "components/Total";
 import styles from "./index.module.scss";
 
 type ListProps = {
@@ -30,20 +29,12 @@ const ParkList = ({
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
-    watch,
   } = useFormContext();
-
-  const formData = watch().parkData || [];
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${selectedDropdownItem} checklist`}</h2>
-        <Total
-          count={formData.length}
-          total={parks.length}
-          styleName={styles.count}
-        />
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.listContainer}>
@@ -63,7 +54,7 @@ const ParkList = ({
               sizeSm
               disabled={!isDirty}
               isLoading={isSubmitting}
-              txt="Save"
+              text="Save"
               type={ButtonType.SUBMIT}
             />
           </div>

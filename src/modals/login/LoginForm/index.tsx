@@ -69,7 +69,7 @@ const LoginForm = ({
           disabled={!isValid}
           isLoading={isSubmitting}
           type={ButtonType.SUBMIT}
-          txt={submitTxt}
+          text={submitTxt}
         />
         <FormHelper id="form" error={formError} />
       </form>

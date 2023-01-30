@@ -16,10 +16,10 @@ const LoginModalContainer = ({
   showRegistration,
   formError,
 }: LoginModalProps) => {
-  const btnTxt = showRegistration ? copy.signInText : copy.signUpText;
+  const btnText = showRegistration ? copy.signInText : copy.signUpText;
   const copyVar = showRegistration ? copy.signUpText : copy.signInText;
   const paragraphText = copy.paragraphText(copyVar);
-  const registerTxt = showRegistration
+  const registerText = showRegistration
     ? copy.accountRegistrationText
     : copy.accountLoginText;
 
@@ -33,9 +33,9 @@ const LoginModalContainer = ({
         formError={formError}
       />
       <p className={styles.registerText}>
-        {registerTxt}
+        {registerText}
         <button type="button" onClick={handleButtonClick}>
-          <strong>{btnTxt}</strong>
+          <strong>{btnText}</strong>
         </button>
       </p>
     </div>

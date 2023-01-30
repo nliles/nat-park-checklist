@@ -7,6 +7,7 @@ import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from "components/Avatar";
 import LoginIcon from "components/LoginIcon";
+import copy from "./en";
 import styles from "./index.module.scss";
 
 type NavBarProps = {
@@ -32,7 +33,7 @@ const NavBar = ({ count }: NavBarProps) => {
         <div className={styles.header}>
           <img src="np.svg" alt="" width={25} className={styles.img} />
           <h1 className={styles.title}>
-            <a href="/">National Park Unit Checklist</a>
+            <a href="/">{copy.siteTitle}</a>
           </h1>
         </div>
         <div className={styles.right}>
@@ -43,6 +44,7 @@ const NavBar = ({ count }: NavBarProps) => {
                 <Total
                   count={count}
                   total={TOTAL_UNITS}
+                  tooltipText={copy.tooltipCopy}
                   styleName={styles.total}
                 />
               )}
