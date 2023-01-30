@@ -4,6 +4,7 @@ import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
+import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
 import Header from "components/Header";
@@ -67,6 +68,11 @@ const ParkView = ({
                 handleClick={handleListItemChange}
                 formatListItem={formatListItem}
                 formatSelectedItem={formatSelectedItem}
+              />
+              <Total
+                count={formData.length}
+                total={parks.length}
+                styleName={styles.count}
               />
             </div>
             <Map

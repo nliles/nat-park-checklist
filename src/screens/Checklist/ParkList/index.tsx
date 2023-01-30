@@ -39,11 +39,6 @@ const ParkList = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>{`${selectedDropdownItem} checklist`}</h2>
-        <Total
-          count={formData.length}
-          total={parks.length}
-          styleName={styles.count}
-        />
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.listContainer}>

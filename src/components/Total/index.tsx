@@ -14,8 +14,6 @@ const Total = ({ count, total, styleName }: TotalProps) => {
       <strong>{count}</strong> out of{" "}
       <a
         className={styles.link}
-        target="_blank"
-        rel="noreferrer"
         href={NAT_PARK_TOTAL_LINK}
       >
         {total}
