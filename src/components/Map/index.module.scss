@@ -60,6 +60,7 @@
 // Tree Map Markers
 .treeLink {
   display: none;
+  cursor: default;
   @media (min-width: $tablet) {
     display: block;
   }
