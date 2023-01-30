@@ -1,0 +1,2 @@
+# proxy to api
+/api/*  https://nat-park-checklist.herokuapp.com  200

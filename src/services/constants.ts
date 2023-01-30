@@ -1,4 +1,4 @@
-export const prodBaseURL = "https://nat-park-checklist.herokuapp.com/";
+export const prodBaseURL = "https://www.natparkchecklist.com/";
 
 export const devBaseURL = 'http://localhost:5000/';
 
