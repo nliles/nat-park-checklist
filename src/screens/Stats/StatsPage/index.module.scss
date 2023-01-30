@@ -9,7 +9,7 @@
   grid-template-columns: 30% 70%;
   padding-bottom: 100px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: $desktop) {
     margin: 0 50px;
   }
 
@@ -21,14 +21,10 @@
   }
 }
 
-.desktop {
-  @media (max-width: $mobile-landscape) {
-    display: none;
-  }
-}
+.mapContainer {
+  margin-top: 20px;
 
-.mobile {
-  @media (min-width: $mobile-landscape) {
+  @media (max-width: $mobile-landscape) {
     display: none;
   }
 }
@@ -37,7 +33,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 20px;
   padding: 0 20px;
   border-right: 1px solid $lightGray;
 }
@@ -53,18 +48,6 @@
   width: 90%;
   margin: 15px 0 25px;
   @media (max-width: $mobile-landscape) {
-    margin: -20px 0 0 0;
+    margin: -20px 0 20px 0;
   }
-}
-
-.map {
-  margin-top: 20px;
-
-  @media (max-width: 1300px) {
-    margin-bottom: 50px;
-  }
-}
-
-.mapMobile {
-  margin: 50px 0;
 }

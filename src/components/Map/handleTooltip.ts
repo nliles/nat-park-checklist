@@ -22,9 +22,14 @@ export const handleMouseOver = (park: Park) => {
   d3.select("#tooltip div span").text(states);
 };
 
-// hide tooltip as mouse leaves region
-export const handleMouseOut = () => {
+// hide tooltip
+export const hideTooltip = () => {
   d3.select("#tooltip").style("visibility", "hidden");
+}
+
+// hide tooltip and remove img as mouse leaves region
+export const handleMouseOut = () => {
+  hideTooltip();
   d3.select("#tooltip div img").attr("src", null);
 };
 

@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
+import { hideTooltip } from 'components/Map/handleTooltip';
 import styles from "../index.module.scss";
 
 function useTooltip() {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
-      d3.select("#tooltip").style("visibility", "hidden");
+      hideTooltip();
     }
   };
 

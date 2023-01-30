@@ -11,7 +11,7 @@ import {
   handleMouseOver,
   handleMouseOut,
   handleMouseMove,
-} from "../handleTooltip";
+} from "components/Map/handleTooltip";
 import styles from "../index.module.scss";
 
 function useMap(
@@ -23,15 +23,22 @@ function useMap(
   handleOnClick?: (id: string) => void
 ) {
   useEffect(() => {
-    const padding = 30;
-    const offsetWidth = 50;
-    const bottomPadding = width > 768 ? 80 : 0;
+    // Map data
     const usData = topojson.feature(usMapData, usMapData.objects.states) as FeatureCollection;
+    const widthTabletDesktop = width >= 768;
+    // Map padding
+    const paddingLeftRight = 0;
+    const paddingTopBottom = widthTabletDesktop ? 35 : 0;
+    const bottomPadding = widthTabletDesktop ? 80 : 0;
+    // Map height/width
+    const offsetWidth = widthTabletDesktop ? 50 : 0;
+    const mapWidth = width - offsetWidth;
+    const mapHeight = (width - offsetWidth) / 2;
 
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
-        [padding, padding],
-        [width - offsetWidth, (width - offsetWidth) / 2],
+        [paddingLeftRight, paddingTopBottom],
+        [mapWidth, mapHeight],
       ],
       usData
     );
@@ -43,6 +50,7 @@ function useMap(
     const drawMap = () => {
       const map = d3.select("#map");
 
+      // Remove previous map before drawing a new one
       d3.select("#map g").remove();
 
       // Draw the map
@@ -86,8 +94,6 @@ function useMap(
             .append("a")
             .attr("class", styles.treeLink)
             .attr("xlink:href", (d) => d.url || "")
-            .attr("target", "_blank")
-            .attr("rel", "noreferrer")
             .attr("transform", (d) => {
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 16.5;
@@ -98,6 +104,7 @@ function useMap(
             .on("mousemove", handleMouseMove)
             .on("mouseout", handleMouseOut);
 
+          // add tree svg container
           const svg = link
             .append("svg")
             .attr("width", 33)
@@ -110,6 +117,7 @@ function useMap(
               }
             });
 
+          // Add tree polygon shape
           svg
             .append("polygon")
             .attr(
