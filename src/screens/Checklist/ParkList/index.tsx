@@ -58,7 +58,7 @@ const ParkList = ({
               sizeSm
               disabled={!isDirty}
               isLoading={isSubmitting}
-              txt="Save"
+              text="Save"
               type={ButtonType.SUBMIT}
             />
           </div>

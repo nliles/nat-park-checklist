@@ -4,7 +4,7 @@ import { ButtonType, ButtonTypeValue } from "components/ui/Button/enum";
 import styles from "./index.module.scss";
 
 type ButtonProps = {
-  txt: string;
+  text: string;
   disabled?: boolean;
   isLoading?: boolean;
   type?: ButtonTypeValue;
@@ -14,7 +14,7 @@ type ButtonProps = {
 
 const Button = ({
   type = ButtonType.BUTTON,
-  txt,
+  text,
   disabled,
   isLoading,
   sizeSm,
@@ -37,7 +37,7 @@ const Button = ({
           />
         </span>
       )}
-      <span className={styles.text}>{txt}</span>
+      <span className={styles.text}>{text}</span>
     </button>
   );
 };

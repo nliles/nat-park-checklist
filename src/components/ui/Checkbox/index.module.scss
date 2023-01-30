@@ -6,7 +6,6 @@
   position: relative;
   padding-left: 35px;
   padding-bottom: 12px;
-  cursor: pointer;
   font-size: 18px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -21,7 +20,6 @@
 .checkboxWrapper input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
   height: 0;
   width: 0;
   height: 100%;
