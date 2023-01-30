@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import cn from "classnames";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
@@ -11,6 +12,7 @@ import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
+import copy from "./en";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
@@ -54,6 +56,12 @@ const ParkView = ({
     setValue("parkData", newData, { shouldDirty: true });
   };
 
+  const totalProps = {
+    count: formData.length,
+    total: parks.length,
+    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase())
+  }
+
   return (
     <PageWrapper count={count}>
       <div className={styles.container}>
@@ -62,6 +70,10 @@ const ParkView = ({
         {!loading && (
           <>
             <div className={styles.dropdownWrapper}>
+              <Total
+                {...totalProps}
+                styleName={cn(styles.count, styles.mobileCount)}
+              />
               <Dropdown
                 list={LIST_OPTIONS}
                 initialSelectedItem={selectedDropdownItem}
@@ -70,9 +82,8 @@ const ParkView = ({
                 formatSelectedItem={formatSelectedItem}
               />
               <Total
-                count={formData.length}
-                total={parks.length}
-                styleName={styles.count}
+                {...totalProps}
+                styleName={cn(styles.count, styles.desktopCount)}
               />
             </div>
             <Map
