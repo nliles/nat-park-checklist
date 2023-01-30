@@ -11,7 +11,7 @@ import {
   handleMouseOver,
   handleMouseOut,
   handleMouseMove,
-} from "../handleTooltip";
+} from "components/Map/handleTooltip";
 import styles from "../index.module.scss";
 
 function useMap(
@@ -23,15 +23,17 @@ function useMap(
   handleOnClick?: (id: string) => void
 ) {
   useEffect(() => {
-    const padding = 30;
+    const padding = 32;
     const offsetWidth = 50;
     const bottomPadding = width > 768 ? 80 : 0;
     const usData = topojson.feature(usMapData, usMapData.objects.states) as FeatureCollection;
+    const mapWidth = width - offsetWidth;
+    const mapHeight = (width - offsetWidth) / 2;
 
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
         [padding, padding],
-        [width - offsetWidth, (width - offsetWidth) / 2],
+        [mapWidth, mapHeight],
       ],
       usData
     );
@@ -98,6 +100,7 @@ function useMap(
             .on("mousemove", handleMouseMove)
             .on("mouseout", handleMouseOut);
 
+          // add tree svg container
           const svg = link
             .append("svg")
             .attr("width", 33)
@@ -110,6 +113,7 @@ function useMap(
               }
             });
 
+          // Add tree polygon shape
           svg
             .append("polygon")
             .attr(
