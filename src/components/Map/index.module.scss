@@ -4,6 +4,10 @@
 .mapContainer {
   display: flex;
   justify-content: center;
+
+  @media (max-width: $mobile-landscape) {
+    padding: 50px 0;
+  }
 }
 
 .state {
