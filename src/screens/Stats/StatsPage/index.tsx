@@ -39,13 +39,12 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
           <DataBars items={selected} />
         </div>
         <div className={styles.columnTwo}>
-          <div className={styles.desktop}>
+          <div className={styles.mapContainer}>
             <Map
               defaultWidth={0}
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
-              styleName={styles.map}
             />
           </div>
           <DataTable

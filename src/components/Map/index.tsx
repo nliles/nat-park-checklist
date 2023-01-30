@@ -9,7 +9,6 @@ type MapProps = {
   parks: Park[];
   selectedParks?: string[];
   showTree?: boolean;
-  styleName?: string;
   defaultWidth?: number;
   handleOnClick?: (id: string) => void;
 };
@@ -18,7 +17,6 @@ const Map = ({
   parks = [],
   selectedParks = [],
   showTree = true,
-  styleName,
   defaultWidth = window.innerWidth,
   handleOnClick,
 }: MapProps) => {
@@ -44,7 +42,7 @@ const Map = ({
   useTooltip();
 
   return (
-    <div ref={mapContainerRef} className={cn(styles.mapContainer, styleName)}>
+    <div ref={mapContainerRef} className={styles.mapContainer}>
       <svg id="map"></svg>
     </div>
   );
