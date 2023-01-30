@@ -50,6 +50,7 @@ function useMap(
     const drawMap = () => {
       const map = d3.select("#map");
 
+      // Remove previous map before drawing a new one
       d3.select("#map g").remove();
 
       // Draw the map
@@ -93,8 +94,6 @@ function useMap(
             .append("a")
             .attr("class", styles.treeLink)
             .attr("xlink:href", (d) => d.url || "")
-            .attr("target", "_blank")
-            .attr("rel", "noreferrer")
             .attr("transform", (d) => {
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 16.5;
