@@ -59,8 +59,8 @@ const ParkView = ({
   const totalProps = {
     count: formData.length,
     total: parks.length,
-    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase())
-  }
+    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
+  };
 
   return (
     <PageWrapper count={count}>
