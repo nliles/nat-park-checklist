@@ -1,4 +1,4 @@
-import { FaInstagram, FaUser, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { icons } from "components/Footer/constants";
 import Icon from "enum/Icon";
 import styles from "./index.module.scss";
