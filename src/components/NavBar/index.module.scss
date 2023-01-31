@@ -39,14 +39,6 @@
     text-decoration: none;
     color: inherit;
   }
-
-  .img {
-    padding-right: 5px;
-
-    @media (max-width: $mobile-landscape) {
-      display: none;
-    }
-  }
 }
 
 .header {
