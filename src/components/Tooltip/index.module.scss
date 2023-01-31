@@ -26,6 +26,7 @@
 .tooltipBaseStyle {
   visibility: hidden;
   position: absolute;
+  z-index: 1;
   height: auto;
   padding: 10px;
   background: white;

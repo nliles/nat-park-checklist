@@ -1,5 +1,6 @@
 const copy = {
-  tooltipCopy: (designation: string) => `Total number of ${designation}s visited.`
+  tooltipCopy: (designation: string) =>
+    `Total number of ${designation}s visited.`,
 };
 
 export default copy;

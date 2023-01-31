@@ -18,13 +18,8 @@
   }
 }
 
-.img {
-  padding-right: 5px;
-}
-
-.img,
-.logIn {
-  @media (max-width: $mobile-landscape) {
-    display: none;
-  }
+.icon {
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }

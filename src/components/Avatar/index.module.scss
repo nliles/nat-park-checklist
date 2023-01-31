@@ -20,12 +20,6 @@
   font-weight: 600;
   font-size: 1rem;
   padding-right: 10px;
-
-  img {
-    @media (max-width: $mobile-landscape) {
-      width: 40px;
-    }
-  }
 }
 
 .avatar {

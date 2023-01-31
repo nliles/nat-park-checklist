@@ -31,7 +31,6 @@ const NavBar = ({ count }: NavBarProps) => {
     <nav className={styles.nav}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <img src="np.svg" alt="" width={25} className={styles.img} />
           <h1 className={styles.title}>
             <a href="/">{copy.siteTitle}</a>
           </h1>

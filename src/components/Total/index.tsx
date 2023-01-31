@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { NAT_PARK_TOTAL_LINK } from "../../constants";
-import Tooltip from "components/Tooltip"
+import Tooltip from "components/Tooltip";
 import styles from "./index.module.scss";
 
 type TotalProps = {
@@ -12,16 +12,12 @@ type TotalProps = {
 
 const Total = ({ count, total, tooltipText, styleName }: TotalProps) => {
   return (
-      <div className={cn(styles.count, styleName)}>
-        <Tooltip hoverText={count.toString()} tooltipText={tooltipText}/>
-        {" "} out of {" "}
-        <a
-          className={styles.link}
-          href={NAT_PARK_TOTAL_LINK}
-        >
-          {total}
-        </a>
-      </div>
+    <div className={cn(styles.count, styleName)}>
+      <Tooltip hoverText={count.toString()} tooltipText={tooltipText} /> out of{" "}
+      <a className={styles.link} href={NAT_PARK_TOTAL_LINK}>
+        {total}
+      </a>
+    </div>
   );
 };
 

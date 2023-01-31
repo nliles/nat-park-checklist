@@ -50,7 +50,7 @@ describe("<Map />", () => {
     );
   });
 
-  it("Displays tooltip on mouse over and hides tooltip on mouse leave", () => {
+  it("Displays tooltip onMouseOver and hides tooltip onMouseOut", () => {
     renderMap();
     fireEvent.mouseOver(screen.getByText("1"));
     expect(screen.getByText("Acadia")).toBeVisible();
