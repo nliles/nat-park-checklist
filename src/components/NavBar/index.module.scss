@@ -59,7 +59,7 @@
   color: $green;
 
   @media (max-width: $mobile-landscape) {
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 70%;
   }
 }

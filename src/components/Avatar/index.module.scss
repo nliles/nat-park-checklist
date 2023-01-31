@@ -14,12 +14,13 @@
 .button {
   display: flex;
   align-items: center;
+  margin: 0;
+  padding: 0;
   background: none;
   border: none;
   color: $green;
   font-weight: 600;
   font-size: 1rem;
-  padding-right: 10px;
 }
 
 .avatar {

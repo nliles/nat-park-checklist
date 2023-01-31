@@ -72,7 +72,7 @@ const ParkView = ({
             <div className={styles.dropdownWrapper}>
               <Total
                 {...totalProps}
-                styleName={cn(styles.count, styles.mobileCount)}
+                styleName={styles.mobileCount}
               />
               <Dropdown
                 list={LIST_OPTIONS}
