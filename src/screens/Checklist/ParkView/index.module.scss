@@ -10,18 +10,18 @@
   grid-row-start: 1;
   justify-self: right;
 
-  &.mopileCount {
-    display: none;
-    @media (max-width: $mobile-landscape) {
-      display: block;
-    }
-  }
-
   &.desktopCount {
     display: block;
     @media (max-width: $mobile-landscape) {
       display: none;
     }
+  }
+}
+
+.mobileCount {
+  display: none;
+  @media (max-width: $mobile-landscape) {
+    display: block;
   }
 }
 
