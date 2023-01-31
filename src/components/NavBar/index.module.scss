@@ -19,7 +19,7 @@
   background: $white;
 
   @media (max-width: $mobile-landscape) {
-    padding: 0 1.5625rem;
+    padding: 0 1rem;
   }
 }
 
@@ -45,7 +45,7 @@
   @media (max-width: $mobile-landscape) {
     margin-left: 0;
     justify-content: center;
-    width: 40%;
+    width: 32%;
   }
 }
 
@@ -57,4 +57,9 @@
   display: flex;
   align-items: center;
   color: $green;
+
+  @media (max-width: $mobile-landscape) {
+    justify-content: space-around;
+    width: 70%;
+  }
 }
