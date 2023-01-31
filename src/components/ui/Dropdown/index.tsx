@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import { useSelect } from "downshift";
-import Caret from 'components/icons/Caret'
+import Caret from "components/icons/Caret";
 import styles from "./index.module.scss";
 
 type DropdownProps = {
@@ -50,9 +50,11 @@ const Dropdown = ({
         <span className={styles.title}>
           {formatSelectedItem(initialSelectedItem)}
         </span>
-        <span className={cn(styles.icon, {
-          [styles.isOpen]: isOpen,
-        })}>
+        <span
+          className={cn(styles.icon, {
+            [styles.isOpen]: isOpen,
+          })}
+        >
           <Caret />
         </span>
       </button>

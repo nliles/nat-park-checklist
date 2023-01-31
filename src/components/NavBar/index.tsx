@@ -32,9 +32,7 @@ const NavBar = ({ count }: NavBarProps) => {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            <a href="/">
-            {copy.siteTitle}
-            </a>
+            <a href="/">{copy.siteTitle}</a>
           </h1>
         </div>
         <div className={styles.right}>
