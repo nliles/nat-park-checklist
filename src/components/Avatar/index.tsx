@@ -18,7 +18,7 @@ const Avatar = ({ active, handleClose }: AvatarProps) => {
           id="avatar"
           className={styles.avatar}
           width={30}
-          src="yosemite.svg"
+          src="np.svg"
           alt="Yosemite icon"
         />
       </button>
