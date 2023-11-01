@@ -7,7 +7,7 @@ import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
-import copy from "./en";
+import copy from "./copy";
 
 function useParks(selectedItem: ParkDesignationType) {
   const [loading, setLoading] = useState<boolean>(false);

@@ -4,7 +4,7 @@ import Input from "components/ui/Input";
 import Button from "components/ui/Button";
 import { User } from "types/user";
 import { ButtonType } from "components/ui/Button/enum";
-import copy from "modals/login/en";
+import copy from "modals/login/copy";
 import styles from "./index.module.scss";
 
 export type LoginFormProps = {

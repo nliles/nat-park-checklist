@@ -12,7 +12,7 @@ import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
-import copy from "./en";
+import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {

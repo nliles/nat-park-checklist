@@ -6,7 +6,7 @@ import { login, register } from "services/auth.service";
 import { User } from "types/user";
 import Modal from "components/ui/Modal";
 import LoginModal from "modals/login/LoginModal";
-import copy from "modals/login/en";
+import copy from "modals/login/copy";
 
 type LoginModalContainerProps = {
   onClose: () => void;

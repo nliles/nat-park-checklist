@@ -13,7 +13,7 @@ import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import flattenParks from "helpers/flattenParks";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
-import copy from "./en";
+import copy from "./copy";
 
 const ParkContainer = () => {
   const [initialValues, setInitialValues] = useState<string[]>([]);

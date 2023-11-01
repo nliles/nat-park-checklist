@@ -5,7 +5,7 @@ import cn from "classnames";
 import { logoutSuccess } from "actions";
 import { logout } from "services/auth.service";
 import styles from "./index.module.scss";
-import copy from "./en";
+import copy from "./copy";
 
 type SubNavProps = {
   showMenu: boolean;

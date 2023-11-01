@@ -7,7 +7,7 @@ import SubNav from "components/SubNav";
 import Total from "components/Total";
 import Avatar from "components/Avatar";
 import LoginIcon from "components/LoginIcon";
-import copy from "./en";
+import copy from "./copy";
 import styles from "./index.module.scss";
 
 type NavBarProps = {
