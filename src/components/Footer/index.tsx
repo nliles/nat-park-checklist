@@ -1,7 +1,7 @@
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { icons } from "components/Footer/constants";
 import Icon from "enum/Icon";
-import styles from "./index.module.scss";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (

@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import cn from "classnames";
 import { hideTooltip } from "components/Map/handleTooltip";
 import tooltipStyles from "components/Tooltip/Tooltip.module.scss";
-import styles from "../index.module.scss";
+import styles from "../Map.module.scss";
 
 function useTooltip() {
   const handleKeyDown = (e: KeyboardEvent) => {

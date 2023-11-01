@@ -1,5 +1,5 @@
 import { FaUser } from "react-icons/fa";
-import styles from "./index.module.scss";
+import styles from "./LoginIcon.module.scss";
 
 type LoginIconProps = {
   handleClick: () => void;

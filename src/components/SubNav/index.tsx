@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import cn from "classnames";
 import { logoutSuccess } from "actions";
 import { logout } from "services/auth.service";
-import styles from "./index.module.scss";
+import styles from "./SubNav.module.scss";
 import copy from "./copy";
 
 type SubNavProps = {
