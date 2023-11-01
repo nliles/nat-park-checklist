@@ -1,5 +1,5 @@
 import cn from "classnames";
-import styles from "./index.module.scss";
+import styles from "./Avatar.module.scss";
 
 type AvatarProps = {
   active: boolean;

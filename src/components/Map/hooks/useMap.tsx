@@ -12,7 +12,7 @@ import {
   handleMouseOut,
   handleMouseMove,
 } from "components/Map/handleTooltip";
-import styles from "../index.module.scss";
+import styles from "../Map.module.scss";
 
 function useMap(
   width: number,

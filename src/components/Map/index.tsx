@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Park } from "types/park";
 import useMap from "components/Map/hooks/useMap";
 import useTooltip from "components/Map/hooks/useTooltip";
-import styles from "./index.module.scss";
+import styles from "./Map.module.scss";
 
 type MapProps = {
   parks: Park[];

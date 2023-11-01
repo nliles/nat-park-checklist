@@ -8,7 +8,7 @@ import Total from "components/Total";
 import Avatar from "components/Avatar";
 import LoginIcon from "components/LoginIcon";
 import copy from "./copy";
-import styles from "./index.module.scss";
+import styles from "./NavBar.module.scss";
 
 type NavBarProps = {
   count?: number;

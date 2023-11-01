@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import styles from "./Header.module.scss";
 
 type HeaderProps = {
   title: string;

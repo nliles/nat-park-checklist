@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import NavBar from "components/NavBar";
 import Footer from "components/Footer";
-import styles from "./index.module.scss";
+import styles from "./PageWrapper.module.scss";
 
 type PageWrapperProps = {
   children: ReactNode;
