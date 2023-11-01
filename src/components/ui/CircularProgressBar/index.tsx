@@ -1,5 +1,5 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import styles from "./index.module.scss";
+import styles from "./CircularProgressBar.module.scss";
 
 type CircularProgressBarProps = {
   count: number;

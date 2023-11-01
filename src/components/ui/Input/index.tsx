@@ -1,6 +1,6 @@
 import { useFormContext, RegisterOptions } from "react-hook-form";
 import FormHelper from "components/ui/FormHelper";
-import styles from "./index.module.scss";
+import styles from "./Input.module.scss";
 
 type InputProps = {
   id: string;

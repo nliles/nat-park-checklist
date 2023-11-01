@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { NAT_PARK_TOTAL_LINK } from "../../constants";
 import Tooltip from "components/Tooltip";
-import styles from "./index.module.scss";
+import styles from "./Total.module.scss";
 
 type TotalProps = {
   count: number;

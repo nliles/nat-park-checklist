@@ -1,5 +1,5 @@
 import cn from "classnames";
-import styles from "./index.module.scss";
+import styles from "./Tooltip.module.scss";
 
 type TooltipProps = {
   hoverText: string;

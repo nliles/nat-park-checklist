@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./index.module.scss";
+import styles from "./FormHelper.module.scss";
 import cn from "classnames";
 
 type FormHelperProps = {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./index.module.scss";
+import styles from "./ProgressBar.module.scss";
 
 export type ProgressBarProps = {
   completed: number;

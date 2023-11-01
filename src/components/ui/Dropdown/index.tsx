@@ -2,7 +2,7 @@ import React from "react";
 import cn from "classnames";
 import { useSelect } from "downshift";
 import Caret from "components/icons/Caret";
-import styles from "./index.module.scss";
+import styles from "./Dropdown.module.scss";
 
 type DropdownProps = {
   handleClick: (item: string) => void;

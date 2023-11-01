@@ -2,7 +2,7 @@ import { useEffect, useState, ReactNode } from "react";
 import ReactModal from "react-modal";
 import { createPortal } from "react-dom";
 import Close from "components/icons/Close";
-import styles from "./index.module.scss";
+import styles from "./Modal.module.scss";
 
 type ModalProps = {
   children: ReactNode;
