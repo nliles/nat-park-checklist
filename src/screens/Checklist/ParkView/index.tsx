@@ -14,6 +14,7 @@ import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./index.module.scss";
+import { Suspense } from "react";
 
 export type ParkViewProps = {
   count: number;
@@ -66,9 +67,7 @@ const ParkView = ({
     <PageWrapper count={count}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
-        {loading && <Spinner />}
-        {!loading && (
-          <>
+          <Suspense fallback={<Spinner />}>
             <div className={styles.dropdownWrapper}>
               <Total
                 {...totalProps}
@@ -97,8 +96,7 @@ const ParkView = ({
               initialParkValues={initialValues}
               handleOnSubmit={handleOnSubmit}
             />
-          </>
-        )}
+          </Suspense>
       </div>
     </PageWrapper>
   );
