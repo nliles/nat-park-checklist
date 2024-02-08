@@ -36,6 +36,7 @@ const Modal = ({ children, onClose, modalLabel }: ModalProps) => {
           <img
             className={styles.avatar}
             width={50}
+            height={50}
             src="yosemite.svg"
             alt="Yosemite icon"
           />
