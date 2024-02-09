@@ -70,7 +70,11 @@ function useMap(
         .attr("d", path)
         .on("click", function(event, d) {
           active.classed(styles.active, false);
-          active = d3.select(this).classed(styles.active, true);
+          if (active.node() === this) {
+            active = d3.select(this).classed(styles.active, false);
+          } else {
+            active = d3.select(this).classed(styles.active, true);
+          }
         });
 
 
