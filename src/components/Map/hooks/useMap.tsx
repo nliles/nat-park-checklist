@@ -52,6 +52,7 @@ function useMap(
 
     const drawMap = () => {
       const map = d3.select("#map");
+      let active: any = d3.select(null);
 
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
@@ -66,7 +67,12 @@ function useMap(
         .enter()
         .append("path")
         .attr("class", styles.state)
-        .attr("d", path);
+        .attr("d", path)
+        .on("click", function(event, d) {
+          active.classed(styles.active, false);
+          active = d3.select(this).classed(styles.active, true);
+        });
+
 
       // Draw Map Markers
       if (parks.length > 0) {
