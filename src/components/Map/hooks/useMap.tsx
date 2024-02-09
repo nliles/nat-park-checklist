@@ -70,11 +70,22 @@ function useMap(
         .attr("d", path)
         .on("click", function(event, d) {
           active.classed(styles.active, false);
-          if (active.node() === this) {
-            active = d3.select(this).classed(styles.active, false);
-          } else {
+          if (active.node() !== this) {
             active = d3.select(this).classed(styles.active, true);
           }
+
+          var bounds = path.bounds(d),
+          dx = bounds[1][0] - bounds[0][0],
+          dy = bounds[1][1] - bounds[0][1],
+          x = (bounds[0][0] + bounds[1][0]) / 2,
+          y = (bounds[0][1] + bounds[1][1]) / 2,
+          scale = .9 / Math.max(dx / width, dy / height),
+          translate = [width / 2 - scale * x, height / 2 - scale * y];
+      
+        d3.select("#map g").transition()
+          .duration(750)
+          .style("stroke-width", 1.5 / scale + "px")
+          .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
         });
 
 
