@@ -60,8 +60,9 @@ function useMap(
         .attr("width", width)
         .attr("height", height + bottomPadding);
 
-      svg
-        .append("g")
+      const g = svg.append("g");
+
+      g
         .selectAll("path")
         .data(usData.features)
         .enter()
