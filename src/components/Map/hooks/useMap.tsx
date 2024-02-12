@@ -89,10 +89,11 @@ function useMap(
         // Tree map markers
         if (showTree) {
           // Data for map markers
-          const markers = svg.selectAll("markers").data(parks);
+          const markers = g.selectAll("markers");
 
           // add link
           const link = markers
+            .data(parks)
             .enter()
             .append("a")
             .attr("class", styles.treeLink)
