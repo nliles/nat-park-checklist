@@ -47,26 +47,49 @@ function useMap(
     );
 
     const path = geoPath().projection(projection);
-
+    const svg = d3.select("#map");
+    let active: any = d3.select(null);
     const getIsSelected = (id: string) => selectedParks.includes(id);
+    function reset() {
+      active = d3.select(null);
+      svg.select("g").transition()
+        .duration(750)
+        .style("stroke-width", "1.5px")
+        .attr("transform", "");
+    };
 
     const drawMap = () => {
-      const map = d3.select("#map");
-
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
 
       // Draw the map
-      map
+      svg
         .attr("width", width)
-        .attr("height", height + bottomPadding)
-        .append("g")
+        .attr("height", height + bottomPadding);
+        
+      svg.append("g")
         .selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
-        .attr("d", path);
+        .attr("d", path)
+        .on("click", function(event, d) {
+          active.classed(styles.active, false);
+          if (active.node() === this) return reset();
+          active = d3.select(this).classed(styles.active, true);
+          const bounds = path.bounds(d),
+          dx = bounds[1][0] - bounds[0][0],
+          dy = bounds[1][1] - bounds[0][1],
+          x = (bounds[0][0] + bounds[1][0]) / 2,
+          y = (bounds[0][1] + bounds[1][1]) / 2,
+          scale = .5 / Math.max(dx / width, dy / height),
+          translate = [width / 2 - scale * x, height / 2 - scale * y];
+      
+          svg.select("g").transition()
+            .duration(750)
+            .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+          });
 
       // Draw Map Markers
       if (parks.length > 0) {
@@ -75,7 +98,7 @@ function useMap(
         d3.selectAll("#map circle").remove();
 
         // add circles
-        map
+        svg
           .selectAll("circles")
           .data(parks)
           .enter()
@@ -89,10 +112,11 @@ function useMap(
         // Tree map markers
         if (showTree) {
           // Data for map markers
-          const elem = map.selectAll("markers").data(parks);
+          const markers = svg.select("g").selectAll("markers");
 
           // add link
-          const link = elem
+          const link = markers
+            .data(parks)
             .enter()
             .append("a")
             .attr("class", styles.treeLink)
@@ -108,7 +132,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const svg = link
+          const tree = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -121,7 +145,7 @@ function useMap(
             });
 
           // Add tree polygon shape
-          svg
+          tree
             .append("polygon")
             .attr(
               "points",
@@ -144,6 +168,7 @@ function useMap(
             .attr("y", 30);
         }
       }
+      
     };
 
     drawMap();
