@@ -49,6 +49,7 @@ function useMap(
     const path = geoPath().projection(projection);
 
     const getIsSelected = (id: string) => selectedParks.includes(id);
+    const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
 
     const drawMap = () => {
       const svg = d3.select("#map");
@@ -107,7 +108,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const treeContainer = link
+          const treeSvg = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -120,17 +121,23 @@ function useMap(
             });
 
           // Add tree polygon shape
-          treeContainer
+          treeSvg
             .append("polygon")
             .attr(
               "points",
               "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
             )
-            .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#a8c686"))
+            .style("fill", (d) => getMarkerFill(d.id))
             .style("fill-rule", "evenodd")
             .style("stroke", "#231f20")
             .style("stroke-width", "20px")
-            .style("stroke-miterlimit", "10");
+            .style("stroke-miterlimit", "10")
+            .on("mouseover", function (e, d) {
+              d3.select(this).style("fill", "#4b5e26");
+            })
+            .on("mouseout", function (e, d) {
+              d3.select(this).style("fill", getMarkerFill(d.id));
+            });
 
           // add link text
           link
@@ -140,7 +147,7 @@ function useMap(
             .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
-            .attr("y", 30);
+            .attr("y", 30)
         }
       }
     };
