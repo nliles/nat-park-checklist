@@ -53,7 +53,7 @@ function useMap(
     const drawMap = () => {
       const svg = d3.select("#map");
       // Remove previous map before drawing a new one
-      d3.select("#map g").remove();
+      svg.select("g").remove();
 
       // Draw the map
       svg
@@ -72,8 +72,8 @@ function useMap(
       // Draw Map Markers
       if (parks.length > 0) {
         // remove old map markers
-        d3.selectAll("#map a").remove();
-        d3.selectAll("#map circle").remove();
+        svg.selectAll("a").remove();
+        svg.selectAll("circle").remove();
 
         // add circles
         svg
