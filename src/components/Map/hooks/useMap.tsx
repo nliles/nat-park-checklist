@@ -59,8 +59,6 @@ function useMap(
     };
 
     const drawMap = () => {
-      const g = d3.select("#map g")
-
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
 
