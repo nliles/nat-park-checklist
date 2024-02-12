@@ -52,6 +52,7 @@ function useMap(
     let link: any = null;
     let treeSvg: any = null;
     const getIsSelected = (id: string) => selectedParks.includes(id);
+    const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
 
     const reset = () => {
       active = d3.select(null);
@@ -81,11 +82,11 @@ function useMap(
       // Draw Map Markers
       if (parks.length > 0) {
         // remove old map markers
-        svg.selectAll("a").remove();
-        // svg.selectAll("circle").remove();
+        g.selectAll("a").remove();
+        g.selectAll("circle").remove();
 
         // add circles
-        svg
+        g
           .selectAll("circles")
           .data(parks)
           .enter()
@@ -102,7 +103,7 @@ function useMap(
           const markers = g.selectAll("markers");
 
           // add link
-          link = markers
+          const link = markers
             .data(parks)
             .enter()
             .append("a")
@@ -119,12 +120,12 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          treeSvg = link
+          const treeSvg = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
             .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", (e: MouseEvent, d: Feature) => {
+            .on("click", (e, d) => {
               e.preventDefault();
               if (handleOnClick) {
                 handleOnClick(d.id as string);
@@ -138,21 +139,27 @@ function useMap(
               "points",
               "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
             )
-            .style("fill", (d: Feature) => (getIsSelected(d.id as string) ? "#4b5e26" : "#a8c686"))
+            .style("fill", (d) => getMarkerFill(d.id))
             .style("fill-rule", "evenodd")
             .style("stroke", "#231f20")
             .style("stroke-width", "20px")
-            .style("stroke-miterlimit", "10");
+            .style("stroke-miterlimit", "10")
+            .on("mouseover", function (e, d) {
+              d3.select(this).style("fill", "#4b5e26");
+            })
+            .on("mouseout", function (e, d) {
+              d3.select(this).style("fill", getMarkerFill(d.id));
+            });
 
           // add link text
           link
             .append("text")
-            .text((d: Feature, i: number) => `${i + 1}`)
+            .text((d, i) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d: Feature) => (getIsSelected(d.id as string) ? "white" : "black"))
+            .style("fill", (d) => (getIsSelected(d.id as string) ? "white" : "black"))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
-            .attr("y", 30);
+            .attr("y", 30)
         }
       }
 
