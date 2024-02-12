@@ -47,12 +47,12 @@ function useMap(
     );
 
     const path = geoPath().projection(projection);
-    const map = d3.select("#map");
+    const svg = d3.select("#map");
     let active: any = d3.select(null);
     const getIsSelected = (id: string) => selectedParks.includes(id);
     function reset() {
       active = d3.select(null);
-      map.select("g").transition()
+      svg.select("g").transition()
         .duration(750)
         .style("stroke-width", "1.5px")
         .attr("transform", "");
@@ -65,11 +65,11 @@ function useMap(
       d3.select("#map g").remove();
 
       // Draw the map
-      map
+      svg
         .attr("width", width)
         .attr("height", height + bottomPadding);
         
-      map.append("g")
+      svg.append("g")
         .selectAll("path")
         .data(usData.features)
         .enter()
@@ -88,11 +88,9 @@ function useMap(
           scale = .5 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
       
-          map.select("g").transition()
+          svg.select("g").transition()
             .duration(750)
-            .style("stroke-width", 1.5 / scale + "px")
             .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-
           });
 
       // Draw Map Markers
@@ -102,7 +100,7 @@ function useMap(
         d3.selectAll("#map circle").remove();
 
         // add circles
-        map
+        svg
           .selectAll("circles")
           .data(parks)
           .enter()
@@ -116,7 +114,7 @@ function useMap(
         // Tree map markers
         if (showTree) {
           // Data for map markers
-          const elem = map.select("g").selectAll("markers").data(parks);
+          const elem = svg.select("g").selectAll("markers").data(parks);
 
           // add link
           const link = elem
@@ -135,7 +133,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const svg = link
+          const tree = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -148,7 +146,7 @@ function useMap(
             });
 
           // Add tree polygon shape
-          svg
+          tree
             .append("polygon")
             .attr(
               "points",
