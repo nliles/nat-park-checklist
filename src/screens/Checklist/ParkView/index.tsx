@@ -67,36 +67,33 @@ const ParkView = ({
     <PageWrapper count={count}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
-          <Suspense fallback={<Spinner />}>
-            <div className={styles.dropdownWrapper}>
-              <Total
-                {...totalProps}
-                styleName={styles.mobileCount}
-              />
-              <Dropdown
-                list={LIST_OPTIONS}
-                initialSelectedItem={selectedDropdownItem}
-                handleClick={handleListItemChange}
-                formatListItem={formatListItem}
-                formatSelectedItem={formatSelectedItem}
-              />
-              <Total
-                {...totalProps}
-                styleName={cn(styles.count, styles.desktopCount)}
-              />
-            </div>
-            <Map
-              parks={parks}
-              selectedParks={formData}
-              handleOnClick={handleClick}
+        <Suspense fallback={<Spinner />}>
+          <div className={styles.dropdownWrapper}>
+            <Total {...totalProps} styleName={styles.mobileCount} />
+            <Dropdown
+              list={LIST_OPTIONS}
+              initialSelectedItem={selectedDropdownItem}
+              handleClick={handleListItemChange}
+              formatListItem={formatListItem}
+              formatSelectedItem={formatSelectedItem}
             />
-            <ParkList
-              parks={parks}
-              selectedDropdownItem={dropdownItem}
-              initialParkValues={initialValues}
-              handleOnSubmit={handleOnSubmit}
+            <Total
+              {...totalProps}
+              styleName={cn(styles.count, styles.desktopCount)}
             />
-          </Suspense>
+          </div>
+          <Map
+            parks={parks}
+            selectedParks={formData}
+            handleOnClick={handleClick}
+          />
+          <ParkList
+            parks={parks}
+            selectedDropdownItem={dropdownItem}
+            initialParkValues={initialValues}
+            handleOnSubmit={handleOnSubmit}
+          />
+        </Suspense>
       </div>
     </PageWrapper>
   );
