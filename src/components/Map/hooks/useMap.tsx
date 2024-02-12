@@ -50,6 +50,7 @@ function useMap(
     const svg = d3.select("#map");
     let active: any = d3.select(null);
     const getIsSelected = (id: string) => selectedParks.includes(id);
+
     function reset() {
       active = d3.select(null);
       svg
@@ -137,7 +138,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const tree = link
+          const treeContainer = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -150,7 +151,7 @@ function useMap(
             });
 
           // Add tree polygon shape
-          tree
+          treeContainer
             .append("polygon")
             .attr(
               "points",
