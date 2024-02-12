@@ -47,12 +47,13 @@ function useMap(
     );
 
     const path = geoPath().projection(projection);
-
+    const map = d3.select("#map");
     const getIsSelected = (id: string) => selectedParks.includes(id);
 
     const drawMap = () => {
-      const map = d3.select("#map");
+      const g = d3.select("#map g")
       let active: any = d3.select(null);
+      // : d3.Selection<SVGElement>;
 
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
@@ -60,21 +61,24 @@ function useMap(
       // Draw the map
       map
         .attr("width", width)
-        .attr("height", height + bottomPadding)
-        .append("g")
+        .attr("height", height + bottomPadding);
+        
+      map.append("g")
         .selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
         .attr("d", path)
-        .on("click", (event, d) => {
-          active.classed(styles.active, false);
+        .on("click", function(event, d) {
+          
           if (active.node() !== this) {
             active = d3.select(this).classed(styles.active, true);
+          } else {
+            active.classed(styles.active, false);
+            active = d3.select(null);
           }
-          console.log(typeof this)
-          var bounds = path.bounds(d),
+          const bounds = path.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
@@ -82,11 +86,19 @@ function useMap(
           scale = .5 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
       
-        d3.select("#map g").transition()
-          .duration(750)
-          .style("stroke-width", 1.5 / scale + "px")
-          .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-        });
+          map.select("g").transition()
+            .duration(750)
+            .style("stroke-width", 1.5 / scale + "px")
+            .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+
+          map.select("g").selectAll("markers").transition()
+            .duration(750)
+            .attr("transform", (d) => {
+              const test = this.getBBox();
+              console.log(test)
+              return "translate(" + test.x +","+ test.y + ")scale("+1/scale+")"; //inverse the scale of parent
+            });
+          });
 
       // let zoom = d3.zoom().scaleExtent([1, 2])
       // .on('zoom', (event) => {
@@ -118,7 +130,7 @@ function useMap(
         // Tree map markers
         if (showTree) {
           // Data for map markers
-          const elem = map.selectAll("markers").data(parks);
+          const elem = map.select("g").selectAll("markers").data(parks);
 
           // add link
           const link = elem
@@ -173,6 +185,7 @@ function useMap(
             .attr("y", 30);
         }
       }
+      
     };
 
     drawMap();

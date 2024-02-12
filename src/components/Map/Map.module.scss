@@ -14,7 +14,7 @@
 .state {
   fill: $tan;
   stroke: $tanOutline;
-  &:active {
+  &.active {
     fill: $tanOutline;
   }
 }
