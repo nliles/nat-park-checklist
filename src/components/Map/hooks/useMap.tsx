@@ -56,7 +56,6 @@ function useMap(
         .select("g")
         .transition()
         .duration(750)
-        .style("stroke-width", "1.5px")
         .attr("transform", "");
     }
 
