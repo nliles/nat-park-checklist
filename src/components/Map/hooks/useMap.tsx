@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
-import { FeatureCollection } from "geojson";
+import { Feature, FeatureCollection } from "geojson";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -49,6 +49,8 @@ function useMap(
     const path = geoPath().projection(projection);
     const svg = d3.select("#map");
     let active: any = d3.select(null);
+    let link: any = null;
+    let treeSvg: any = null;
     const getIsSelected = (id: string) => selectedParks.includes(id);
 
     function reset() {
@@ -69,38 +71,18 @@ function useMap(
 
       const g = svg.append("g");
 
-      g.selectAll("path")
+      const d = g.selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
         .attr("d", path)
-        .on("click", function (event, d) {
-          active.classed(styles.active, false);
-          if (active.node() === this) return reset();
-          active = d3.select(this).classed(styles.active, true);
-          const bounds = path.bounds(d),
-            dx = bounds[1][0] - bounds[0][0],
-            dy = bounds[1][1] - bounds[0][1],
-            x = (bounds[0][0] + bounds[1][0]) / 2,
-            y = (bounds[0][1] + bounds[1][1]) / 2,
-            scale = 0.5 / Math.max(dx / width, dy / height),
-            translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-          g
-            .transition()
-            .duration(750)
-            .attr(
-              "transform",
-              "translate(" + translate + ")scale(" + scale + ")"
-            );
-        });
 
       // Draw Map Markers
       if (parks.length > 0) {
         // remove old map markers
         svg.selectAll("a").remove();
-        svg.selectAll("circle").remove();
+        // svg.selectAll("circle").remove();
 
         // add circles
         svg
@@ -120,7 +102,7 @@ function useMap(
           const markers = g.selectAll("markers");
 
           // add link
-          const link = markers
+          link = markers
             .data(parks)
             .enter()
             .append("a")
@@ -137,26 +119,26 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const treeContainer = link
+          treeSvg = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
             .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", (e, d) => {
+            .on("click", (e: MouseEvent, d: Feature) => {
               e.preventDefault();
               if (handleOnClick) {
-                handleOnClick(d.id);
+                handleOnClick(d.id as string);
               }
             });
 
           // Add tree polygon shape
-          treeContainer
+          treeSvg
             .append("polygon")
             .attr(
               "points",
               "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
             )
-            .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#a8c686"))
+            .style("fill", (d: Feature) => (getIsSelected(d.id as string) ? "#4b5e26" : "#a8c686"))
             .style("fill-rule", "evenodd")
             .style("stroke", "#231f20")
             .style("stroke-width", "20px")
@@ -165,14 +147,35 @@ function useMap(
           // add link text
           link
             .append("text")
-            .text((d, i) => `${i + 1}`)
+            .text((d: Feature, i: number) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
+            .style("fill", (d: Feature) => (getIsSelected(d.id as string) ? "white" : "black"))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
             .attr("y", 30);
         }
       }
+
+      d.on("click", function (event, d) {
+        active.classed(styles.active, false);
+        if (active.node() === this) return reset();
+        active = d3.select(this).classed(styles.active, true);
+        const bounds = path.bounds(d),
+          dx = bounds[1][0] - bounds[0][0],
+          dy = bounds[1][1] - bounds[0][1],
+          x = (bounds[0][0] + bounds[1][0]) / 2,
+          y = (bounds[0][1] + bounds[1][1]) / 2,
+          scale = 0.5 / Math.max(dx / width, dy / height),
+          translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+        g
+          .transition()
+          .duration(750)
+          .attr(
+            "transform",
+            `translate(${translate})scale(${scale})`
+          );      
+      });
     };
 
     drawMap();
