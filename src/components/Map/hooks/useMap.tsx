@@ -32,7 +32,7 @@ function useMap(
     // Map padding
     const paddingLeftRight = 0;
     const paddingTopBottom = widthTabletDesktop ? 35 : 0;
-    const bottomPadding = widthTabletDesktop ? 80 : 0;
+    const bottomPadding = 0;
     // Map height/width
     const offsetWidth = widthTabletDesktop ? 50 : 0;
     const mapWidth = width - offsetWidth;
@@ -61,33 +61,43 @@ function useMap(
       map
         .attr("width", width)
         .attr("height", height + bottomPadding)
-        .append("g")
-        .selectAll("path")
+        .append("g");
+
+      map.selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
         .attr("d", path)
-        .on("click", function(event, d) {
-          active.classed(styles.active, false);
-          if (active.node() !== this) {
-            active = d3.select(this).classed(styles.active, true);
-          }
-
-          var bounds = path.bounds(d),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = .5 / Math.max(dx / width, dy / height),
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
+        .on("click", (event, state) => {
+        //if (active.node() === this) { return reset(); }
+        // if (window.US_STATES[d.id].water_authorities === 0) { return; }
       
-        d3.select("#map g").transition()
-          .duration(750)
-          .style("stroke-width", 1.5 / scale + "px")
-          .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-        });
+        // active.classed("active", false);
+        // active = d3.select(this).classed("active", true);
+      
+        // var bounds = path.bounds(state),
+        //   dx = bounds[1][0] - bounds[0][0],
+        //   dy = bounds[1][1] - bounds[0][1],
+        //   x = (bounds[0][0] + bounds[1][0]) / 2,
+        //   y = (bounds[0][1] + bounds[1][1]) / 2,
+        //   scale = .9 / Math.max(dx / width, dy / height),
+        //   translate = [width / 2 - scale * x, height / 2 - scale * y];
+      
+        // g.transition()
+        //   .duration(750)
+        //   .style("stroke-width", 1.5 / scale + "px")
+        //   .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+      });
+        
 
+      let zoom = d3.zoom().scaleExtent([1, 2])
+      .on('zoom', (event) => {
+        console.log('here!!', event)
+        map.attr("transform", event.transform);
+      });
+     
+     // map.call(zoom);
 
       // Draw Map Markers
       if (parks.length > 0) {
