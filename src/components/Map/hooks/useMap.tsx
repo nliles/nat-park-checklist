@@ -48,12 +48,22 @@ function useMap(
 
     const path = geoPath().projection(projection);
     const map = d3.select("#map");
+    let active: any = d3.select(null);
+    // : d3.Selection<SVGElement>;
     const getIsSelected = (id: string) => selectedParks.includes(id);
+
+    function reset() {
+      active.classed("active", false);
+      active = d3.select(null);
+
+      map.select("g").transition()
+        .duration(750)
+        .style("stroke-width", "1.5px")
+        .attr("transform", "");
+    };
 
     const drawMap = () => {
       const g = d3.select("#map g")
-      let active: any = d3.select(null);
-      // : d3.Selection<SVGElement>;
 
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
@@ -71,7 +81,9 @@ function useMap(
         .attr("class", styles.state)
         .attr("d", path)
         .on("click", function(event, d) {
-          
+          if (active.node() === this) {
+            return reset();
+          }
           if (active.node() !== this) {
             active = d3.select(this).classed(styles.active, true);
           } else {
@@ -99,15 +111,6 @@ function useMap(
               return "translate(" + test.x +","+ test.y + ")scale("+1/scale+")"; //inverse the scale of parent
             });
           });
-
-      // let zoom = d3.zoom().scaleExtent([1, 2])
-      // .on('zoom', (event) => {
-      //   console.log('here!!', event)
-      //   map.attr("transform", event.transform);
-      // });
-      
-      // map.call(zoom);
-
 
       // Draw Map Markers
       if (parks.length > 0) {
