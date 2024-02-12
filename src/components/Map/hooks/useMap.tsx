@@ -58,7 +58,9 @@ function useMap(
       // Draw the map
       svg
         .attr("width", width)
-        .attr("height", height + bottomPadding)
+        .attr("height", height + bottomPadding);
+
+      svg
         .append("g")
         .selectAll("path")
         .data(usData.features)
