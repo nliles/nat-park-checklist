@@ -87,8 +87,7 @@ function useMap(
             scale = 0.5 / Math.max(dx / width, dy / height),
             translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-          svg
-            .select("g")
+          g
             .transition()
             .duration(750)
             .attr(
