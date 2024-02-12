@@ -50,16 +50,13 @@ function useMap(
     const svg = d3.select("#map");
     let active: any = d3.select(null);
     const getIsSelected = (id: string) => selectedParks.includes(id);
-    const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
+    const getMarkerFill = (id: string) =>
+      getIsSelected(id) ? "#4b5e26" : "#a8c686";
 
     const reset = () => {
       active = d3.select(null);
-      svg
-        .select("g")
-        .transition()
-        .duration(750)
-        .attr("transform", "");
-    }
+      svg.select("g").transition().duration(750).attr("transform", "");
+    };
 
     const drawMap = () => {
       // Remove previous map before drawing a new one
@@ -70,12 +67,13 @@ function useMap(
 
       const g = svg.append("g");
 
-      const d = g.selectAll("path")
+      const d = g
+        .selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
-        .attr("d", path)
+        .attr("d", path);
 
       // Draw Map Markers
       if (parks.length > 0) {
@@ -84,8 +82,7 @@ function useMap(
         g.selectAll("circle").remove();
 
         // add circles
-        g
-          .selectAll("circles")
+        g.selectAll("circles")
           .data(parks)
           .enter()
           .append("circle")
@@ -157,37 +154,35 @@ function useMap(
             .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
-            .attr("y", 30)
+            .attr("y", 30);
         }
       }
 
-      d
-      .on("mouseover", function (event, d) {
-         d3.select(this).style("fill", "#d8d2bc")
+      d.on("mouseover", function (event, d) {
+        d3.select(this).style("fill", "#d8d2bc");
       })
-      .on("mouseout", function (event, d) {
-        d3.select(this).style("fill", active.node() === this ? "#d8d2bc" : "#eae3d1")
-     })
-      .on("click", function (event, d) {
-        active.classed(styles.active, false);
-        if (active.node() === this) return reset();
-        active = d3.select(this).classed(styles.active, true);
-        const bounds = path.bounds(d),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = 0.5 / Math.max(dx / width, dy / height),
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
+        .on("mouseout", function (event, d) {
+          d3.select(this).style(
+            "fill",
+            active.node() === this ? "#d8d2bc" : "#eae3d1"
+          );
+        })
+        .on("click", function (event, d) {
+          active.classed(styles.active, false);
+          if (active.node() === this) return reset();
+          active = d3.select(this).classed(styles.active, true);
+          const bounds = path.bounds(d),
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = 0.5 / Math.max(dx / width, dy / height),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-        g
-          .transition()
-          .duration(750)
-          .attr(
-            "transform",
-            `translate(${translate})scale(${scale})`
-          );      
-      });
+          g.transition()
+            .duration(750)
+            .attr("transform", `translate(${translate})scale(${scale})`);
+        });
     };
 
     drawMap();
