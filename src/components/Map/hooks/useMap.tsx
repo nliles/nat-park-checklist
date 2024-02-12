@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
-import { Feature, FeatureCollection } from "geojson";
+import { FeatureCollection } from "geojson";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -49,8 +49,6 @@ function useMap(
     const path = geoPath().projection(projection);
     const svg = d3.select("#map");
     let active: any = d3.select(null);
-    let link: any = null;
-    let treeSvg: any = null;
     const getIsSelected = (id: string) => selectedParks.includes(id);
     const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
 
@@ -128,7 +126,7 @@ function useMap(
             .on("click", (e, d) => {
               e.preventDefault();
               if (handleOnClick) {
-                handleOnClick(d.id as string);
+                handleOnClick(d.id);
               }
             });
 
@@ -156,7 +154,7 @@ function useMap(
             .append("text")
             .text((d, i) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => (getIsSelected(d.id as string) ? "white" : "black"))
+            .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
             .attr("y", 30)

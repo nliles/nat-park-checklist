@@ -2,8 +2,7 @@
 @import "../../../styles/breakpoints.scss";
 
 .container {
-  margin: 0 100px;
-  padding-bottom: 50px;
+  margin: 50px 100px;
 
   @media (max-width: $desktop) {
     margin: 50px 25px 25px 25px;
