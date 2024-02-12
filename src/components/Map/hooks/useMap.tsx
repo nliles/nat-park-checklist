@@ -51,17 +51,16 @@ function useMap(
     const getIsSelected = (id: string) => selectedParks.includes(id);
 
     const drawMap = () => {
-      const map = d3.select("#map");
-
+      const svg = d3.select("#map");
       // Remove previous map before drawing a new one
-      d3.select("#map g").remove();
+      svg.select("g").remove();
 
       // Draw the map
-      map
-        .attr("width", width)
-        .attr("height", height + bottomPadding)
-        .append("g")
-        .selectAll("path")
+      svg.attr("width", width).attr("height", height + bottomPadding);
+
+      const g = svg.append("g");
+
+      g.selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
@@ -71,11 +70,11 @@ function useMap(
       // Draw Map Markers
       if (parks.length > 0) {
         // remove old map markers
-        d3.selectAll("#map a").remove();
-        d3.selectAll("#map circle").remove();
+        svg.selectAll("a").remove();
+        svg.selectAll("circle").remove();
 
         // add circles
-        map
+        svg
           .selectAll("circles")
           .data(parks)
           .enter()
@@ -89,10 +88,10 @@ function useMap(
         // Tree map markers
         if (showTree) {
           // Data for map markers
-          const elem = map.selectAll("markers").data(parks);
+          const markers = svg.selectAll("markers").data(parks);
 
           // add link
-          const link = elem
+          const link = markers
             .enter()
             .append("a")
             .attr("class", styles.treeLink)
@@ -108,7 +107,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const svg = link
+          const treeContainer = link
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -121,7 +120,7 @@ function useMap(
             });
 
           // Add tree polygon shape
-          svg
+          treeContainer
             .append("polygon")
             .attr(
               "points",
