@@ -90,7 +90,7 @@ function useMap(
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
-          .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#A8C686"));
+          .style("fill", (d) => getMarkerFill(d.id))
 
         // Tree map markers
         if (showTree) {
