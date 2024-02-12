@@ -53,7 +53,7 @@ function useMap(
     let treeSvg: any = null;
     const getIsSelected = (id: string) => selectedParks.includes(id);
 
-    function reset() {
+    const reset = () => {
       active = d3.select(null);
       svg
         .select("g")
