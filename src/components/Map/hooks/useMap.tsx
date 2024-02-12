@@ -56,14 +56,11 @@ function useMap(
       svg.select("g").remove();
 
       // Draw the map
-      svg
-        .attr("width", width)
-        .attr("height", height + bottomPadding);
+      svg.attr("width", width).attr("height", height + bottomPadding);
 
       const g = svg.append("g");
 
-      g
-        .selectAll("path")
+      g.selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
