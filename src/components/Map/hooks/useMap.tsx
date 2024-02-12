@@ -49,13 +49,9 @@ function useMap(
     const path = geoPath().projection(projection);
     const map = d3.select("#map");
     let active: any = d3.select(null);
-    // : d3.Selection<SVGElement>;
     const getIsSelected = (id: string) => selectedParks.includes(id);
-
     function reset() {
-      active.classed("active", false);
       active = d3.select(null);
-
       map.select("g").transition()
         .duration(750)
         .style("stroke-width", "1.5px")
@@ -81,15 +77,9 @@ function useMap(
         .attr("class", styles.state)
         .attr("d", path)
         .on("click", function(event, d) {
-          if (active.node() === this) {
-            return reset();
-          }
-          if (active.node() !== this) {
-            active = d3.select(this).classed(styles.active, true);
-          } else {
-            active.classed(styles.active, false);
-            active = d3.select(null);
-          }
+          active.classed(styles.active, false);
+          if (active.node() === this) return reset();
+          active = d3.select(this).classed(styles.active, true);
           const bounds = path.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
@@ -103,13 +93,6 @@ function useMap(
             .style("stroke-width", 1.5 / scale + "px")
             .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
 
-          map.select("g").selectAll("markers").transition()
-            .duration(750)
-            .attr("transform", (d) => {
-              const test = this.getBBox();
-              console.log(test)
-              return "translate(" + test.x +","+ test.y + ")scale("+1/scale+")"; //inverse the scale of parent
-            });
           });
 
       // Draw Map Markers
