@@ -42,7 +42,7 @@ const Map = ({
 
   return (
     <div ref={mapContainerRef} className={styles.mapContainer}>
-      <svg id="map"></svg>
+      <svg id="map"/>
     </div>
   );
 };
