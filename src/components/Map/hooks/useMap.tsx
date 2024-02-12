@@ -30,17 +30,15 @@ function useMap(
     ) as FeatureCollection;
     const widthTabletDesktop = width >= 768;
     // Map padding
-    const paddingLeftRight = 0;
     const paddingTopBottom = widthTabletDesktop ? 35 : 0;
-    const bottomPadding = widthTabletDesktop ? 80 : 0;
+    const bottomPadding = widthTabletDesktop ? 40 : 0;
     // Map height/width
-    const offsetWidth = widthTabletDesktop ? 50 : 0;
-    const mapWidth = width - offsetWidth;
-    const mapHeight = (width - offsetWidth) / 2;
+    const mapWidth = width;
+    const mapHeight = width / 2;
 
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
-        [paddingLeftRight, paddingTopBottom],
+        [0, paddingTopBottom],
         [mapWidth, mapHeight],
       ],
       usData
