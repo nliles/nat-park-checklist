@@ -52,44 +52,50 @@ function useMap(
     const getIsSelected = (id: string) => selectedParks.includes(id);
     function reset() {
       active = d3.select(null);
-      svg.select("g").transition()
+      svg
+        .select("g")
+        .transition()
         .duration(750)
         .style("stroke-width", "1.5px")
         .attr("transform", "");
-    };
+    }
 
     const drawMap = () => {
       // Remove previous map before drawing a new one
       d3.select("#map g").remove();
 
       // Draw the map
+      svg.attr("width", width).attr("height", height + bottomPadding);
+
       svg
-        .attr("width", width)
-        .attr("height", height + bottomPadding);
-        
-      svg.append("g")
+        .append("g")
         .selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
         .attr("class", styles.state)
         .attr("d", path)
-        .on("click", function(event, d) {
+        .on("click", function (event, d) {
           active.classed(styles.active, false);
           if (active.node() === this) return reset();
           active = d3.select(this).classed(styles.active, true);
           const bounds = path.bounds(d),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = .5 / Math.max(dx / width, dy / height),
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
-      
-          svg.select("g").transition()
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = 0.5 / Math.max(dx / width, dy / height),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+          svg
+            .select("g")
+            .transition()
             .duration(750)
-            .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-          });
+            .attr(
+              "transform",
+              "translate(" + translate + ")scale(" + scale + ")"
+            );
+        });
 
       // Draw Map Markers
       if (parks.length > 0) {
@@ -168,7 +174,6 @@ function useMap(
             .attr("y", 30);
         }
       }
-      
     };
 
     drawMap();
