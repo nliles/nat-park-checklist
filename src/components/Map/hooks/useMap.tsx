@@ -46,6 +46,7 @@ function useMap(
 
     const path = geoPath().projection(projection);
     const svg = d3.select("#map");
+    let link: any = d3.select(null);
     let active: any = d3.select(null);
     const getIsSelected = (id: string) => selectedParks.includes(id);
     const getMarkerFill = (id: string) =>
@@ -96,7 +97,7 @@ function useMap(
           const markers = g.selectAll("markers");
 
           // add link
-          const link = markers
+          link = markers
             .data(parks)
             .enter()
             .append("a")
@@ -156,15 +157,16 @@ function useMap(
         }
       }
 
-      d.on("mouseover", function (event, d) {
-        d3.select(this).style("fill", "#d8d2bc");
-      })
-        .on("mouseout", function (event, d) {
-          d3.select(this).style(
-            "fill",
-            active.node() === this ? "#d8d2bc" : "#eae3d1"
-          );
-        })
+      d
+      // .on("mouseover", function (event, d) {
+      //   d3.select(this).style("fill", "#d8d2bc");
+      // })
+      //   .on("mouseout", function (event, d) {
+      //     d3.select(this).style(
+      //       "fill",
+      //       active.node() === this ? "#d8d2bc" : "#eae3d1"
+      //     );
+      //   })
         .on("click", function (event, d) {
           active.classed(styles.active, false);
           if (active.node() === this) return reset();
@@ -180,7 +182,14 @@ function useMap(
           g.transition()
             .duration(750)
             .attr("transform", `translate(${translate})scale(${scale})`);
-        });
+
+          link.transition()
+            .duration(750)
+            .attr("transform", function() {
+              const transform = d3.select(this).attr("transform");
+              return `${transform}scale(${1/scale})`;
+            }); 
+        }); 
     };
 
     drawMap();
