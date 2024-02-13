@@ -50,6 +50,7 @@ function useMap(
 
     const getIsSelected = (id: string) => selectedParks.includes(id);
     const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
+    const getLinkTextFill = (id: string) => getIsSelected(id) ? "white" : "black"
 
     const drawMap = () => {
       const svg = d3.select("#map");
@@ -84,7 +85,7 @@ function useMap(
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
-          .style("fill", (d) => (getIsSelected(d.id) ? "#4b5e26" : "#A8C686"));
+          .style("fill", (d) => getMarkerFill(d.id))
 
         // Tree map markers
         if (showTree) {
@@ -104,9 +105,17 @@ function useMap(
               const y = (p?.[1] || 0) - 45;
               return `translate(${x}, ${y})`;
             })
-            .on("mouseover", (e, d) => handleMouseOver(d))
+            .on("mouseover", function (e, d) {
+              const linkText = d3.select(this).selectAll('text');
+              linkText.style("fill", "white");
+              handleMouseOver(d)
+            })
             .on("mousemove", handleMouseMove)
-            .on("mouseout", handleMouseOut);
+            .on("mouseout", function (e, d) {
+              const linkText = d3.select(this).selectAll('text');
+              linkText.style("fill", getLinkTextFill(d.id));
+              handleMouseOut();
+            })
 
           // add tree svg container
           const treeSvg = linkContainer
@@ -145,10 +154,15 @@ function useMap(
             .append("text")
             .text((d, i) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
+            .style("fill", (d) => getLinkTextFill(d.id))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
             .attr("y", 30)
+            .on("mouseover", function (e, d) {
+              e.stopPropagation();
+              d3.select(this).style("fill", getLinkTextFill(d.id));
+              handleMouseOver(d)
+            })
         }
       }
     };
