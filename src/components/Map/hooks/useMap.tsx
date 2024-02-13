@@ -38,7 +38,7 @@ function useMap(
 
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
-        [0, paddingTopBottom],
+        [0, '60'],
         [mapWidth, mapHeight],
       ],
       usData
