@@ -46,11 +46,16 @@ function useMap(
 
     const path = geoPath().projection(projection);
     const svg = d3.select("#map");
-    let link: any = d3.select(null);
+    let linkContainer: any = d3.select(null);
     let active: any = d3.select(null);
+    
     const getIsSelected = (id: string) => selectedParks.includes(id);
+
     const getMarkerFill = (id: string) =>
       getIsSelected(id) ? "#4b5e26" : "#a8c686";
+
+    const getLinkTextFill = (id: string) =>
+      getIsSelected(id) ? "white" : "black";
 
     const reset = () => {
       active = d3.select(null);
@@ -89,15 +94,15 @@ function useMap(
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
-          .style("fill", (d) => getMarkerFill(d.id))
+          .style("fill", (d) => getMarkerFill(d.id));
 
         // Tree map markers
         if (showTree) {
           // Data for map markers
           const markers = g.selectAll("markers");
 
-          // add link
-          link = markers
+          // add link container
+          linkContainer = markers
             .data(parks)
             .enter()
             .append("a")
@@ -107,14 +112,23 @@ function useMap(
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 16.5;
               const y = (p?.[1] || 0) - 45;
-              return `translate(${x}, ${y})`;
+              const scale = 1;
+              return `translate(${x}, ${y})scale(${scale})`;
             })
-            .on("mouseover", (e, d) => handleMouseOver(d))
+            .on("mouseover", function (e, d) {
+              const linkText = d3.select(this).selectAll("text");
+              linkText.style("fill", "white");
+              handleMouseOver(d);
+            })
             .on("mousemove", handleMouseMove)
-            .on("mouseout", handleMouseOut);
+            .on("mouseout", function (e, d) {
+              const linkText = d3.select(this).selectAll("text");
+              linkText.style("fill", getLinkTextFill(d.id));
+              handleMouseOut();
+            });
 
           // add tree svg container
-          const treeSvg = link
+          const treeSvg = linkContainer
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -146,14 +160,19 @@ function useMap(
             });
 
           // add link text
-          link
+          linkContainer
             .append("text")
             .text((d, i) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => (getIsSelected(d.id) ? "white" : "black"))
+            .style("fill", (d) => getLinkTextFill(d.id))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
-            .attr("y", 30);
+            .attr("y", 30)
+            .on("mouseover", function (e, d) {
+              e.stopPropagation();
+              d3.select(this).style("fill", getLinkTextFill(d.id));
+              handleMouseOver(d);
+            });
         }
       }
 
@@ -183,7 +202,7 @@ function useMap(
             .duration(750)
             .attr("transform", `translate(${translate})scale(${scale})`);
 
-          link.transition()
+          linkContainer.transition()
             .duration(750)
             .attr("transform", function() {
               const transform = d3.select(this).attr("transform");
