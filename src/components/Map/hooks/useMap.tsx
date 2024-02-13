@@ -49,8 +49,10 @@ function useMap(
     const path = geoPath().projection(projection);
 
     const getIsSelected = (id: string) => selectedParks.includes(id);
-    const getMarkerFill = (id: string) => getIsSelected(id) ? "#4b5e26" : "#a8c686"
-    const getLinkTextFill = (id: string) => getIsSelected(id) ? "white" : "black"
+    const getMarkerFill = (id: string) =>
+      getIsSelected(id) ? "#4b5e26" : "#a8c686";
+    const getLinkTextFill = (id: string) =>
+      getIsSelected(id) ? "white" : "black";
 
     const drawMap = () => {
       const svg = d3.select("#map");
@@ -85,7 +87,7 @@ function useMap(
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
-          .style("fill", (d) => getMarkerFill(d.id))
+          .style("fill", (d) => getMarkerFill(d.id));
 
         // Tree map markers
         if (showTree) {
@@ -106,16 +108,16 @@ function useMap(
               return `translate(${x}, ${y})`;
             })
             .on("mouseover", function (e, d) {
-              const linkText = d3.select(this).selectAll('text');
+              const linkText = d3.select(this).selectAll("text");
               linkText.style("fill", "white");
-              handleMouseOver(d)
+              handleMouseOver(d);
             })
             .on("mousemove", handleMouseMove)
             .on("mouseout", function (e, d) {
-              const linkText = d3.select(this).selectAll('text');
+              const linkText = d3.select(this).selectAll("text");
               linkText.style("fill", getLinkTextFill(d.id));
               handleMouseOut();
-            })
+            });
 
           // add tree svg container
           const treeSvg = linkContainer
@@ -161,8 +163,8 @@ function useMap(
             .on("mouseover", function (e, d) {
               e.stopPropagation();
               d3.select(this).style("fill", getLinkTextFill(d.id));
-              handleMouseOver(d)
-            })
+              handleMouseOver(d);
+            });
         }
       }
     };
