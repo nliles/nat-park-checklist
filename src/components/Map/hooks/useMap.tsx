@@ -91,8 +91,8 @@ function useMap(
           // Data for map markers
           const markers = g.selectAll("markers");
 
-          // add link
-          const link = markers
+          // add link container
+          const linkContainer = markers
             .data(parks)
             .enter()
             .append("a")
@@ -109,7 +109,7 @@ function useMap(
             .on("mouseout", handleMouseOut);
 
           // add tree svg container
-          const treeSvg = link
+          const treeSvg = linkContainer
             .append("svg")
             .attr("width", 33)
             .attr("height", 45)
@@ -141,7 +141,7 @@ function useMap(
             });
 
           // add link text
-          link
+          linkContainer
             .append("text")
             .text((d, i) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
