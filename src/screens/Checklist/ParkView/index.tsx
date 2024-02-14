@@ -18,7 +18,7 @@ import styles from "./index.module.scss";
 export type ParkViewProps = {
   count: number;
   handleListItemChange: (item: string) => void;
-  loading?: boolean;
+  isLoading?: boolean;
   parks: Park[];
   initialValues: string[];
   selectedParks?: string[];
@@ -28,7 +28,7 @@ export type ParkViewProps = {
 
 const ParkView = ({
   count,
-  loading = false,
+  isLoading = false,
   parks,
   initialValues,
   selectedDropdownItem,
@@ -66,8 +66,8 @@ const ParkView = ({
     <PageWrapper count={count}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
-          {loading && <Spinner />}
-          {!loading && (
+          {isLoading && <Spinner />}
+          {!isLoading && (
           <>
             <div className={styles.dropdownWrapper}>
             <Total
@@ -98,7 +98,7 @@ const ParkView = ({
             handleOnSubmit={handleOnSubmit}
           />
         </>
-          )}
+        )}
       </div>
     </PageWrapper>
   );

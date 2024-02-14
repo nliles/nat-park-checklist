@@ -1,5 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import ParkDesignation from "enum/ParkDesignation";
 import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import { ParkViewProps } from ".";
@@ -45,7 +44,7 @@ describe("<ParkView />", () => {
         <ParkView
           count={0}
           parks={parks}
-          loading={false}
+          isLoading={false}
           selectedDropdownItem={ParkDesignation.NAT_PARK}
           initialValues={[]}
           handleListItemChange={() => {}}
@@ -56,7 +55,7 @@ describe("<ParkView />", () => {
     );
   };
 
-  it("Displays the correct content when loading is false", () => {
+  it("Displays the correct content when isLoading is false", () => {
     renderParkView();
     expect(
       screen.getByRole("button", { name: "National Parks" })
@@ -67,8 +66,8 @@ describe("<ParkView />", () => {
     expect(screen.getByText("2. Arches National Park")).toBeVisible();
   });
 
-  it("Displays the correct content when loading is true", () => {
-    renderParkView({ loading: true });
+  it("Displays the correct content when isLoading is true", () => {
+    renderParkView({ isLoading: true });
     expect(
       screen.queryByRole("button", { name: "National Parks" })
     ).not.toBeInTheDocument();
