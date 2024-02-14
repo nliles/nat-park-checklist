@@ -51,27 +51,22 @@ function useMap(
     return `translate(${x}, ${y})scale(${scale})`;
   }
 
+  const getIsSelected = (id: string) => selectedParks.includes(id);
+  
+  const getMarkerFill = (id: string) =>
+    getIsSelected(id) ? "#4b5e26" : "#a8c686";
+
+  const getLinkTextFill = (id: string) =>
+    getIsSelected(id) ? "white" : "black";
+
   useEffect(() => {
     const drawMap = () => {
       const path = geoPath().projection(projection);
       const svg = d3.select("#map");
       let linkContainer: any = d3.select(null);
       let active: any = d3.select(null);
-      
-      const getIsSelected = (id: string) => selectedParks.includes(id);
-  
-      const getMarkerFill = (id: string) =>
-        getIsSelected(id) ? "#4b5e26" : "#a8c686";
-  
-      const getLinkTextFill = (id: string) =>
-        getIsSelected(id) ? "white" : "black";
-  
-      const reset = () => {
-        active = d3.select(null);
-        svg.select("g").transition().duration(750).attr("transform", "");
-      };
-      // Remove previous map before drawing a new one
-      
+
+      // Remove previous map before drawing a new one   
       svg.select("g").remove();
 
       // Draw the map
@@ -208,6 +203,12 @@ function useMap(
             .duration(750)
             .attr("transform", (park: Park) => getMarkCoords({ park, scale: (1/scale)  } )); 
         }); 
+
+        const reset = () => {
+          active = d3.select(null);
+          svg.select("g").transition().duration(750).attr("transform", "");
+          linkContainer.transition().duration(750).attr("transform", (park: Park) => getMarkCoords({ park } )); 
+        };
     };
 
     drawMap();
