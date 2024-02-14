@@ -174,15 +174,6 @@ function useMap(
       }
 
       d
-      // .on("mouseover", function (event, d) {
-      //   d3.select(this).style("fill", "#d8d2bc");
-      // })
-      //   .on("mouseout", function (event, d) {
-      //     d3.select(this).style(
-      //       "fill",
-      //       active.node() === this ? "#d8d2bc" : "#eae3d1"
-      //     );
-      //   })
         .on("click", function (event, d) {
           active.classed(styles.active, false);
           if (active.node() === this) return reset();
