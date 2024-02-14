@@ -17,6 +17,9 @@
 .state {
   fill: $tan;
   stroke: $tanOutline;
+  &.active {
+    fill: $tanOutline;
+  }
 }
 
 // Map Tooltip

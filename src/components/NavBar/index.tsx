@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
@@ -21,11 +21,11 @@ const NavBar = ({ count }: NavBarProps) => {
   const toggleClose = () => setShowMenu((prevState) => !prevState);
   const toggleModal = () => setShowModal((prevState) => !prevState);
 
-  useLayoutEffect(() => {
-    if (!isLoggedIn) {
-      toggleModal();
-    }
-  }, [isLoggedIn]);
+  // useLayoutEffect(() => {
+  //   if (!isLoggedIn) {
+  //     toggleModal();
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <nav className={styles.nav}>

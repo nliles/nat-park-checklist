@@ -43,15 +43,24 @@ function useMap(
     );
 
     const path = geoPath().projection(projection);
-
+    const svg = d3.select("#map");
+    let linkContainer: any = d3.select(null);
+    let active: any = d3.select(null);
+    
     const getIsSelected = (id: string) => selectedParks.includes(id);
+
     const getMarkerFill = (id: string) =>
       getIsSelected(id) ? "#4b5e26" : "#a8c686";
+
     const getLinkTextFill = (id: string) =>
       getIsSelected(id) ? "white" : "black";
 
+    const reset = () => {
+      active = d3.select(null);
+      svg.select("g").transition().duration(750).attr("transform", "");
+    };
+
     const drawMap = () => {
-      const svg = d3.select("#map");
       // Remove previous map before drawing a new one
       svg.select("g").remove();
 
@@ -60,7 +69,8 @@ function useMap(
 
       const g = svg.append("g");
 
-      g.selectAll("path")
+      const d = g
+        .selectAll("path")
         .data(usData.features)
         .enter()
         .append("path")
@@ -70,12 +80,11 @@ function useMap(
       // Draw Map Markers
       if (parks.length > 0) {
         // remove old map markers
-        svg.selectAll("a").remove();
-        svg.selectAll("circle").remove();
+        g.selectAll("a").remove();
+        g.selectAll("circle").remove();
 
         // add circles
-        svg
-          .selectAll("circles")
+        g.selectAll("circles")
           .data(parks)
           .enter()
           .append("circle")
@@ -91,7 +100,7 @@ function useMap(
           const markers = g.selectAll("markers");
 
           // add link container
-          const linkContainer = markers
+          linkContainer = markers
             .data(parks)
             .enter()
             .append("a")
@@ -101,7 +110,8 @@ function useMap(
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 16.5;
               const y = (p?.[1] || 0) - 45;
-              return `translate(${x}, ${y})`;
+              const scale = 1;
+              return `translate(${x}, ${y})scale(${scale})`;
             })
             .on("mouseover", function (e, d) {
               const linkText = d3.select(this).selectAll("text");
@@ -121,7 +131,7 @@ function useMap(
             .attr("width", 33)
             .attr("height", 45)
             .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", (e, d) => {
+            .on("click", (e: Event, d: Park) => {
               e.preventDefault();
               if (handleOnClick) {
                 handleOnClick(d.id);
@@ -135,34 +145,68 @@ function useMap(
               "points",
               "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
             )
-            .style("fill", (d) => getMarkerFill(d.id))
+            .style("fill", (d: Park) => getMarkerFill(d.id))
             .style("fill-rule", "evenodd")
             .style("stroke", "#231f20")
             .style("stroke-width", "20px")
             .style("stroke-miterlimit", "10")
-            .on("mouseover", function (e, d) {
+            .on("mouseover", function () {
               d3.select(this).style("fill", "#4b5e26");
             })
-            .on("mouseout", function (e, d) {
+            .on("mouseout", function (e: Event, d: Park) {
               d3.select(this).style("fill", getMarkerFill(d.id));
             });
 
           // add link text
           linkContainer
             .append("text")
-            .text((d, i) => `${i + 1}`)
+            .text((d: Park, i: number) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => getLinkTextFill(d.id))
+            .style("fill", (d: Park) => getLinkTextFill(d.id))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
             .attr("y", 30)
-            .on("mouseover", function (e, d) {
+            .on("mouseover", function (e: Event, d: Park) {
               e.stopPropagation();
               d3.select(this).style("fill", getLinkTextFill(d.id));
               handleMouseOver(d);
             });
         }
       }
+
+      d
+      // .on("mouseover", function (event, d) {
+      //   d3.select(this).style("fill", "#d8d2bc");
+      // })
+      //   .on("mouseout", function (event, d) {
+      //     d3.select(this).style(
+      //       "fill",
+      //       active.node() === this ? "#d8d2bc" : "#eae3d1"
+      //     );
+      //   })
+        .on("click", function (event, d) {
+          active.classed(styles.active, false);
+          if (active.node() === this) return reset();
+          active = d3.select(this).classed(styles.active, true);
+          const bounds = path.bounds(d),
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = 0.5 / Math.max(dx / width, dy / height),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+          g.transition()
+            .duration(750)
+            .attr("transform", `translate(${translate})scale(${scale})`);
+
+          // linkContainer.transition()
+          //   .duration(750)
+          //   .attr("transform", function() {
+          //     const transform = d3.select(this).attr("transform");
+          //     return `${transform}scale(${1/scale})`;
+          //   }); 
+        }); 
     };
 
     drawMap();
