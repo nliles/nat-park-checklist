@@ -67,7 +67,6 @@ function useMap(
 
   useEffect(() => {
     const drawMap = () => {
-      console.log("draw map");
       const path = geoPath().projection(projection);
       const svg = d3.select("#map");
       let linkContainer: any = d3.select(null);
@@ -215,9 +214,9 @@ function useMap(
     if (parks.length > 0) {
       drawMap();
     }
-    // window.addEventListener("resize", drawMap);
-    // return () => window.removeEventListener("resize", drawMap);
-  }, [parks]);
+    window.addEventListener("resize", drawMap);
+    return () => window.removeEventListener("resize", drawMap);
+  });
 }
 
 export default useMap;
