@@ -8,10 +8,11 @@
   height: 40px;
   width: 250px;
   margin: 10px 0;
-  border: 2px solid $green;
+  border: 1px solid $green;
   grid-column-start: 1;
   grid-row-start: 1;
   justify-self: center;
+  border-radius: 2px;
 
   &.isOpen {
     .list {
@@ -68,13 +69,13 @@
   max-height: 183px;
   overflow: auto;
   top: 40px;
-  left: -2px;
+  left: -1px;
   width: 100%;
   margin: 0;
   padding: 0;
   border-top: 0;
   display: none;
-  border: 2px solid $green;
+  border: 1px solid $green;
   list-style: none;
 }
 

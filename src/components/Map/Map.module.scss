@@ -2,8 +2,14 @@
 @import "../../styles/breakpoints.scss";
 
 .mapContainer {
+  margin: 0 100px;
+  border: 1px solid $tanOutline;
+  overflow: hidden;
+  @media (max-width: 1024px) {
+    margin: 0 25px;
+  }
   @media (max-width: $mobile-landscape) {
-    padding: 50px 0;
+    border: none;
   }
 }
 

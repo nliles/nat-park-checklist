@@ -9,7 +9,7 @@ const Caret = () => (
     <path
       d="M1.38062 1.04688L6.91321 6.85356L12.3443 1.04688"
       stroke="#4b5e26"
-      strokeWidth="2"
+      strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
