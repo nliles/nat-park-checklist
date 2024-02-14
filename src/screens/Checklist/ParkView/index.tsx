@@ -14,7 +14,6 @@ import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./index.module.scss";
-import { Suspense } from "react";
 
 export type ParkViewProps = {
   count: number;
@@ -67,36 +66,39 @@ const ParkView = ({
     <PageWrapper count={count}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
-          <Suspense fallback={<Spinner />}>
+          {loading && <Spinner />}
+          {!loading && (
+          <>
             <div className={styles.dropdownWrapper}>
-              <Total
-                {...totalProps}
-                styleName={styles.mobileCount}
-              />
-              <Dropdown
-                list={LIST_OPTIONS}
-                initialSelectedItem={selectedDropdownItem}
-                handleClick={handleListItemChange}
-                formatListItem={formatListItem}
-                formatSelectedItem={formatSelectedItem}
-              />
-              <Total
-                {...totalProps}
-                styleName={cn(styles.count, styles.desktopCount)}
-              />
-            </div>
-            <Map
-              parks={parks}
-              selectedParks={formData}
-              handleOnClick={handleClick}
+            <Total
+              {...totalProps}
+              styleName={styles.mobileCount}
             />
-            <ParkList
-              parks={parks}
-              selectedDropdownItem={dropdownItem}
-              initialParkValues={initialValues}
-              handleOnSubmit={handleOnSubmit}
+            <Dropdown
+              list={LIST_OPTIONS}
+              initialSelectedItem={selectedDropdownItem}
+              handleClick={handleListItemChange}
+              formatListItem={formatListItem}
+              formatSelectedItem={formatSelectedItem}
             />
-          </Suspense>
+            <Total
+              {...totalProps}
+              styleName={cn(styles.count, styles.desktopCount)}
+            />
+          </div>
+          <Map
+            parks={parks}
+            selectedParks={formData}
+            handleOnClick={handleClick}
+          />
+          <ParkList
+            parks={parks}
+            selectedDropdownItem={dropdownItem}
+            initialParkValues={initialValues}
+            handleOnSubmit={handleOnSubmit}
+          />
+        </>
+          )}
       </div>
     </PageWrapper>
   );
