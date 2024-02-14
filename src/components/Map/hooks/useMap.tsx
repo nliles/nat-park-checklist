@@ -131,7 +131,7 @@ function useMap(
             .attr("width", 33)
             .attr("height", 45)
             .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", (e, d) => {
+            .on("click", (e: Event, d: Park) => {
               e.preventDefault();
               if (handleOnClick) {
                 handleOnClick(d.id);
@@ -145,28 +145,28 @@ function useMap(
               "points",
               "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
             )
-            .style("fill", (d) => getMarkerFill(d.id))
+            .style("fill", (d: Park) => getMarkerFill(d.id))
             .style("fill-rule", "evenodd")
             .style("stroke", "#231f20")
             .style("stroke-width", "20px")
             .style("stroke-miterlimit", "10")
-            .on("mouseover", function (e, d) {
+            .on("mouseover", function () {
               d3.select(this).style("fill", "#4b5e26");
             })
-            .on("mouseout", function (e, d) {
+            .on("mouseout", function (e: Event, d: Park) {
               d3.select(this).style("fill", getMarkerFill(d.id));
             });
 
           // add link text
           linkContainer
             .append("text")
-            .text((d, i) => `${i + 1}`)
+            .text((d: Park, i: number) => `${i + 1}`)
             .attr("class", styles.treeLinkText)
-            .style("fill", (d) => getLinkTextFill(d.id))
+            .style("fill", (d: Park) => getLinkTextFill(d.id))
             .attr("text-anchor", "middle")
             .attr("x", 16.5)
             .attr("y", 30)
-            .on("mouseover", function (e, d) {
+            .on("mouseover", function (e: Event, d: Park) {
               e.stopPropagation();
               d3.select(this).style("fill", getLinkTextFill(d.id));
               handleMouseOver(d);
