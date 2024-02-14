@@ -200,12 +200,12 @@ function useMap(
             .duration(750)
             .attr("transform", `translate(${translate})scale(${scale})`);
 
-          linkContainer.transition()
-            .duration(750)
-            .attr("transform", function() {
-              const transform = d3.select(this).attr("transform");
-              return `${transform}scale(${1/scale})`;
-            }); 
+          // linkContainer.transition()
+          //   .duration(750)
+          //   .attr("transform", function() {
+          //     const transform = d3.select(this).attr("transform");
+          //     return `${transform}scale(${1/scale})`;
+          //   }); 
         }); 
     };
 
