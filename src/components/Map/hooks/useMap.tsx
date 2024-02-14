@@ -101,11 +101,8 @@ function useMap(
 
         // Tree map markers
         if (showTree) {
-          // Data for map markers
-          const markers = g.selectAll("markers");
-
           // add link container
-          linkContainer = markers
+          linkContainer = g.selectAll("markers")
             .data(parks)
             .enter()
             .append("a")
