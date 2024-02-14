@@ -14,6 +14,8 @@ import {
 } from "components/Map/handleTooltip";
 import styles from "../Map.module.scss";
 
+
+
 function useMap(
   width: number,
   height: number,
@@ -22,46 +24,53 @@ function useMap(
   showTree: boolean,
   handleOnClick?: (id: string) => void
 ) {
+  // Map data
+  const usData = topojson.feature(
+    usMapData,
+    usMapData.objects.states
+  ) as FeatureCollection;
+  const widthTabletDesktop = width >= 768;
+  // Map padding
+  const bottomPadding = widthTabletDesktop ? 60 : 0;
+  // Map height/width
+  const mapHeight = width / 2;
+
+  const projection = geoAlbersUsaTerritories().fitExtent(
+    [
+      [0, bottomPadding],
+      [width, mapHeight],
+    ],
+    usData
+  );
+
+  const getMarkCoords = ({park, scale = 1}: { park: Park; scale?: number}) => {
+    const p = projection([park.longitude, park.latitude]);
+    const x = (p?.[0] || 0) - (16.5 * scale);
+    const y = (p?.[1] || 0) - (45 * scale);
+    return `translate(${x}, ${y})scale(${scale})`;
+  }
+
   useEffect(() => {
-    // Map data
-    const usData = topojson.feature(
-      usMapData,
-      usMapData.objects.states
-    ) as FeatureCollection;
-    const widthTabletDesktop = width >= 768;
-    // Map padding
-    const bottomPadding = widthTabletDesktop ? 60 : 0;
-    // Map height/width
-    const mapHeight = width / 2;
-
-    const projection = geoAlbersUsaTerritories().fitExtent(
-      [
-        [0, bottomPadding],
-        [width, mapHeight],
-      ],
-      usData
-    );
-
-    const path = geoPath().projection(projection);
-    const svg = d3.select("#map");
-    let linkContainer: any = d3.select(null);
-    let active: any = d3.select(null);
-    
-    const getIsSelected = (id: string) => selectedParks.includes(id);
-
-    const getMarkerFill = (id: string) =>
-      getIsSelected(id) ? "#4b5e26" : "#a8c686";
-
-    const getLinkTextFill = (id: string) =>
-      getIsSelected(id) ? "white" : "black";
-
-    const reset = () => {
-      active = d3.select(null);
-      svg.select("g").transition().duration(750).attr("transform", "");
-    };
-
     const drawMap = () => {
+      const path = geoPath().projection(projection);
+      const svg = d3.select("#map");
+      let linkContainer: any = d3.select(null);
+      let active: any = d3.select(null);
+      
+      const getIsSelected = (id: string) => selectedParks.includes(id);
+  
+      const getMarkerFill = (id: string) =>
+        getIsSelected(id) ? "#4b5e26" : "#a8c686";
+  
+      const getLinkTextFill = (id: string) =>
+        getIsSelected(id) ? "white" : "black";
+  
+      const reset = () => {
+        active = d3.select(null);
+        svg.select("g").transition().duration(750).attr("transform", "");
+      };
       // Remove previous map before drawing a new one
+      
       svg.select("g").remove();
 
       // Draw the map
@@ -106,12 +115,7 @@ function useMap(
             .append("a")
             .attr("class", styles.treeLink)
             .attr("xlink:href", (d) => d.url || "")
-            .attr("transform", (d) => {
-              const p = projection([d.longitude, d.latitude]);
-              const x = (p?.[0] || 0) - 16.5;
-              const y = (p?.[1] || 0) - 45;
-              return `translate(${x}, ${y})`;
-            })
+            .attr("transform", (park: Park) => getMarkCoords({ park } ))
             .on("mouseover", function (e, d) {
               const linkText = d3.select(this).selectAll("text");
               linkText.style("fill", "white");
@@ -201,13 +205,7 @@ function useMap(
 
           linkContainer.transition()
             .duration(750)
-            .attr("transform", function(d: Park) {
-              const p = projection([d.longitude, d.latitude]);
-              const newScale = (1/scale)
-              const x = (p?.[0] || 0) - (16.5 * newScale);
-              const y = (p?.[1] || 0) - (45 * newScale);
-              return `translate(${x}, ${y})scale(${newScale})`;
-            }); 
+            .attr("transform", (park: Park) => getMarkCoords({ park, scale: (1/scale)  } )); 
         }); 
     };
 
