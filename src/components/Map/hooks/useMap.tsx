@@ -110,8 +110,7 @@ function useMap(
               const p = projection([d.longitude, d.latitude]);
               const x = (p?.[0] || 0) - 16.5;
               const y = (p?.[1] || 0) - 45;
-              const scale = 1;
-              return `translate(${x}, ${y})scale(${scale})`;
+              return `translate(${x}, ${y})`;
             })
             .on("mouseover", function (e, d) {
               const linkText = d3.select(this).selectAll("text");
@@ -200,12 +199,15 @@ function useMap(
             .duration(750)
             .attr("transform", `translate(${translate})scale(${scale})`);
 
-          // linkContainer.transition()
-          //   .duration(750)
-          //   .attr("transform", function() {
-          //     const transform = d3.select(this).attr("transform");
-          //     return `${transform}scale(${1/scale})`;
-          //   }); 
+          linkContainer.transition()
+            .duration(750)
+            .attr("transform", function(d: Park) {
+              const p = projection([d.longitude, d.latitude]);
+              const newScale = (1/scale)
+              const x = (p?.[0] || 0) - (16.5 * newScale);
+              const y = (p?.[1] || 0) - (45 * newScale);
+              return `translate(${x}, ${y})scale(${newScale})`;
+            }); 
         }); 
     };
 
