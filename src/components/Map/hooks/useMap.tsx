@@ -25,7 +25,6 @@ function useMap(
   showTree: boolean,
   handleOnClick?: (id: string) => void
 ) {
-  console.log(width, height, parks, selectedParks);
   // Map data
   const usData = topojson.feature(
     usMapData,
@@ -214,7 +213,6 @@ function useMap(
     };
 
     if (parks.length > 0) {
-      // if data is loaded => draw map
       drawMap();
     }
     // window.addEventListener("resize", drawMap);

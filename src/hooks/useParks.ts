@@ -10,13 +10,13 @@ import formatParks from "helpers/formatParks";
 import copy from "./copy";
 
 function useParks(selectedItem: ParkDesignationType) {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
 
   useEffect(() => {
     const fetchParks = async () => {
       const codes = PARK_INFO[selectedItem].codes;
-      setLoading(true);
+      setIsLoading(true);
       setParks([]);
       try {
         let data = loadState(selectedItem);
@@ -29,17 +29,17 @@ function useParks(selectedItem: ParkDesignationType) {
           saveState(selectedItem, JSON.stringify(data));
         }
         setParks(data);
-        setLoading(false);
       } catch (e) {
-        setLoading(false);
         toast.error(copy.loadParksError);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchParks();
   }, [selectedItem]);
 
   return {
-    loading,
+    isLoading,
     parks,
   };
 }

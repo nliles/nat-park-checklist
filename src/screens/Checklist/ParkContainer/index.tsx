@@ -22,8 +22,8 @@ const ParkContainer = () => {
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK;
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
-  const { loading, parks } = useParks(selectedDropdownItem);
-  const { selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+  const { isLoading, parks } = useParks(selectedDropdownItem);
+  const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
   const methods = useForm({
@@ -90,7 +90,7 @@ const ParkContainer = () => {
     <FormProvider {...methods}>
       <ParkView
         count={selectedCount + formData.length}
-        loading={loading}
+        isLoading={isLoading || isSelectedLoading}
         initialValues={initialValues}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}

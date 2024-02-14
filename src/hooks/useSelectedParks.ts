@@ -7,11 +7,13 @@ import copy from "./copy";
 
 function useSelectedParks(isLoggedIn: boolean) {
   const [selectedParks, setSelectedParks] = useState<Parks>({});
+  const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 
   useEffect(() => {
     const fetchParks = async () => {
       try {
+        setIsLoading(true)
         let data = loadState(storageKey);
         if (!data.length) {
           const { parks } = await getParks();
@@ -23,6 +25,8 @@ function useSelectedParks(isLoggedIn: boolean) {
         if (err?.status !== 401) {
           toast.error(copy.selectedParksError);
         }
+      } finally {
+        setIsLoading(false)
       }
     };
     if (isLoggedIn) {
@@ -34,6 +38,7 @@ function useSelectedParks(isLoggedIn: boolean) {
   }, [isLoggedIn]);
 
   return {
+    isLoading,
     selectedParks,
     setSelectedParks,
   };
