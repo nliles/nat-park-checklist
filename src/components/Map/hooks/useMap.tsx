@@ -14,7 +14,8 @@ import {
 } from "components/Map/handleTooltip";
 import styles from "../Map.module.scss";
 
-
+const TREE_MARKER_HEIGHT = 45;
+const TREE_MARKER_WIDTH = 16.5;
 
 function useMap(
   width: number,
@@ -45,8 +46,8 @@ function useMap(
 
   const getMarkCoords = ({park, scale = 1}: { park: Park; scale?: number}) => {
     const p = projection([park.longitude, park.latitude]);
-    const x = (p?.[0] || 0) - (16.5 * scale);
-    const y = (p?.[1] || 0) - (45 * scale);
+    const x = (p?.[0] || 0) - (TREE_MARKER_WIDTH * scale);
+    const y = (p?.[1] || 0) - (TREE_MARKER_HEIGHT * scale);
     return `translate(${x}, ${y})scale(${scale})`;
   }
 
