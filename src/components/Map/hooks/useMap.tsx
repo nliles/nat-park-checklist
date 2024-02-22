@@ -27,44 +27,44 @@ function useMap(
 ) {
   useEffect(() => {
     const drawMap = () => {
-      console.log('draw map')
-        // Map data
-  const usData = topojson.feature(
-    usMapData,
-    usMapData.objects.states
-  ) as FeatureCollection;
-  const widthTabletDesktop = width >= 768;
-  // Map padding
-  const bottomPadding = widthTabletDesktop ? 60 : 0;
+      console.log("draw map");
+      // Map data
+      const usData = topojson.feature(
+        usMapData,
+        usMapData.objects.states
+      ) as FeatureCollection;
+      const widthTabletDesktop = width >= 768;
+      // Map padding
+      const bottomPadding = widthTabletDesktop ? 60 : 0;
 
-  const projection = geoAlbersUsaTerritories().fitExtent(
-    [
-      [0, bottomPadding],
-      [width, height],
-    ],
-    usData
-  );
+      const projection = geoAlbersUsaTerritories().fitExtent(
+        [
+          [0, bottomPadding],
+          [width, height],
+        ],
+        usData
+      );
 
-  const getMarkCoords = ({
-    park,
-    scale = 1,
-  }: {
-    park: Park;
-    scale?: number;
-  }) => {
-    const p = projection([park.longitude, park.latitude]);
-    const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * scale;
-    const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * scale;
-    return `translate(${x}, ${y})scale(${scale})`;
-  };
+      const getMarkCoords = ({
+        park,
+        scale = 1,
+      }: {
+        park: Park;
+        scale?: number;
+      }) => {
+        const p = projection([park.longitude, park.latitude]);
+        const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * scale;
+        const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * scale;
+        return `translate(${x}, ${y})scale(${scale})`;
+      };
 
-  const getIsSelected = (id: string) => selectedParks.includes(id);
+      const getIsSelected = (id: string) => selectedParks.includes(id);
 
-  const getMarkerFill = (id: string) =>
-    getIsSelected(id) ? "#4b5e26" : "#a8c686";
+      const getMarkerFill = (id: string) =>
+        getIsSelected(id) ? "#4b5e26" : "#a8c686";
 
-  const getLinkTextFill = (id: string) =>
-    getIsSelected(id) ? "white" : "black";
+      const getLinkTextFill = (id: string) =>
+        getIsSelected(id) ? "white" : "black";
       const path = geoPath().projection(projection);
       const svg = d3.select("#map");
       let linkContainer: any = d3.select(null);
