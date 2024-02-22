@@ -33,13 +33,11 @@ function useMap(
   const widthTabletDesktop = width >= 768;
   // Map padding
   const bottomPadding = widthTabletDesktop ? 60 : 0;
-  // Map height/width
-  const mapHeight = width / 2;
 
   const projection = geoAlbersUsaTerritories().fitExtent(
     [
       [0, bottomPadding],
-      [width, mapHeight],
+      [width, height],
     ],
     usData
   );
@@ -67,6 +65,7 @@ function useMap(
 
   useEffect(() => {
     const drawMap = () => {
+      console.log('draw map')
       const path = geoPath().projection(projection);
       const svg = d3.select("#map");
       let linkContainer: any = d3.select(null);
@@ -214,8 +213,6 @@ function useMap(
     if (parks.length > 0) {
       drawMap();
     }
-    window.addEventListener("resize", drawMap);
-    return () => window.removeEventListener("resize", drawMap);
   });
 }
 
