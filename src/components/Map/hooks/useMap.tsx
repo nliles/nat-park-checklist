@@ -25,7 +25,10 @@ function useMap(
   showTree: boolean,
   handleOnClick?: (id: string) => void
 ) {
-  // Map data
+  useEffect(() => {
+    const drawMap = () => {
+      console.log('draw map')
+        // Map data
   const usData = topojson.feature(
     usMapData,
     usMapData.objects.states
@@ -62,10 +65,6 @@ function useMap(
 
   const getLinkTextFill = (id: string) =>
     getIsSelected(id) ? "white" : "black";
-
-  useEffect(() => {
-    const drawMap = () => {
-      console.log('draw map')
       const path = geoPath().projection(projection);
       const svg = d3.select("#map");
       let linkContainer: any = d3.select(null);
@@ -213,7 +212,7 @@ function useMap(
     if (parks.length > 0) {
       drawMap();
     }
-  });
+  }, [parks, height, width, showTree, handleOnClick, selectedParks]);
 }
 
 export default useMap;
