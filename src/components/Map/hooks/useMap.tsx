@@ -51,10 +51,11 @@ function useMap(
         park: Park;
         scale?: number;
       }) => {
+        const adjustedScale = width < 1000 ? (scale * 0.75) : scale;
         const p = projection([park.longitude, park.latitude]);
-        const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * scale;
-        const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * scale;
-        return `translate(${x}, ${y})scale(${scale})`;
+        const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
+        const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
+        return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
       const getIsSelected = (id: string) => selectedParks.includes(id);
