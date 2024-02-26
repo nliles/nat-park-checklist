@@ -27,7 +27,6 @@ function useMap(
 ) {
   useEffect(() => {
     const drawMap = () => {
-      console.log("draw map");
       // Map data
       const usData = topojson.feature(
         usMapData,
