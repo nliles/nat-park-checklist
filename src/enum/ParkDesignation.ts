@@ -1,5 +1,5 @@
 enum ParkDesignation {
-  ALL_DESIGNATIONS = "nationalParkUnit",
+  ALL_DESIGNATIONS = "allDesignations",
   NAT_PARK = "nationalPark",
   NAT_BATTLEFIELD = "nationalBattlefield",
   NAT_BATTLEFIELD_PARK = "nationalBattlefieldPark",

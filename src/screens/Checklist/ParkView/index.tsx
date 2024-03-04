@@ -40,11 +40,15 @@ const ParkView = ({
   const formData = watch().parkData || [];
 
   const formatListItem = (item: string) => {
+    if (item === ParkDesignation.ALL_DESIGNATIONS) return 'Select All';
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
-  const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+  const formatSelectedItem = (item: string) => {
+    if (item === ParkDesignation.ALL_DESIGNATIONS) return 'National Park Units';
+    return `${startCase(item)}s`;
+  }
 
   const handleClick = (id: string) => {
     let newData = [...formData];
