@@ -75,7 +75,7 @@ const ParkView = ({
               styleName={styles.mobileCount}
             />
             <Dropdown
-              list={LIST_OPTIONS}
+              items={LIST_OPTIONS}
               initialSelectedItem={selectedDropdownItem}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}

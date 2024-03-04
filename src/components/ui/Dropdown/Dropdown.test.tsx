@@ -9,7 +9,7 @@ describe("<Dropdown/>", () => {
   it("displays the correct default Dropdowned item", async () => {
     render(
       <Dropdown
-        list={items}
+        items={items}
         initialSelectedItem="California"
         handleClick={() => {}}
         formatListItem={(item) => item}
@@ -23,7 +23,7 @@ describe("<Dropdown/>", () => {
   it("formats list items correctly", async () => {
     render(
       <Dropdown
-        list={items}
+        items={items}
         initialSelectedItem="California"
         handleClick={() => {}}
         formatListItem={(item) => item}
@@ -37,7 +37,7 @@ describe("<Dropdown/>", () => {
     const mockClick = jest.fn();
     render(
       <Dropdown
-        list={items}
+        items={items}
         initialSelectedItem="California"
         handleClick={mockClick}
         formatListItem={(item) => item}
