@@ -5,7 +5,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 45px;
+  height: 50px;
+  padding: 0 .5rem;
   width: 250px;
   margin: 10px 0;
   border: 1px solid $green;
@@ -27,7 +28,6 @@
 
 .button {
   width: 100%;
-  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,6 +45,7 @@
   width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-top: 10px;
 }
 
 .icon {
@@ -67,7 +68,7 @@
   background: $white;
   max-height: 183px;
   overflow: auto;
-  top: 40px;
+  top: 50px;
   left: -1px;
   width: 100%;
   margin: 0;
@@ -104,6 +105,7 @@
 
 .label {
   position: absolute;
-  top: 1px;
+  top: 5px;
   color: $green;
+  font-weight: 600;
 }
