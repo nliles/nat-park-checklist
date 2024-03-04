@@ -47,6 +47,7 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
+        <label className={styles.label}>Select a designation</label>
         <span className={styles.title}>
           {formatSelectedItem(initialSelectedItem)}
         </span>
@@ -57,6 +58,7 @@ const Dropdown = ({
         >
           <Caret />
         </span>
+        
       </button>
       <ul className={styles.list} role="listbox" {...getMenuProps()}>
         {list.map((item, index) => (

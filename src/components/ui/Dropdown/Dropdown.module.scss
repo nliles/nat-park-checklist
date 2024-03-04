@@ -5,7 +5,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 45px;
   width: 250px;
   margin: 10px 0;
   border: 1px solid $green;
@@ -26,7 +26,6 @@
 }
 
 .button {
-  height: 45px;
   width: 100%;
   padding: 0 10px;
   display: flex;
@@ -101,4 +100,10 @@
   &:last-child {
     border-bottom: none;
   }
+}
+
+.label {
+  position: absolute;
+  top: 1px;
+  color: $green;
 }
