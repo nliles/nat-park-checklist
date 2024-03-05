@@ -20,7 +20,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
 
   return (
     <div>
-      <Header title="Parks Visited" />
+      <Header title="My Park Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
           <div className={styles.total}>
@@ -45,6 +45,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               selectedParks={totalParks}
               parks={parks}
               showTree={false}
+              showBorder={false}
             />
           </div>
           <DataTable
