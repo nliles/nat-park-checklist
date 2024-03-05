@@ -46,6 +46,10 @@ type ParkInfoDict = {
 };
 
 export const PARK_INFO: ParkInfoDict = {
+  [ParkDesignation.ALL_DESIGNATIONS]: {
+    codes: [],
+    formattedParks: [],
+  },
   [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
     formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],

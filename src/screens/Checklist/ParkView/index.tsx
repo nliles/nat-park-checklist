@@ -40,6 +40,7 @@ const ParkView = ({
   const formData = watch().parkData || [];
 
   const formatListItem = (item: string) => {
+    if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
@@ -75,7 +76,7 @@ const ParkView = ({
               styleName={styles.mobileCount}
             />
             <Dropdown
-              list={LIST_OPTIONS}
+              items={LIST_OPTIONS}
               initialSelectedItem={selectedDropdownItem}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}

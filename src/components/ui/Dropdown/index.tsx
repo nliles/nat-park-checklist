@@ -6,7 +6,7 @@ import styles from "./Dropdown.module.scss";
 
 type DropdownProps = {
   handleClick: (item: string) => void;
-  list: string[];
+  items: string[];
   initialSelectedItem: string;
   styleName?: string;
   formatListItem?: (item: string) => string;
@@ -15,7 +15,7 @@ type DropdownProps = {
 
 const Dropdown = ({
   handleClick,
-  list,
+  items,
   initialSelectedItem,
   styleName,
   formatListItem = (item: string) => item,
@@ -28,7 +28,7 @@ const Dropdown = ({
     highlightedIndex,
     isOpen,
   } = useSelect({
-    items: list,
+    items: items,
     onStateChange: ({ selectedItem }) => {
       if (selectedItem) {
         handleClick(selectedItem);
@@ -61,7 +61,7 @@ const Dropdown = ({
         
       </button>
       <ul className={styles.list} role="listbox" {...getMenuProps()}>
-        {list.map((item, index) => (
+        {items.map((item, index) => (
           <li
             className={cn(styles.listItem, {
               [styles.selected]: item === initialSelectedItem,
