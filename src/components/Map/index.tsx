@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { useRef, useState, useEffect } from "react";
 import { Park } from "types/park";
 import useMap from "components/Map/hooks/useMap";
@@ -8,6 +9,7 @@ type MapProps = {
   parks: Park[];
   selectedParks?: string[];
   showTree?: boolean;
+  showBorder?: boolean;
   defaultWidth?: number;
   handleOnClick?: (id: string) => void;
 };
@@ -16,6 +18,7 @@ const Map = ({
   parks = [],
   selectedParks = [],
   showTree = true,
+  showBorder = true,
   defaultWidth = window.innerWidth,
   handleOnClick,
 }: MapProps) => {
@@ -41,7 +44,9 @@ const Map = ({
   useTooltip();
 
   return (
-    <div ref={mapContainerRef} className={styles.mapContainer}>
+    <div ref={mapContainerRef} className={cn(styles.mapContainer, {
+      [styles.border]: showBorder
+    })}>
       <svg id="map" />
     </div>
   );
