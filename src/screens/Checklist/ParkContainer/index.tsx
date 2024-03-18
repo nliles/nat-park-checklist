@@ -16,7 +16,6 @@ import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
-  const [initialValues, setInitialValues] = useState<any>({});
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
@@ -29,28 +28,7 @@ const ParkContainer = () => {
 
   const methods = useForm({
     defaultValues: {
-      parkData: {
-        nationalPark: [],
-        internationalHistoricSite: [],
-        nationalBattlefield: [],
-        nationalBattlefieldPark: [],
-        nationalBattlefieldSite: [],
-        nationalMilitaryPark: [],
-        nationalHistoricPark: [],
-        nationalHistoricSite: [],
-        nationalLakeshore: [],
-        nationalMemorial: [],
-        nationalMonument: [],
-        nationalParkway: [],
-        nationalPreserve: [],
-        nationalReserve: [],
-        nationalRecreationArea: [],
-        nationalRiver: [],
-        nationalScenicTrail: [],
-        nationalSeashore: [],
-        nationalWildAndScenicRiver: [],
-        otherDesignation: [],
-      },
+      parkData: selectedParks,
     },
   });
 
@@ -61,24 +39,24 @@ const ParkContainer = () => {
   } = methods;
 
   useEffect(() => {
-    reset({ parkData: initialValues });
-  }, [initialValues, reset]);
+    reset({ parkData: selectedParks });
+  }, [selectedParks, reset]);
 
   const formData = watch().parkData;
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setInitialValues({});
       setSelectedCount(0);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, selectedParks]);
 
   useEffect(() => {
     if (selectedParks) {
-      let currentParks = showAll ? Object.values(selectedParks).flat(1) : (selectedParks[selectedDropdownItem] || []);
+      const formattedValues = Object.values(selectedParks).flat(1);
+      let currentParks = showAll ? formattedValues : (selectedParks[selectedDropdownItem] || []);
       const total = flattenParks(selectedParks).length;
+      console.log(total, currentParks.length, formattedValues.length)
       setSelectedCount(total - currentParks.length);
-      setInitialValues(selectedParks);
     }
   }, [selectedParks, selectedDropdownItem, showAll]);
 
@@ -114,7 +92,6 @@ const ParkContainer = () => {
       <ParkView
         count={selectedCount + Object.values(formData).flat(1).length}
         isLoading={isLoading || isSelectedLoading}
-        initialValues={initialValues}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}

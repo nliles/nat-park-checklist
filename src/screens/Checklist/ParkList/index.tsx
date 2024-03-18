@@ -11,13 +11,11 @@ import styles from "./index.module.scss";
 type ListProps = {
   parks: Park[];
   selectedDropdownItem: string;
-  initialParkValues: string[];
   handleOnSubmit: (values: string[]) => void;
 };
 
 const ParkList = ({
   parks = [],
-  initialParkValues = [],
   selectedDropdownItem,
   handleOnSubmit,
 }: ListProps) => {

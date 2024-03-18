@@ -20,7 +20,6 @@ export type ParkViewProps = {
   handleListItemChange: (item: string) => void;
   isLoading?: boolean;
   parks: Park[];
-  initialValues: string[];
   selectedParks?: string[];
   selectedDropdownItem: ParkDesignationType;
   handleOnSubmit: (values: string[]) => void;
@@ -30,14 +29,13 @@ const ParkView = ({
   count,
   isLoading = false,
   parks,
-  initialValues,
   selectedDropdownItem,
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
   const { watch, setValue } = useFormContext();
 
-  const formData = watch().parkData || [];
+  const formData = watch().parkData || {};
 
   const formatListItem = (item: string) => {
     if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
@@ -98,7 +96,6 @@ const ParkView = ({
           <ParkList
             parks={parks}
             selectedDropdownItem={selectedDropdownItem}
-            initialParkValues={initialValues}
             handleOnSubmit={handleOnSubmit}
           />
         </>
