@@ -16,7 +16,6 @@ import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
-  count: number;
   handleListItemChange: (item: string) => void;
   isLoading?: boolean;
   parks: Park[];
@@ -26,7 +25,6 @@ export type ParkViewProps = {
 };
 
 const ParkView = ({
-  count,
   isLoading = false,
   parks,
   selectedDropdownItem,
@@ -56,16 +54,16 @@ const ParkView = ({
     setValue("parkData", newData, { shouldDirty: true });
   };
 
-  const newCount = Object.values(formData).flat(1).length;
-
   const totalProps = {
-    count: newCount,
+    count: formData[selectedDropdownItem].length,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
+  const allDesignationTotal = Object.values(formData).flat(1).length
+
   return (
-    <PageWrapper count={newCount}>
+    <PageWrapper count={allDesignationTotal}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
           {isLoading && <Spinner />}

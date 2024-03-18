@@ -5,8 +5,31 @@ import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
 import copy from "./copy";
 
+const defaultValues = {
+  nationalPark: [],
+  nationalBattlefield: [],
+  nationalBattlefieldPark: [],
+  nationalBattlefieldSite: [],
+  nationalMilitaryPark: [],
+  nationalHistoricPar: [],
+  nationalHistoricSite: [],
+  nationalLakeshore: [],
+  nationalMemorial: [],
+  nationalMonument: [],
+  nationalParkway: [],
+  nationalPreserve: [],
+  nationalReserve: [],
+  nationalRecreationArea: [],
+  nationalRiver: [],
+  nationalScenicTrail: [],
+  nationalSeashore: [],
+  nationalWildAndScenicRiver: [],
+  internationalHistoricSite: [],
+  otherDesignation: [],
+}
+
 function useSelectedParks(isLoggedIn: boolean) {
-  const [selectedParks, setSelectedParks] = useState<Parks>({});
+  const [selectedParks, setSelectedParks] = useState<Parks>(defaultValues);
   const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 

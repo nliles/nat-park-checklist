@@ -20,7 +20,7 @@ const ParkList = ({
   handleOnSubmit,
 }: ListProps) => {
   const onSubmit = (values: any) => {
-    handleOnSubmit(values);
+    handleOnSubmit(values.parkData);
   }
 
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
