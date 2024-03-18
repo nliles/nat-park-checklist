@@ -7,13 +7,10 @@ type Image = {
   altText: string;
 };
 
-export type CondensedPark = {
+export type Park = {
   id: string;
   latitude: string;
   longitude: string;
-};
-
-export type Park = CondensedPark & {
   addresses?: Address[];
   fullName: string;
   designation: string;
