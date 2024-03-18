@@ -1,6 +1,5 @@
 import { useFormContext } from "react-hook-form";
 import cn from "classnames";
-import camelCase from "lodash/camelCase";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
@@ -49,9 +48,8 @@ const ParkView = ({
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   const handleClick = (id: string, designation: string) => {
-    const formattedDesignation = camelCase(designation);
     let newData: any = structuredClone(formData);
-    const designationArray = newData[formattedDesignation];
+    const designationArray = newData[selectedDropdownItem];
     if (designationArray.includes(id)) {
       designationArray.filter((parkId: string) => parkId !== id);
     } else {
