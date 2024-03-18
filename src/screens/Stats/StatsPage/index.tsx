@@ -1,7 +1,6 @@
 import { TOTAL_UNITS } from "../../../constants";
 import { Park } from "types/park";
 import { Parks } from "types";
-import flattenParks from "helpers/flattenParks";
 import Header from "components/Header";
 import Map from "components/Map";
 import CircularProgressBar from "components/ui/CircularProgressBar";
@@ -16,7 +15,7 @@ type StatsPageProps = {
 };
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
-  const totalParks = flattenParks(selected);
+  const totalParks = Object.values(selected).flat(1);
 
   return (
     <div>

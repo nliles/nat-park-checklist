@@ -5,8 +5,31 @@ import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
 import copy from "./copy";
 
+export const defaultSelectedValues: Parks = {
+  nationalPark: [],
+  nationalBattlefield: [],
+  nationalBattlefieldPark: [],
+  nationalBattlefieldSite: [],
+  nationalMilitaryPark: [],
+  nationalHistoricPark: [],
+  nationalHistoricSite: [],
+  nationalLakeshore: [],
+  nationalMemorial: [],
+  nationalMonument: [],
+  nationalParkway: [],
+  nationalPreserve: [],
+  nationalReserve: [],
+  nationalRecreationArea: [],
+  nationalRiver: [],
+  nationalScenicTrail: [],
+  nationalSeashore: [],
+  nationalWildAndScenicRiver: [],
+  internationalHistoricSite: [],
+  otherDesignation: [],
+}
+
 function useSelectedParks(isLoggedIn: boolean) {
-  const [selectedParks, setSelectedParks] = useState<Parks>({});
+  const [selectedParks, setSelectedParks] = useState<Parks>(defaultSelectedValues);
   const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 
@@ -33,7 +56,7 @@ function useSelectedParks(isLoggedIn: boolean) {
       fetchParks();
     } else {
       sessionStorage.removeItem(storageKey);
-      setSelectedParks({});
+      setSelectedParks(defaultSelectedValues);
     }
   }, [isLoggedIn]);
 

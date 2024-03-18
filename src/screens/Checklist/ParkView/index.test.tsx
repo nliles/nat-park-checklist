@@ -42,11 +42,9 @@ describe("<ParkView />", () => {
     render(
       <FormProviderWrapper>
         <ParkView
-          count={0}
           parks={parks}
           isLoading={false}
           selectedDropdownItem={ParkDesignation.NAT_PARK}
-          initialValues={[]}
           handleListItemChange={() => {}}
           handleOnSubmit={() => {}}
           {...props}

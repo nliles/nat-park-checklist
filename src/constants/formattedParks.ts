@@ -12,7 +12,7 @@ export const SEQUOIA_NAT_PARK = {
   states: "CA",
   latitude: "36.485625",
   longitude: "-118.466728",
-  designation: "National Parks",
+  designation: "National Park",
   url: "https://www.nps.gov/seki/index.htm",
 };
 
@@ -29,7 +29,7 @@ export const KINGS_CANYON_NAT_PARK = {
   states: "CA",
   latitude: "36.739991",
   longitude: "-118.963389",
-  designation: "National Parks",
+  designation: "National Park",
   url: "https://www.nps.gov/seki/index.htm",
 };
 

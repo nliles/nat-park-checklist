@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
+import { defaultSelectedValues } from 'hooks/useSelectedParks'
 import StatsPage from ".";
 
 jest.mock("react-redux", () => ({
@@ -9,6 +9,7 @@ jest.mock("react-redux", () => ({
 
 describe("<StatsPage />", () => {
   const selected = {
+    ...defaultSelectedValues,
     nationalPark: ["6DA17C86-088E-4B4D-B862-7C1BD5CF236B"],
   };
 

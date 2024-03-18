@@ -16,55 +16,54 @@ import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
-  count: number;
   handleListItemChange: (item: string) => void;
   isLoading?: boolean;
   parks: Park[];
-  initialValues: string[];
   selectedParks?: string[];
   selectedDropdownItem: ParkDesignationType;
-  handleOnSubmit: (values: string[]) => void;
+  handleOnSubmit: () => void;
 };
 
 const ParkView = ({
-  count,
   isLoading = false,
   parks,
-  initialValues,
   selectedDropdownItem,
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
   const { watch, setValue } = useFormContext();
 
-  const formData = watch().parkData || [];
+  const formData = watch().parkData || {};
 
   const formatListItem = (item: string) => {
-    if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
+    // if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
-  const handleClick = (id: string) => {
-    let newData = [...formData];
-    if (formData.includes(id)) {
-      newData = formData.filter((parkId: string) => parkId !== id);
+  const handleClick = (id: string, designation: string) => {
+    let newData: any = structuredClone(formData);
+    const designationArray = newData[selectedDropdownItem];
+    if (designationArray.includes(id)) {
+      designationArray.filter((parkId: string) => parkId !== id);
     } else {
-      newData.push(id);
+      designationArray.push(id);
     }
     setValue("parkData", newData, { shouldDirty: true });
   };
 
   const totalProps = {
-    count: formData.length,
+    count: formData[selectedDropdownItem].length,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
+  const allDesignationTotal = Object.values(formData).flat(1).length
+
   return (
-    <PageWrapper count={count}>
+    <PageWrapper count={allDesignationTotal}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
           {isLoading && <Spinner />}
@@ -90,12 +89,11 @@ const ParkView = ({
           <Map
             parks={parks}
             selectedParks={formData}
-            handleOnClick={handleClick}
+            handleClick={handleClick}
           />
           <ParkList
             parks={parks}
-            selectedDropdownItem={dropdownItem}
-            initialParkValues={initialValues}
+            selectedDropdownItem={selectedDropdownItem}
             handleOnSubmit={handleOnSubmit}
           />
         </>

@@ -1,5 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import ParkList from "screens/Checklist/ParkList";
 
@@ -42,7 +41,6 @@ describe("<ParkList />", () => {
         <ParkList
           parks={parks}
           selectedDropdownItem="National Park"
-          initialParkValues={[]}
           handleOnSubmit={() => {}}
         />
       </FormProviderWrapper>

@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types/park";
+import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
@@ -10,20 +11,14 @@ import styles from "./index.module.scss";
 type ListProps = {
   parks: Park[];
   selectedDropdownItem: string;
-  initialParkValues: string[];
-  handleOnSubmit: (values: string[]) => void;
+  handleOnSubmit: () => void;
 };
 
 const ParkList = ({
   parks = [],
-  initialParkValues = [],
   selectedDropdownItem,
   handleOnSubmit,
 }: ListProps) => {
-  const onSubmit = async (values: any) => {
-    await handleOnSubmit(values.parkData);
-  };
-
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
 
   const {
@@ -34,19 +29,20 @@ const ParkList = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${selectedDropdownItem} checklist`}</h2>
+        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleOnSubmit)}>
         <div className={styles.listContainer}>
           {parks &&
-            parks.map((park, i) => (
+            parks.map((park, i) => {
+              return (
               <Checkbox
                 key={park.fullName}
                 label={`${i + 1}. ${park.fullName}`}
                 id={park.id}
-                name="parkData"
+                name={`parkData.${selectedDropdownItem}`}
               />
-            ))}
+            )})}
         </div>
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { Parks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
@@ -9,26 +10,24 @@ import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
-import useSelectedParks from "hooks/useSelectedParks";
+import useSelectedParks, { defaultSelectedValues } from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
-import flattenParks from "helpers/flattenParks";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
-  const [initialValues, setInitialValues] = useState<string[]>([]);
-  const [selectedCount, setSelectedCount] = useState<number>(0);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK;
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
+  // const showAll = 'nationalParkUnit' === selectedDropdownItem;
   const { isLoading, parks } = useParks(selectedDropdownItem);
   const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
   const methods = useForm({
     defaultValues: {
-      parkData: initialValues,
+      parkData: selectedParks,
     },
   });
 
@@ -39,30 +38,15 @@ const ParkContainer = () => {
   } = methods;
 
   useEffect(() => {
-    reset({ parkData: initialValues });
-  }, [initialValues, reset]);
+    reset({ parkData: selectedParks });
+  }, [selectedParks, reset]);
 
-  const formData = watch().parkData;
+  const formData: Parks = watch().parkData;
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      setInitialValues([]);
-      setSelectedCount(0);
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (selectedParks) {
-      const currentParks = selectedParks[selectedDropdownItem] || [];
-      const total = flattenParks(selectedParks).length;
-      setSelectedCount(total - currentParks.length);
-      setInitialValues(currentParks);
-    }
-  }, [selectedParks, selectedDropdownItem]);
-
-  const handleOnSubmit = async (values: string[]) => {
+  const handleOnSubmit = async () => {
     try {
-      const { parks } = await updateParks(selectedDropdownItem, values);
+      // TODO: Add PUT request when showing all parks
+      const { parks } = await updateParks(selectedDropdownItem, formData[selectedDropdownItem]);
       setSelectedParks(parks);
       toast.success(copy.updateSuccess);
     } catch (err: any) {
@@ -74,7 +58,7 @@ const ParkContainer = () => {
 
   const handleListItemChange = (item: string) => {
     if (isLoggedIn && isDirty) {
-      handleOnSubmit(formData);
+      handleOnSubmit();
     }
     navigate(`/?designation=${kebabCase(item)}`);
   };
@@ -82,9 +66,7 @@ const ParkContainer = () => {
   return (
     <FormProvider {...methods}>
       <ParkView
-        count={selectedCount + formData.length}
         isLoading={isLoading || isSelectedLoading}
-        initialValues={initialValues}
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}

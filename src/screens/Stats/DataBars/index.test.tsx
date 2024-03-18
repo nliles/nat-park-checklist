@@ -1,9 +1,11 @@
 import React from "react";
+import { defaultSelectedValues } from 'hooks/useSelectedParks'
 import { render, screen } from "@testing-library/react";
 import DataBars from ".";
 
 describe("<DataBars />", () => {
   const parkData = {
+    ...defaultSelectedValues,
     nationalPark: [
       "6DA17C86-088E-4B4D-B862-7C1BD5CF236B",
       "C9056F71-7162-4208-8AE9-2D0AEFA594FD",

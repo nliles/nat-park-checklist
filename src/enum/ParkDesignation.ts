@@ -1,5 +1,4 @@
-enum ParkDesignation {
-  ALL_DESIGNATIONS = "nationalParkUnit",
+export enum ParkDesignation {
   NAT_PARK = "nationalPark",
   NAT_BATTLEFIELD = "nationalBattlefield",
   NAT_BATTLEFIELD_PARK = "nationalBattlefieldPark",

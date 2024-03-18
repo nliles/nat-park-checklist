@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
+import { Park } from "types/park";
 import PageWrapper from "components/PageWrapper";
 import useSelectedParks from "hooks/useSelectedParks";
 import latLong from "data/latLong";
@@ -10,7 +11,7 @@ const StatsContainer = () => {
   const { selectedParks } = useSelectedParks(isLoggedIn);
   return (
     <PageWrapper>
-      <StatsPage selected={selectedParks} parks={latLong} />
+      <StatsPage selected={selectedParks} parks={latLong as Park[]} />
     </PageWrapper>
   );
 };
