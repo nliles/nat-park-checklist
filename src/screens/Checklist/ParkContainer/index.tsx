@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
 import camelCase from "lodash/camelCase";
-import { createParks, updateParks } from "services/park.service";
+import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
@@ -62,15 +62,8 @@ const ParkContainer = () => {
 
   const handleOnSubmit = async (values: string[]) => {
     try {
-      let returnedParks;
-      if (Object.keys(selectedParks).length === 0) {
-        const { parks } = await createParks(selectedDropdownItem, values);
-        returnedParks = parks;
-      } else {
-        const { parks } = await updateParks(selectedDropdownItem, values);
-        returnedParks = parks;
-      }
-      setSelectedParks(returnedParks);
+      const { parks } = await updateParks(selectedDropdownItem, values);
+      setSelectedParks(parks);
       toast.success(copy.updateSuccess);
     } catch (err: any) {
       if (err?.status !== 401) {
