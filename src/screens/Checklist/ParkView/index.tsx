@@ -36,7 +36,7 @@ const ParkView = ({
   const formData = watch().parkData || {};
 
   const formatListItem = (item: string) => {
-    if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
+    // if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 

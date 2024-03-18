@@ -5,13 +5,13 @@ import { loadState, saveState } from "storage/sessionStorage";
 import { Parks } from "types";
 import copy from "./copy";
 
-const defaultValues = {
+export const defaultSelectedValues: Parks = {
   nationalPark: [],
   nationalBattlefield: [],
   nationalBattlefieldPark: [],
   nationalBattlefieldSite: [],
   nationalMilitaryPark: [],
-  nationalHistoricPar: [],
+  nationalHistoricPark: [],
   nationalHistoricSite: [],
   nationalLakeshore: [],
   nationalMemorial: [],
@@ -29,7 +29,7 @@ const defaultValues = {
 }
 
 function useSelectedParks(isLoggedIn: boolean) {
-  const [selectedParks, setSelectedParks] = useState<Parks>(defaultValues);
+  const [selectedParks, setSelectedParks] = useState<Parks>(defaultSelectedValues);
   const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 
@@ -56,7 +56,7 @@ function useSelectedParks(isLoggedIn: boolean) {
       fetchParks();
     } else {
       sessionStorage.removeItem(storageKey);
-      setSelectedParks({});
+      setSelectedParks(defaultSelectedValues);
     }
   }, [isLoggedIn]);
 

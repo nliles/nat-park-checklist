@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { Parks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
@@ -11,7 +12,6 @@ import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
 import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
-import flattenParks from "helpers/flattenParks";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
@@ -20,7 +20,7 @@ const ParkContainer = () => {
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK;
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
-  const showAll = 'nationalParkUnit' === selectedDropdownItem;
+  // const showAll = 'nationalParkUnit' === selectedDropdownItem;
   const { isLoading, parks } = useParks(selectedDropdownItem);
   const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
@@ -41,16 +41,13 @@ const ParkContainer = () => {
     reset({ parkData: selectedParks });
   }, [selectedParks, reset]);
 
-  const formData = watch().parkData;
+  const formData: Parks = watch().parkData;
 
   const handleOnSubmit = async () => {
     try {
-      if (showAll) {
-        // TODO: Send put request
-      } else {
-        const { parks } = await updateParks(selectedDropdownItem, (formData as any)[selectedDropdownItem]);
-        setSelectedParks(parks);
-      }
+      // TODO: Add PUT request when showing all parks
+      const { parks } = await updateParks(selectedDropdownItem, formData[selectedDropdownItem]);
+      setSelectedParks(parks);
       toast.success(copy.updateSuccess);
     } catch (err: any) {
       if (err?.status !== 401) {
