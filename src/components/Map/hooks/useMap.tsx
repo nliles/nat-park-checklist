@@ -184,7 +184,7 @@ function useMap(
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = 0.7 / Math.max(dx / width, dy / height),
+          scale = 0.8 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
         g.transition()
@@ -198,6 +198,19 @@ function useMap(
             getMarkCoords({ park, scale: 1 / scale })
           );
       });
+
+      function handleZoom(e: any) {
+        console.log(e.transform)
+        g.attr("transform", e.transform)
+      }
+
+      const zoom = d3.zoom()
+      
+      zoom.on("zoom", handleZoom)
+
+      zoom.scaleExtent([1, 2]).translateExtent([[0, 0], [width, height]]);
+
+      // (svg as any).call(zoom)
 
       const reset = () => {
         active = d3.select(null);
