@@ -10,7 +10,7 @@ import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
-import useSelectedParks from "hooks/useSelectedParks";
+import useSelectedParks, { defaultSelectedValues } from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
