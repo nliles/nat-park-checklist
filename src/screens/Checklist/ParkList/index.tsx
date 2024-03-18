@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
-import camelCase from "lodash/camelCase";
 import { State } from "reducers/types";
 import { Park } from "types/park";
+import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
@@ -35,19 +35,18 @@ const ParkList = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${selectedDropdownItem} checklist`}</h2>
+        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {
-              const formattedDesignation = camelCase(selectedDropdownItem);
               return (
               <Checkbox
                 key={park.fullName}
                 label={`${i + 1}. ${park.fullName}`}
                 id={park.id}
-                name={`parkData.${formattedDesignation}`}
+                name={`parkData.${selectedDropdownItem}`}
               />
             )})}
         </div>

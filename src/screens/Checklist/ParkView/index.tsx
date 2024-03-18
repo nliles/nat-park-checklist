@@ -97,7 +97,7 @@ const ParkView = ({
           />
           <ParkList
             parks={parks}
-            selectedDropdownItem={dropdownItem}
+            selectedDropdownItem={selectedDropdownItem}
             initialParkValues={initialValues}
             handleOnSubmit={handleOnSubmit}
           />
