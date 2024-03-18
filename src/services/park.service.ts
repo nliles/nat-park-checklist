@@ -7,7 +7,7 @@ type Response = {
 }
 
 export const getParks = (): Promise<{ parks: Parks }> => {
-  return apiClient.get("/park");
+  return apiClient.get("/users/park");
 };
 
 export const createParks = (
@@ -15,7 +15,7 @@ export const createParks = (
   parks: string[]
 ): Promise<Response> => {
   return apiClient.post(
-    "/park",
+    "/users/park",
     { designation, parks }
   );
 };
@@ -25,7 +25,7 @@ export const updateParks = (
   parks: string[]
 ): Promise<Response> => {
   return apiClient.patch(
-    "/park",
+    "/users/park",
     { designation, parks }
   );
 };
