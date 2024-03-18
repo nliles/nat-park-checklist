@@ -11,7 +11,7 @@ import styles from "./index.module.scss";
 type ListProps = {
   parks: Park[];
   selectedDropdownItem: string;
-  handleOnSubmit: (values: string[]) => void;
+  handleOnSubmit: () => void;
 };
 
 const ParkList = ({
@@ -19,10 +19,6 @@ const ParkList = ({
   selectedDropdownItem,
   handleOnSubmit,
 }: ListProps) => {
-  const onSubmit = (values: any) => {
-    handleOnSubmit(values.parkData);
-  }
-
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
 
   const {
@@ -35,7 +31,7 @@ const ParkList = ({
       <div className={styles.header}>
         <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleOnSubmit)}>
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {

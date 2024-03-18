@@ -21,7 +21,7 @@ export type ParkViewProps = {
   parks: Park[];
   selectedParks?: string[];
   selectedDropdownItem: ParkDesignationType;
-  handleOnSubmit: (values: string[]) => void;
+  handleOnSubmit: () => void;
 };
 
 const ParkView = ({

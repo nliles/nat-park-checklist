@@ -43,12 +43,12 @@ const ParkContainer = () => {
 
   const formData = watch().parkData;
 
-  const handleOnSubmit = async (values: any) => {
+  const handleOnSubmit = async () => {
     try {
       if (showAll) {
         // TODO: Send put request
       } else {
-        const { parks } = await updateParks(selectedDropdownItem, values[selectedDropdownItem]);
+        const { parks } = await updateParks(selectedDropdownItem, (formData as any)[selectedDropdownItem]);
         setSelectedParks(parks);
       }
       toast.success(copy.updateSuccess);
@@ -61,7 +61,7 @@ const ParkContainer = () => {
 
   const handleListItemChange = (item: string) => {
     if (isLoggedIn && isDirty) {
-      handleOnSubmit(formData);
+      handleOnSubmit();
     }
     navigate(`/?designation=${kebabCase(item)}`);
   };
