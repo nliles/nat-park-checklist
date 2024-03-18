@@ -202,7 +202,6 @@ function useMap(
       function handleZoom(e: any) {
         console.log(e.transform)
         g.attr("transform", e.transform)
-        console.log("here", e)
       }
 
       const zoom = d3.zoom()
@@ -211,7 +210,7 @@ function useMap(
 
       zoom.scaleExtent([1, 2]).translateExtent([[0, 0], [width, height]]);
 
-      (svg as any).call(zoom)
+      // (svg as any).call(zoom)
 
       const reset = () => {
         active = d3.select(null);
