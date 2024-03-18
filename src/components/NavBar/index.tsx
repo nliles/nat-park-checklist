@@ -21,6 +21,7 @@ const NavBar = ({ count }: NavBarProps) => {
   const toggleClose = () => setShowMenu((prevState) => !prevState);
   const toggleModal = () => setShowModal((prevState) => !prevState);
 
+  // TODO: Show this once per session
   // useLayoutEffect(() => {
   //   if (!isLoggedIn) {
   //     toggleModal();

@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import cn from "classnames";
+import camelCase from "lodash/camelCase";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
@@ -47,24 +48,28 @@ const ParkView = ({
   const dropdownItem = startCase(selectedDropdownItem);
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
-  const handleClick = (id: string) => {
-    let newData = [...formData];
-    if (formData.includes(id)) {
-      newData = formData.filter((parkId: string) => parkId !== id);
+  const handleClick = (id: string, designation: string) => {
+    const formattedDesignation = camelCase(designation);
+    let newData: any = structuredClone(formData);
+    const designationArray = newData[formattedDesignation];
+    if (designationArray.includes(id)) {
+      designationArray.filter((parkId: string) => parkId !== id);
     } else {
-      newData.push(id);
+      designationArray.push(id);
     }
     setValue("parkData", newData, { shouldDirty: true });
   };
 
+  const newCount = Object.values(formData).flat(1).length;
+
   const totalProps = {
-    count: formData.length,
+    count: newCount,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
   return (
-    <PageWrapper count={count}>
+    <PageWrapper count={newCount}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
           {isLoading && <Spinner />}
@@ -90,7 +95,7 @@ const ParkView = ({
           <Map
             parks={parks}
             selectedParks={formData}
-            handleOnClick={handleClick}
+            handleClick={handleClick}
           />
           <ParkList
             parks={parks}

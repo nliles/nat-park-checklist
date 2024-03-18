@@ -16,19 +16,41 @@ import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
-  const [initialValues, setInitialValues] = useState<string[]>([]);
+  const [initialValues, setInitialValues] = useState<any>({});
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK;
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
+  const showAll = 'nationalParkUnit' === selectedDropdownItem;
   const { isLoading, parks } = useParks(selectedDropdownItem);
   const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
   const methods = useForm({
     defaultValues: {
-      parkData: initialValues,
+      parkData: {
+        nationalPark: [],
+        internationalHistoricSite: [],
+        nationalBattlefield: [],
+        nationalBattlefieldPark: [],
+        nationalBattlefieldSite: [],
+        nationalMilitaryPark: [],
+        nationalHistoricPark: [],
+        nationalHistoricSite: [],
+        nationalLakeshore: [],
+        nationalMemorial: [],
+        nationalMonument: [],
+        nationalParkway: [],
+        nationalPreserve: [],
+        nationalReserve: [],
+        nationalRecreationArea: [],
+        nationalRiver: [],
+        nationalScenicTrail: [],
+        nationalSeashore: [],
+        nationalWildAndScenicRiver: [],
+        otherDesignation: [],
+      },
     },
   });
 
@@ -46,24 +68,32 @@ const ParkContainer = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setInitialValues([]);
+      setInitialValues({});
       setSelectedCount(0);
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
     if (selectedParks) {
-      const currentParks = selectedParks[selectedDropdownItem] || [];
+      let currentParks = showAll ? Object.values(selectedParks).flat(1) : (selectedParks[selectedDropdownItem] || []);
       const total = flattenParks(selectedParks).length;
       setSelectedCount(total - currentParks.length);
-      setInitialValues(currentParks);
+      setInitialValues(selectedParks);
     }
-  }, [selectedParks, selectedDropdownItem]);
+  }, [selectedParks, selectedDropdownItem, showAll]);
 
-  const handleOnSubmit = async (values: string[]) => {
+  const handleOnSubmit = async (values: any) => {
     try {
-      const { parks } = await updateParks(selectedDropdownItem, values);
-      setSelectedParks(parks);
+      if (showAll) {
+        // TODO: Send put request
+      } else {
+        const { parks } = await updateParks(selectedDropdownItem, values.parkData[selectedDropdownItem]);
+        setSelectedParks(parks);
+      }
+      for (const [key, value] of Object.entries(values)) {
+        const { parks } = await updateParks(key as ParkDesignationType, value as string[]);
+        setSelectedParks(parks);
+      }
       toast.success(copy.updateSuccess);
     } catch (err: any) {
       if (err?.status !== 401) {
@@ -82,7 +112,7 @@ const ParkContainer = () => {
   return (
     <FormProvider {...methods}>
       <ParkView
-        count={selectedCount + formData.length}
+        count={selectedCount + Object.values(formData).flat(1).length}
         isLoading={isLoading || isSelectedLoading}
         initialValues={initialValues}
         selectedDropdownItem={selectedDropdownItem}

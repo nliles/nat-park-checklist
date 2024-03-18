@@ -7,14 +7,19 @@ type Image = {
   altText: string;
 };
 
-export type Park = {
-  addresses?: Address[];
-  fullName?: string;
+export type CondensedPark = {
   id: string;
-  images?: Image[];
   latitude: string;
   longitude: string;
-  name?: string;
-  states?: string;
-  url?: string;
 };
+
+export type Park = CondensedPark & {
+  addresses?: Address[];
+  fullName: string;
+  designation: string;
+  images: Image[];
+  name: string;
+  states: string;
+  url: string;
+};
+

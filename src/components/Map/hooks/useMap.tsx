@@ -23,7 +23,7 @@ function useMap(
   parks: Park[],
   selectedParks: string[],
   showTree: boolean,
-  handleOnClick?: (id: string) => void
+  handleClick?: (id: string, designation: string) => void
 ) {
   useEffect(() => {
     const drawMap = () => {
@@ -134,8 +134,8 @@ function useMap(
             .attr("viewBox", "0 0 540.41 736.19")
             .on("click", (e: Event, d: Park) => {
               e.preventDefault();
-              if (handleOnClick) {
-                handleOnClick(d.id);
+              if (handleClick) {
+                handleClick(d.id, d.designation);
               }
             });
 
@@ -225,7 +225,7 @@ function useMap(
     if (parks.length > 0) {
       drawMap();
     }
-  }, [parks, height, width, showTree, handleOnClick, selectedParks]);
+  }, [parks, height, width, showTree, handleClick, selectedParks]);
 }
 
 export default useMap;

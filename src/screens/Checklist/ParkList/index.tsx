@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
+import camelCase from "lodash/camelCase";
 import { State } from "reducers/types";
 import { Park } from "types/park";
 import Button from "components/ui/Button";
@@ -20,9 +21,10 @@ const ParkList = ({
   selectedDropdownItem,
   handleOnSubmit,
 }: ListProps) => {
-  const onSubmit = async (values: any) => {
-    await handleOnSubmit(values.parkData);
-  };
+  const onSubmit = (values: any) => {
+    console.log('values', values)
+    handleOnSubmit(values);
+  }
 
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
 
@@ -39,14 +41,16 @@ const ParkList = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.listContainer}>
           {parks &&
-            parks.map((park, i) => (
+            parks.map((park, i) => {
+              const formattedDesignation = camelCase(selectedDropdownItem);
+              return (
               <Checkbox
                 key={park.fullName}
                 label={`${i + 1}. ${park.fullName}`}
                 id={park.id}
-                name="parkData"
+                name={`parkData.${formattedDesignation}`}
               />
-            ))}
+            )})}
         </div>
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
