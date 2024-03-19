@@ -63,11 +63,13 @@ const Dropdown = ({
           {selectedItem ? formatSelectedItem(selectedItem) : ''}
         </span>
         <div className={styles.iconContainer}>
+          {selectedItem && (
         <button className={cn(styles.clearIcon, {
           [styles.isOpen]: isOpen,
         })} onClick={clearItem}>
           <Close color="#64726f" size={22.5}/>
         </button>
+          )}
         <span
           className={cn(styles.icon, {
             [styles.isOpen]: isOpen,
