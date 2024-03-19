@@ -66,10 +66,10 @@ const Dropdown = ({
         <button className={cn(styles.clearIcon, {
           [styles.isOpen]: isOpen,
         })} onClick={clearItem}>
-          <Close color="#64726f" size={25}/>
+          <Close color="#64726f" size={22.5}/>
         </button>
         <span
-          className={cn(styles.clearIcon, {
+          className={cn(styles.icon, {
             [styles.isOpen]: isOpen,
           })}
         >
