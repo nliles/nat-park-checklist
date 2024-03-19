@@ -39,8 +39,21 @@
   color: $black;
 }
 
-.close {
-  all: unset
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+}
+
+.clearIcon {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-right: 1px solid gray;
 }
 
 .title {
@@ -108,8 +121,14 @@
 }
 
 .label {
-  position: absolute;
-  top: 5px;
-  color: $green;
-  font-weight: 600;
+  color: #64726f;
+  font-size: 18px;
+
+  &.isOpen {
+    font-size: inherit;
+    position: absolute;
+    top: 5px;
+    color: $green;
+    font-weight: 600;
+  }
 }

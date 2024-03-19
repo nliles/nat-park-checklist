@@ -56,21 +56,26 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <label className={styles.label}>Select a designation</label>
+        <label className={cn(styles.label, {
+          [styles.isOpen]: isOpen,
+        })}>Select a designation</label>
         <span className={styles.title}>
           {selectedItem ? formatSelectedItem(selectedItem) : ''}
         </span>
-        <button className={styles.close} onClick={clearItem}>
-          <Close />
+        <div className={styles.iconContainer}>
+        <button className={cn(styles.clearIcon, {
+          [styles.isOpen]: isOpen,
+        })} onClick={clearItem}>
+          <Close color="#64726f" size={25}/>
         </button>
         <span
-          className={cn(styles.icon, {
+          className={cn(styles.clearIcon, {
             [styles.isOpen]: isOpen,
           })}
         >
           <Caret />
         </span>
-        
+      </div>
       </button>
       <ul className={styles.list} role="listbox" {...getMenuProps()}>
         {items.map((item, index) => (
