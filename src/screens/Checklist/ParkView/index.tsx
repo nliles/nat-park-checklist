@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import cn from "classnames";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
-import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
+import ParkDesignation from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Total from "components/Total";
@@ -20,7 +20,7 @@ export type ParkViewProps = {
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
-  selectedDropdownItem: ParkDesignationType;
+  selectedDropdownItem: string;
   handleOnSubmit: () => void;
 };
 
@@ -36,12 +36,13 @@ const ParkView = ({
   const formData = watch().parkData || {};
 
   const formatListItem = (item: string) => {
-    // if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
+    if (item === 'selectAll') return copy.selectAll;
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
   const dropdownItem = startCase(selectedDropdownItem);
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+  const allDesignationTotal = Object.values(formData).flat(1).length;
 
   const handleClick = (id: string, designation: string) => {
     let newData: any = structuredClone(formData);
@@ -55,12 +56,13 @@ const ParkView = ({
   };
 
   const totalProps = {
-    count: formData[selectedDropdownItem].length,
+    count: selectedDropdownItem === 'selectAll' ? allDesignationTotal : formData[selectedDropdownItem].length,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
-  const allDesignationTotal = Object.values(formData).flat(1).length
+
+  const items = ["selectAll", ...LIST_OPTIONS];
 
   return (
     <PageWrapper count={allDesignationTotal}>
@@ -75,7 +77,7 @@ const ParkView = ({
               styleName={styles.mobileCount}
             />
             <Dropdown
-              items={LIST_OPTIONS}
+              items={items}
               initialSelectedItem={selectedDropdownItem}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}

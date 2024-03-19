@@ -10,7 +10,7 @@ import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
-import useSelectedParks, { defaultSelectedValues } from "hooks/useSelectedParks";
+import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
@@ -19,9 +19,9 @@ const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation") || ParkDesignation.NAT_PARK;
-  const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
-  // const showAll = 'nationalParkUnit' === selectedDropdownItem;
-  const { isLoading, parks } = useParks(selectedDropdownItem);
+  const selectedDropdownItem = camelCase(designation);
+  const showAll = 'selectAll' === selectedDropdownItem;
+  const { isLoading, parks } = useParks(showAll ? undefined : selectedDropdownItem  as ParkDesignationType);
   const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
@@ -44,10 +44,14 @@ const ParkContainer = () => {
   const formData: Parks = watch().parkData;
 
   const handleOnSubmit = async () => {
-    try {
-      // TODO: Add PUT request when showing all parks
-      const { parks } = await updateParks(selectedDropdownItem, formData[selectedDropdownItem]);
-      setSelectedParks(parks);
+    try { 
+      if (showAll) {
+          // TODO: Add PUT request when showing all parks
+      } else {
+        const { parks } = await updateParks(selectedDropdownItem as ParkDesignationType, formData[selectedDropdownItem as ParkDesignationType]);
+        setSelectedParks(parks);
+      }
+
       toast.success(copy.updateSuccess);
     } catch (err: any) {
       if (err?.status !== 401) {
