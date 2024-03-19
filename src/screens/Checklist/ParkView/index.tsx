@@ -3,6 +3,7 @@ import cn from "classnames";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation from "enum/ParkDesignation";
+import camelCase from "lodash/camelCase";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Total from "components/Total";
@@ -16,11 +17,11 @@ import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
-  handleListItemChange: (item: string) => void;
+  handleListItemChange: (item?: string) => void;
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
-  selectedDropdownItem: string;
+  selectedDropdownItem?: string;
   handleOnSubmit: () => void;
 };
 
@@ -40,13 +41,13 @@ const ParkView = ({
     return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   };
 
-  const dropdownItem = startCase(selectedDropdownItem);
+  const dropdownItem = selectedDropdownItem ? startCase(selectedDropdownItem) : 'National Park Unit Checklist';
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
   const allDesignationTotal = Object.values(formData).flat(1).length;
 
   const handleClick = (id: string, designation: string) => {
     let newData: any = structuredClone(formData);
-    const designationArray = newData[selectedDropdownItem];
+    const designationArray = newData[camelCase(designation)];
     if (designationArray.includes(id)) {
       designationArray.filter((parkId: string) => parkId !== id);
     } else {
@@ -56,13 +57,12 @@ const ParkView = ({
   };
 
   const totalProps = {
-    count: selectedDropdownItem === 'selectAll' ? allDesignationTotal : formData[selectedDropdownItem].length,
+    count: selectedDropdownItem ? (formData[selectedDropdownItem]?.length || 0) : allDesignationTotal,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
-
-  const items = ["selectAll", ...LIST_OPTIONS];
+    // initialSelectedItem={ParkDesignation.NAT_PARK}
 
   return (
     <PageWrapper count={allDesignationTotal}>
@@ -77,8 +77,7 @@ const ParkView = ({
               styleName={styles.mobileCount}
             />
             <Dropdown
-              items={items}
-              initialSelectedItem={selectedDropdownItem}
+              items={LIST_OPTIONS}
               handleClick={handleListItemChange}
               formatListItem={formatListItem}
               formatSelectedItem={formatSelectedItem}

@@ -39,6 +39,10 @@
   color: $black;
 }
 
+.close {
+  all: unset
+}
+
 .title {
   font-size: 18px;
   text-transform: capitalize;

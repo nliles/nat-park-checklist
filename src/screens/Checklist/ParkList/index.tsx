@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
+import camelCase from "lodash/camelCase";
 import { Park } from "types/park";
 import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
@@ -10,7 +11,7 @@ import styles from "./index.module.scss";
 
 type ListProps = {
   parks: Park[];
-  selectedDropdownItem: string;
+  selectedDropdownItem?: string;
   handleOnSubmit: () => void;
 };
 
@@ -29,7 +30,7 @@ const ParkList = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
+        <h2>{selectedDropdownItem ? `${startCase(selectedDropdownItem)} checklist` : 'National Park Unit checklist'}</h2>
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <div className={styles.listContainer}>
@@ -40,7 +41,7 @@ const ParkList = ({
                 key={park.fullName}
                 label={`${i + 1}. ${park.fullName}`}
                 id={park.id}
-                name={`parkData.${selectedDropdownItem}`}
+                name={`parkData.${camelCase(park.designation)}`}
               />
             )})}
         </div>

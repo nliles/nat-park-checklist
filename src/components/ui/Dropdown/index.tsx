@@ -2,12 +2,13 @@ import React from "react";
 import cn from "classnames";
 import { useSelect } from "downshift";
 import Caret from "components/icons/Caret";
+import Close from "components/icons/Close";
 import styles from "./Dropdown.module.scss";
 
 type DropdownProps = {
-  handleClick: (item: string) => void;
+  handleClick: (item?: string) => void;
   items: string[];
-  initialSelectedItem: string;
+  initialSelectedItem?: string;
   styleName?: string;
   formatListItem?: (item: string) => string;
   formatSelectedItem?: (item: string) => string;
@@ -25,16 +26,24 @@ const Dropdown = ({
     getToggleButtonProps,
     getMenuProps,
     getItemProps,
+    selectItem,
+    selectedItem,
     highlightedIndex,
     isOpen,
   } = useSelect({
     items: items,
-    onStateChange: ({ selectedItem }) => {
-      if (selectedItem) {
-        handleClick(selectedItem);
-      }
-    },
+    defaultSelectedItem: initialSelectedItem,
+    onSelectedItemChange: ({ selectedItem }) => {
+      handleClick(selectedItem as string | undefined);
+		},
   });
+
+  const clearItem = (e: any) => {
+    e.stopPropagation();
+    selectItem('');
+  }
+
+  console.log(selectedItem)
 
   return (
     <div
@@ -49,8 +58,11 @@ const Dropdown = ({
       >
         <label className={styles.label}>Select a designation</label>
         <span className={styles.title}>
-          {formatSelectedItem(initialSelectedItem)}
+          {selectedItem ? formatSelectedItem(selectedItem) : ''}
         </span>
+        <button className={styles.close} onClick={clearItem}>
+          <Close />
+        </button>
         <span
           className={cn(styles.icon, {
             [styles.isOpen]: isOpen,
@@ -64,7 +76,7 @@ const Dropdown = ({
         {items.map((item, index) => (
           <li
             className={cn(styles.listItem, {
-              [styles.selected]: item === initialSelectedItem,
+              [styles.selected]: item === selectedItem,
               [styles.highlighted]: index === highlightedIndex,
             })}
             id={item}

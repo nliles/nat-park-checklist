@@ -9,13 +9,13 @@ import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
 import copy from "./copy";
 
-function useParks(selectedItem?: ParkDesignationType) {
+function useParks(selectedItem?: string) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
 
   useEffect(() => {
     const fetchParks = async () => {
-      const codes = selectedItem ? PARK_INFO[selectedItem].codes : ALL_CODES;
+      const codes = selectedItem ? PARK_INFO[selectedItem as ParkDesignationType].codes : ALL_CODES;
       setIsLoading(true);
       setParks([]);
       try {
@@ -25,8 +25,7 @@ function useParks(selectedItem?: ParkDesignationType) {
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
-          console.log(json)
-          data = sortParks(formatParks(json.data, selectedItem));
+          data = sortParks(formatParks(json.data, selectedItem as ParkDesignationType));
           saveState(selectedItem || "", JSON.stringify(data));
         }
         setParks(data);
