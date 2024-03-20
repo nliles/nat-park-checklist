@@ -200,7 +200,6 @@ function useMap(
       });
 
       function handleZoom(e: any) {
-        console.log(e.transform);
         g.attr("transform", e.transform);
       }
 
