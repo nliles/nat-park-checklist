@@ -34,8 +34,7 @@ const ParkView = ({
 }: ParkViewProps) => {
   const { watch, setValue } = useFormContext();
 
-  const formData = watch().parkData || {};
-
+  const formData = watch('parkData');
   const formatListItem = (item: string) => `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`
   const allDesignationTotal = Object.values(formData).flat(1).length;
   const dropdownItem = startCase(selectedDropdownItem);
@@ -43,14 +42,15 @@ const ParkView = ({
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   const handleClick = (id: string, designation: string) => {
+    const formattedDesignation = camelCase(designation);
     let newData: any = structuredClone(formData);
-    const designationArray = newData[camelCase(designation)];
+    const designationArray = newData[formattedDesignation];
     if (designationArray.includes(id)) {
       designationArray.filter((parkId: string) => parkId !== id);
     } else {
       designationArray.push(id);
     }
-    setValue("parkData", newData, { shouldDirty: true });
+    setValue(`parkData.${formattedDesignation}`, designationArray, { shouldDirty: true });
   };
 
   const totalProps = {

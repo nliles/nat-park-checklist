@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
+import camelCase from "lodash/camelCase";
 import { Park } from "types/park";
 import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
@@ -41,7 +42,7 @@ const ParkList = ({
                   key={park.fullName}
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
-                  name={`parkData.${selectedDropdownItem}`}
+                  name={`parkData.${camelCase(park.designation)}`}
                 />
               );
             })}

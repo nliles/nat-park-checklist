@@ -34,6 +34,7 @@ const ParkContainer = () => {
     },
   });
 
+
   const {
     watch,
     reset,
@@ -44,7 +45,7 @@ const ParkContainer = () => {
     reset({ parkData: selectedParks });
   }, [selectedParks, reset]);
 
-  const formData: Parks = watch().parkData;
+  const formData: Parks = watch('parkData');
 
   const handleOnSubmit = async () => {
     try { 
@@ -52,10 +53,8 @@ const ParkContainer = () => {
         const { parks } = await updateParkDesignation(selectedDropdownItem as ParkDesignationType, formData[selectedDropdownItem as ParkDesignationType]);
         setSelectedParks(parks);
       } else {
-        console.log(formData)
-        // const { parks } = await updateParks(formData);
-        // console.log('saved parks', parks);
-        // setSelectedParks(parks);
+        const { parks } = await updateParks(formData);
+        setSelectedParks(parks);
       }
       toast.success(copy.updateSuccess);
     } catch (err: any) {
