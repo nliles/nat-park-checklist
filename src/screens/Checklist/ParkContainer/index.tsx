@@ -22,7 +22,11 @@ const ParkContainer = () => {
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
   // const showAll = 'nationalParkUnit' === selectedDropdownItem;
   const { isLoading, parks } = useParks(selectedDropdownItem);
-  const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+  const {
+    isLoading: isSelectedLoading,
+    selectedParks,
+    setSelectedParks,
+  } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
   const methods = useForm({
@@ -46,7 +50,10 @@ const ParkContainer = () => {
   const handleOnSubmit = async () => {
     try {
       // TODO: Add PUT request when showing all parks
-      const { parks } = await updateParks(selectedDropdownItem, formData[selectedDropdownItem]);
+      const { parks } = await updateParks(
+        selectedDropdownItem,
+        formData[selectedDropdownItem]
+      );
       setSelectedParks(parks);
       toast.success(copy.updateSuccess);
     } catch (err: any) {
