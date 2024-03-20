@@ -6,9 +6,9 @@ import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
 
 type DropdownProps = {
-  handleClick: (item: string) => void;
+  handleClick: (item?: string | null) => void;
   items: string[];
-  initialSelectedItem: string;
+  initialSelectedItem?: string;
   styleName?: string;
   formatListItem?: (item: string) => string;
   formatSelectedItem?: (item: string) => string;
@@ -22,24 +22,25 @@ const Dropdown = ({
   formatListItem = (item: string) => item,
   formatSelectedItem = (item: string) => item,
 }: DropdownProps) => {
-  const {
+  const { 
     getToggleButtonProps,
     getMenuProps,
     getItemProps,
     highlightedIndex,
     isOpen,
+    selectItem,
+    selectedItem,
   } = useSelect({
+    defaultSelectedItem: initialSelectedItem,
     items: items,
-    onStateChange: ({ selectedItem }) => {
-      if (selectedItem) {
-        handleClick(selectedItem);
-      }
-    },
+    onSelectedItemChange: ({ selectedItem }) => {
+      handleClick(selectedItem);
+    }
   });
 
   const clearItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation();
-    // TODO: Clear item
+    selectItem('');
   };
 
   return (
@@ -55,16 +56,16 @@ const Dropdown = ({
       >
         <label
           className={cn(styles.label, {
-            [styles.isOpen]: isOpen || initialSelectedItem,
+            [styles.isOpen]: isOpen || selectedItem,
           })}
         >
           Select a designation
         </label>
         <span className={styles.title}>
-          {formatSelectedItem(initialSelectedItem)}
+          {selectedItem ? formatSelectedItem(selectedItem) : ''}
         </span>
         <div className={styles.iconContainer}>
-          {!initialSelectedItem && (
+          {!selectedItem && (
             <span
               className={cn(styles.clearIcon, {
                 [styles.isOpen]: isOpen,
@@ -87,7 +88,7 @@ const Dropdown = ({
         {items.map((item, index) => (
           <li
             className={cn(styles.listItem, {
-              [styles.selected]: item === initialSelectedItem,
+              [styles.selected]: item === selectedItem,
               [styles.highlighted]: index === highlightedIndex,
             })}
             id={item}

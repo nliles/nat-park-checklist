@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import cn from "classnames";
 import PageWrapper from "components/PageWrapper";
+import camelCase from "lodash/camelCase";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
@@ -16,11 +17,11 @@ import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
-  handleListItemChange: (item: string) => void;
+  handleListItemChange: (item?: string | null) => void;
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
-  selectedDropdownItem: ParkDesignationType;
+  selectedDropdownItem?: ParkDesignationType;
   handleOnSubmit: () => void;
 };
 
@@ -33,39 +34,36 @@ const ParkView = ({
 }: ParkViewProps) => {
   const { watch, setValue } = useFormContext();
 
-  const formData = watch().parkData || {};
-
-  const formatListItem = (item: string) => {
-    // if (item === ParkDesignation.ALL_DESIGNATIONS) return copy.selectAll;
-    return `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
-  };
-
+  const formData = watch('parkData');
+  const formatListItem = (item: string) => `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`
+  const allDesignationTotal = Object.values(formData).flat(1).length;
   const dropdownItem = startCase(selectedDropdownItem);
+  const headerTitle = selectedDropdownItem ? dropdownItem : 'National Park Unit';
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   const handleClick = (id: string, designation: string) => {
-    let newData: any = structuredClone(formData);
-    const designationArray = newData[selectedDropdownItem];
+    const formattedDesignation = camelCase(designation);
+    let designationArray = formData[formattedDesignation].slice();
     if (designationArray.includes(id)) {
-      designationArray.filter((parkId: string) => parkId !== id);
+      designationArray = designationArray.filter((parkId: string) => parkId !== id);
     } else {
       designationArray.push(id);
     }
-    setValue("parkData", newData, { shouldDirty: true });
+    setValue(`parkData.${formattedDesignation}`, designationArray, { shouldDirty: true });
   };
 
   const totalProps = {
-    count: formData[selectedDropdownItem].length,
+    count: selectedDropdownItem ? (formData[selectedDropdownItem]?.length || 0) : allDesignationTotal,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
-  const allDesignationTotal = Object.values(formData).flat(1).length;
+  
 
   return (
     <PageWrapper count={allDesignationTotal}>
       <div className={styles.container}>
-        <Header title={`${dropdownItem}s`} />
+        <Header title={headerTitle} />
         {isLoading && <Spinner />}
         {!isLoading && (
           <>
