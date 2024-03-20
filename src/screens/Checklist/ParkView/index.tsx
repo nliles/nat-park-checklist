@@ -16,7 +16,7 @@ import copy from "./copy";
 import styles from "./index.module.scss";
 
 export type ParkViewProps = {
-  handleListItemChange: (item: string) => void;
+  handleListItemChange: (item?: string | null) => void;
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];

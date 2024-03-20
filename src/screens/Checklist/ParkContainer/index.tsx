@@ -63,11 +63,11 @@ const ParkContainer = () => {
     }
   };
 
-  const handleListItemChange = (item: string) => {
+  const handleListItemChange = (item?: string | null) => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit();
     }
-    navigate(`/?designation=${kebabCase(item)}`);
+    navigate(item ? `/?designation=${kebabCase(item)}` : '');
   };
 
   return (
