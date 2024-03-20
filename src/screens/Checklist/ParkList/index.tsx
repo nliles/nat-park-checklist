@@ -10,7 +10,7 @@ import styles from "./index.module.scss";
 
 type ListProps = {
   parks: Park[];
-  selectedDropdownItem: string;
+  selectedDropdownItem?: string;
   handleOnSubmit: () => void;
 };
 
@@ -20,6 +20,7 @@ const ParkList = ({
   handleOnSubmit,
 }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
+  const headerCopy = selectedDropdownItem ? startCase(selectedDropdownItem) : 'National Park Unit';
 
   const {
     handleSubmit,
@@ -29,7 +30,7 @@ const ParkList = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${startCase(selectedDropdownItem)} checklist`}</h2>
+        <h2>{`${headerCopy} checklist`}</h2>
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <div className={styles.listContainer}>

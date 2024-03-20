@@ -133,6 +133,9 @@ export const PARK_INFO: ParkInfoDict = {
   },
 };
 
+export const ALL_CODES = [...Object.entries(PARK_INFO).map(obj => obj[1].codes)].flat(1);
+export const ALL_FORMATTED = [...Object.entries(PARK_INFO).map(obj => obj[1].formattedParks)].flat(1);
+
 export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
   (acc, element) => acc + element.codes.length + element.formattedParks.length,
   0

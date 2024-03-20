@@ -8,7 +8,7 @@ import styles from "./Dropdown.module.scss";
 type DropdownProps = {
   handleClick: (item?: string | null) => void;
   items: string[];
-  initialSelectedItem: string;
+  initialSelectedItem?: string;
   styleName?: string;
   formatListItem?: (item: string) => string;
   formatSelectedItem?: (item: string) => string;
