@@ -43,9 +43,9 @@ const ParkView = ({
 
   const handleClick = (id: string, designation: string) => {
     const formattedDesignation = camelCase(designation);
-    const designationArray = formData[formattedDesignation].slice();
+    let designationArray = formData[formattedDesignation].slice();
     if (designationArray.includes(id)) {
-      designationArray.filter((parkId: string) => parkId !== id);
+      designationArray = designationArray.filter((parkId: string) => parkId !== id);
     } else {
       designationArray.push(id);
     }
