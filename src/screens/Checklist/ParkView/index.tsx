@@ -60,43 +60,40 @@ const ParkView = ({
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
-  const allDesignationTotal = Object.values(formData).flat(1).length
+  const allDesignationTotal = Object.values(formData).flat(1).length;
 
   return (
     <PageWrapper count={allDesignationTotal}>
       <div className={styles.container}>
         <Header title={`${dropdownItem}s`} />
-          {isLoading && <Spinner />}
-          {!isLoading && (
+        {isLoading && <Spinner />}
+        {!isLoading && (
           <>
             <div className={styles.dropdownWrapper}>
-            <Total
-              {...totalProps}
-              styleName={styles.mobileCount}
+              <Total {...totalProps} styleName={styles.mobileCount} />
+              <Dropdown
+                items={LIST_OPTIONS}
+                initialSelectedItem={selectedDropdownItem}
+                handleClick={handleListItemChange}
+                formatListItem={formatListItem}
+                formatSelectedItem={formatSelectedItem}
+              />
+              <Total
+                {...totalProps}
+                styleName={cn(styles.count, styles.desktopCount)}
+              />
+            </div>
+            <Map
+              parks={parks}
+              selectedParks={formData}
+              handleClick={handleClick}
             />
-            <Dropdown
-              items={LIST_OPTIONS}
-              initialSelectedItem={selectedDropdownItem}
-              handleClick={handleListItemChange}
-              formatListItem={formatListItem}
-              formatSelectedItem={formatSelectedItem}
+            <ParkList
+              parks={parks}
+              selectedDropdownItem={selectedDropdownItem}
+              handleOnSubmit={handleOnSubmit}
             />
-            <Total
-              {...totalProps}
-              styleName={cn(styles.count, styles.desktopCount)}
-            />
-          </div>
-          <Map
-            parks={parks}
-            selectedParks={formData}
-            handleClick={handleClick}
-          />
-          <ParkList
-            parks={parks}
-            selectedDropdownItem={selectedDropdownItem}
-            handleOnSubmit={handleOnSubmit}
-          />
-        </>
+          </>
         )}
       </div>
     </PageWrapper>

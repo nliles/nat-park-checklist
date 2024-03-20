@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import Close from "components/icons/Close";
 import { useSelect } from "downshift";
 import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
@@ -36,6 +37,11 @@ const Dropdown = ({
     },
   });
 
+  const clearItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.stopPropagation();
+    // TODO: Clear item
+  };
+
   return (
     <div
       className={cn(styles.container, styleName, {
@@ -47,18 +53,35 @@ const Dropdown = ({
         type="button"
         {...getToggleButtonProps()}
       >
-        <label className={styles.label}>Select a designation</label>
+        <label
+          className={cn(styles.label, {
+            [styles.isOpen]: isOpen || initialSelectedItem,
+          })}
+        >
+          Select a designation
+        </label>
         <span className={styles.title}>
           {formatSelectedItem(initialSelectedItem)}
         </span>
-        <span
-          className={cn(styles.icon, {
-            [styles.isOpen]: isOpen,
-          })}
-        >
-          <Caret />
-        </span>
-        
+        <div className={styles.iconContainer}>
+          {!initialSelectedItem && (
+            <span
+              className={cn(styles.clearIcon, {
+                [styles.isOpen]: isOpen,
+              })}
+              onClick={clearItem}
+            >
+              <Close color="#4b5e26" size={22.5} />
+            </span>
+          )}
+          <span
+            className={cn(styles.icon, {
+              [styles.isOpen]: isOpen,
+            })}
+          >
+            <Caret />
+          </span>
+        </div>
       </button>
       <ul className={styles.list} role="listbox" {...getMenuProps()}>
         {items.map((item, index) => (

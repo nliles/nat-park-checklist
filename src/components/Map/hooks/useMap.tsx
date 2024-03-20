@@ -51,7 +51,7 @@ function useMap(
         park: Park;
         scale?: number;
       }) => {
-        const adjustedScale = width < 1000 ? (scale * 0.75) : scale;
+        const adjustedScale = width < 1000 ? scale * 0.75 : scale;
         const p = projection([park.longitude, park.latitude]);
         const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
         const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
@@ -200,15 +200,17 @@ function useMap(
       });
 
       function handleZoom(e: any) {
-        console.log(e.transform)
-        g.attr("transform", e.transform)
+        g.attr("transform", e.transform);
       }
 
-      const zoom = d3.zoom()
-      
-      zoom.on("zoom", handleZoom)
+      const zoom = d3.zoom();
 
-      zoom.scaleExtent([1, 2]).translateExtent([[0, 0], [width, height]]);
+      zoom.on("zoom", handleZoom);
+
+      zoom.scaleExtent([1, 2]).translateExtent([
+        [0, 0],
+        [width, height],
+      ]);
 
       // (svg as any).call(zoom)
 

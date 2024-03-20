@@ -10,7 +10,7 @@ import { updateParks } from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
-import useSelectedParks, { defaultSelectedValues } from "hooks/useSelectedParks";
+import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
@@ -22,7 +22,11 @@ const ParkContainer = () => {
   const selectedDropdownItem = camelCase(designation) as ParkDesignationType;
   // const showAll = 'nationalParkUnit' === selectedDropdownItem;
   const { isLoading, parks } = useParks(selectedDropdownItem);
-  const { isLoading: isSelectedLoading, selectedParks, setSelectedParks } = useSelectedParks(isLoggedIn);
+  const {
+    isLoading: isSelectedLoading,
+    selectedParks,
+    setSelectedParks,
+  } = useSelectedParks(isLoggedIn);
   const navigate = useNavigate();
 
   const methods = useForm({
@@ -46,7 +50,10 @@ const ParkContainer = () => {
   const handleOnSubmit = async () => {
     try {
       // TODO: Add PUT request when showing all parks
-      const { parks } = await updateParks(selectedDropdownItem, formData[selectedDropdownItem]);
+      const { parks } = await updateParks(
+        selectedDropdownItem,
+        formData[selectedDropdownItem]
+      );
       setSelectedParks(parks);
       toast.success(copy.updateSuccess);
     } catch (err: any) {

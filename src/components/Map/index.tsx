@@ -46,9 +46,12 @@ const Map = ({
   useTooltip();
 
   return (
-    <div ref={mapContainerRef} className={cn(styles.mapContainer, {
-      [styles.border]: showBorder
-    })}>
+    <div
+      ref={mapContainerRef}
+      className={cn(styles.mapContainer, {
+        [styles.border]: showBorder,
+      })}
+    >
       <svg id="map" />
     </div>
   );
