@@ -1,4 +1,12 @@
-const Close = ({ size = 30, strokeWidth = "1.5", color = "#000000" }: { size?: number; strokeWidth?: string; color?: string }) => (
+const Close = ({
+  size = 30,
+  strokeWidth = "1.5",
+  color = "#000000",
+}: {
+  size?: number;
+  strokeWidth?: string;
+  color?: string;
+}) => (
   <svg
     width={size}
     height={size}
