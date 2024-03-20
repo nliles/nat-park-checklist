@@ -43,8 +43,7 @@ const ParkView = ({
 
   const handleClick = (id: string, designation: string) => {
     const formattedDesignation = camelCase(designation);
-    let newData: any = structuredClone(formData);
-    const designationArray = newData[formattedDesignation];
+    const designationArray = formData[formattedDesignation].slice();
     if (designationArray.includes(id)) {
       designationArray.filter((parkId: string) => parkId !== id);
     } else {
