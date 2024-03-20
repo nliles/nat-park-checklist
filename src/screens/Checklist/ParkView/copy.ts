@@ -1,5 +1,5 @@
 const copy = {
-  selectAll: 'Select All',
+  selectAll: "Select All",
   tooltipCopy: (designation: string) =>
     `Total number of ${designation}s visited.`,
 };

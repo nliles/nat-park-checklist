@@ -36,13 +36,14 @@ const ParkList = ({
           {parks &&
             parks.map((park, i) => {
               return (
-              <Checkbox
-                key={park.fullName}
-                label={`${i + 1}. ${park.fullName}`}
-                id={park.id}
-                name={`parkData.${selectedDropdownItem}`}
-              />
-            )})}
+                <Checkbox
+                  key={park.fullName}
+                  label={`${i + 1}. ${park.fullName}`}
+                  id={park.id}
+                  name={`parkData.${selectedDropdownItem}`}
+                />
+              );
+            })}
         </div>
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
