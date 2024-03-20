@@ -65,7 +65,7 @@ const Dropdown = ({
           {selectedItem ? formatSelectedItem(selectedItem) : ''}
         </span>
         <div className={styles.iconContainer}>
-          {selectedItem && (
+          {!selectedItem && (
             <span
               className={cn(styles.clearIcon, {
                 [styles.isOpen]: isOpen,
