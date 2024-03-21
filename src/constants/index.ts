@@ -36,7 +36,7 @@ import {
   SEQUOIA_NAT_PARK,
 } from "./formattedParks";
 
-export const LIST_OPTIONS = [...Object.values(ParkDesignation)];
+export const LIST_OPTIONS: ParkDesignation[] = [...Object.values(ParkDesignation)];
 
 type ParkInfo = {
   codes: string[];
