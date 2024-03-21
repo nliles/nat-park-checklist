@@ -91,7 +91,7 @@ export const NAT_PARK_CODES = [
   "zion",
 ];
 
-export const NAT_HISTORIC_CODES = [
+export const  NAT_HISTORIC_PARK_CODES = [
   "abli",
   "adam",
   "apco",
