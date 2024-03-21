@@ -15,6 +15,8 @@ export const NAT_BATTLEFIELD_CODES = [
 
 export const NAT_BATTLEFIELD_PARK_CODES = ["kemo", "mana", "rich", "rira"];
 
+export const NAT_BATTLEFIELD_SITE_CODES = ["brcr"];
+
 export const NAT_MILITARY_PARK_CODES = [
   "chch",
   "frsp",
@@ -367,7 +369,14 @@ export const NAT_SEASHORE_CODES = [
   "pore",
 ];
 
-export const NAT_SCENIC_TRAIL_CODES = ["appa", "iatr", "natt", "neen", "noco", "pohe"];
+export const NAT_SCENIC_TRAIL_CODES = [
+  "appa",
+  "iatr",
+  "natt",
+  "neen",
+  "noco",
+  "pohe",
+];
 
 export const NAT_RIVER_CODES = ["biso", "buff", "mnrr", "ozar"];
 
@@ -441,3 +450,4 @@ export const OTHER_DESIGNATION_CODES = [
   "wotr",
 ];
 
+export const INTERNATIONAL_HISTORIC_SITE = ["sacr"];
