@@ -7,7 +7,9 @@ import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
+import { LIST_OPTIONS } from "../../../constants";
 import styles from "./index.module.scss";
+import ParkDesignation from "enum/ParkDesignation";
 
 type ListProps = {
   parks: Park[];
@@ -37,12 +39,14 @@ const ParkList = ({
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {
+              const formattedDesignation = camelCase(park.designation)
+              const formattedName = LIST_OPTIONS.includes(formattedDesignation as ParkDesignation) ? formattedDesignation : ParkDesignation.OTHER_DESIGNATION;
               return (
                 <Checkbox
                   key={park.fullName}
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
-                  name={`parkData.${camelCase(park.designation)}`}
+                  name={`parkData.${formattedName}`}
                 />
               );
             })}
