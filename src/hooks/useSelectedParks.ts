@@ -11,7 +11,7 @@ export const defaultSelectedValues: SelectedParks = {
   nationalBattlefieldPark: [],
   nationalBattlefieldSite: [],
   nationalMilitaryPark: [],
-  nationalHistoricPark: [],
+  nationalHistoricalPark: [],
   nationalHistoricSite: [],
   nationalLakeshore: [],
   nationalMemorial: [],

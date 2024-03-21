@@ -7,7 +7,7 @@ import {
   NAT_BATTLEFIELD_PARK_CODES,
   NAT_MILITARY_PARK_CODES,
   NAT_MONUMENT_CODES,
-  NAT_HISTORIC_PARK_CODES,
+  NAT_HISTORICAL_PARK_CODES,
   NAT_HISTORIC_SITE_CODES,
   NAT_MEMORIAL_CODES,
   NAT_SEASHORE_CODES,
@@ -68,8 +68,8 @@ export const PARK_INFO: ParkInfoDict = {
     codes: NAT_MILITARY_PARK_CODES,
     formattedParks: [],
   },
-  [ParkDesignation.NAT_HISTORIC_PARK]: {
-    codes: NAT_HISTORIC_PARK_CODES,
+  [ParkDesignation.NAT_HISTORICAL_PARK]: {
+    codes: NAT_HISTORICAL_PARK_CODES,
     formattedParks: [],
   },
   [ParkDesignation.NAT_HISTORIC_SITE]: {
