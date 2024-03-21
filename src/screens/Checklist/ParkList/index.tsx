@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import camelCase from "lodash/camelCase";
 import { Park } from "types/park";
+import ParkDesignation from "enum/ParkDesignation";
+// import { PARK_INFO, ALL_CODES } from "../constants";
 import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
@@ -26,10 +28,19 @@ const ParkList = ({
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
-    watch
   } = useFormContext();
 
-  const formData = watch('parkData');
+  const getParkDesignation = (designation: string) => {
+    const formattedDesignation = camelCase(designation);
+    const allowedDesignations = Object.values(ParkDesignation);
+    let count = 0;
+    if (allowedDesignations.includes(formattedDesignation as ParkDesignation)) {
+      return formattedDesignation;
+    } else {
+     //console.log('do something', designation)
+    }
+    return 'nationalPark'
+  }
 
   return (
     <div className={styles.container}>
@@ -41,11 +52,7 @@ const ParkList = ({
           {parks &&
             parks.map((park, i) => {
               // TODO: Fix park designations
-              const foundDestination = formData[camelCase(park.designation)];
-              if (!foundDestination) {
-                console.log(`${park.name} ===> ${park.designation}`)
-              }
-              const fieldName = formData[camelCase(park.designation)] ? camelCase(park.designation) : 'otherDesignation'
+              const fieldName = getParkDesignation(park.designation);
               return (
                 <Checkbox
                   key={park.fullName}

@@ -25,6 +25,22 @@ export type ParkViewProps = {
   handleOnSubmit: () => void;
 };
 
+const getParkDesignation = (designation: string) => {
+  const formattedDesignation = camelCase(designation);
+  const allowedDesignations = Object.values(ParkDesignation);
+  let count = 0;
+  if (allowedDesignations.includes(formattedDesignation as ParkDesignation)) {
+    // console.log('includes')
+    // return 'nationalPark'
+  } else {
+    count++
+    console.log('do something')
+    // return 'nationalPark'
+  }
+  console.log(count)
+  return 'nationalPark'
+}
+
 const ParkView = ({
   isLoading = false,
   parks,
@@ -43,7 +59,7 @@ const ParkView = ({
 
   const handleClick = (id: string, designation: string) => {
     const formattedDesignation = camelCase(designation);
-    let designationArray = formData[formattedDesignation].slice();
+    let designationArray = formData[getParkDesignation(designation)].slice();
     if (designationArray.includes(id)) {
       designationArray = designationArray.filter((parkId: string) => parkId !== id);
     } else {
