@@ -3,6 +3,7 @@ import ParkDesignation from "enum/ParkDesignation";
 import {
   NAT_PARK_CODES,
   NAT_BATTLEFIELD_CODES,
+  NAT_BATTLEFIELD_SITE_CODES,
   NAT_BATTLEFIELD_PARK_CODES,
   NAT_MILITARY_PARK_CODES,
   NAT_MONUMENT_CODES,
@@ -19,6 +20,7 @@ import {
   NAT_PRESERVES_CODES,
   NAT_WILD_SCENIC_RIVER_CODES,
   OTHER_DESIGNATION_CODES,
+  INTERNATIONAL_HISTORIC_SITE,
 } from "./parkCodes";
 import {
   GREAT_SAND_DUNES_PRESERVE,
@@ -59,7 +61,7 @@ export const PARK_INFO: ParkInfoDict = {
     formattedParks: [],
   },
   [ParkDesignation.NAT_BATTLEFIELD_SITE]: {
-    codes: ["brcr"],
+    codes:  NAT_BATTLEFIELD_SITE_CODES,
     formattedParks: [],
   },
   [ParkDesignation.NAT_MILITARY_PARK]: {
@@ -128,7 +130,7 @@ export const PARK_INFO: ParkInfoDict = {
     formattedParks: [],
   },
   [ParkDesignation.INTERNATIONAL_HISTORIC_SITE]: {
-    codes: ["sacr"],
+    codes: INTERNATIONAL_HISTORIC_SITE,
     formattedParks: [],
   },
 };
