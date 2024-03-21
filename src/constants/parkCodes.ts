@@ -91,7 +91,7 @@ export const NAT_PARK_CODES = [
   "zion",
 ];
 
-export const NAT_HISTORIC_CODES = [
+export const NAT_HISTORIC_PARK_CODES = [
   "abli",
   "adam",
   "apco",
@@ -137,6 +137,7 @@ export const NAT_HISTORIC_CODES = [
   "paal",
   "pagr",
   "peco",
+  "pull",
   "puho",
   "reer",
   "rori",
@@ -158,6 +159,7 @@ export const NAT_HISTORIC_CODES = [
 
 export const NAT_HISTORIC_SITE_CODES = [
   "alpo",
+  "amch",
   "ande",
   "anjo",
   "beol",
@@ -207,6 +209,7 @@ export const NAT_HISTORIC_SITE_CODES = [
   "mamc",
   "miin",
   "mimi",
+  "neph",
   "nico",
   "nisi",
   "wicl",
@@ -364,7 +367,7 @@ export const NAT_SEASHORE_CODES = [
   "pore",
 ];
 
-export const NAT_SCENIC_TRAIL_CODES = ["appa", "natt", "pohe"];
+export const NAT_SCENIC_TRAIL_CODES = ["appa", "iatr", "natt", "neen", "noco", "pohe"];
 
 export const NAT_RIVER_CODES = ["biso", "buff", "mnrr", "ozar"];
 
