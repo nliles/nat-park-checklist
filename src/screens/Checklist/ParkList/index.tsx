@@ -26,7 +26,10 @@ const ParkList = ({
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
+    watch
   } = useFormContext();
+
+  const formData = watch('parkData');
 
   return (
     <div className={styles.container}>
@@ -37,12 +40,14 @@ const ParkList = ({
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {
+              // TODO: Fix park designations
+              const fieldName = formData[camelCase(park.designation)] ? camelCase(park.designation) : 'otherDesignation'
               return (
                 <Checkbox
                   key={park.fullName}
                   label={`${i + 1}. ${park.fullName}`}
                   id={park.id}
-                  name={`parkData.${camelCase(park.designation)}`}
+                  name={`parkData.${fieldName}`}
                 />
               );
             })}

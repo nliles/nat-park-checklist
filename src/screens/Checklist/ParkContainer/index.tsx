@@ -12,13 +12,13 @@ import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";
 import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
-import { ParkDesignation, ParkDesignationType } from "enum/ParkDesignation";
+import { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
-  const designation = query.get("designation") || ParkDesignation.NAT_PARK;;
+  const designation = query.get("designation");
   const selectedDropdownItem = designation ? camelCase(designation) as ParkDesignationType : undefined;
   const { isLoading, parks } = useParks(selectedDropdownItem);
   const {
@@ -33,7 +33,6 @@ const ParkContainer = () => {
       parkData: selectedParks,
     },
   });
-
 
   const {
     watch,
