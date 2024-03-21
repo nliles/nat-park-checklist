@@ -1,5 +1,5 @@
 import startCase from "lodash/startCase";
-import { Parks } from "types";
+import { SelectedParks } from "types";
 import ParkDesignation from "enum/ParkDesignation";
 import getParkTotal from "helpers/getParkTotal";
 import styles from "./index.module.scss";
@@ -7,7 +7,7 @@ import styles from "./index.module.scss";
 type DataTableProps = {
   count: number;
   total: number;
-  items: Parks;
+  items: SelectedParks;
 };
 
 const DataTable = ({ count, total, items }: DataTableProps) => {

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from "react";
-import { Parks } from "types";
+import { SelectedParks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
@@ -45,7 +45,7 @@ const ParkContainer = () => {
     reset({ parkData: selectedParks });
   }, [selectedParks, reset]);
 
-  const formData: Parks = watch('parkData');
+  const formData: SelectedParks = watch('parkData');
 
   const handleOnSubmit = async () => {
     try { 
