@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
 import toast from "react-hot-toast";
 import { loadState, saveState } from "storage/sessionStorage";
-import { Parks } from "types";
+import { SelectedParks } from "types";
 import copy from "./copy";
 
-export const defaultSelectedValues: Parks = {
+export const defaultSelectedValues: SelectedParks = {
   nationalPark: [],
   nationalBattlefield: [],
   nationalBattlefieldPark: [],
@@ -29,7 +29,7 @@ export const defaultSelectedValues: Parks = {
 }
 
 function useSelectedParks(isLoggedIn: boolean) {
-  const [selectedParks, setSelectedParks] = useState<Parks>(defaultSelectedValues);
+  const [selectedParks, setSelectedParks] = useState<SelectedParks>(defaultSelectedValues);
   const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 
