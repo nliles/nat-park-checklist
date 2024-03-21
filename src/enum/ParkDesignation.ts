@@ -4,7 +4,7 @@ export enum ParkDesignation {
   NAT_BATTLEFIELD_PARK = "nationalBattlefieldPark",
   NAT_BATTLEFIELD_SITE = "nationalBattlefieldSite",
   NAT_MILITARY_PARK = "nationalMilitaryPark",
-  NAT_HISTORIC_PARK = "nationalHistoricPark",
+  NAT_HISTORICAL_PARK = "nationalHistoricalPark",
   NAT_HISTORIC_SITE = "nationalHistoricSite",
   NAT_LAKESHORE = "nationalLakeshore",
   NAT_MEMORIAL = "nationalMemorial",

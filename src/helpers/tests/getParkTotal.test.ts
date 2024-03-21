@@ -8,7 +8,7 @@ describe("getParkTotal", () => {
     [ParkDesignation.NAT_BATTLEFIELD_PARK, 4],
     [ParkDesignation.NAT_BATTLEFIELD_SITE, 1],
     [ParkDesignation.NAT_MILITARY_PARK, 9],
-    [ParkDesignation.NAT_HISTORIC_PARK, 62],
+    [ParkDesignation.NAT_HISTORICAL_PARK, 62],
     [ParkDesignation.NAT_HISTORIC_SITE, 73],
     [ParkDesignation.NAT_LAKESHORE, 3],
     [ParkDesignation.NAT_MEMORIAL, 31],
