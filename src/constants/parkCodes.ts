@@ -139,7 +139,6 @@ export const NAT_HISTORIC_PARK_CODES = [
   "paal",
   "pagr",
   "peco",
-  "pull",
   "puho",
   "pull",
   "reer",
