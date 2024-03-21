@@ -41,6 +41,10 @@ const ParkList = ({
           {parks &&
             parks.map((park, i) => {
               // TODO: Fix park designations
+              const foundDestination = formData[camelCase(park.designation)];
+              if (!foundDestination) {
+                console.log(`${park.name} ===> ${park.designation}`)
+              }
               const fieldName = formData[camelCase(park.designation)] ? camelCase(park.designation) : 'otherDesignation'
               return (
                 <Checkbox
