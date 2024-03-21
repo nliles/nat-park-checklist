@@ -1,6 +1,6 @@
 import { TOTAL_UNITS } from "../../../constants";
 import { Park } from "types/park";
-import { Parks } from "types";
+import { SelectedParks } from "types";
 import Header from "components/Header";
 import Map from "components/Map";
 import CircularProgressBar from "components/ui/CircularProgressBar";
@@ -10,7 +10,7 @@ import Count from "screens/Stats/StatsPage/Count";
 import styles from "./index.module.scss";
 
 type StatsPageProps = {
-  selected: Parks;
+  selected: SelectedParks;
   parks: Park[];
 };
 

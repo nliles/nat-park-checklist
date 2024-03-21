@@ -2,11 +2,11 @@ import ParkDesignation from "enum/ParkDesignation";
 import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import getParkTotal from "helpers/getParkTotal";
-import { Parks } from "types";
+import { SelectedParks } from "types";
 import styles from "./index.module.scss";
 
 type DataBarsProps = {
-  items: Parks;
+  items: SelectedParks;
 };
 
 const DataBars = ({ items }: DataBarsProps) => {
