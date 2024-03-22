@@ -1,4 +1,4 @@
-// Sequoia and Kings Canyon Nat parks are managed together and only one unit is returned by the NPS API:
+// Sequoia and Kings Canyon Nat parks are managed together. Only one unit is returned by the NPS API
 const SEQUOIA_KINGS_BASE = {
   parkCode: "seki",
   states: "CA",
@@ -37,7 +37,7 @@ export const KINGS_CANYON_NAT_PARK = {
   longitude: "-118.963389",
 };
 
-// The following parks are not returned by the NPS API:
+// The following parks are not returned by the NPS API
 export const JDR_MEMORIAL_PARKWAY = {
   id: "jdr-memorial-parkway",
   images: [
