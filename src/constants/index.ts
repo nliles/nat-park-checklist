@@ -23,7 +23,6 @@ import {
   INTERNATIONAL_HISTORIC_SITE,
 } from "./parkCodes";
 import {
-  GLACIER_BAY_NAT_PARK,
   GREAT_SAND_DUNES_PRESERVE,
   GLACIER_BAY_PRESERVE,
   GATES_OF_ARCTIC_PRESERVE,
@@ -54,8 +53,8 @@ type ParkInfoDict = {
 export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
-    formattedParks: [GLACIER_BAY_NAT_PARK, KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
-    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "grsa", "katm", "lacl", "wrst"], designation: 'National Park' }]
+    formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
+    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Park' }]
   },
   [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,

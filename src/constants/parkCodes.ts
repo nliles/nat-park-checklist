@@ -51,6 +51,7 @@ export const NAT_PARK_CODES = [
   "jeff",
   "gaar",
   "glac",
+  "glba",
   "grca",
   "grte",
   "grba",

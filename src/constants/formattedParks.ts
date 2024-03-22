@@ -1,4 +1,4 @@
-
+// Sequoia and Kings Canyon Nat parks are managed together and are returned
 const SEQUOIA_KINGS_BASE = {
   parkCode: "seki",
   states: "CA",
