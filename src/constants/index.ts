@@ -38,8 +38,8 @@ export type ParkOverride = { parkCodes: string[]; designation: string; needsId?:
 
 type ParkInfo = {
   codes: string[];
-  formattedParks: Park[];
-  parkOverrides: ParkOverride[];
+  formattedParks?: Park[];
+  parkOverrides?: ParkOverride[];
 };
 
 type ParkInfoDict = {
@@ -54,38 +54,25 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_BATTLEFIELD_PARK]: {
     codes: NAT_BATTLEFIELD_PARK_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_BATTLEFIELD_SITE]: {
     codes: NAT_BATTLEFIELD_SITE_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_MILITARY_PARK]: {
     codes: NAT_MILITARY_PARK_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_HISTORICAL_PARK]: {
     codes: NAT_HISTORICAL_PARK_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_HISTORIC_SITE]: {
     codes: NAT_HISTORIC_SITE_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_MEMORIAL]: {
     codes: NAT_MEMORIAL_CODES,
     formattedParks: [FORT_CAROLINE_NAT_MEMORIAL],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_MONUMENT]: {
     codes: NAT_MONUMENT_CODES,
@@ -94,58 +81,39 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_SEASHORE]: {
     codes: NAT_SEASHORE_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_SCENIC_TRAIL]: {
     codes: NAT_SCENIC_TRAIL_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_REC_AREA]: {
     codes: NAT_REC_AREAS_CODES,
     formattedParks: [LAKE_CHELAN_NRA, LAKE_ROSS_NRA],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_RIVER]: {
     codes: NAT_RIVER_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_LAKESHORE]: {
     codes: NAT_LAKESHORE_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_PARKWAY]: {
     codes: NAT_PARKWAY_CODES,
     formattedParks: [JDR_MEMORIAL_PARKWAY],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_RESERVES]: {
     codes: NAT_RESERVES_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.NAT_PRESERVES]: {
     codes: NAT_PRESERVES_CODES,
-    formattedParks: [],
     parkOverrides: [{ parkCodes: ["ania", "crmo", "dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Preserve', needsId: true }]
   },
   [ParkDesignation.NAT_WILD_AND_SCENIC_RIVER]: {
     codes: NAT_WILD_SCENIC_RIVER_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.OTHER_DESIGNATION]: {
     codes: OTHER_DESIGNATION_CODES,
-    formattedParks: [],
-    parkOverrides: [],
   },
   [ParkDesignation.INTERNATIONAL_HISTORIC_SITE]: {
     codes: INTERNATIONAL_HISTORIC_SITE,
-    formattedParks: [],
-    parkOverrides: [],
   },
 };
 
@@ -154,15 +122,15 @@ export const ALL_CODES = [
 ].flat(1);
 
 export const ALL_FORMATTED = [
-  ...Object.entries(PARK_INFO).map((obj) => obj[1].formattedParks),
+  ...Object.entries(PARK_INFO).map((obj) => obj[1].formattedParks || []),
 ].flat(1);
 
-export const ALL_UPDATED = [
-  ...Object.entries(PARK_INFO).map((obj) => obj[1].parkOverrides),
+export const ALL_OVERRIDES = [
+  ...Object.entries(PARK_INFO).map((obj) => obj[1].parkOverrides || []),
 ].flat(1);
 
 export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
-  (acc, element) => acc + element.codes.length + element.formattedParks.length,
+  (acc, element) => acc + element.codes.length + (element.formattedParks || []).length,
   0
 );
 
