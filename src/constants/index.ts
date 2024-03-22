@@ -90,7 +90,7 @@ export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_MONUMENT]: {
     codes: NAT_MONUMENT_CODES,
     formattedParks: [HOHOKAM_NAT_MONUMENT],
-    parkOverrides: [],
+    parkOverrides: [{ parkCodes: ["ania", "crmo"], designation: 'National Monument' }]
   },
   [ParkDesignation.NAT_SEASHORE]: {
     codes: NAT_SEASHORE_CODES,
@@ -130,7 +130,7 @@ export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PRESERVES]: {
     codes: NAT_PRESERVES_CODES,
     formattedParks: [],
-    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Preserves', needsId: true }]
+    parkOverrides: [{ parkCodes: ["ania", "crmo", "dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Preserve', needsId: true }]
   },
   [ParkDesignation.NAT_WILD_AND_SCENIC_RIVER]: {
     codes: NAT_WILD_SCENIC_RIVER_CODES,

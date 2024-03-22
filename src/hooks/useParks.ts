@@ -17,7 +17,7 @@ function useParks(selectedItem?: ParkDesignationType) {
       const codes = selectedItem ? PARK_INFO[selectedItem as ParkDesignationType].codes : ALL_CODES;
       setIsLoading(true);
       try {
-        let data = loadState(selectedItem || "allDesignations");
+        let data = loadState(selectedItem);
         if (!data.length) {
           const res = await fetch(
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
@@ -25,7 +25,7 @@ function useParks(selectedItem?: ParkDesignationType) {
           const json = await res.json();
 
           data = sortParks(formatParks(json.data, selectedItem));
-          saveState(selectedItem || "allDesignations", JSON.stringify(data));
+          saveState(JSON.stringify(data), selectedItem);
         }
         setParks(data);
       } catch (e) {
