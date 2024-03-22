@@ -6,7 +6,7 @@ import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
-import getParkDesignation from 'helpers/getParkDesignation';
+import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./index.module.scss";
 
 type ListProps = {
@@ -21,7 +21,9 @@ const ParkList = ({
   handleOnSubmit,
 }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
-  const headerCopy = selectedDropdownItem ? startCase(selectedDropdownItem) : 'National Park Unit';
+  const headerCopy = selectedDropdownItem
+    ? startCase(selectedDropdownItem)
+    : "National Park Unit";
 
   const {
     handleSubmit,
@@ -37,7 +39,10 @@ const ParkList = ({
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {
-              const formattedName = getParkDesignation(park.designation, park.parkCode);
+              const formattedName = getParkDesignation(
+                park.designation,
+                park.parkCode
+              );
               return (
                 <Checkbox
                   key={park.fullName}

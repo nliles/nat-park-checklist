@@ -34,32 +34,43 @@ const ParkView = ({
 }: ParkViewProps) => {
   const { watch, setValue } = useFormContext();
 
-  const formData = watch('parkData');
-  const formatListItem = (item: string) => `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`
+  const formData = watch("parkData");
+  const formatListItem = (item: string) =>
+    `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   const allDesignationTotal = Object.values(formData).flat(1).length;
   const dropdownItem = startCase(selectedDropdownItem);
-  const headerTitle = selectedDropdownItem ? dropdownItem : 'National Park Unit';
+  const headerTitle = selectedDropdownItem
+    ? dropdownItem
+    : "National Park Unit";
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   const handleClick = (id: string, designation: string) => {
     const formattedDesignation = camelCase(designation);
-    const formattedName = LIST_OPTIONS.includes(formattedDesignation as ParkDesignation) ? formattedDesignation : ParkDesignation.OTHER_DESIGNATION;
+    const formattedName = LIST_OPTIONS.includes(
+      formattedDesignation as ParkDesignation
+    )
+      ? formattedDesignation
+      : ParkDesignation.OTHER_DESIGNATION;
     let designationArray = formData[formattedName].slice();
     if (designationArray.includes(id)) {
-      designationArray = designationArray.filter((parkId: string) => parkId !== id);
+      designationArray = designationArray.filter(
+        (parkId: string) => parkId !== id
+      );
     } else {
       designationArray.push(id);
     }
-    setValue(`parkData.${formattedDesignation}`, designationArray, { shouldDirty: true });
+    setValue(`parkData.${formattedDesignation}`, designationArray, {
+      shouldDirty: true,
+    });
   };
 
   const totalProps = {
-    count: selectedDropdownItem ? (formData[selectedDropdownItem]?.length || 0) : allDesignationTotal,
+    count: selectedDropdownItem
+      ? formData[selectedDropdownItem]?.length || 0
+      : allDesignationTotal,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
-
-  
 
   return (
     <PageWrapper count={allDesignationTotal}>
