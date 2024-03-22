@@ -10,6 +10,7 @@ import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
 import Dropdown from "components/ui/Dropdown";
 import Header from "components/Header";
+import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
@@ -44,13 +45,8 @@ const ParkView = ({
     : "National Park Unit";
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
-  const handleClick = (id: string, designation: string) => {
-    const formattedDesignation = camelCase(designation);
-    const formattedName = LIST_OPTIONS.includes(
-      formattedDesignation as ParkDesignation
-    )
-      ? formattedDesignation
-      : ParkDesignation.OTHER_DESIGNATION;
+  const handleClick = (id: string, parkCode: string, designation: string) => {
+    const formattedName = getParkDesignation(designation, parkCode);
     let designationArray = formData[formattedName].slice();
     if (designationArray.includes(id)) {
       designationArray = designationArray.filter(
@@ -59,7 +55,7 @@ const ParkView = ({
     } else {
       designationArray.push(id);
     }
-    setValue(`parkData.${formattedDesignation}`, designationArray, {
+    setValue(`parkData.${formattedName}`, designationArray, {
       shouldDirty: true,
     });
   };
