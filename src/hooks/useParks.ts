@@ -14,7 +14,9 @@ function useParks(selectedItem?: ParkDesignationType) {
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
     const fetchParks = async () => {
-      const codes = selectedItem ? PARK_INFO[selectedItem as ParkDesignationType].codes : ALL_CODES;
+      const codes = selectedItem
+        ? PARK_INFO[selectedItem as ParkDesignationType].codes
+        : ALL_CODES;
       setIsLoading(true);
       try {
         let data = loadState(selectedItem);

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 // A custom hook that builds on useLocation to parse
 // the query string for you.
@@ -9,4 +9,4 @@ function useQuery() {
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
-export default useQuery
+export default useQuery;
