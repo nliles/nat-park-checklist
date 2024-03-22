@@ -13,6 +13,7 @@ export type Park = {
   longitude: string;
   addresses?: Address[];
   fullName: string;
+  parkCode: string;
   designation: string;
   images: Image[];
   name: string;
