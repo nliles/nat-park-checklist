@@ -69,6 +69,7 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_HISTORIC_SITE]: {
     codes: NAT_HISTORIC_SITE_CODES,
+    parkOverrides: [{ parkCodes: ["foth", "paav"], designation: 'National Historic Site' }]
   },
   [ParkDesignation.NAT_MEMORIAL]: {
     codes: NAT_MEMORIAL_CODES,
