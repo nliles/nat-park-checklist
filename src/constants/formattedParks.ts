@@ -1,4 +1,4 @@
-// Sequoia and Kings Canyon Nat parks are managed together and are returned
+// Sequoia and Kings Canyon Nat parks are managed together and only one unit is returned by the NPS API:
 const SEQUOIA_KINGS_BASE = {
   parkCode: "seki",
   states: "CA",
