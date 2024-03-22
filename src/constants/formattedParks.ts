@@ -1,3 +1,4 @@
+
 const SEQUOIA_KINGS_BASE = {
   parkCode: "seki",
   states: "CA",
@@ -36,32 +37,33 @@ export const KINGS_CANYON_NAT_PARK = {
   longitude: "-118.963389",
 };
 
-// National parks and preserves => split out
+// The following parks are jointly managed and return one entry for both park and preserve
+export const DENALI_NATIONAL_PRESERVE = {
+  id: "denali-national-preserve",
+  name: "Denali",
+  states: "AK",
+  parkCode: "dena",
+  latitude: "63.29777484",
+  longitude: "-151.0526568",
+  url: "https://www.nps.gov/dena/index.htm",
+  images: [
+    {
+      altText: "Three brown bears walking along a dirt road",
+      url: "https://www.nps.gov/common/uploads/structured_data/FC8ECC8C-A531-46F8-0D60DF1C84105DBE.jpg",
+    },
+  ],
+  fullName: "Denali National Preserve",
+  designation: "National Preserve",
+};
 
-const GATES_OF_ARCTIC_BASE = {
+export const GATES_OF_ARCTIC_PRESERVE = {
+  id: "gates-of-arctic-preserve",
   parkCode: "gaar",
   name: "Gates Of The Arctic",
   states: "AK",
   latitude: "67.75961636",
   longitude: "-153.2917758",
   url: "https://www.nps.gov/gaar/index.htm",
-}
-
-export const GATES_OF_ARCTIC_NAT_PARK = {
-  ...GATES_OF_ARCTIC_BASE,
-  id: "BC195D18-71C8-4A99-BF8E-10BFAB849679",
-  images: [
-    {
-      altText: "Alpenglow on the granite cliffs of mountains",
-      url: "https://www.nps.gov/common/uploads/structured_data/3C7A89F4-1DD8-B71B-0B52204A2EBF61A4.jpg",
-    },
-  ],
-  fullName: "Gates of the Arctic National Park",
-  designation: "National Park",
-}
-export const GATES_OF_ARCTIC_PRESERVE = {
-  ...GATES_OF_ARCTIC_BASE,
-  id: "gates-of-arctic-preserve",
   images: [
     {
       altText: "Alpenglow on the granite cliffs of mountains",
@@ -72,25 +74,31 @@ export const GATES_OF_ARCTIC_PRESERVE = {
   designation: "National Preserve",
 };
 
-export const GREAT_SAND_DUNES_PRESERVE = {
-  id: "great-sand-dunes-nat-park",
+const GLACIER_BAY_BASE = {
+  parkCode: "glac",
+  name: "Glacier Bay",
+  states: "AK",
+  latitude: "58.80086718",
+  longitude: "-136.8407579",
+  url: "https://www.nps.gov/glba/index.htm",
+}
+
+export const GLACIER_BAY_NAT_PARK = {
+  ...GLACIER_BAY_BASE,
+  id: "2B5178C6-2446-488C-AC31-47E3CEBF7159",
   images: [
     {
-      altText: "Grasslands, large dunes, and snow-capped peaks at sunset",
-      url: "https://www.nps.gov/common/uploads/structured_data/BC4ACB4C-0A6D-0188-E9A6AA1217827461.jpg",
+      altText:
+        "Icebergs, calved from tidewater glaciers are a common sight in Glacier Bay National Park.",
+      url: "https://www.nps.gov/common/uploads/structured_data/3C790BBF-1DD8-B71B-0B0AE92D0B9C24EB.jpg",
     },
   ],
-  parkCode: "",
-  name: "Great Sand Dunes National Preserve",
-  fullName: "Great Sand Dunes National Preserve",
-  states: "CO",
-  latitude: "37.79256812",
-  longitude: "-105.5919572",
-  designation: "National Preserve",
-  url: "https://www.nps.gov/grsa/index.htm",
+  fullName: "Glacier Bay National Park",
+  designation: "National Park",
 };
 
 export const GLACIER_BAY_PRESERVE = {
+  ...GLACIER_BAY_BASE,
   id: "glacier-bay-preserve",
   images: [
     {
@@ -99,48 +107,42 @@ export const GLACIER_BAY_PRESERVE = {
       url: "https://www.nps.gov/common/uploads/structured_data/3C790BBF-1DD8-B71B-0B0AE92D0B9C24EB.jpg",
     },
   ],
-  parkCode: "",
-  name: "Glacier Bay National Preserve",
   fullName: "Glacier Bay National Preserve",
-  states: "AK",
-  latitude: "58.80086718",
-  longitude: "-136.8407579",
   designation: "National Preserve",
-  url: "https://www.nps.gov/glba/index.htm",
 };
 
-const DENALI_BASE = {
-  name: "Denali",
-  states: "AK",
-  parkCode: "dena",
-  latitude: "63.29777484",
-  longitude: "-151.0526568",
-  url: "https://www.nps.gov/dena/index.htm",
+const GREAT_SAND_DUNES_BASE = {
+  parkCode: "grsa",
+  name: "Great Sand Dunes",
+  states: "CO",
+  latitude: "37.79256812",
+  longitude: "-105.5919572",
+  url: "https://www.nps.gov/grsa/index.htm",
 }
 
-export const DENALI_NATIONAL_PARK = {
-  ...DENALI_BASE,
-  id: "C0BF2A42-E353-4FAE-B4C4-AA0676B58100",
+export const GREAT_SAND_DUNES_NAT_PARK = {
+  ...GREAT_SAND_DUNES_BASE,
+  id: "461D40CC-4379-4C1B-ADB8-3563147F61A1",
   images: [
     {
-      altText: "Three brown bears walking along a dirt road",
-      url: "https://www.nps.gov/common/uploads/structured_data/FC8ECC8C-A531-46F8-0D60DF1C84105DBE.jpg",
+      altText: "Grasslands, large dunes, and snow-capped peaks at sunset",
+      url: "https://www.nps.gov/common/uploads/structured_data/BC4ACB4C-0A6D-0188-E9A6AA1217827461.jpg",
     },
   ],
-  fullName: "Denali National Park",
+  fullName: "Great Sand Dunes National Park",
   designation: "National Park",
 };
 
-export const DENALI_NATIONAL_PRESERVE = {
-  ...DENALI_BASE,
-  id: "denali-national-preserve",
+export const GREAT_SAND_DUNES_PRESERVE = {
+  ...GREAT_SAND_DUNES_BASE,
+  id: "great-sand-dunes-nat-park",
   images: [
     {
-      altText: "Three brown bears walking along a dirt road",
-      url: "https://www.nps.gov/common/uploads/structured_data/FC8ECC8C-A531-46F8-0D60DF1C84105DBE.jpg",
+      altText: "Grasslands, large dunes, and snow-capped peaks at sunset",
+      url: "https://www.nps.gov/common/uploads/structured_data/BC4ACB4C-0A6D-0188-E9A6AA1217827461.jpg",
     },
   ],
-  fullName: "Denali National Preserve",
+  fullName: "Great Sand Dunes National Preserve",
   designation: "National Preserve",
 };
 
