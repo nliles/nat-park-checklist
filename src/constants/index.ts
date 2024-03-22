@@ -23,11 +23,7 @@ import {
   INTERNATIONAL_HISTORIC_SITE,
 } from "./parkCodes";
 import {
-  GREAT_SAND_DUNES_PRESERVE,
-  GLACIER_BAY_PRESERVE,
-  GATES_OF_ARCTIC_PRESERVE,
   KINGS_CANYON_NAT_PARK,
-  DENALI_NATIONAL_PRESERVE,
   FORT_CAROLINE_NAT_MEMORIAL,
   JDR_MEMORIAL_PARKWAY,
   LAKE_ROSS_NRA,
@@ -38,7 +34,7 @@ import {
 
 export const LIST_OPTIONS: ParkDesignation[] = [...Object.values(ParkDesignation)];
 
-export type ParkOverride = { parkCodes: string[]; designation: string };
+export type ParkOverride = { parkCodes: string[]; designation: string; needsId?: boolean };
 
 type ParkInfo = {
   codes: string[];
@@ -133,13 +129,8 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_PRESERVES]: {
     codes: NAT_PRESERVES_CODES,
-    formattedParks: [
-      DENALI_NATIONAL_PRESERVE,
-      GATES_OF_ARCTIC_PRESERVE,
-      GLACIER_BAY_PRESERVE,
-      GREAT_SAND_DUNES_PRESERVE,
-    ],
-    parkOverrides: [],
+    formattedParks: [],
+    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Preserves', needsId: true }]
   },
   [ParkDesignation.NAT_WILD_AND_SCENIC_RIVER]: {
     codes: NAT_WILD_SCENIC_RIVER_CODES,
