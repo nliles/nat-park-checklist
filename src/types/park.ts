@@ -1,5 +1,5 @@
 type Address = {
-  stateCode: string;
+  stateparkCode: string;
 };
 
 type Image = {
@@ -13,6 +13,7 @@ export type Park = {
   longitude: string;
   addresses?: Address[];
   fullName: string;
+  parkCode: string;
   designation: string;
   images: Image[];
   name: string;

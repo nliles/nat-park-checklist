@@ -23,6 +23,8 @@ import {
   INTERNATIONAL_HISTORIC_SITE,
 } from "./parkCodes";
 import {
+  DENALI_NATIONAL_PARK,
+  GATES_OF_ARCTIC_NAT_PARK,
   GREAT_SAND_DUNES_PRESERVE,
   GLACIER_BAY_PRESERVE,
   GATES_OF_ARCTIC_PRESERVE,
@@ -50,7 +52,7 @@ type ParkInfoDict = {
 export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
-    formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
+    formattedParks: [DENALI_NATIONAL_PARK, GATES_OF_ARCTIC_NAT_PARK, KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
   },
   [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,
