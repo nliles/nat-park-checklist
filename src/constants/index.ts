@@ -50,7 +50,7 @@ export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
     formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
-    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Park' }]
+    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "redw", "wrst"], designation: 'National Park' }]
   },
   [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,
