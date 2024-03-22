@@ -1,5 +1,5 @@
 type Address = {
-  stateparkCode: string;
+  stateCode: string;
 };
 
 type Image = {

@@ -12,7 +12,6 @@ import copy from "./copy";
 function useParks(selectedItem?: ParkDesignationType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
-  // duplicates: ['ania', 'crmo', 'katm', 'lacl', 'mnrr', 'pull', 'wrst']
   useEffect(() => {
     const fetchParks = async () => {
       const codes = selectedItem ? PARK_INFO[selectedItem as ParkDesignationType].codes : ALL_CODES;
@@ -24,7 +23,7 @@ function useParks(selectedItem?: ParkDesignationType) {
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
-          console.log(json.data)
+
           data = sortParks(formatParks(json.data, selectedItem));
           saveState(selectedItem || "allDesignations", JSON.stringify(data));
         }
