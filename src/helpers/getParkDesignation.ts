@@ -17,6 +17,7 @@ const getParkDesignation = (
           return parkKey as ParkDesignation;
         }
       }
+      return ParkDesignation.OTHER_DESIGNATION;
     }) || ParkDesignation.OTHER_DESIGNATION
   );
 };
