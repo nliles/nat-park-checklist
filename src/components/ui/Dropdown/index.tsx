@@ -22,7 +22,7 @@ const Dropdown = ({
   formatListItem = (item: string) => item,
   formatSelectedItem = (item: string) => item,
 }: DropdownProps) => {
-  const { 
+  const {
     getToggleButtonProps,
     getMenuProps,
     getItemProps,
@@ -35,12 +35,12 @@ const Dropdown = ({
     items: items,
     onSelectedItemChange: ({ selectedItem }) => {
       handleClick(selectedItem);
-    }
+    },
   });
 
   const clearItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation();
-    selectItem('');
+    selectItem("");
   };
 
   return (
@@ -62,7 +62,7 @@ const Dropdown = ({
           Select a designation
         </label>
         <span className={styles.title}>
-          {selectedItem ? formatSelectedItem(selectedItem) : ''}
+          {selectedItem ? formatSelectedItem(selectedItem) : ""}
         </span>
         <div className={styles.iconContainer}>
           {selectedItem && (

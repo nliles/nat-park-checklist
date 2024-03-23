@@ -32,9 +32,15 @@ import {
   SEQUOIA_NAT_PARK,
 } from "./formattedParks";
 
-export const LIST_OPTIONS: ParkDesignation[] = [...Object.values(ParkDesignation)];
+export const LIST_OPTIONS: ParkDesignation[] = [
+  ...Object.values(ParkDesignation),
+];
 
-export type ParkOverride = { parkCodes: string[]; designation: string; needsId?: boolean };
+export type ParkOverride = {
+  parkCodes: string[];
+  designation: string;
+  needsId?: boolean;
+};
 
 type ParkInfo = {
   codes: string[];
@@ -50,7 +56,22 @@ export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_PARK]: {
     codes: NAT_PARK_CODES,
     formattedParks: [KINGS_CANYON_NAT_PARK, SEQUOIA_NAT_PARK],
-    parkOverrides: [{ parkCodes: ["dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Park' }]
+    parkOverrides: [
+      {
+        parkCodes: [
+          "dena",
+          "gaar",
+          "glac",
+          "glba",
+          "grsa",
+          "katm",
+          "lacl",
+          "redw",
+          "wrst",
+        ],
+        designation: "National Park",
+      },
+    ],
   },
   [ParkDesignation.NAT_BATTLEFIELD]: {
     codes: NAT_BATTLEFIELD_CODES,
@@ -69,6 +90,9 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_HISTORIC_SITE]: {
     codes: NAT_HISTORIC_SITE_CODES,
+    parkOverrides: [
+      { parkCodes: ["foth", "paav"], designation: "National Historic Site" },
+    ],
   },
   [ParkDesignation.NAT_MEMORIAL]: {
     codes: NAT_MEMORIAL_CODES,
@@ -77,7 +101,9 @@ export const PARK_INFO: ParkInfoDict = {
   [ParkDesignation.NAT_MONUMENT]: {
     codes: NAT_MONUMENT_CODES,
     formattedParks: [HOHOKAM_NAT_MONUMENT],
-    parkOverrides: [{ parkCodes: ["ania", "crmo"], designation: 'National Monument' }]
+    parkOverrides: [
+      { parkCodes: ["ania", "crmo"], designation: "National Monument" },
+    ],
   },
   [ParkDesignation.NAT_SEASHORE]: {
     codes: NAT_SEASHORE_CODES,
@@ -104,7 +130,24 @@ export const PARK_INFO: ParkInfoDict = {
   },
   [ParkDesignation.NAT_PRESERVES]: {
     codes: NAT_PRESERVES_CODES,
-    parkOverrides: [{ parkCodes: ["ania", "crmo", "dena", "gaar", "glac", "glba", "grsa", "katm", "lacl", "wrst"], designation: 'National Preserve', needsId: true }]
+    parkOverrides: [
+      {
+        parkCodes: [
+          "ania",
+          "crmo",
+          "dena",
+          "gaar",
+          "glac",
+          "glba",
+          "grsa",
+          "katm",
+          "lacl",
+          "wrst",
+        ],
+        designation: "National Preserve",
+        needsId: true,
+      },
+    ],
   },
   [ParkDesignation.NAT_WILD_AND_SCENIC_RIVER]: {
     codes: NAT_WILD_SCENIC_RIVER_CODES,
@@ -130,7 +173,8 @@ export const ALL_OVERRIDES = [
 ].flat(1);
 
 export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
-  (acc, element) => acc + element.codes.length + (element.formattedParks || []).length,
+  (acc, element) =>
+    acc + element.codes.length + (element.formattedParks || []).length,
   0
 );
 

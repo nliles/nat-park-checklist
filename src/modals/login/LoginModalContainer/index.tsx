@@ -20,10 +20,10 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
   const toggleRegistration = () => {
     setShowRegistration((prevVal) => !prevVal);
     setFormError(undefined);
-  }
+  };
 
   const handleSuccess = (userId: string) => {
-    localStorage.setItem("user", userId)
+    localStorage.setItem("user", userId);
     dispatch(loginSuccess(userId));
     onClose();
   };
@@ -38,7 +38,7 @@ const LoginModalContainer = ({ onClose }: LoginModalContainerProps) => {
         if (showRegistration) {
           const { user } = await register(formattedValues);
           handleSuccess(user.id);
-          toast.success(copy.registrationSuccess)
+          toast.success(copy.registrationSuccess);
         } else {
           const { user } = await login(formattedValues);
           handleSuccess(user.id);

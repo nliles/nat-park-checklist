@@ -20,4 +20,3 @@ export type Park = {
   states: string;
   url: string;
 };
-

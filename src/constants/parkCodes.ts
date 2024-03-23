@@ -378,7 +378,7 @@ export const NAT_SCENIC_TRAIL_CODES = [
   "pohe",
 ];
 
-export const NAT_RIVER_CODES = ["biso", "buff", "mnrr", "ozar"];
+export const NAT_RIVER_CODES = ["biso", "buff", "miss", "ozar"];
 
 export const NAT_LAKESHORE_CODES = ["apis", "piro", "slbe"];
 

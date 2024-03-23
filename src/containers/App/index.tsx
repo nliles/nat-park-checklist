@@ -10,21 +10,21 @@ import "./index.scss";
 const App = () => {
   return (
     <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<ParkContainer />} />
-            <Route
-              path="/stats"
-              element={
-                <ProtectedRoute>
-                  <StatsContainer />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <div id="modal-root" />
-        </BrowserRouter>
-        <ToasterAlert />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ParkContainer />} />
+          <Route
+            path="/stats"
+            element={
+              <ProtectedRoute>
+                <StatsContainer />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        <div id="modal-root" />
+      </BrowserRouter>
+      <ToasterAlert />
     </Provider>
   );
 };

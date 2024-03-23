@@ -23,7 +23,7 @@ function useMap(
   parks: Park[],
   selectedParks: string[],
   showTree: boolean,
-  handleClick?: (id: string, designation: string) => void
+  handleClick?: (id: string, parkCode: string, designation: string) => void
 ) {
   useEffect(() => {
     const drawMap = () => {
@@ -135,7 +135,7 @@ function useMap(
             .on("click", (e: Event, d: Park) => {
               e.preventDefault();
               if (handleClick) {
-                handleClick(d.id, d.designation);
+                handleClick(d.id, d.parkCode, d.designation);
               }
             });
 

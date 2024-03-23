@@ -11,7 +11,7 @@ type MapProps = {
   showTree?: boolean;
   showBorder?: boolean;
   defaultWidth?: number;
-  handleClick?: (id: string, designation: string) => void;
+  handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
 
 const Map = ({

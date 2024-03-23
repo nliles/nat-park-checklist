@@ -4,7 +4,7 @@ const SEQUOIA_KINGS_BASE = {
   states: "CA",
   url: "https://www.nps.gov/seki/index.htm",
   designation: "National Park",
-}
+};
 
 export const SEQUOIA_NAT_PARK = {
   ...SEQUOIA_KINGS_BASE,

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { defaultSelectedValues } from 'hooks/useSelectedParks'
+import { defaultSelectedValues } from "hooks/useSelectedParks";
 import DataTable from ".";
 
 describe("<DataTable />", () => {

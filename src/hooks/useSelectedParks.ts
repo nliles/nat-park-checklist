@@ -26,17 +26,19 @@ export const defaultSelectedValues: SelectedParks = {
   nationalWildAndScenicRiver: [],
   internationalHistoricSite: [],
   otherDesignation: [],
-}
+};
 
 function useSelectedParks(isLoggedIn: boolean) {
-  const [selectedParks, setSelectedParks] = useState<SelectedParks>(defaultSelectedValues);
+  const [selectedParks, setSelectedParks] = useState<SelectedParks>(
+    defaultSelectedValues
+  );
   const [isLoading, setIsLoading] = useState(false);
   const storageKey = "selectedParks";
 
   useEffect(() => {
     const fetchParks = async () => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         let data = loadState(storageKey);
         if (!data.length) {
           const { parks } = await getParks();
@@ -49,7 +51,7 @@ function useSelectedParks(isLoggedIn: boolean) {
           toast.error(copy.selectedParksError);
         }
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
     if (isLoggedIn) {

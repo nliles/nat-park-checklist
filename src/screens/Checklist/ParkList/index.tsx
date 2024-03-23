@@ -1,15 +1,13 @@
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
-import camelCase from "lodash/camelCase";
 import { Park } from "types/park";
 import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
-import { LIST_OPTIONS } from "../../../constants";
+import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./index.module.scss";
-import ParkDesignation from "enum/ParkDesignation";
 
 type ListProps = {
   parks: Park[];
@@ -23,7 +21,9 @@ const ParkList = ({
   handleOnSubmit,
 }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
-  const headerCopy = selectedDropdownItem ? startCase(selectedDropdownItem) : 'National Park Unit';
+  const headerCopy = selectedDropdownItem
+    ? startCase(selectedDropdownItem)
+    : "National Park Unit";
 
   const {
     handleSubmit,
@@ -39,8 +39,10 @@ const ParkList = ({
         <div className={styles.listContainer}>
           {parks &&
             parks.map((park, i) => {
-              const formattedDesignation = camelCase(park.designation)
-              const formattedName = LIST_OPTIONS.includes(formattedDesignation as ParkDesignation) ? formattedDesignation : ParkDesignation.OTHER_DESIGNATION;
+              const formattedName = getParkDesignation(
+                park.designation,
+                park.parkCode
+              );
               return (
                 <Checkbox
                   key={park.fullName}

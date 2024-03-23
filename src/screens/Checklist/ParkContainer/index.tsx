@@ -19,7 +19,9 @@ const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation");
-  const selectedDropdownItem = designation ? camelCase(designation) as ParkDesignationType : undefined;
+  const selectedDropdownItem = designation
+    ? (camelCase(designation) as ParkDesignationType)
+    : undefined;
   const { isLoading, parks } = useParks(selectedDropdownItem);
   const {
     isLoading: isSelectedLoading,
@@ -34,7 +36,6 @@ const ParkContainer = () => {
     },
   });
 
-
   const {
     watch,
     reset,
@@ -45,12 +46,15 @@ const ParkContainer = () => {
     reset({ parkData: selectedParks });
   }, [selectedParks, reset]);
 
-  const formData: SelectedParks = watch('parkData');
+  const formData: SelectedParks = watch("parkData");
 
   const handleOnSubmit = async () => {
-    try { 
+    try {
       if (selectedDropdownItem) {
-        const { parks } = await updateParkDesignation(selectedDropdownItem as ParkDesignationType, formData[selectedDropdownItem as ParkDesignationType]);
+        const { parks } = await updateParkDesignation(
+          selectedDropdownItem as ParkDesignationType,
+          formData[selectedDropdownItem as ParkDesignationType]
+        );
         setSelectedParks(parks);
       } else {
         const { parks } = await updateParks(formData);
@@ -68,7 +72,7 @@ const ParkContainer = () => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit();
     }
-    navigate(item ? `/?designation=${kebabCase(item)}` : '');
+    navigate(item ? `/?designation=${kebabCase(item)}` : "");
   };
 
   return (
