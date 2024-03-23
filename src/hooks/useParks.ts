@@ -6,28 +6,32 @@ import { PARK_INFO, ALL_CODES } from "../constants";
 import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
+import { LIST_OPTIONS } from "../constants";
 import formatParks from "helpers/formatParks";
 import copy from "./copy";
+
+const ALL_DESIGNATION_KEY = "allDesignations";
 
 function useParks(selectedItem?: ParkDesignationType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
     const fetchParks = async () => {
-      const codes = selectedItem
-        ? PARK_INFO[selectedItem as ParkDesignationType].codes
-        : ALL_CODES;
+      const storageKey = selectedItem || ALL_DESIGNATION_KEY;
+      // const codes = selectedItem
+      //   ? PARK_INFO[selectedItem as ParkDesignationType].codes
+      //   : ALL_CODES;
       setIsLoading(true);
       try {
-        let data = loadState(selectedItem);
+        let data = loadState(storageKey);
         if (!data.length) {
           const res = await fetch(
-            `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
+            `${NPS_API}/parks?parkCode=${ALL_CODES}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
 
           data = sortParks(formatParks(json.data, selectedItem));
-          saveState(JSON.stringify(data), selectedItem);
+          saveState(storageKey, JSON.stringify(data));
         }
         setParks(data);
       } catch (e) {

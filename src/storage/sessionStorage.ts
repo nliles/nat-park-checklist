@@ -1,9 +1,7 @@
-const ALL_DESIGNATION_KEY = "allDesignations";
-
 // load state from sessionStorage
-export const loadState = (itemKey?: string) => {
+export const loadState = (itemKey: string) => {
   try {
-    const storageState = sessionStorage.getItem(itemKey || ALL_DESIGNATION_KEY);
+    const storageState = sessionStorage.getItem(itemKey);
     return JSON.parse(storageState || "[]");
   } catch (err) {
     return undefined;
@@ -11,9 +9,9 @@ export const loadState = (itemKey?: string) => {
 };
 
 // save state to sessionStorage
-export const saveState = (itemValue: string, itemKey?: string) => {
+export const saveState = (itemKey: string, itemValue: string) => {
   try {
-    sessionStorage.setItem(itemKey || ALL_DESIGNATION_KEY, itemValue);
+    sessionStorage.setItem(itemKey, itemValue);
   } catch (err) {
     return undefined;
   }
