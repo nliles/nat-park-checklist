@@ -78,19 +78,23 @@ const ParkView = ({
           <>
             <div className={styles.dropdownWrapper}>
               <Total {...totalProps} styleName={styles.mobileCount} />
-              <Dropdown
-                items={LIST_OPTIONS}
-                label="Select a designation"
-                initialSelectedItem={selectedDropdownItem}
-                handleClick={handleListItemChange}
-                formatListItem={formatListItem}
-                formatSelectedItem={formatSelectedItem}
-              />
-              <Dropdown
-                items={STATES_LIST}
-                label="State"
-                handleClick={selectState}
-              />
+              <div className={styles.dropdowns}>
+                <Dropdown
+                  items={LIST_OPTIONS}
+                  label="Select a designation"
+                  initialSelectedItem={selectedDropdownItem}
+                  handleClick={handleListItemChange}
+                  formatListItem={formatListItem}
+                  formatSelectedItem={formatSelectedItem}
+                  className={styles.designation}
+                />
+                <Dropdown
+                  items={STATES_LIST}
+                  label="State"
+                  handleClick={selectState}
+                  className={styles.state}
+                />
+              </div>
               <Total
                 {...totalProps}
                 styleName={cn(styles.count, styles.desktopCount)}

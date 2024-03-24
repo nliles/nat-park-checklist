@@ -11,7 +11,6 @@ import copy from "./copy";
 import getParkDesignation from "helpers/getParkDesignation";
 
 function useParks(selectedItem?: ParkDesignationType, selectedState?: string | null) {
-  console.log(selectedState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {

@@ -11,7 +11,7 @@ type DropdownProps = {
   label?: string;
   items: string[];
   initialSelectedItem?: string;
-  styleName?: string;
+  className?: string;
   formatListItem?: (item: string) => string;
   formatSelectedItem?: (item: string) => string;
 };
@@ -21,7 +21,7 @@ const Dropdown = ({
   label = copy.defaultLabel,
   items,
   initialSelectedItem,
-  styleName,
+  className,
   formatListItem = (item: string) => item,
   formatSelectedItem = (item: string) => item,
 }: DropdownProps) => {
@@ -48,7 +48,7 @@ const Dropdown = ({
 
   return (
     <div
-      className={cn(styles.container, styleName, {
+      className={cn(styles.container, className, {
         [styles.isOpen]: isOpen,
       })}
     >

@@ -43,3 +43,19 @@
     margin: 0;
   }
 }
+
+.dropdowns {
+  display: flex;
+  justify-content: center;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.designation {
+  width: 250px;
+  margin-right: 1rem;
+}
+
+.state {
+  width: 100px;
+}
