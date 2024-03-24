@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SelectedParks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -16,13 +16,14 @@ import { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
+  const [selectedState, setSelectedState] = useState<string | null>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation");
   const selectedDropdownItem = designation
     ? (camelCase(designation) as ParkDesignationType)
     : undefined;
-  const { isLoading, parks } = useParks(selectedDropdownItem);
+  const { isLoading, parks } = useParks(selectedDropdownItem, selectedState);
   const {
     isLoading: isSelectedLoading,
     selectedParks,
@@ -82,6 +83,7 @@ const ParkContainer = () => {
         selectedDropdownItem={selectedDropdownItem}
         parks={parks}
         handleListItemChange={handleListItemChange}
+        selectState={setSelectedState}
         handleOnSubmit={handleOnSubmit}
       />
     </FormProvider>

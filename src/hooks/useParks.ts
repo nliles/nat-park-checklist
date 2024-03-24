@@ -10,7 +10,10 @@ import formatParks from "helpers/formatParks";
 import copy from "./copy";
 import getParkDesignation from "helpers/getParkDesignation";
 
-function useParks(selectedItem?: ParkDesignationType) {
+function useParks(
+  selectedItem?: ParkDesignationType,
+  selectedState?: string | null
+) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
@@ -28,13 +31,13 @@ function useParks(selectedItem?: ParkDesignationType) {
           data = sortParks(formatParks(json.data));
           saveState(storageKey, JSON.stringify(data));
         }
-        const filteredParks = selectedItem
-          ? data.filter(
+        const filteredParks = data.filter(
               (park: Park) =>
-                getParkDesignation(park.designation, park.parkCode) ===
-                selectedItem
-            )
-          : data;
+                selectedItem ? getParkDesignation(park.designation, park.parkCode) ===
+                selectedItem : park
+            ).filter((park: Park) =>
+            selectedState ? park.states.includes(selectedState) : park
+            );
         setParks(filteredParks);
       } catch (e) {
         toast.error(copy.loadParksError);
@@ -43,7 +46,7 @@ function useParks(selectedItem?: ParkDesignationType) {
       }
     };
     fetchParks();
-  }, [selectedItem]);
+  }, [selectedItem, selectedState]);
 
   return {
     isLoading,

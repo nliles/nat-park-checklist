@@ -11,10 +11,10 @@ import Dropdown from "components/ui/Dropdown";
 import Header from "components/Header";
 import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
-import { LIST_OPTIONS } from "../../../constants";
+import { LIST_OPTIONS, STATES_LIST } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
-import styles from "./index.module.scss";
+import styles from "./ParkView.module.scss";
 
 export type ParkViewProps = {
   handleListItemChange: (item?: string | null) => void;
@@ -22,6 +22,7 @@ export type ParkViewProps = {
   parks: Park[];
   selectedParks?: string[];
   selectedDropdownItem?: ParkDesignationType;
+  selectState: (item?: string | null) => void;
   handleOnSubmit: () => void;
 };
 
@@ -29,6 +30,7 @@ const ParkView = ({
   isLoading = false,
   parks,
   selectedDropdownItem,
+  selectState,
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
@@ -76,13 +78,23 @@ const ParkView = ({
           <>
             <div className={styles.dropdownWrapper}>
               <Total {...totalProps} styleName={styles.mobileCount} />
-              <Dropdown
-                items={LIST_OPTIONS}
-                initialSelectedItem={selectedDropdownItem}
-                handleClick={handleListItemChange}
-                formatListItem={formatListItem}
-                formatSelectedItem={formatSelectedItem}
-              />
+              <div className={styles.dropdowns}>
+                <Dropdown
+                  items={LIST_OPTIONS}
+                  label={copy.designationLabel}
+                  initialSelectedItem={selectedDropdownItem}
+                  handleClick={handleListItemChange}
+                  formatListItem={formatListItem}
+                  formatSelectedItem={formatSelectedItem}
+                  className={styles.designation}
+                />
+                <Dropdown
+                  items={STATES_LIST}
+                  label={copy.stateLabel}
+                  handleClick={selectState}
+                  className={styles.state}
+                />
+              </div>
               <Total
                 {...totalProps}
                 styleName={cn(styles.count, styles.desktopCount)}
