@@ -11,7 +11,7 @@ import Dropdown from "components/ui/Dropdown";
 import Header from "components/Header";
 import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
-import { LIST_OPTIONS } from "../../../constants";
+import { LIST_OPTIONS, STATES_LIST } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./ParkView.module.scss";
@@ -87,7 +87,7 @@ const ParkView = ({
                 formatSelectedItem={formatSelectedItem}
               />
               <Dropdown
-                items={['CA']}
+                items={STATES_LIST}
                 label="State"
                 handleClick={selectState}
               />
