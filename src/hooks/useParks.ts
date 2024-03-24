@@ -6,18 +6,15 @@ import { PARK_INFO, ALL_CODES } from "../constants";
 import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
-import { LIST_OPTIONS } from "../constants";
 import formatParks from "helpers/formatParks";
 import copy from "./copy";
-
-const ALL_DESIGNATION_KEY = "allDesignations";
 
 function useParks(selectedItem?: ParkDesignationType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
     const fetchParks = async () => {
-      const storageKey = selectedItem || ALL_DESIGNATION_KEY;
+      const storageKey = selectedItem || 'allDesignations';
       const codes = selectedItem
         ? PARK_INFO[selectedItem as ParkDesignationType].codes
         : ALL_CODES;

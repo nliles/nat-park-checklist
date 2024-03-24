@@ -24,7 +24,7 @@ export const SEQUOIA_NAT_PARK = {
 
 export const KINGS_CANYON_NAT_PARK = {
   ...SEQUOIA_KINGS_BASE,
-  id: "kings-canyon-nat-park",
+  id: "kings-canyon-national-park",
   images: [
     {
       altText: "A deep canyon with a forested floor and steep granite cliffs",
