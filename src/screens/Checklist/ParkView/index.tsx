@@ -81,7 +81,7 @@ const ParkView = ({
               <div className={styles.dropdowns}>
                 <Dropdown
                   items={LIST_OPTIONS}
-                  label="Select a designation"
+                  label={copy.designationLabel}
                   initialSelectedItem={selectedDropdownItem}
                   handleClick={handleListItemChange}
                   formatListItem={formatListItem}
@@ -90,7 +90,7 @@ const ParkView = ({
                 />
                 <Dropdown
                   items={STATES_LIST}
-                  label="State"
+                  label={copy.stateLabel}
                   handleClick={selectState}
                   className={styles.state}
                 />
