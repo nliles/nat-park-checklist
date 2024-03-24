@@ -10,7 +10,10 @@ import formatParks from "helpers/formatParks";
 import copy from "./copy";
 import getParkDesignation from "helpers/getParkDesignation";
 
-function useParks(selectedItem?: ParkDesignationType, selectedState?: string | null) {
+function useParks(
+  selectedItem?: ParkDesignationType,
+  selectedState?: string | null
+) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
@@ -35,7 +38,11 @@ function useParks(selectedItem?: ParkDesignationType, selectedState?: string | n
                 selectedItem
             )
           : data;
-        filteredParks = selectedState ? filteredParks.filter((park: Park) => park.states.includes(selectedState)) : filteredParks;
+        filteredParks = selectedState
+          ? filteredParks.filter((park: Park) =>
+              park.states.includes(selectedState)
+            )
+          : filteredParks;
         setParks(filteredParks);
       } catch (e) {
         toast.error(copy.loadParksError);
