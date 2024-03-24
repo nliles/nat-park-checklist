@@ -137,7 +137,6 @@ export const PARK_INFO: ParkInfoDict = {
           "crmo",
           "dena",
           "gaar",
-          "glac",
           "glba",
           "grsa",
           "katm",

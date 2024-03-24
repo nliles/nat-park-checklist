@@ -43,6 +43,7 @@ const ParkList = ({
                 park.designation,
                 park.parkCode
               );
+              console.log(formattedName)
               return (
                 <Checkbox
                   key={park.fullName}
