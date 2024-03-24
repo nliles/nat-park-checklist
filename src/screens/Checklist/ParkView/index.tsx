@@ -14,7 +14,7 @@ import startCase from "lodash/startCase";
 import { LIST_OPTIONS } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
-import styles from "./index.module.scss";
+import styles from "./ParkView.module.scss";
 
 export type ParkViewProps = {
   handleListItemChange: (item?: string | null) => void;
@@ -22,6 +22,7 @@ export type ParkViewProps = {
   parks: Park[];
   selectedParks?: string[];
   selectedDropdownItem?: ParkDesignationType;
+  selectState: (item?: string | null) => void;
   handleOnSubmit: () => void;
 };
 
@@ -29,6 +30,7 @@ const ParkView = ({
   isLoading = false,
   parks,
   selectedDropdownItem,
+  selectState,
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
@@ -78,10 +80,16 @@ const ParkView = ({
               <Total {...totalProps} styleName={styles.mobileCount} />
               <Dropdown
                 items={LIST_OPTIONS}
+                label="Select a designation"
                 initialSelectedItem={selectedDropdownItem}
                 handleClick={handleListItemChange}
                 formatListItem={formatListItem}
                 formatSelectedItem={formatSelectedItem}
+              />
+              <Dropdown
+                items={['CA']}
+                label="State"
+                handleClick={selectState}
               />
               <Total
                 {...totalProps}

@@ -4,9 +4,11 @@ import Close from "components/icons/Close";
 import { useSelect } from "downshift";
 import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
+import copy from "./copy";
 
 type DropdownProps = {
   handleClick: (item?: string | null) => void;
+  label?: string;
   items: string[];
   initialSelectedItem?: string;
   styleName?: string;
@@ -16,6 +18,7 @@ type DropdownProps = {
 
 const Dropdown = ({
   handleClick,
+  label = copy.defaultLabel,
   items,
   initialSelectedItem,
   styleName,
@@ -59,7 +62,7 @@ const Dropdown = ({
             [styles.isOpen]: isOpen || selectedItem,
           })}
         >
-          Select a designation
+          {label}
         </label>
         <span className={styles.title}>
           {selectedItem ? formatSelectedItem(selectedItem) : ""}

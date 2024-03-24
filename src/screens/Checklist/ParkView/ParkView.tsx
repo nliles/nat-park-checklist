@@ -47,6 +47,7 @@ describe("<ParkView />", () => {
           selectedDropdownItem={ParkDesignation.NAT_PARK}
           handleListItemChange={() => {}}
           handleOnSubmit={() => {}}
+          selectState={() => {}}
           {...props}
         />
       </FormProviderWrapper>

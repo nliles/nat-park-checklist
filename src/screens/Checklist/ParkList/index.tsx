@@ -7,7 +7,7 @@ import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
-import styles from "./index.module.scss";
+import styles from "./ParkList.module.scss";
 
 type ListProps = {
   parks: Park[];
