@@ -14,12 +14,13 @@ function useParks(selectedItem?: ParkDesignationType) {
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
     const fetchParks = async () => {
+      const storageKey = selectedItem || 'allDesignations';
       const codes = selectedItem
         ? PARK_INFO[selectedItem as ParkDesignationType].codes
         : ALL_CODES;
       setIsLoading(true);
       try {
-        let data = loadState(selectedItem);
+        let data = loadState(storageKey);
         if (!data.length) {
           const res = await fetch(
             `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
@@ -27,7 +28,7 @@ function useParks(selectedItem?: ParkDesignationType) {
           const json = await res.json();
 
           data = sortParks(formatParks(json.data, selectedItem));
-          saveState(JSON.stringify(data), selectedItem);
+          saveState(storageKey, JSON.stringify(data));
         }
         setParks(data);
       } catch (e) {
