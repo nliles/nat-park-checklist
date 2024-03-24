@@ -2,35 +2,40 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
-import { PARK_INFO, ALL_CODES } from "../constants";
+import { ALL_CODES } from "../constants";
 import { NPS_API, API_KEY } from "hooks/constants";
 import { loadState, saveState } from "storage/sessionStorage";
 import sortParks from "helpers/sortParks";
 import formatParks from "helpers/formatParks";
 import copy from "./copy";
+import getParkDesignation from "helpers/getParkDesignation";
 
 function useParks(selectedItem?: ParkDesignationType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [parks, setParks] = useState<Park[]>([]);
   useEffect(() => {
     const fetchParks = async () => {
-      const storageKey = selectedItem || 'allDesignations';
-      const codes = selectedItem
-        ? PARK_INFO[selectedItem as ParkDesignationType].codes
-        : ALL_CODES;
+      const storageKey = "allDesignations";
       setIsLoading(true);
       try {
         let data = loadState(storageKey);
         if (!data.length) {
           const res = await fetch(
-            `${NPS_API}/parks?parkCode=${codes}&limit=496&sort=fullName&api_key=${API_KEY}`
+            `${NPS_API}/parks?parkCode=${ALL_CODES}&limit=496&sort=fullName&api_key=${API_KEY}`
           );
           const json = await res.json();
 
-          data = sortParks(formatParks(json.data, selectedItem));
+          data = sortParks(formatParks(json.data));
           saveState(storageKey, JSON.stringify(data));
         }
-        setParks(data);
+        const filteredParks = selectedItem
+          ? data.filter(
+              (park: Park) =>
+                getParkDesignation(park.designation, park.parkCode) ===
+                selectedItem
+            )
+          : data;
+        setParks(filteredParks);
       } catch (e) {
         toast.error(copy.loadParksError);
       } finally {
