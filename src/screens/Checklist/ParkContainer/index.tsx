@@ -14,7 +14,6 @@ import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
-import { saveState } from "storage/sessionStorage";
 
 const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
