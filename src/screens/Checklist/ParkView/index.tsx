@@ -42,8 +42,8 @@ const ParkView = ({
   const allDesignations = Object.values(formData).flat(1);
   const dropdownItem = startCase(selectedDropdownItem);
   const headerTitle = selectedDropdownItem
-    ? dropdownItem
-    : "National Park Unit";
+    ? `${dropdownItem}s`
+    : "National Park Units";
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
 
   const handleClick = (id: string, parkCode: string, designation: string) => {
