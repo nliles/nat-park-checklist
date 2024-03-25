@@ -42,7 +42,7 @@ const NavBar = ({ count }: NavBarProps) => {
                 className={styles.img}
                 width={30}
                 src="np.svg"
-                alt="Tree shield icon"
+                alt={copy.altText}
               />
               <span>{copy.siteTitle}</span>
             </a>
