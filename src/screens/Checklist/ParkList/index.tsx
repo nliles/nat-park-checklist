@@ -7,6 +7,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./ParkList.module.scss";
+import copy from "./copy";
 
 type ListProps = {
   parks: Park[];
@@ -49,7 +50,7 @@ const ParkList = ({
             })}
           </div>
         ) : (
-          <em className={styles.noResults}>No results found</em>
+          <em className={styles.noResults}>{copy.noResults}</em>
         )}
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
