@@ -21,7 +21,7 @@ export type ParkViewProps = {
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
-  selectedDropdownItem?: ParkDesignationType;
+  selectedDesignation?: ParkDesignationType;
   selectedState?: string;
   handleOnSubmit: () => void;
 };
@@ -29,7 +29,7 @@ export type ParkViewProps = {
 const ParkView = ({
   isLoading = false,
   parks,
-  selectedDropdownItem,
+  selectedDesignation,
   selectedState,
   handleListItemChange,
   handleOnSubmit,
@@ -40,13 +40,13 @@ const ParkView = ({
   const formatListItem = (item: string) =>
     `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
   const allDesignations = Object.values(formData).flat(1);
-  const dropdownItem = startCase(selectedDropdownItem);
-  const headerTitle = selectedDropdownItem
+  const dropdownItem = startCase(selectedDesignation);
+  const headerTitle = selectedDesignation
     ? `${dropdownItem}s`
     : `${copy.allDesignationTitle}s`;
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
   const stateText = selectedState ? `(${selectedState})` : '';
-  const listTitle = selectedDropdownItem ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
+  const listTitle = selectedDesignation ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
 
   const handleClick = (id: string, parkCode: string, designation: string) => {
     const formattedName = getParkDesignation(designation, parkCode);
@@ -63,8 +63,8 @@ const ParkView = ({
     });
   };
 
-  const selectedData = selectedDropdownItem
-  ? formData[selectedDropdownItem]
+  const selectedData = selectedDesignation
+  ? formData[selectedDesignation]
   : allDesignations;
 
   const found = parks.filter(park => selectedData.includes(park.id))
@@ -72,7 +72,7 @@ const ParkView = ({
   const totalProps = {
     count: found.length || 0,
     total: parks.length,
-    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
+    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase(), selectedState),
   };
 
   return (
@@ -88,7 +88,7 @@ const ParkView = ({
                 <Dropdown
                   items={LIST_OPTIONS}
                   label={copy.designationLabel}
-                  initialSelectedItem={selectedDropdownItem}
+                  initialSelectedItem={selectedDesignation}
                   handleClick={handleListItemChange}
                   formatListItem={formatListItem}
                   formatSelectedItem={formatSelectedItem}
@@ -104,10 +104,12 @@ const ParkView = ({
                   keyValue="state"
                 />
               </div>
+              {(selectedDesignation || selectedState) && (
               <Total
                 {...totalProps}
                 styleName={cn(styles.count, styles.desktopCount)}
               />
+              )}
             </div>
             <Map
               parks={parks}

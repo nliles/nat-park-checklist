@@ -44,7 +44,7 @@ describe("<ParkView />", () => {
         <ParkView
           parks={parks}
           isLoading={false}
-          selectedDropdownItem={ParkDesignation.NAT_PARK}
+          selectedDesignation={ParkDesignation.NAT_PARK}
           handleListItemChange={() => {}}
           handleOnSubmit={() => {}}
           {...props}
