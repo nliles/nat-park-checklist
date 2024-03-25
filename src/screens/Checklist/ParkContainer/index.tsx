@@ -1,6 +1,6 @@
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SelectedParks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -16,10 +16,10 @@ import { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
-  const [selectedState, setSelectedState] = useState<string | null>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation");
+  const selectedState = query.get("state");
   const selectedDesignation = designation
     ? (camelCase(designation) as ParkDesignationType)
     : undefined;
@@ -69,16 +69,28 @@ const ParkContainer = () => {
     }
   };
 
-  const handleListItemChange = (item?: string | null) => {
-    if (isLoggedIn && isDirty) {
-      handleOnSubmit();
-    }
+  const handleParamUpdate = ({ designation = selectedDesignation, state = selectedState }: { designation?: string | null, state?: string | null }) => {
     const params = {
-      ...(item) && { designation: kebabCase(item) },
+      ...(designation) && { designation: kebabCase(designation) },
+      ...(state) && { state },
    }
     navigate({
       search: createSearchParams(params).toString()
     });
+  }
+
+  const handleListItemChange = (item?: string | null) => {
+    if (isLoggedIn && isDirty) {
+      handleOnSubmit();
+    }
+    handleParamUpdate({ designation: item });
+  };
+
+  const handleStateChange = (item?: string | null) => {
+    // if (isLoggedIn && isDirty) {
+    //   handleOnSubmit();
+    // }
+    handleParamUpdate({ state: item });
   };
 
   return (
@@ -88,7 +100,7 @@ const ParkContainer = () => {
         selectedDropdownItem={selectedDesignation}
         parks={parks}
         handleListItemChange={handleListItemChange}
-        selectState={setSelectedState}
+        selectState={handleStateChange}
         handleOnSubmit={handleOnSubmit}
       />
     </FormProvider>
