@@ -39,12 +39,14 @@ const ParkView = ({
   const formData = watch("parkData");
   const formatListItem = (item: string) =>
     `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
-  const allDesignationTotal = Object.values(formData).flat(1).length;
+  const allDesignations = Object.values(formData).flat(1);
   const dropdownItem = startCase(selectedDropdownItem);
   const headerTitle = selectedDropdownItem
-    ? dropdownItem
-    : "National Park Unit";
+    ? `${dropdownItem}s`
+    : `${copy.allDesignationTitle}s`;
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+  const stateText = selectedState ? `(${selectedState})` : '';
+  const listTitle = selectedDropdownItem ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
 
   const handleClick = (id: string, parkCode: string, designation: string) => {
     const formattedName = getParkDesignation(designation, parkCode);
@@ -61,16 +63,20 @@ const ParkView = ({
     });
   };
 
+  const selectedData = selectedDropdownItem
+  ? formData[selectedDropdownItem]
+  : allDesignations;
+
+  const found = parks.filter(park => selectedData.includes(park.id))
+
   const totalProps = {
-    count: selectedDropdownItem
-      ? formData[selectedDropdownItem]?.length || 0
-      : allDesignationTotal,
+    count: found.length || 0,
     total: parks.length,
     tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase()),
   };
 
   return (
-    <PageWrapper count={allDesignationTotal}>
+    <PageWrapper count={allDesignations.length || 0}>
       <div className={styles.container}>
         <Header title={headerTitle} />
         {isLoading && <Spinner />}
@@ -110,7 +116,7 @@ const ParkView = ({
             />
             <ParkList
               parks={parks}
-              selectedDropdownItem={selectedDropdownItem}
+              listTitle={listTitle}
               handleOnSubmit={handleOnSubmit}
             />
           </>

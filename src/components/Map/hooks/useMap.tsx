@@ -224,9 +224,7 @@ function useMap(
       };
     };
 
-    if (parks.length > 0) {
-      drawMap();
-    }
+    drawMap();
   }, [parks, height, width, showTree, handleClick, selectedParks]);
 }
 

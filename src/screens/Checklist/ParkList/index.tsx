@@ -2,29 +2,25 @@ import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { Park } from "types/park";
-import startCase from "lodash/startCase";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./ParkList.module.scss";
+import copy from "./copy";
 
 type ListProps = {
   parks: Park[];
-  selectedDropdownItem?: string;
+  listTitle: string;
   handleOnSubmit: () => void;
 };
 
 const ParkList = ({
   parks = [],
-  selectedDropdownItem,
+  listTitle,
   handleOnSubmit,
 }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
-  const headerCopy = selectedDropdownItem
-    ? startCase(selectedDropdownItem)
-    : "National Park Unit";
-
   const {
     handleSubmit,
     formState: { isDirty, isSubmitting },
@@ -33,7 +29,7 @@ const ParkList = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>{`${headerCopy} checklist`}</h2>
+        <h2>{listTitle}</h2>
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         {parks.length ? (
@@ -54,7 +50,7 @@ const ParkList = ({
             })}
           </div>
         ) : (
-          <em className={styles.noResults}>No results found</em>
+          <em className={styles.noResults}>{copy.noResults}</em>
         )}
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
