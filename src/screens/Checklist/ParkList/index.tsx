@@ -36,23 +36,26 @@ const ParkList = ({
         <h2>{`${headerCopy} checklist`}</h2>
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
+        {parks.length ? (
         <div className={styles.listContainer}>
-          {parks &&
-            parks.map((park, i) => {
-              const formattedName = getParkDesignation(
-                park.designation,
-                park.parkCode
-              );
-              return (
-                <Checkbox
-                  key={park.fullName}
-                  label={`${i + 1}. ${park.fullName}`}
-                  id={park.id}
-                  name={`parkData.${formattedName}`}
-                />
-              );
-            })}
-        </div>
+        {parks.map((park, i) => {
+            const formattedName = getParkDesignation(
+              park.designation,
+              park.parkCode
+            );
+            return (
+              <Checkbox
+                key={park.fullName}
+                label={`${i + 1}. ${park.fullName}`}
+                id={park.id}
+                name={`parkData.${formattedName}`}
+              />
+            );
+          })}
+      </div>
+        ) : (
+          <em className={styles.noResults}>No results found</em>
+        )}
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
             <Button
@@ -70,3 +73,4 @@ const ParkList = ({
 };
 
 export default ParkList;
+
