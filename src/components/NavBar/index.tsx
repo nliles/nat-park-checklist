@@ -24,10 +24,10 @@ const NavBar = ({ count }: NavBarProps) => {
 
   // TODO: Show this once per session
   useLayoutEffect(() => {
-    const hideModal = loadState('hideModal');
+    const hideModal = loadState("hideModal");
     if (!isLoggedIn && !hideModal) {
       toggleModal();
-      saveState('hideModal', 'true')
+      saveState("hideModal", "true");
     }
   }, [isLoggedIn]);
 
@@ -36,7 +36,16 @@ const NavBar = ({ count }: NavBarProps) => {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            <a href="/">{copy.siteTitle}</a>
+            <a href="/">
+              <img
+                id="avatar"
+                className={styles.img}
+                width={30}
+                src="np.svg"
+                alt={copy.altText}
+              />
+              <span>{copy.siteTitle}</span>
+            </a>
           </h1>
         </div>
         <div className={styles.right}>

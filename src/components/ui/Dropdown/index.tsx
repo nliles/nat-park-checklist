@@ -7,7 +7,13 @@ import styles from "./Dropdown.module.scss";
 import copy from "./copy";
 
 type DropdownProps = {
-  handleClick: ({ designation, state }: { designation?: string | null; state?: string | null; }) => void;
+  handleClick: ({
+    designation,
+    state,
+  }: {
+    designation?: string | null;
+    state?: string | null;
+  }) => void;
   label?: string;
   items: string[];
   initialSelectedItem?: string;
