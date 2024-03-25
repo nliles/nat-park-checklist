@@ -134,9 +134,7 @@ function useMap(
             .attr("viewBox", "0 0 540.41 736.19")
             .on("click", (e: Event, d: Park) => {
               e.preventDefault();
-              if (handleClick) {
-                handleClick(d.id, d.parkCode, d.designation);
-              }
+              handleClick?.(d.id, d.parkCode, d.designation);
             });
 
           // Add tree polygon shape

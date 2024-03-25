@@ -39,7 +39,7 @@ function useSelectedParks(isLoggedIn: boolean) {
     const fetchParks = async () => {
       try {
         setIsLoading(true);
-        let data = loadState(storageKey);
+        let data = loadState(storageKey) || [];
         if (!data.length) {
           const { parks } = await getParks();
           data = parks;

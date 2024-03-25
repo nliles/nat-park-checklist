@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
+import { loadState, saveState } from "storage/sessionStorage";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import { TOTAL_UNITS } from "../../constants";
@@ -22,11 +23,13 @@ const NavBar = ({ count }: NavBarProps) => {
   const toggleModal = () => setShowModal((prevState) => !prevState);
 
   // TODO: Show this once per session
-  // useLayoutEffect(() => {
-  //   if (!isLoggedIn) {
-  //     toggleModal();
-  //   }
-  // }, [isLoggedIn]);
+  useLayoutEffect(() => {
+    const hideModal = loadState('hideModal');
+    if (!isLoggedIn && !hideModal) {
+      toggleModal();
+      saveState('hideModal', 'true')
+    }
+  }, [isLoggedIn]);
 
   return (
     <nav className={styles.nav}>
