@@ -37,22 +37,22 @@ const ParkList = ({
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         {parks.length ? (
-        <div className={styles.listContainer}>
-        {parks.map((park, i) => {
-            const formattedName = getParkDesignation(
-              park.designation,
-              park.parkCode
-            );
-            return (
-              <Checkbox
-                key={park.fullName}
-                label={`${i + 1}. ${park.fullName}`}
-                id={park.id}
-                name={`parkData.${formattedName}`}
-              />
-            );
-          })}
-      </div>
+          <div className={styles.listContainer}>
+            {parks.map((park, i) => {
+              const formattedName = getParkDesignation(
+                park.designation,
+                park.parkCode
+              );
+              return (
+                <Checkbox
+                  key={park.fullName}
+                  label={`${i + 1}. ${park.fullName}`}
+                  id={park.id}
+                  name={`parkData.${formattedName}`}
+                />
+              );
+            })}
+          </div>
         ) : (
           <em className={styles.noResults}>No results found</em>
         )}
@@ -73,4 +73,3 @@ const ParkList = ({
 };
 
 export default ParkList;
-

@@ -69,15 +69,21 @@ const ParkContainer = () => {
     }
   };
 
-  const handleParamUpdate = ({ designation = selectedDesignation, state = selectedState }: { designation?: string | null, state?: string | null }) => {
+  const handleParamUpdate = ({
+    designation = selectedDesignation,
+    state = selectedState,
+  }: {
+    designation?: string | null;
+    state?: string | null;
+  }) => {
     const params = {
-      ...(designation) && { designation: kebabCase(designation) },
-      ...(state) && { state },
-   }
+      ...(designation && { designation: kebabCase(designation) }),
+      ...(state && { state }),
+    };
     navigate({
-      search: createSearchParams(params).toString()
+      search: createSearchParams(params).toString(),
     });
-  }
+  };
 
   const handleListItemChange = (item?: string | null) => {
     if (isLoggedIn && isDirty) {
