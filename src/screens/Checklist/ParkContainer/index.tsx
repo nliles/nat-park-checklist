@@ -48,21 +48,23 @@ const ParkContainer = () => {
   const formData: SelectedParks = watch("parkData");
 
   const handleOnSubmit = async () => {
-    try {
-      if (selectedDesignation) {
-        const { parks } = await updateParkDesignation(
-          selectedDesignation as ParkDesignationType,
-          formData[selectedDesignation as ParkDesignationType]
-        );
-        setSelectedParks(parks);
-      } else {
-        const { parks } = await updateParks(formData);
-        setSelectedParks(parks);
-      }
-      toast.success(copy.updateSuccess);
-    } catch (err: any) {
-      if (err?.status !== 401) {
-        toast.error(copy.updateError);
+    if (isLoggedIn) {
+      try {
+        if (selectedDesignation) {
+          const { parks } = await updateParkDesignation(
+            selectedDesignation as ParkDesignationType,
+            formData[selectedDesignation as ParkDesignationType]
+          );
+          setSelectedParks(parks);
+        } else {
+          const { parks } = await updateParks(formData);
+          setSelectedParks(parks);
+        }
+        toast.success(copy.updateSuccess);
+      } catch (err: any) {
+        if (err?.status !== 401) {
+          toast.error(copy.updateError);
+        }
       }
     }
   };
@@ -94,7 +96,7 @@ const ParkContainer = () => {
     <FormProvider {...methods}>
       <ParkView
         isLoading={isLoading || isSelectedLoading}
-        selectedDropdownItem={selectedDesignation}
+        selectedDesignation={selectedDesignation}
         selectedState={selectedState}
         parks={parks}
         handleListItemChange={handleListItemChange}
