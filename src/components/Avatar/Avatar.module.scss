@@ -2,8 +2,7 @@
 @import "../../styles/breakpoints.scss";
 
 .menuIcon {
-  height: 3.125rem;
-  display: flex;
+  margin-top: 5px;
   border-bottom: 5px solid transparent;
 
   &.active {
@@ -12,18 +11,12 @@
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  color: $green;
-  font-weight: 600;
-  font-size: 1rem;
+  all: unset;
 }
 
 .avatar {
+  height: 40px;
+  width: 40px;
   border-radius: 50px;
   border: 1px solid $green;
 }
