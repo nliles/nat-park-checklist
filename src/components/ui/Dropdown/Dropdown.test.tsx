@@ -13,6 +13,7 @@ describe("<Dropdown/>", () => {
         initialSelectedItem="California"
         handleClick={() => {}}
         formatListItem={(item) => item}
+        keyValue="state"
       />
     );
     expect(
@@ -27,6 +28,7 @@ describe("<Dropdown/>", () => {
         initialSelectedItem="California"
         handleClick={() => {}}
         formatListItem={(item) => item}
+        keyValue="state"
       />
     );
     const item = within(screen.getByRole("listbox")).getByText("New York");
@@ -41,6 +43,7 @@ describe("<Dropdown/>", () => {
         initialSelectedItem="California"
         handleClick={mockClick}
         formatListItem={(item) => item}
+        keyValue="state"
       />
     );
     const item = within(screen.getByRole("listbox")).getByText("New York");

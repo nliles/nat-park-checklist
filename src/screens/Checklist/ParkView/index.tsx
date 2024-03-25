@@ -17,12 +17,12 @@ import copy from "./copy";
 import styles from "./ParkView.module.scss";
 
 export type ParkViewProps = {
-  handleListItemChange: (item?: string | null) => void;
+  handleListItemChange: ({ designation, state }: { designation?: string | null; state?: string | null}) => void;
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
   selectedDropdownItem?: ParkDesignationType;
-  selectState: (item?: string | null) => void;
+  selectedState?: string;
   handleOnSubmit: () => void;
 };
 
@@ -30,7 +30,7 @@ const ParkView = ({
   isLoading = false,
   parks,
   selectedDropdownItem,
-  selectState,
+  selectedState,
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
@@ -87,12 +87,15 @@ const ParkView = ({
                   formatListItem={formatListItem}
                   formatSelectedItem={formatSelectedItem}
                   className={styles.designation}
+                  keyValue="designation"
                 />
                 <Dropdown
                   items={STATES_LIST}
                   label={copy.stateLabel}
-                  handleClick={selectState}
+                  handleClick={handleListItemChange}
                   className={styles.state}
+                  initialSelectedItem={selectedState}
+                  keyValue="state"
                 />
               </div>
               <Total
