@@ -18,11 +18,9 @@ import copy from "./copy";
 const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
-  const designation = query.get("designation");
-  const selectedState = query.get("state");
-  const selectedDesignation = designation
-    ? (camelCase(designation) as ParkDesignationType)
-    : undefined;
+  const designation = query.get("designation") || '';
+  const selectedState = query.get("state")?.toUpperCase();
+  const selectedDesignation = camelCase(designation) as ParkDesignationType;
   const { isLoading, parks } = useParks(selectedDesignation, selectedState);
   const {
     isLoading: isSelectedLoading,
@@ -78,35 +76,28 @@ const ParkContainer = () => {
   }) => {
     const params = {
       ...(designation && { designation: kebabCase(designation) }),
-      ...(state && { state }),
+      ...(state && { state: state.toLowerCase() }),
     };
     navigate({
       search: createSearchParams(params).toString(),
     });
   };
 
-  const handleListItemChange = (item?: string | null) => {
+  const handleListItemChange = ({ designation, state }: { designation?: string | null, state?: string | null }) => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit();
     }
-    handleParamUpdate({ designation: item });
+    handleParamUpdate({ designation, state });
   };
-
-  const handleStateChange = (item?: string | null) => {
-    // if (isLoggedIn && isDirty) {
-    //   handleOnSubmit();
-    // }
-    handleParamUpdate({ state: item });
-  };
-
+  
   return (
     <FormProvider {...methods}>
       <ParkView
         isLoading={isLoading || isSelectedLoading}
         selectedDropdownItem={selectedDesignation}
+        selectedState={selectedState}
         parks={parks}
         handleListItemChange={handleListItemChange}
-        selectState={handleStateChange}
         handleOnSubmit={handleOnSubmit}
       />
     </FormProvider>

@@ -7,13 +7,14 @@ import styles from "./Dropdown.module.scss";
 import copy from "./copy";
 
 type DropdownProps = {
-  handleClick: (item?: string | null) => void;
+  handleClick: ({ designation, state }: { designation?: string | null; state?: string | null; }) => void;
   label?: string;
   items: string[];
   initialSelectedItem?: string;
   className?: string;
   formatListItem?: (item: string) => string;
   formatSelectedItem?: (item: string) => string;
+  keyValue: string;
 };
 
 const Dropdown = ({
@@ -24,6 +25,7 @@ const Dropdown = ({
   className,
   formatListItem = (item: string) => item,
   formatSelectedItem = (item: string) => item,
+  keyValue,
 }: DropdownProps) => {
   const {
     getToggleButtonProps,
@@ -37,7 +39,9 @@ const Dropdown = ({
     defaultSelectedItem: initialSelectedItem,
     items: items,
     onSelectedItemChange: ({ selectedItem }) => {
-      handleClick(selectedItem);
+      if (keyValue) {
+        handleClick({ [keyValue]: selectedItem });
+      }
     },
   });
 
