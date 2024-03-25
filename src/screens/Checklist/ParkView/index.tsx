@@ -43,8 +43,10 @@ const ParkView = ({
   const dropdownItem = startCase(selectedDropdownItem);
   const headerTitle = selectedDropdownItem
     ? `${dropdownItem}s`
-    : copy.allDesignationTitle;
+    : `${copy.allDesignationTitle}s`;
   const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+  const stateText = selectedState ? `(${selectedState})` : '';
+  const listTitle = selectedDropdownItem ? `${dropdownItem} checklist` : `${copy.allDesignationTitle} checklist ${stateText}`
 
   const handleClick = (id: string, parkCode: string, designation: string) => {
     const formattedName = getParkDesignation(designation, parkCode);
@@ -114,7 +116,7 @@ const ParkView = ({
             />
             <ParkList
               parks={parks}
-              selectedDropdownItem={selectedDropdownItem}
+              listTitle={listTitle}
               handleOnSubmit={handleOnSubmit}
             />
           </>
