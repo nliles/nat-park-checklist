@@ -6,7 +6,7 @@ type InputProps = {
   id: string;
   label: string;
   type?: string;
-  autoComplete?: string;
+  autoComplete?: "on" | "off";
   required?: boolean;
   formError?: string;
   rules?: RegisterOptions;
@@ -16,7 +16,7 @@ const Input = ({
   id,
   label,
   type = "text",
-  autoComplete,
+  autoComplete = "on",
   required = false,
   formError,
   rules,

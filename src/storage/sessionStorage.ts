@@ -2,7 +2,7 @@
 export const loadState = (itemKey: string) => {
   try {
     const storageState = sessionStorage.getItem(itemKey);
-    return JSON.parse(storageState || "[]");
+    return JSON.parse(storageState || "");
   } catch (err) {
     return undefined;
   }

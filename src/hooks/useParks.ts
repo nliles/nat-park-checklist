@@ -21,7 +21,7 @@ function useParks(
       const storageKey = "allDesignations";
       setIsLoading(true);
       try {
-        let data = loadState(storageKey);
+        let data = loadState(storageKey) || [];
         if (!data.length) {
           const res = await fetch(
             `${NPS_API}/parks?parkCode=${ALL_CODES}&limit=496&sort=fullName&api_key=${API_KEY}`

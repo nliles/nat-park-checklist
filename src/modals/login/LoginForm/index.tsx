@@ -40,7 +40,6 @@ const LoginForm = ({
           id="email"
           label="Email"
           type="email"
-          autoComplete="email"
           required
           rules={{
             required: copy.emailRequired,
@@ -53,6 +52,7 @@ const LoginForm = ({
         />
         <Input
           id="password"
+          autoComplete="off"
           label="Password"
           type="password"
           required
