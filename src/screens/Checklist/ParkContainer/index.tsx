@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SelectedParks } from "types";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -16,14 +16,14 @@ import { ParkDesignationType } from "enum/ParkDesignation";
 import copy from "./copy";
 
 const ParkContainer = () => {
-  const [selectedState, setSelectedState] = useState<string | null>();
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
   const designation = query.get("designation");
-  const selectedDropdownItem = designation
+  const selectedState = query.get("state");
+  const selectedDesignation = designation
     ? (camelCase(designation) as ParkDesignationType)
     : undefined;
-  const { isLoading, parks } = useParks(selectedDropdownItem, selectedState);
+  const { isLoading, parks } = useParks(selectedDesignation, selectedState);
   const {
     isLoading: isSelectedLoading,
     selectedParks,
@@ -51,10 +51,10 @@ const ParkContainer = () => {
 
   const handleOnSubmit = async () => {
     try {
-      if (selectedDropdownItem) {
+      if (selectedDesignation) {
         const { parks } = await updateParkDesignation(
-          selectedDropdownItem as ParkDesignationType,
-          formData[selectedDropdownItem as ParkDesignationType]
+          selectedDesignation as ParkDesignationType,
+          formData[selectedDesignation as ParkDesignationType]
         );
         setSelectedParks(parks);
       } else {
@@ -69,21 +69,44 @@ const ParkContainer = () => {
     }
   };
 
+  const handleParamUpdate = ({
+    designation = selectedDesignation,
+    state = selectedState,
+  }: {
+    designation?: string | null;
+    state?: string | null;
+  }) => {
+    const params = {
+      ...(designation && { designation: kebabCase(designation) }),
+      ...(state && { state }),
+    };
+    navigate({
+      search: createSearchParams(params).toString(),
+    });
+  };
+
   const handleListItemChange = (item?: string | null) => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit();
     }
-    navigate(item ? `/?designation=${kebabCase(item)}` : "");
+    handleParamUpdate({ designation: item });
+  };
+
+  const handleStateChange = (item?: string | null) => {
+    // if (isLoggedIn && isDirty) {
+    //   handleOnSubmit();
+    // }
+    handleParamUpdate({ state: item });
   };
 
   return (
     <FormProvider {...methods}>
       <ParkView
         isLoading={isLoading || isSelectedLoading}
-        selectedDropdownItem={selectedDropdownItem}
+        selectedDropdownItem={selectedDesignation}
         parks={parks}
         handleListItemChange={handleListItemChange}
-        selectState={setSelectedState}
+        selectState={handleStateChange}
         handleOnSubmit={handleOnSubmit}
       />
     </FormProvider>
