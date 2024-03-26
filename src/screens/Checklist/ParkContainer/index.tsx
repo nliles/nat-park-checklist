@@ -48,7 +48,6 @@ const ParkContainer = () => {
   const formData: SelectedParks = watch("parkData");
 
   const handleOnSubmit = async () => {
-    if (isLoggedIn) {
       try {
         if (selectedDesignation) {
           const { parks } = await updateParkDesignation(
@@ -66,7 +65,6 @@ const ParkContainer = () => {
           toast.error(copy.updateError);
         }
       }
-    }
   };
 
   const handleParamUpdate = ({

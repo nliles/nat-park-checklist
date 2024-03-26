@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
-import { FeatureCollection } from "geojson";
+import { Feature, FeatureCollection } from "geojson";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
@@ -173,7 +173,9 @@ function useMap(
         }
       }
 
-      d.on("click", function (event, d) {
+      d.on("click", handleStateZoom);
+
+      function handleStateZoom(event: Event, d: Feature) {
         active.classed(styles.active, false);
         if (active.node() === this) return reset();
         active = d3.select(this).classed(styles.active, true);
@@ -195,7 +197,7 @@ function useMap(
           .attr("transform", (park: Park) =>
             getMarkCoords({ park, scale: 1 / scale })
           );
-      });
+      }
 
       function handleZoom(e: any) {
         g.attr("transform", e.transform);
@@ -212,7 +214,7 @@ function useMap(
 
       // (svg as any).call(zoom)
 
-      const reset = () => {
+      function reset() {
         active = d3.select(null);
         svg.select("g").transition().duration(750).attr("transform", "");
         linkContainer
