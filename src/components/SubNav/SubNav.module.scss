@@ -24,29 +24,24 @@
     padding: 0 2rem;
     font-size: 1rem;
 
+    &:hover {
+      text-decoration: underline;
+    }
+
     &:last-child {
       border: none;
     }
-  }
 
-  .listItem {
-    display: flex;
-    list-style: none;
-    height: 45px;
-    border-bottom: 1px solid $lightGray;
-    padding: 0 2rem;
-    font-size: 1rem;
-  }
+    a {
+      text-decoration: none;
+      color: $black;
+    }
 
-  a {
-    text-decoration: none;
-    color: $black;
-  }
-
-  button {
-    background: transparent;
-    border: none;
-    font-size: 1rem;
+    button {
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+    }
   }
 
   &.show {
