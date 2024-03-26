@@ -163,7 +163,7 @@ function useMap(
             .attr("class", styles.treeLinkText)
             .style("fill", (d: Park) => getLinkTextFill(d.id))
             .attr("text-anchor", "middle")
-            .attr("x", 16.5)
+            .attr("x", TREE_MARKER_WIDTH)
             .attr("y", 30)
             .on("mouseover", function (e: Event, d: Park) {
               e.stopPropagation();
