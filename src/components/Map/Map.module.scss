@@ -19,10 +19,17 @@
 .state {
   fill: $tan;
   stroke: $tanOutline;
+  stroke-width: 0.7;
   &.active {
     fill: $tanOutline;
   }
+  &.hover {
+    stroke: #c5bc9c;
+    stroke-width: 2;
+  }
 }
+
+
 
 // Map Tooltip
 .tooltip {
