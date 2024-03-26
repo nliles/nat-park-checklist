@@ -221,7 +221,7 @@ function useMap(
           .transition()
           .duration(750)
           .attr("transform", (park: Park) => getMarkCoords({ park }));
-      };
+      }
     };
 
     drawMap();
