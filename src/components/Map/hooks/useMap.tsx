@@ -83,6 +83,7 @@ function useMap(
         .data(usData.features)
         .enter()
         .append("path")
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("class", styles.state)
         .attr("d", path);
 
@@ -174,6 +175,14 @@ function useMap(
       }
 
       d.on("click", handleStateZoom);
+      d.on("mouseover", ({ currentTarget }) => {
+        d3.select(currentTarget)
+        .classed(styles.hover, true)
+      })
+      .on("mouseout", ({ currentTarget }) => {
+        d3.select(currentTarget)
+        .classed(styles.hover, false);
+      })
 
       function handleStateZoom(event: Event, d: Feature) {
         active.classed(styles.active, false);
