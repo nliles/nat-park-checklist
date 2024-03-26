@@ -16,7 +16,7 @@ const CircularProgressBar = ({ count, total }: CircularProgressBarProps) => {
         strokeWidth={10}
         styles={buildStyles({
           rotation: 0,
-          strokeLinecap: "butt",
+          strokeLinecap: "round",
           textSize: "18px",
           pathTransitionDuration: 0.5,
           pathColor: "#4b5e26",
