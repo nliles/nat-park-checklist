@@ -20,12 +20,12 @@
   fill: $tan;
   stroke: $tanOutline;
   stroke-width: 0.7;
-  &.active {
-    fill: $tanOutline;
-  }
-  &.hover {
+  &.hover, &:active {
     stroke: $tanOutlineHover;
     stroke-width: 2;
+  }
+  &.active {
+    fill: $tanOutline;
   }
 }
 

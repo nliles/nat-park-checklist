@@ -7,16 +7,16 @@ type Response = {
 };
 
 export const getParks = (): Promise<{ parks: SelectedParks }> => {
-  return apiClient.get("/users/park");
+  return apiClient.get("/user/park");
 };
 
 export const updateParkDesignation = (
   designation: ParkDesignationType,
   parks: string[]
 ): Promise<Response> => {
-  return apiClient.patch("/users/park", { designation, parks });
+  return apiClient.patch("/user/park", { designation, parks });
 };
 
 export const updateParks = (parks: SelectedParks): Promise<Response> => {
-  return apiClient.put("/users/park", { parks });
+  return apiClient.put("/user/park", { parks });
 };
