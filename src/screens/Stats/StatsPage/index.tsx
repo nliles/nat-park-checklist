@@ -3,7 +3,7 @@ import { Park } from "types/park";
 import { SelectedParks } from "types";
 import Header from "components/Header";
 import Map from "components/Map";
-import CircularProgressBar from "components/ui/CircularProgressBar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
 import Count from "screens/Stats/StatsPage/Count";
@@ -22,13 +22,22 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
       <Header title="My Park Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
-          <div className={styles.total}>
-            <Count
-              percentage={percentage}
-            />
-            <div className={styles.progress}>
-              <CircularProgressBar
-                percentage={percentage}
+          <div className={styles.container}>
+            <span className={styles.total}>{`${percentage}%`}</span>
+            <span>of units visited</span>
+          </div>
+          <div className={styles.progress}>
+            <div className={styles.wrapper}>
+              <CircularProgressbar
+                value={57}
+                strokeWidth={50}
+                styles={buildStyles({
+                  strokeLinecap: "butt",
+                  pathColor: "#4b5e26",
+                  textColor: "#4b5e26",
+                  trailColor: "#eae3d1",
+                  backgroundColor: "#4b5e26",
+                })}
               />
             </div>
           </div>
