@@ -16,7 +16,7 @@ type StatsPageProps = {
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
-
+  const percentage = Math.floor((totalParks.length / TOTAL_UNITS) * 100);
   return (
     <div>
       <Header title="My Park Stats" />
@@ -24,14 +24,11 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         <div className={styles.columnOne}>
           <div className={styles.total}>
             <Count
-              header="NPS units visited"
-              count={totalParks.length}
-              total={TOTAL_UNITS}
+              percentage={percentage}
             />
             <div className={styles.progress}>
               <CircularProgressBar
-                count={totalParks.length}
-                total={TOTAL_UNITS}
+                percentage={percentage}
               />
             </div>
           </div>

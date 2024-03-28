@@ -1,19 +1,15 @@
 import styles from "./index.module.scss";
 
 type CountProps = {
-  header: string;
-  count: number;
-  total: number;
+  percentage: number;
 };
 
-const Count = ({ header, count, total }: CountProps) => {
+const Count = ({ percentage }: CountProps) => {
   return (
-    <div className={styles.container}>
-      <h3 className={styles.header}>{header}</h3>
+    <div className={styles.container}>  
       <div>
-        <span className={styles.total}>{count}</span>
-        <span>out of </span>
-        <span>{total}</span>
+        <span className={styles.total}>{`${percentage}%`}</span>
+        <span>of units visited</span>
       </div>
     </div>
   );
