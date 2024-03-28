@@ -3,9 +3,8 @@ import Count from ".";
 
 describe("<Count />", () => {
   it("Displays the correct count", () => {
-    render(<Count header="Total" count={5} total={20} />);
+    render(<Count percentage={25} />);
     expect(screen.getByText("Total")).toBeVisible();
-    expect(screen.getByText("5")).toBeVisible();
-    expect(screen.getByText("20")).toBeVisible();
+    expect(screen.getByText("25%")).toBeVisible();
   });
 });
