@@ -52,3 +52,24 @@
     margin: -20px 0 20px 0;
   }
 }
+
+.wrapper {
+  width: 150px;
+  height: 150px;
+
+  :global(.CircularProgressbar-text) {
+    transform: translate(-11px, 5px);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Nanum Myeongjo", serif;
+  color: $green;
+}
+
+.total {
+  display: block;
+  font-size: 3rem;
+}
