@@ -28,7 +28,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
           <div className={styles.progress}>
             <div className={styles.wrapper}>
               <CircularProgressbar
-                value={57}
+                value={percentage}
                 strokeWidth={50}
                 styles={buildStyles({
                   strokeLinecap: "butt",
