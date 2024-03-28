@@ -6,7 +6,6 @@ import Map from "components/Map";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
-import Count from "screens/Stats/StatsPage/Count";
 import styles from "./index.module.scss";
 
 type StatsPageProps = {
