@@ -4,7 +4,6 @@
 .section {
   display: grid;
   margin: 0 100px;
-  padding-bottom: 50px;
   grid-gap: 10px;
   grid-template-columns: 30% 70%;
   padding-bottom: 100px;
@@ -69,7 +68,18 @@
   color: $green;
 }
 
+// .progressContainer {
+//   // border-radius: 1.5rem;
+//   // box-shadow: 0 2px 32px 0 #0000001a;
+// }
+
 .total {
   display: block;
   font-size: 3rem;
+}
+
+.tileContainer {
+  margin: 0 50px;
+  display: flex;
+  flex-wrap: wrap;
 }

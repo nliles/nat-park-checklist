@@ -1,0 +1,51 @@
+@import "../../../styles/breakpoints.scss";
+@import "../../../styles/colors.scss";
+
+.tile {
+    flex: 1;
+    margin: 1rem;
+    min-width: 200px;
+    height: 100px;
+    padding: 1rem;
+    // background-color: #ede9e3;
+    // border: 5px solid #4b5e26;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 32px 0 #0000001a;
+  }
+  
+  .blockCount {
+    display: block;
+  }
+  
+  .boldCount {
+    font-family: "Nanum Myeongjo", serif;
+    color: $green;
+    // display: block;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  
+  .tileContent {
+    display: flex;
+    align-items: center;
+    // justify-content: space-evenly;
+    font-family: "Nanum Myeongjo", serif;
+  }
+  
+  .testOne {
+    width: 45%
+  }
+  
+  .testTwo {
+    width: 50%
+  }
+  
+  .tileHeader {
+    color: $green;
+    font-weight: 600;
+  }
+  
+  .tileWrapper {
+    width: 75px;
+    height: 75px;
+  }

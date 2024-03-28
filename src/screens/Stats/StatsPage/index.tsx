@@ -1,11 +1,12 @@
 import { TOTAL_UNITS } from "../../../constants";
+import { ParkDesignationType } from "enum/ParkDesignation";
 import { Park } from "types/park";
 import { SelectedParks } from "types";
+import getParkTotal from "helpers/getParkTotal";
 import Header from "components/Header";
 import Map from "components/Map";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import DataTable from "screens/Stats/DataTable";
-import DataBars from "screens/Stats/DataBars";
+import Tile from "../Tile";
 import styles from "./index.module.scss";
 
 type StatsPageProps = {
@@ -16,11 +17,13 @@ type StatsPageProps = {
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
   const percentage = Math.floor((totalParks.length / TOTAL_UNITS) * 100);
+  const itemKeys = Object.keys(selected) as ParkDesignationType[];
   return (
     <div>
       <Header title="My Park Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
+        <div className={styles.progressContainer}>
           <div className={styles.container}>
             <span className={styles.total}>{`${percentage}%`}</span>
             <span>of units visited</span>
@@ -40,7 +43,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               />
             </div>
           </div>
-          <DataBars items={selected} />
+          </div>
         </div>
         <div className={styles.columnTwo}>
           <div className={styles.mapContainer}>
@@ -52,13 +55,11 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               showBorder={false}
             />
           </div>
-          <DataTable
-            count={totalParks.length}
-            total={TOTAL_UNITS}
-            items={selected}
-          />
         </div>
       </div>
+    <div className={styles.tileContainer}>
+      {itemKeys?.map((option) => <Tile title={option} total={getParkTotal(option)} completed={selected[option]?.length || 0}/>)}
+    </div>
     </div>
   );
 };
