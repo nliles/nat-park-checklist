@@ -185,6 +185,7 @@ function useMap(
       })
 
       function handleStateZoom(event: Event, d: Feature) {
+        event.stopPropagation();
         active.classed(styles.active, false);
         if (active.node() === this) return reset();
         active = d3.select(this).classed(styles.active, true);
@@ -200,6 +201,13 @@ function useMap(
           .duration(750)
           .attr("transform", `translate(${translate})scale(${scale})`);
 
+        // g.transition().duration(750).call(
+        //   zoom.transform,
+        //   d3.zoomIdentity
+        //     .translate(width / 2 - scale * x, height / 2 - scale * y)
+        //     .scale(scale)
+        // );
+          
         linkContainer
           .transition()
           .duration(750)
