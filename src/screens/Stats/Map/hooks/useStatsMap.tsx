@@ -33,8 +33,8 @@ function useStatsMap(
     const color = d3.scaleQuantize([0, 1], colorScale);
 
     const getStateFill = (d: Feature) => {
-      // @ts-ignore
       const stateParks = parks.filter((park) =>
+      // @ts-ignore
         park.states.includes(STATES_MAP[d.properties?.name])
       );
       const total = stateParks.filter((selected) =>
@@ -95,6 +95,8 @@ function useStatsMap(
         .data(usData.features)
         .join("path")
         .attr("fill", (d) => getStateFill(d))
+        .attr("stroke", "#d8d2bc")
+        .attr("stroke-width", "0.7")
         .attr("d", path)
         .enter()
         .append("path")
