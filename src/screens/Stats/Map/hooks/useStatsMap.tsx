@@ -8,7 +8,6 @@ import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import { STATES_MAP } from "../../../../constants";
 import usMapData from "data/us";
-import styles from "../Map.module.scss";
 
 function useStatsMap(
   width: number,
@@ -64,7 +63,7 @@ function useStatsMap(
 
       const path = geoPath().projection(projection);
       const svg = d3.select("#statsMap");
-      const legend = d3.select("#legend");
+      // const legend = d3.select("#legend");
 
       // Remove previous map before drawing a new one
       svg.select("g").remove();
@@ -73,23 +72,6 @@ function useStatsMap(
       svg.attr("width", width).attr("height", height + bottomPadding);
 
       const g = svg.append("g");
-
-      legend
-        .append("rect")
-        .attr("width", 20)
-        .attr("height", 10)
-        .style("fill", "#eae3d1");
-      legend
-        .append("rect")
-        .attr("width", 20)
-        .attr("height", 10)
-        .style("fill", "#dce8ce");
-      legend
-        .append("circle")
-        .attr("cx", 200)
-        .attr("cy", 160)
-        .attr("r", 6)
-        .style("fill", "#eae3d1");
 
       g.selectAll("path")
         .data(usData.features)
