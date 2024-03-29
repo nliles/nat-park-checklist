@@ -4,6 +4,7 @@ import { Park } from "types/park";
 import useMap from "components/Map/hooks/useMap";
 import useTooltip from "components/Map/hooks/useTooltip";
 import styles from "./Map.module.scss";
+import useStateMap from "./hooks/useStateMap";
 
 type MapProps = {
   parks: Park[];
@@ -12,6 +13,7 @@ type MapProps = {
   showBorder?: boolean;
   defaultWidth?: number;
   handleClick?: (id: string, parkCode: string, designation: string) => void;
+  stateMap?: boolean;
 };
 
 const Map = ({
@@ -21,6 +23,7 @@ const Map = ({
   showBorder = true,
   defaultWidth = window.innerWidth,
   handleClick,
+  stateMap = false,
 }: MapProps) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(defaultWidth);
@@ -42,7 +45,8 @@ const Map = ({
 
   const formattedSelected = Object.values(selectedParks).flat(1);
 
-  useMap(width, height, parks, formattedSelected, showTree, handleClick);
+  useMap(width, height, parks, formattedSelected, showTree, handleClick, stateMap);
+  useStateMap(width, height, parks, formattedSelected, stateMap)
   useTooltip();
 
   return (
@@ -53,6 +57,7 @@ const Map = ({
       })}
     >
       <svg id="map" />
+      <div id="legend"></div>
     </div>
   );
 };

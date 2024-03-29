@@ -23,7 +23,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
       <Header title="My Park Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
-        <div className={styles.progressContainer}>
           <div className={styles.container}>
             <span className={styles.total}>{`${percentage}%`}</span>
             <span>of units visited</span>
@@ -43,15 +42,13 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               />
             </div>
           </div>
-          </div>
         </div>
         <div className={styles.columnTwo}>
           <div className={styles.mapContainer}>
             <Map
-              defaultWidth={0}
               selectedParks={totalParks}
               parks={parks}
-              showTree={false}
+              stateMap={true}
               showBorder={false}
             />
           </div>

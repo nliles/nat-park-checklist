@@ -23,7 +23,8 @@ function useMap(
   parks: Park[],
   selectedParks: string[],
   showTree: boolean,
-  handleClick?: (id: string, parkCode: string, designation: string) => void
+  handleClick?: (id: string, parkCode: string, designation: string) => void,
+  stateMap?: boolean,
 ) {
   useEffect(() => {
     const drawMap = () => {
@@ -238,8 +239,10 @@ function useMap(
       }
     };
 
-    drawMap();
-  }, [parks, height, width, showTree, handleClick, selectedParks]);
+    if (!stateMap) {
+      drawMap();
+  }
+  }, [parks, height, width, showTree, handleClick, selectedParks, stateMap]);
 }
 
 export default useMap;
