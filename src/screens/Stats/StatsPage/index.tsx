@@ -44,10 +44,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         </div>
         <div className={styles.columnTwo}>
           <div className={styles.mapContainer}>
-            <Map
-              selectedParks={totalParks}
-              parks={parks}
-            />
+            <Map selectedParks={totalParks} parks={parks} />
           </div>
           <DataTable
             count={totalParks.length}

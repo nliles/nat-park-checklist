@@ -14,19 +14,35 @@ function useStatsMap(
   width: number,
   height: number,
   parks: Park[],
-  selectedParks: string[],
+  selectedParks: string[]
 ) {
   useEffect(() => {
-    const colorScale = ["#eae3d1", "#dce8ce", "#d3e2c2", "#cadcb6", "#c2d7aa", "#b9d19e", "#a8c686", "#818e67","#6e7e51", "#5d6e3b", "#4b5e26"];
+    const colorScale = [
+      "#eae3d1",
+      "#dce8ce",
+      "#d3e2c2",
+      "#cadcb6",
+      "#c2d7aa",
+      "#b9d19e",
+      "#a8c686",
+      "#818e67",
+      "#6e7e51",
+      "#5d6e3b",
+      "#4b5e26",
+    ];
     const color = d3.scaleQuantize([0, 1], colorScale);
 
     const getStateFill = (d: Feature) => {
-        // @ts-ignore
-        const stateParks = parks.filter(park => park.states.includes(STATES_MAP[d.properties?.name])); 
-        const total = stateParks.filter(selected => selectedParks.includes(selected.id))
-        const percentage = (total.length || 0) / (stateParks.length || 0);
-        return color(percentage);
-    }
+      // @ts-ignore
+      const stateParks = parks.filter((park) =>
+        park.states.includes(STATES_MAP[d.properties?.name])
+      );
+      const total = stateParks.filter((selected) =>
+        selectedParks.includes(selected.id)
+      );
+      const percentage = (total.length || 0) / (stateParks.length || 0);
+      return color(percentage);
+    };
 
     const drawMap = () => {
       // Map data
@@ -58,21 +74,27 @@ function useStatsMap(
 
       const g = svg.append("g");
 
-      legend.append("rect")
-      .attr("width", 20)
-      .attr("height", 10)
-      .style("fill", "#eae3d1");
-      legend.append("rect")
-      .attr("width", 20)
-      .attr("height", 10)
-      .style("fill", "#dce8ce");
-      legend.append("circle").attr("cx",200).attr("cy",160).attr("r", 6).style("fill", "#eae3d1")
+      legend
+        .append("rect")
+        .attr("width", 20)
+        .attr("height", 10)
+        .style("fill", "#eae3d1");
+      legend
+        .append("rect")
+        .attr("width", 20)
+        .attr("height", 10)
+        .style("fill", "#dce8ce");
+      legend
+        .append("circle")
+        .attr("cx", 200)
+        .attr("cy", 160)
+        .attr("r", 6)
+        .style("fill", "#eae3d1");
 
-      g
-        .selectAll("path")
+      g.selectAll("path")
         .data(usData.features)
         .join("path")
-        .attr("fill", d => getStateFill(d))
+        .attr("fill", (d) => getStateFill(d))
         .attr("d", path)
         .enter()
         .append("path")
@@ -81,7 +103,7 @@ function useStatsMap(
         .attr("d", path);
     };
     if (parks.length) {
-        drawMap();
+      drawMap();
     }
   }, [height, width, parks, selectedParks]);
 }
