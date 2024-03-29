@@ -100,8 +100,6 @@ function useStatsMap(
         .attr("d", path)
         .enter()
         .append("path")
-        .attr("vector-effect", "non-scaling-stroke")
-        .attr("class", styles.state)
         .attr("d", path);
     };
     if (parks.length) {
