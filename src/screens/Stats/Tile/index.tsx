@@ -16,23 +16,23 @@ const Tile = ({ completed, total, title }: StatsPageProps) => {
             <span className={styles.tileHeader}>{`${startCase(title)}s`}</span>
         <div className={styles.tileContent}>
         <div className={styles.testOne}>
-            <div className={styles.tileWrapper}>
-            <CircularProgressbar
-                value={percentage}
-                text={`${percentage}%`}
-                styles={buildStyles({
-                textSize: '2rem',
-                strokeLinecap: "round",
-                textColor: "#4b5e26",
-                pathColor: "#4b5e26",
-                trailColor: "#a8c686",
-                })}
-            />
-        </div>
-        </div>
-        <div className={styles.testTwo}>
         <p><span className={styles.blockCount}><span className={styles.boldCount}>{completed}</span>{' '}</span>{`out of ${total}`}</p>
         </div>
+        <div className={styles.testTwo}>
+          <div className={styles.tileWrapper}>
+              <CircularProgressbar
+                  value={percentage}
+                  text={`${percentage}%`}
+                  styles={buildStyles({
+                  textSize: '2rem',
+                  strokeLinecap: "round",
+                  textColor: "#4b5e26",
+                  pathColor: "#4b5e26",
+                  trailColor: "#a8c686",
+                  })}
+              />
+          </div>
+          </div>
         </div>
         </div>
   );
