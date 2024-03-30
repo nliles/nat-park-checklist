@@ -36,7 +36,7 @@ const Map = ({
 
   useStatsMap(width, height, parks, formattedSelected);
   return (
-    <div ref={mapContainerRef} className={styles.mapContainer}>
+    <div ref={mapContainerRef} className={styles.mapContainer} id="mapContainer">
       <svg id="legend" width="260" height="50" />
       <svg id="statsMap" />
     </div>
