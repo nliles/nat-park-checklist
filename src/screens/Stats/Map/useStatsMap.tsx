@@ -75,8 +75,6 @@ function useStatsMap(
       //Initialize legend
       const legendItemHeight = 7;
       const legendItemWidth = 20;
-      const xOffset = 0;
-      const yOffset = 0;
       const legend = d3
         .select("#legend")
         .attr("transform", `translate(${width - 260},0)`)
@@ -92,7 +90,7 @@ function useStatsMap(
         .attr("height", legendItemHeight)
         .style("fill", (d) => color(d))
         .attr("transform", (d, i) => {
-          const x = yOffset + (legendItemWidth) * i;
+          const x = legendItemWidth * i;
           return `translate(${x}, 18)`;
         });
 
@@ -103,42 +101,40 @@ function useStatsMap(
         .attr("class", "tickGroup")
         .style("font-size", "10")
         .style("text-anchor", "middle")
-        .attr("transform", `translate(50, 28)`)
-
+        .attr("transform", `translate(50, 28)`);
 
       // Add legend title
       legendTicksGroup
-        .append('text')
+        .append("text")
         .attr("transform", `translate(0, -20)`)
         .style("font-weight", "bold")
-        .attr('x1', 0)
-        .attr('y1', -20)
+        .attr("x1", 0)
+        .attr("y1", -20)
         .attr("dy", ".35em")
-        .text('Parks visited (%)');
+        .text("Parks visited (%)");
 
       legendTicksGroup
         .selectAll()
         .data([1, 2, 3, 4, 5, 6, 7, 8, 9])
         .enter()
-        .append('g')
+        .append("g")
         .attr("class", "tick")
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
-          const x = -50 + (legendItemWidth * tickIndex);
+          const x = -50 + legendItemWidth * tickIndex;
           return `translate(${x}, -3)`;
-        })
+        });
 
       d3.selectAll(".tick")
-         .append("line")
-         .attr("stroke", "black")
-         .attr('y2', 6)
-         .attr('y1', -`${legendItemHeight}`)
+        .append("line")
+        .attr("stroke", "black")
+        .attr("y2", 6)
+        .attr("y1", -`${legendItemHeight}`);
 
       d3.selectAll(".tick")
-         .append("text")
-         .attr('dy', "1.75em")
-         .text((d) => `${d}0`);
-
+        .append("text")
+        .attr("dy", "1.75em")
+        .text((d) => `${d}0`);
 
       g.selectAll("path")
         .data(usData.features)
