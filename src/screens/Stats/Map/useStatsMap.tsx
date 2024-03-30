@@ -6,7 +6,7 @@ import { Park } from "types/park";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
-import { STATES_MAP } from "../../../../constants";
+import { STATES_MAP } from "../../../constants";
 import usMapData from "data/us";
 
 function useStatsMap(
@@ -30,10 +30,9 @@ function useStatsMap(
       "#4b5e26",
     ];
     const color = d3.scaleQuantize([0, 1], colorScale);
-
     const getStateFill = (d: Feature) => {
       const stateParks = parks.filter((park) =>
-      // @ts-ignore
+        // @ts-ignore
         park.states.includes(STATES_MAP[d.properties?.name])
       );
       const total = stateParks.filter((selected) =>
@@ -63,7 +62,6 @@ function useStatsMap(
 
       const path = geoPath().projection(projection);
       const svg = d3.select("#statsMap");
-      // const legend = d3.select("#legend");
 
       // Remove previous map before drawing a new one
       svg.select("g").remove();
@@ -72,6 +70,32 @@ function useStatsMap(
       svg.attr("width", width).attr("height", height + bottomPadding);
 
       const g = svg.append("g");
+
+      //Initialize legend
+      const legendItemHeight = 5;
+      const legendItemWidth = 20;
+      const legendSpacing = 1;
+      const xOffset = 0;
+      const yOffset = 0;
+      const legend = d3
+        .select("#legend")
+        .attr("transform", `translate(${width - 260},0)`)
+        .append("svg")
+        .selectAll()
+        .data([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]);
+
+      //Create legend items
+      legend
+        .enter()
+        .append("rect")
+        .attr("width", legendItemWidth)
+        .attr("height", legendItemHeight)
+        .style("fill", (d) => color(d))
+        .attr("transform", (d, i) => {
+          var y = xOffset;
+          var x = yOffset + (legendItemWidth + legendSpacing) * i;
+          return `translate(${x}, ${y})`;
+        });
 
       g.selectAll("path")
         .data(usData.features)

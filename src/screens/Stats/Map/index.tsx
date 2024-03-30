@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Park } from "types/park";
-import useStatsMap from "./hooks/useStatsMap";
+import useStatsMap from "./useStatsMap";
 import styles from "./Map.module.scss";
 
 type MapProps = {
@@ -37,7 +37,7 @@ const Map = ({
   useStatsMap(width, height, parks, formattedSelected);
   return (
     <div ref={mapContainerRef} className={styles.mapContainer}>
-      <svg id="legend" width="100" height="20" />
+      <svg id="legend" width="260" height="50" />
       <svg id="statsMap" />
     </div>
   );
