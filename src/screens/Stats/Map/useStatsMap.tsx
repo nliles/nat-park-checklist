@@ -63,10 +63,13 @@ function useStatsMap(
       const svg = d3.select("#statsMap");
       const legendSvg = d3.select("#legend");
       // Tooltip
-      d3.select('#mapContainer')
-        .append('div')
-        .attr('id', 'tooltip')
-        .attr('style', 'position: absolute; background: white; border: 1px solid black; opacity: 0;');
+      d3.select("#mapContainer")
+        .append("div")
+        .attr("id", "tooltip")
+        .attr(
+          "style",
+          "position: absolute; background: white; border: 1px solid black; opacity: 0;"
+        );
 
       // Remove previous map before drawing a new one
       svg.select("g").remove();
@@ -141,27 +144,34 @@ function useStatsMap(
         .text((d) => `${d}0`);
 
       // add states
-      statesGroup.selectAll("path")
+      statesGroup
+        .selectAll("path")
         .data(usData.features)
         .join("path")
         .attr("fill", (d) => color(getStatePercentage(d)))
         .attr("stroke", "white")
         .attr("stroke-width", "1")
-        .on('mouseover', function(e, d) {
+        .on("mouseover", function (e, d) {
           const percentage = Math.round(getStatePercentage(d) * 100);
-          console.log(percentage)
-          d3.select('#tooltip').transition().duration(200).style('opacity', 1).text(`${percentage}%`);
+          console.log(percentage);
+          d3.select("#tooltip")
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .text(`${percentage}%`);
         })
-        .on('mouseout', function() {
-          d3.select('#tooltip').style('opacity', 0)
-          })
-          .on('mousemove', function(event, d) {
-          d3.select('#tooltip').style('left', (event.pageX+10) + 'px').style('top', (event.pageY+10) + 'px')
-          })
+        .on("mouseout", function () {
+          d3.select("#tooltip").style("opacity", 0);
+        })
+        .on("mousemove", function (event, d) {
+          d3.select("#tooltip")
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY + 10 + "px");
+        })
         .attr("d", path)
         .enter()
         .append("path")
-        .attr("d", path)
+        .attr("d", path);
     };
     if (parks.length) {
       drawMap();
