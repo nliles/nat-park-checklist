@@ -15,11 +15,11 @@ type DropdownProps = {
     state?: string | null;
   }) => void;
   label?: string;
-  items: string[];
+  items: { name: string, value: string}[];
   initialSelectedItem?: string;
   className?: string;
   formatListItem?: (item: string) => string;
-  formatSelectedItem?: (item: string) => string;
+  formatSelectedItem?: (item: { name: string; value: string }) => string;
   keyValue: string;
 };
 
@@ -30,9 +30,10 @@ const Dropdown = ({
   initialSelectedItem,
   className,
   formatListItem = (item: string) => item,
-  formatSelectedItem = (item: string) => item,
+  formatSelectedItem = (item: { name: string; value: string }) => item.value,
   keyValue,
 }: DropdownProps) => {
+  const foundItem = items.find(item => item.value === initialSelectedItem)
   const {
     getToggleButtonProps,
     getMenuProps,
@@ -42,18 +43,18 @@ const Dropdown = ({
     selectItem,
     selectedItem,
   } = useSelect({
-    defaultSelectedItem: initialSelectedItem,
+    defaultSelectedItem: foundItem,
     items: items,
     onSelectedItemChange: ({ selectedItem }) => {
       if (keyValue) {
-        handleClick({ [keyValue]: selectedItem });
+        handleClick({ [keyValue]: selectedItem?.value || "" });
       }
     },
   });
 
   const clearItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation();
-    selectItem("");
+    selectItem(null);
   };
 
   return (
@@ -104,11 +105,10 @@ const Dropdown = ({
               [styles.selected]: item === selectedItem,
               [styles.highlighted]: index === highlightedIndex,
             })}
-            id={item}
-            key={item}
+            key={item.value}
             {...getItemProps({ item, index })}
           >
-            {formatListItem ? formatListItem(item) : item}
+            {formatListItem ? formatListItem(item.value) : item.value}
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import { Park } from "types/park";
 import ParkDesignation from "enum/ParkDesignation";
+import camelCase from "lodash/camelCase";
 import {
   NAT_PARK_CODES,
   NAT_BATTLEFIELD_CODES,
@@ -32,8 +33,8 @@ import {
   SEQUOIA_NAT_PARK,
 } from "./formattedParks";
 
-export const LIST_OPTIONS: ParkDesignation[] = [
-  ...Object.values(ParkDesignation),
+export const DESIGNATION_OPTIONS = [
+  ...Object.values(ParkDesignation).map((designation) => ({ name: camelCase(designation), value: designation }))
 ];
 
 export type ParkOverride = {
