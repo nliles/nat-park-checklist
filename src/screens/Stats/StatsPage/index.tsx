@@ -2,11 +2,11 @@ import { TOTAL_UNITS } from "../../../constants";
 import { Park } from "types/park";
 import { SelectedParks } from "types";
 import Header from "components/Header";
-import Map from "../Map";
+import StatsMap from "../StatsMap";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import DataTable from "screens/Stats/DataTable";
 import DataBars from "screens/Stats/DataBars";
-import styles from "./index.module.scss";
+import styles from "./StatsPage.module.scss";
 
 type StatsPageProps = {
   selected: SelectedParks;
@@ -44,7 +44,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         </div>
         <div className={styles.columnTwo}>
           <div className={styles.mapContainer}>
-            <Map selectedParks={totalParks} parks={parks} />
+            <StatsMap selectedParks={totalParks} parks={parks} />
           </div>
           <DataTable
             count={totalParks.length}

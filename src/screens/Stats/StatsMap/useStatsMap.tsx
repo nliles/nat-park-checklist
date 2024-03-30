@@ -18,18 +18,19 @@ function useStatsMap(
   useEffect(() => {
     const colorScale = [
       "#eae3d1",
-      "#d3e2c2",
+      "#e9f0e0",
       "#cadcb6",
-      "#c2d7aa",
-      "#b9d19e",
-      "#a8c686",
+      "#b7bea8",
+      "#a5ae92",
+      "#939e7c",
       "#818e67",
       "#6e7e51",
       "#5d6e3b",
       "#4b5e26",
     ];
     const color = d3.scaleQuantize([0, 1], colorScale);
-    const getStateFill = (d: Feature) => {
+
+    const getStatePercentage = (d: Feature) => {
       const stateParks = parks.filter((park) =>
         // @ts-ignore
         park.states.includes(STATES_MAP[d.properties?.name])
@@ -37,8 +38,7 @@ function useStatsMap(
       const total = stateParks.filter((selected) =>
         selectedParks.includes(selected.id)
       );
-      const percentage = (total.length || 0) / (stateParks.length || 0);
-      return color(percentage);
+      return (total.length || 0) / (stateParks.length || 0);
     };
 
     const drawMap = () => {
@@ -62,6 +62,14 @@ function useStatsMap(
       const path = geoPath().projection(projection);
       const svg = d3.select("#statsMap");
       const legendSvg = d3.select("#legend");
+      // Tooltip
+      d3.select("#mapContainer")
+        .append("div")
+        .attr("id", "tooltip")
+        .attr(
+          "style",
+          "position: absolute; background: white; border: 1px solid black; opacity: 0;"
+        );
 
       // Remove previous map before drawing a new one
       svg.select("g").remove();
@@ -69,8 +77,7 @@ function useStatsMap(
 
       // Draw the map
       svg.attr("width", width).attr("height", height + bottomPadding);
-
-      const g = svg.append("g");
+      const statesGroup = svg.append("g");
 
       //Initialize legend
       const legendItemHeight = 7;
@@ -136,12 +143,31 @@ function useStatsMap(
         .attr("dy", "1.75em")
         .text((d) => `${d}0`);
 
-      g.selectAll("path")
+      // add states
+      statesGroup
+        .selectAll("path")
         .data(usData.features)
         .join("path")
-        .attr("fill", (d) => getStateFill(d))
-        .attr("stroke", "#d8d2bc")
-        .attr("stroke-width", "0.7")
+        .attr("fill", (d) => color(getStatePercentage(d)))
+        .attr("stroke", "white")
+        .attr("stroke-width", "1")
+        .on("mouseover", function (e, d) {
+          const percentage = Math.round(getStatePercentage(d) * 100);
+          console.log(percentage);
+          d3.select("#tooltip")
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .text(`${percentage}%`);
+        })
+        .on("mouseout", function () {
+          d3.select("#tooltip").style("opacity", 0);
+        })
+        .on("mousemove", function (event, d) {
+          d3.select("#tooltip")
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY + 10 + "px");
+        })
         .attr("d", path)
         .enter()
         .append("path")
