@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Park } from "types/park";
 import useStatsMap from "./useStatsMap";
-import styles from "./Map.module.scss";
+import styles from "./StatsMap.module.scss";
 
 type MapProps = {
   parks: Park[];
@@ -9,7 +9,7 @@ type MapProps = {
   defaultWidth?: number;
 };
 
-const Map = ({
+const StatsMap = ({
   parks = [],
   selectedParks = [],
   defaultWidth = window.innerWidth,
@@ -47,4 +47,4 @@ const Map = ({
   );
 };
 
-export default Map;
+export default StatsMap;
