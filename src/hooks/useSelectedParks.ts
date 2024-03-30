@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getParks } from "services/park.service";
 import toast from "react-hot-toast";
-import { loadState, saveState } from "storage/sessionStorage";
 import { SelectedParks } from "types";
 import copy from "./copy";
 
@@ -33,19 +32,13 @@ function useSelectedParks(isLoggedIn: boolean) {
     defaultSelectedValues
   );
   const [isLoading, setIsLoading] = useState(false);
-  const storageKey = "selectedParks";
 
   useEffect(() => {
     const fetchParks = async () => {
       try {
         setIsLoading(true);
-        let data = loadState(storageKey) || [];
-        if (!data.length) {
-          const { parks } = await getParks();
-          data = parks;
-          saveState(storageKey, JSON.stringify(data));
-        }
-        setSelectedParks(data);
+        const { parks } = await getParks();
+        setSelectedParks(parks);
       } catch (err: any) {
         if (err?.status !== 401) {
           toast.error(copy.selectedParksError);
@@ -57,7 +50,6 @@ function useSelectedParks(isLoggedIn: boolean) {
     if (isLoggedIn) {
       fetchParks();
     } else {
-      sessionStorage.removeItem(storageKey);
       setSelectedParks(defaultSelectedValues);
     }
   }, [isLoggedIn]);
