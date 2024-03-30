@@ -18,7 +18,6 @@ function useStatsMap(
   useEffect(() => {
     const colorScale = [
       "#eae3d1",
-      "#dce8ce",
       "#d3e2c2",
       "#cadcb6",
       "#c2d7aa",
@@ -62,9 +61,11 @@ function useStatsMap(
 
       const path = geoPath().projection(projection);
       const svg = d3.select("#statsMap");
+      const legendSvg = d3.select("#legend");
 
       // Remove previous map before drawing a new one
       svg.select("g").remove();
+      legendSvg.select("g").remove();
 
       // Draw the map
       svg.attr("width", width).attr("height", height + bottomPadding);
@@ -72,17 +73,14 @@ function useStatsMap(
       const g = svg.append("g");
 
       //Initialize legend
-      const legendItemHeight = 5;
+      const legendItemHeight = 7;
       const legendItemWidth = 20;
-      const legendSpacing = 1;
-      const xOffset = 0;
-      const yOffset = 0;
       const legend = d3
         .select("#legend")
         .attr("transform", `translate(${width - 260},0)`)
-        .append("svg")
+        .append("g")
         .selectAll()
-        .data([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]);
+        .data([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]);
 
       //Create legend items
       legend
@@ -92,10 +90,51 @@ function useStatsMap(
         .attr("height", legendItemHeight)
         .style("fill", (d) => color(d))
         .attr("transform", (d, i) => {
-          var y = xOffset;
-          var x = yOffset + (legendItemWidth + legendSpacing) * i;
-          return `translate(${x}, ${y})`;
+          const x = legendItemWidth * i;
+          return `translate(${x}, 18)`;
         });
+
+      //Create legend ticks
+      const legendTicksGroup = d3
+        .select("#legend")
+        .append("g")
+        .attr("class", "tickGroup")
+        .style("font-size", "10")
+        .style("text-anchor", "middle")
+        .attr("transform", `translate(50, 28)`);
+
+      // Add legend title
+      legendTicksGroup
+        .append("text")
+        .attr("transform", `translate(0, -20)`)
+        .style("font-weight", "bold")
+        .attr("x1", 0)
+        .attr("y1", -20)
+        .attr("dy", ".35em")
+        .text("Parks visited (%)");
+
+      legendTicksGroup
+        .selectAll()
+        .data([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .enter()
+        .append("g")
+        .attr("class", "tick")
+        .attr("transform", (d, i) => {
+          const tickIndex = i + 1;
+          const x = -50 + legendItemWidth * tickIndex;
+          return `translate(${x}, -3)`;
+        });
+
+      d3.selectAll(".tick")
+        .append("line")
+        .attr("stroke", "black")
+        .attr("y2", 6)
+        .attr("y1", -`${legendItemHeight}`);
+
+      d3.selectAll(".tick")
+        .append("text")
+        .attr("dy", "1.75em")
+        .text((d) => `${d}0`);
 
       g.selectAll("path")
         .data(usData.features)
