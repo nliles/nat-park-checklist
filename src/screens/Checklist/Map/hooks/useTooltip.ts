@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import cn from "classnames";
-import { hideTooltip } from "components/Map/handleTooltip";
+import { hideTooltip } from "screens/Checklist/Map/handleTooltip";
 import tooltipStyles from "components/Tooltip/Tooltip.module.scss";
 import styles from "../Map.module.scss";
 

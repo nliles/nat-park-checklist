@@ -1,2 +1,2 @@
 # Ignore artifacts:
-src/components/Map/us.ts
+src/data/us.ts

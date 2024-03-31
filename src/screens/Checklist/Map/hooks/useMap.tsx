@@ -11,7 +11,7 @@ import {
   handleMouseOver,
   handleMouseOut,
   handleMouseMove,
-} from "components/Map/handleTooltip";
+} from "screens/Checklist/Map/handleTooltip";
 import styles from "../Map.module.scss";
 
 const TREE_MARKER_HEIGHT = 45;
@@ -22,7 +22,6 @@ function useMap(
   height: number,
   parks: Park[],
   selectedParks: string[],
-  showTree: boolean,
   handleClick?: (id: string, parkCode: string, designation: string) => void
 ) {
   useEffect(() => {
@@ -98,14 +97,13 @@ function useMap(
           .data(parks)
           .enter()
           .append("circle")
-          .classed(styles.mobileCircle, showTree)
+          .attr("class", styles.mobileCircle)
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
           .style("fill", (d) => getMarkerFill(d.id));
 
         // Tree map markers
-        if (showTree) {
           // add link container
           linkContainer = g
             .selectAll("markers")
@@ -172,7 +170,6 @@ function useMap(
               handleMouseOver(d);
             });
         }
-      }
 
       d.on("click", handleStateZoom);
       d.on("mouseover", ({ currentTarget }) => {
@@ -239,7 +236,7 @@ function useMap(
     };
 
     drawMap();
-  }, [parks, height, width, showTree, handleClick, selectedParks]);
+  }, [parks, height, width, handleClick, selectedParks]);
 }
 
 export default useMap;

@@ -4,7 +4,7 @@ import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
-import Map from "components/Map";
+import Map from "screens/Checklist/Map";
 import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
 import Dropdown, { DropdownItem } from "components/ui/Dropdown";
