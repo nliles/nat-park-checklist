@@ -3,9 +3,11 @@ import ParkDesignation from "enum/ParkDesignation";
 
 const getParkDesignation = (
   designation: string,
-  parkCode: string,
+  parkCode: string
 ): ParkDesignation => {
-  const foundDesignation = DESIGNATION_OPTIONS.find(item => item.name === designation);
+  const foundDesignation = DESIGNATION_OPTIONS.find(
+    (item) => item.name === designation
+  );
   if (foundDesignation) {
     return foundDesignation.value as ParkDesignation;
   }

@@ -34,7 +34,10 @@ import {
 } from "./formattedParks";
 
 export const DESIGNATION_OPTIONS = [
-  ...Object.values(ParkDesignation).map((designation) => ({ name: startCase(designation), value: designation }))
+  ...Object.values(ParkDesignation).map((designation) => ({
+    name: startCase(designation),
+    value: designation,
+  })),
 ];
 
 export type ParkOverride = {

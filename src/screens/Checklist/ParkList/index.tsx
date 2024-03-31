@@ -15,11 +15,7 @@ type ListProps = {
   handleOnSubmit: () => void;
 };
 
-const ParkList = ({
-  parks = [],
-  listTitle,
-  handleOnSubmit,
-}: ListProps) => {
+const ParkList = ({ parks = [], listTitle, handleOnSubmit }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const {
     handleSubmit,

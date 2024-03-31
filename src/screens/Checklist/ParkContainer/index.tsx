@@ -18,7 +18,7 @@ import copy from "./copy";
 const ParkContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const query = useQuery();
-  const designation = query.get("designation") || '';
+  const designation = query.get("designation") || "";
   const selectedState = query.get("state")?.toUpperCase();
   const selectedDesignation = camelCase(designation) as ParkDesignationType;
   const { isLoading, parks } = useParks(selectedDesignation, selectedState);
@@ -48,23 +48,23 @@ const ParkContainer = () => {
   const formData: SelectedParks = watch("parkData");
 
   const handleOnSubmit = async () => {
-      try {
-        if (selectedDesignation) {
-          const { parks } = await updateParkDesignation(
-            selectedDesignation as ParkDesignationType,
-            formData[selectedDesignation as ParkDesignationType]
-          );
-          setSelectedParks(parks);
-        } else {
-          const { parks } = await updateParks(formData);
-          setSelectedParks(parks);
-        }
-        toast.success(copy.updateSuccess);
-      } catch (err: any) {
-        if (err?.status !== 401) {
-          toast.error(copy.updateError);
-        }
+    try {
+      if (selectedDesignation) {
+        const { parks } = await updateParkDesignation(
+          selectedDesignation as ParkDesignationType,
+          formData[selectedDesignation as ParkDesignationType]
+        );
+        setSelectedParks(parks);
+      } else {
+        const { parks } = await updateParks(formData);
+        setSelectedParks(parks);
       }
+      toast.success(copy.updateSuccess);
+    } catch (err: any) {
+      if (err?.status !== 401) {
+        toast.error(copy.updateError);
+      }
+    }
   };
 
   const handleParamUpdate = ({
@@ -83,13 +83,19 @@ const ParkContainer = () => {
     });
   };
 
-  const handleListItemChange = ({ designation, state }: { designation?: string | null, state?: string | null }) => {
+  const handleListItemChange = ({
+    designation,
+    state,
+  }: {
+    designation?: string | null;
+    state?: string | null;
+  }) => {
     if (isLoggedIn && isDirty) {
       handleOnSubmit();
     }
     handleParamUpdate({ designation, state });
   };
-  
+
   return (
     <FormProvider {...methods}>
       <ParkView

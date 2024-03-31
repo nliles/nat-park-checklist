@@ -17,7 +17,13 @@ import copy from "./copy";
 import styles from "./ParkView.module.scss";
 
 export type ParkViewProps = {
-  handleListItemChange: ({ designation, state }: { designation?: string | null; state?: string | null}) => void;
+  handleListItemChange: ({
+    designation,
+    state,
+  }: {
+    designation?: string | null;
+    state?: string | null;
+  }) => void;
   isLoading?: boolean;
   parks: Park[];
   selectedParks?: string[];
@@ -45,8 +51,10 @@ const ParkView = ({
     ? `${dropdownItem}s`
     : `${copy.allDesignationTitle}s`;
   const formatSelectedItem = (item: DropdownItem) => `${startCase(item.name)}s`;
-  const stateText = selectedState ? `(${selectedState})` : '';
-  const listTitle = selectedDesignation ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
+  const stateText = selectedState ? `(${selectedState})` : "";
+  const listTitle = selectedDesignation
+    ? `${dropdownItem} checklist ${stateText}`
+    : `${copy.allDesignationTitle} checklist ${stateText}`;
 
   const handleClick = (id: string, parkCode: string, designation: string) => {
     const formattedName = getParkDesignation(designation, parkCode);
@@ -64,10 +72,10 @@ const ParkView = ({
   };
 
   const selectedData = selectedDesignation
-  ? formData[selectedDesignation]
-  : allDesignations;
+    ? formData[selectedDesignation]
+    : allDesignations;
 
-  const found = parks.filter(park => selectedData.includes(park.id))
+  const found = parks.filter((park) => selectedData.includes(park.id));
 
   const totalProps = {
     count: found.length || 0,
@@ -105,10 +113,10 @@ const ParkView = ({
                 />
               </div>
               {(selectedDesignation || selectedState) && (
-              <Total
-                {...totalProps}
-                styleName={cn(styles.count, styles.desktopCount)}
-              />
+                <Total
+                  {...totalProps}
+                  styleName={cn(styles.count, styles.desktopCount)}
+                />
               )}
             </div>
             <Map
