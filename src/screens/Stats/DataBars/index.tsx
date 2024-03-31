@@ -20,7 +20,7 @@ const DataBars = ({ items }: DataBarsProps) => {
         return (
           <div className={styles.progress} key={option}>
             <div className={styles.text}>
-              <span>{startCase(option)}</span>
+              <span>{`${startCase(option)}s`}</span>
               <span className={styles.perc}>{`${percentage}%`}</span>
             </div>
             <ProgressBar completed={completed} total={total} />
