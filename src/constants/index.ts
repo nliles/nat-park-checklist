@@ -1,6 +1,6 @@
 import { Park } from "types/park";
 import ParkDesignation from "enum/ParkDesignation";
-import camelCase from "lodash/camelCase";
+import startCase from "lodash.startcase";
 import {
   NAT_PARK_CODES,
   NAT_BATTLEFIELD_CODES,
@@ -34,7 +34,7 @@ import {
 } from "./formattedParks";
 
 export const DESIGNATION_OPTIONS = [
-  ...Object.values(ParkDesignation).map((designation) => ({ name: camelCase(designation), value: designation }))
+  ...Object.values(ParkDesignation).map((designation) => ({ name: startCase(designation), value: designation }))
 ];
 
 export type ParkOverride = {
