@@ -15,12 +15,12 @@ const DataBars = ({ items }: DataBarsProps) => {
     <div className={styles.container}>
       {itemKeys?.map((option) => {
         const total = getParkTotal(option);
-        const completed = items[option]?.length || 0;
+        const completed = items[option].length;
         const percentage = Math.round((completed / total) * 100);
         return (
           <div className={styles.progress} key={option}>
             <div className={styles.text}>
-              <span>{startCase(option)}</span>
+              <span>{`${startCase(option)}s`}</span>
               <span className={styles.perc}>{`${percentage}%`}</span>
             </div>
             <ProgressBar completed={completed} total={total} />

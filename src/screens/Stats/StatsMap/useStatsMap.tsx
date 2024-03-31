@@ -75,8 +75,8 @@ function useStatsMap(
         );
 
       // Remove previous map before drawing a new one
-      svg.select("g").remove();
-      legendSvg.select("g").remove();
+      svg.selectAll("g > *").remove();
+      legendSvg.selectAll("g > *").remove();
 
       // Draw the map
       svg.attr("width", width).attr("height", height + bottomPadding);
