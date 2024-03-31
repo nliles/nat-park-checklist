@@ -1,4 +1,3 @@
-import cn from "classnames";
 import { Park } from "types/park";
 import useMap from "screens/Checklist/Map/hooks/useMap";
 import useContainerWidth from "hooks/useContainerWidth";
@@ -8,8 +7,6 @@ import styles from "./Map.module.scss";
 type MapProps = {
   parks: Park[];
   selectedParks?: string[];
-  showTree?: boolean;
-  showBorder?: boolean;
   defaultWidth?: number;
   handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
@@ -17,7 +14,6 @@ type MapProps = {
 const Map = ({
   parks = [],
   selectedParks = [],
-  showBorder = true,
   defaultWidth = window.innerWidth,
   handleClick,
 }: MapProps) => {
@@ -30,9 +26,7 @@ const Map = ({
   return (
     <div
       ref={containerRef}
-      className={cn(styles.mapContainer, {
-        [styles.border]: showBorder,
-      })}
+      className={styles.mapContainer}
     >
       <svg id="map" />
     </div>
