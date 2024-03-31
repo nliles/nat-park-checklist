@@ -10,6 +10,8 @@
 .table {
   width: 90%;
   border-collapse: collapse;
+  box-shadow: 0 2px 32px 0 #0000001a;
+  border-bottom: 2px solid $green;
 }
 
 .thead,
@@ -18,13 +20,24 @@
   color: $green;
 }
 
+.tfoot tr {
+  .th,
+  td {
+    border-top: 1px solid $green;
+  }
+}
+
 .row {
-  border-top: 2px solid $green;
-  border-bottom: 1px solid $green;
+  background: $green;
+  color: $white;
 }
 
 .tr {
   border-bottom: 1px solid $lightGray;
+}
+
+.tr:nth-child(even) {
+  background: #fafafa;
 }
 
 .th,
@@ -38,5 +51,9 @@
 .td {
   &:first-of-type {
     width: 70%;
+    border-radius: 5px 0 0 0;
+  }
+  &:last-of-type {
+    border-radius: 0 5px 0 0;
   }
 }

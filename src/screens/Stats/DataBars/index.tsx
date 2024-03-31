@@ -3,7 +3,7 @@ import ProgressBar from "components/ui/ProgressBar";
 import startCase from "lodash/startCase";
 import getParkTotal from "helpers/getParkTotal";
 import { SelectedParks } from "types";
-import styles from "./index.module.scss";
+import styles from "./DataBars.module.scss";
 
 type DataBarsProps = {
   items: SelectedParks;

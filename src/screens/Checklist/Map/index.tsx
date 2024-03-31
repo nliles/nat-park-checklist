@@ -1,33 +1,36 @@
 import { Park } from "types/park";
-import useStatsMap from "./useStatsMap";
-import styles from "./StatsMap.module.scss";
-import useContainerWidth from 'hooks/useContainerWidth';
+import useMap from "screens/Checklist/Map/hooks/useMap";
+import useContainerWidth from "hooks/useContainerWidth";
+import useTooltip from "screens/Checklist/Map/hooks/useTooltip";
+import styles from "./Map.module.scss";
 
 type MapProps = {
   parks: Park[];
   selectedParks?: string[];
   defaultWidth?: number;
+  handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
 
-const StatsMap = ({
+const Map = ({
   parks = [],
   selectedParks = [],
   defaultWidth = window.innerWidth,
+  handleClick,
 }: MapProps) => {
   const { containerRef, width, height } = useContainerWidth();
   const formattedSelected = Object.values(selectedParks).flat(1);
-  useStatsMap(width, height, parks, formattedSelected);
+
+  useMap(width, height, parks, formattedSelected, handleClick);
+  useTooltip();
 
   return (
     <div
       ref={containerRef}
       className={styles.mapContainer}
-      id="mapContainer"
     >
-      <svg id="legend" width="260" height="50" />
-      <svg id="statsMap" />
+      <svg id="map" />
     </div>
   );
 };
 
-export default StatsMap;
+export default Map;

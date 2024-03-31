@@ -1,14 +1,13 @@
-@import "../../styles/colors.scss";
-@import "../../styles/breakpoints.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/breakpoints.scss";
 
 .mapContainer {
   margin: 0 100px;
   overflow: hidden;
-  &.border {
-    border: 1px solid $tanOutline;
-  }
+  border: 1px solid $tanOutline;
   @media (max-width: 1024px) {
     margin: 0 25px;
+    border: none;
   }
   @media (max-width: $mobile-landscape) {
     border: none;

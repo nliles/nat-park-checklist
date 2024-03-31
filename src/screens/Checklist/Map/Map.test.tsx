@@ -33,7 +33,7 @@ describe("<Map />", () => {
   ];
 
   const renderMap = () => {
-    render(<Map parks={parks} selectedParks={[]} showTree />);
+    render(<Map parks={parks} selectedParks={[]} />);
   };
 
   it("Displays the correct content", () => {
