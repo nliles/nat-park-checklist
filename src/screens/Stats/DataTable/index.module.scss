@@ -10,6 +10,7 @@
 .table {
   width: 90%;
   border-collapse: collapse;
+  box-shadow: 0 2px 32px 0 #0000001a;
 }
 
 .thead,
@@ -19,12 +20,16 @@
 }
 
 .row {
-  border-top: 2px solid $green;
-  border-bottom: 1px solid $green;
+  background: $green;
+  color: $white;
 }
 
 .tr {
   border-bottom: 1px solid $lightGray;
+}
+
+.tr:nth-child(even) {
+  background: #fafafa;
 }
 
 .th,
