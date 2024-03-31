@@ -8,6 +8,7 @@
 }
 
 .table {
+  table-layout: fixed;
   width: 90%;
   border-collapse: collapse;
   box-shadow: 0 2px 32px 0 #0000001a;
@@ -51,9 +52,9 @@
 .td {
   &:first-of-type {
     width: 70%;
-    border-radius: 5px 0 0 0;
+    border-radius: 10px 0 0 0;
   }
   &:last-of-type {
-    border-radius: 0 5px 0 0;
+    border-radius: 0 10px 0 0;
   }
 }
