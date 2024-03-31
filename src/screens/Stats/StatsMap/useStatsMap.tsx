@@ -31,7 +31,9 @@ function useStatsMap(
     const color = d3.scaleQuantize([0, 1], colorScale);
 
     const getStatePercentage = (d: Feature) => {
-      const stateValue = STATES_MAP.find(item => item.name === d.properties?.name);
+      const stateValue = STATES_MAP.find(
+        (item) => item.name === d.properties?.name
+      );
       const stateParks = parks.filter((park) =>
         // @ts-ignore
         park.states.includes(stateValue.value)
