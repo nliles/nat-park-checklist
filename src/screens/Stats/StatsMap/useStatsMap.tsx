@@ -171,9 +171,6 @@ function useStatsMap(
             .style("top", event.pageY + 10 + "px");
         })
         .attr("d", path)
-        .enter()
-        .append("path")
-        .attr("d", path);
     };
     if (parks.length) {
       drawMap();
