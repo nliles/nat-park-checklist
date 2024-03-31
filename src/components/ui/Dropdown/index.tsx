@@ -6,6 +6,8 @@ import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
 import copy from "./copy";
 
+type DropdownItem = { name: string; value: string };
+
 type DropdownProps = {
   handleClick: ({
     designation,
@@ -15,11 +17,11 @@ type DropdownProps = {
     state?: string | null;
   }) => void;
   label?: string;
-  items: { name: string, value: string}[];
+  items: DropdownItem[];
   initialSelectedItem?: string;
   className?: string;
   formatListItem?: (item: string) => string;
-  formatSelectedItem?: (item: { name: string; value: string }) => string;
+  formatSelectedItem?: (item: DropdownItem) => string;
   keyValue: string;
 };
 
@@ -30,7 +32,7 @@ const Dropdown = ({
   initialSelectedItem,
   className,
   formatListItem = (item: string) => item,
-  formatSelectedItem = (item: { name: string; value: string }) => item.value,
+  formatSelectedItem = (item: DropdownItem) => item.value,
   keyValue,
 }: DropdownProps) => {
   const foundItem = items.find(item => item.value === initialSelectedItem)
