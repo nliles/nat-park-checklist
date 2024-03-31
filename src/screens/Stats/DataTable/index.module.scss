@@ -11,12 +11,19 @@
   width: 90%;
   border-collapse: collapse;
   box-shadow: 0 2px 32px 0 #0000001a;
+  border-bottom: 2px solid $green;
 }
 
 .thead,
 .tfoot {
   text-align: left;
   color: $green;
+}
+
+.tfoot tr {
+  .th, td {
+    border-top: 1px solid $green;
+  }
 }
 
 .row {
@@ -43,5 +50,9 @@
 .td {
   &:first-of-type {
     width: 70%;
+    border-radius: 5px 0 0 0;
+  }
+  &:last-of-type {
+    border-radius: 0 5px 0 0;
   }
 }
