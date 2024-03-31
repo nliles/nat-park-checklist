@@ -31,13 +31,16 @@ function useParks(
           data = sortParks(formatParks(json.data));
           saveState(storageKey, JSON.stringify(data));
         }
-        const filteredParks = data.filter(
-              (park: Park) =>
-                selectedItem ? getParkDesignation(park.designation, park.parkCode) ===
-                selectedItem : park
-            ).filter((park: Park) =>
+        const filteredParks = data
+          .filter((park: Park) =>
+            selectedItem
+              ? getParkDesignation(park.designation, park.parkCode) ===
+                selectedItem
+              : park
+          )
+          .filter((park: Park) =>
             selectedState ? park.states.includes(selectedState) : park
-            );
+          );
         setParks(filteredParks);
       } catch (e) {
         toast.error(copy.loadParksError);

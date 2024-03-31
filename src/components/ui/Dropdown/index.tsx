@@ -35,7 +35,7 @@ const Dropdown = ({
   formatSelectedItem = (item: DropdownItem) => item.value,
   keyValue,
 }: DropdownProps) => {
-  const foundItem = items.find(item => item.value === initialSelectedItem)
+  const foundItem = items.find((item) => item.value === initialSelectedItem);
   const {
     getToggleButtonProps,
     getMenuProps,

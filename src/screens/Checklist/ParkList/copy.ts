@@ -1,6 +1,5 @@
 const copy = {
-    noResults: "No results found",
-  };
-  
-  export default copy;
-  
+  noResults: "No results found",
+};
+
+export default copy;

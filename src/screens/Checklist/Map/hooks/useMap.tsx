@@ -104,82 +104,79 @@ function useMap(
           .style("fill", (d) => getMarkerFill(d.id));
 
         // Tree map markers
-          // add link container
-          linkContainer = g
-            .selectAll("markers")
-            .data(parks)
-            .enter()
-            .append("a")
-            .attr("class", styles.treeLink)
-            .attr("xlink:href", (d) => d.url || "")
-            .attr("transform", (park: Park) => getMarkCoords({ park }))
-            .on("mouseover", function (e, d) {
-              const linkText = d3.select(this).selectAll("text");
-              linkText.style("fill", "white");
-              handleMouseOver(d);
-            })
-            .on("mousemove", handleMouseMove)
-            .on("mouseout", function (e, d) {
-              const linkText = d3.select(this).selectAll("text");
-              linkText.style("fill", getLinkTextFill(d.id));
-              handleMouseOut();
-            });
+        // add link container
+        linkContainer = g
+          .selectAll("markers")
+          .data(parks)
+          .enter()
+          .append("a")
+          .attr("class", styles.treeLink)
+          .attr("xlink:href", (d) => d.url || "")
+          .attr("transform", (park: Park) => getMarkCoords({ park }))
+          .on("mouseover", function (e, d) {
+            const linkText = d3.select(this).selectAll("text");
+            linkText.style("fill", "white");
+            handleMouseOver(d);
+          })
+          .on("mousemove", handleMouseMove)
+          .on("mouseout", function (e, d) {
+            const linkText = d3.select(this).selectAll("text");
+            linkText.style("fill", getLinkTextFill(d.id));
+            handleMouseOut();
+          });
 
-          // add tree svg container
-          const treeSvg = linkContainer
-            .append("svg")
-            .attr("width", 33)
-            .attr("height", 45)
-            .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", (e: Event, d: Park) => {
-              e.preventDefault();
-              handleClick?.(d.id, d.parkCode, d.designation);
-            });
+        // add tree svg container
+        const treeSvg = linkContainer
+          .append("svg")
+          .attr("width", 33)
+          .attr("height", 45)
+          .attr("viewBox", "0 0 540.41 736.19")
+          .on("click", (e: Event, d: Park) => {
+            e.preventDefault();
+            handleClick?.(d.id, d.parkCode, d.designation);
+          });
 
-          // Add tree polygon shape
-          treeSvg
-            .append("polygon")
-            .attr(
-              "points",
-              "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
-            )
-            .style("fill", (d: Park) => getMarkerFill(d.id))
-            .style("fill-rule", "evenodd")
-            .style("stroke", "#231f20")
-            .style("stroke-width", "20px")
-            .style("stroke-miterlimit", "10")
-            .on("mouseover", function () {
-              d3.select(this).style("fill", "#4b5e26");
-            })
-            .on("mouseout", function (e: Event, d: Park) {
-              d3.select(this).style("fill", getMarkerFill(d.id));
-            });
+        // Add tree polygon shape
+        treeSvg
+          .append("polygon")
+          .attr(
+            "points",
+            "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
+          )
+          .style("fill", (d: Park) => getMarkerFill(d.id))
+          .style("fill-rule", "evenodd")
+          .style("stroke", "#231f20")
+          .style("stroke-width", "20px")
+          .style("stroke-miterlimit", "10")
+          .on("mouseover", function () {
+            d3.select(this).style("fill", "#4b5e26");
+          })
+          .on("mouseout", function (e: Event, d: Park) {
+            d3.select(this).style("fill", getMarkerFill(d.id));
+          });
 
-          // add link text
-          linkContainer
-            .append("text")
-            .text((d: Park, i: number) => `${i + 1}`)
-            .attr("class", styles.treeLinkText)
-            .style("fill", (d: Park) => getLinkTextFill(d.id))
-            .attr("text-anchor", "middle")
-            .attr("x", TREE_MARKER_WIDTH)
-            .attr("y", 30)
-            .on("mouseover", function (e: Event, d: Park) {
-              e.stopPropagation();
-              d3.select(this).style("fill", getLinkTextFill(d.id));
-              handleMouseOver(d);
-            });
-        }
+        // add link text
+        linkContainer
+          .append("text")
+          .text((d: Park, i: number) => `${i + 1}`)
+          .attr("class", styles.treeLinkText)
+          .style("fill", (d: Park) => getLinkTextFill(d.id))
+          .attr("text-anchor", "middle")
+          .attr("x", TREE_MARKER_WIDTH)
+          .attr("y", 30)
+          .on("mouseover", function (e: Event, d: Park) {
+            e.stopPropagation();
+            d3.select(this).style("fill", getLinkTextFill(d.id));
+            handleMouseOver(d);
+          });
+      }
 
       d.on("click", handleStateZoom);
       d.on("mouseover", ({ currentTarget }) => {
-        d3.select(currentTarget)
-        .classed(styles.hover, true)
-      })
-      .on("mouseout", ({ currentTarget }) => {
-        d3.select(currentTarget)
-        .classed(styles.hover, false);
-      })
+        d3.select(currentTarget).classed(styles.hover, true);
+      }).on("mouseout", ({ currentTarget }) => {
+        d3.select(currentTarget).classed(styles.hover, false);
+      });
 
       function handleStateZoom(event: Event, d: Feature) {
         event.stopPropagation();
@@ -204,7 +201,7 @@ function useMap(
         //     .translate(width / 2 - scale * x, height / 2 - scale * y)
         //     .scale(scale)
         // );
-          
+
         linkContainer
           .transition()
           .duration(750)
