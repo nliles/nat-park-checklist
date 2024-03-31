@@ -6,7 +6,7 @@ import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
 import copy from "./copy";
 
-type DropdownItem = { name: string; value: string };
+export type DropdownItem = { name: string; value: string };
 
 type DropdownProps = {
   handleClick: ({

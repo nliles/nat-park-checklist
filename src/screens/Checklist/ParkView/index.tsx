@@ -7,7 +7,7 @@ import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
-import Dropdown from "components/ui/Dropdown";
+import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
 import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
@@ -44,7 +44,7 @@ const ParkView = ({
   const headerTitle = selectedDesignation
     ? `${dropdownItem}s`
     : `${copy.allDesignationTitle}s`;
-  const formatSelectedItem = (item: { name: string; value: string}) => `${startCase(item.name)}s`;
+  const formatSelectedItem = (item: DropdownItem) => `${startCase(item.name)}s`;
   const stateText = selectedState ? `(${selectedState})` : '';
   const listTitle = selectedDesignation ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
 
