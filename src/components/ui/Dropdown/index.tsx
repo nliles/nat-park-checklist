@@ -6,6 +6,8 @@ import Caret from "components/icons/Caret";
 import styles from "./Dropdown.module.scss";
 import copy from "./copy";
 
+export type DropdownItem = { name: string; value: string };
+
 type DropdownProps = {
   handleClick: ({
     designation,
@@ -15,11 +17,11 @@ type DropdownProps = {
     state?: string | null;
   }) => void;
   label?: string;
-  items: string[];
+  items: DropdownItem[];
   initialSelectedItem?: string;
   className?: string;
   formatListItem?: (item: string) => string;
-  formatSelectedItem?: (item: string) => string;
+  formatSelectedItem?: (item: DropdownItem) => string;
   keyValue: string;
 };
 
@@ -30,9 +32,10 @@ const Dropdown = ({
   initialSelectedItem,
   className,
   formatListItem = (item: string) => item,
-  formatSelectedItem = (item: string) => item,
+  formatSelectedItem = (item: DropdownItem) => item.value,
   keyValue,
 }: DropdownProps) => {
+  const foundItem = items.find(item => item.value === initialSelectedItem)
   const {
     getToggleButtonProps,
     getMenuProps,
@@ -42,18 +45,18 @@ const Dropdown = ({
     selectItem,
     selectedItem,
   } = useSelect({
-    defaultSelectedItem: initialSelectedItem,
+    defaultSelectedItem: foundItem,
     items: items,
     onSelectedItemChange: ({ selectedItem }) => {
       if (keyValue) {
-        handleClick({ [keyValue]: selectedItem });
+        handleClick({ [keyValue]: selectedItem?.value || "" });
       }
     },
   });
 
   const clearItem = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     e.stopPropagation();
-    selectItem("");
+    selectItem(null);
   };
 
   return (
@@ -104,11 +107,10 @@ const Dropdown = ({
               [styles.selected]: item === selectedItem,
               [styles.highlighted]: index === highlightedIndex,
             })}
-            id={item}
-            key={item}
+            key={item.value}
             {...getItemProps({ item, index })}
           >
-            {formatListItem ? formatListItem(item) : item}
+            {formatListItem ? formatListItem(item.value) : item.value}
           </li>
         ))}
       </ul>

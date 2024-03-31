@@ -31,9 +31,10 @@ function useStatsMap(
     const color = d3.scaleQuantize([0, 1], colorScale);
 
     const getStatePercentage = (d: Feature) => {
+      const stateValue = STATES_MAP.find(item => item.name === d.properties?.name);
       const stateParks = parks.filter((park) =>
         // @ts-ignore
-        park.states.includes(STATES_MAP[d.properties?.name])
+        park.states.includes(stateValue.value)
       );
       const total = stateParks.filter((selected) =>
         selectedParks.includes(selected.id)
@@ -153,7 +154,6 @@ function useStatsMap(
         .attr("stroke-width", "1")
         .on("mouseover", function (e, d) {
           const percentage = Math.round(getStatePercentage(d) * 100);
-          console.log(percentage);
           d3.select("#tooltip")
             .transition()
             .duration(200)

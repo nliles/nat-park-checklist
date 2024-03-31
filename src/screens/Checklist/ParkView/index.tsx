@@ -7,11 +7,11 @@ import ParkList from "screens/Checklist/ParkList";
 import Map from "components/Map";
 import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
-import Dropdown from "components/ui/Dropdown";
+import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
 import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
-import { LIST_OPTIONS, STATES_LIST } from "../../../constants";
+import { DESIGNATION_OPTIONS, STATES_MAP } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./ParkView.module.scss";
@@ -44,7 +44,7 @@ const ParkView = ({
   const headerTitle = selectedDesignation
     ? `${dropdownItem}s`
     : `${copy.allDesignationTitle}s`;
-  const formatSelectedItem = (item: string) => `${startCase(item)}s`;
+  const formatSelectedItem = (item: DropdownItem) => `${startCase(item.name)}s`;
   const stateText = selectedState ? `(${selectedState})` : '';
   const listTitle = selectedDesignation ? `${dropdownItem} checklist ${stateText}` : `${copy.allDesignationTitle} checklist ${stateText}`
 
@@ -86,7 +86,7 @@ const ParkView = ({
               <Total {...totalProps} styleName={styles.mobileCount} />
               <div className={styles.dropdowns}>
                 <Dropdown
-                  items={LIST_OPTIONS}
+                  items={DESIGNATION_OPTIONS}
                   label={copy.designationLabel}
                   initialSelectedItem={selectedDesignation}
                   handleClick={handleListItemChange}
@@ -96,7 +96,7 @@ const ParkView = ({
                   keyValue="designation"
                 />
                 <Dropdown
-                  items={STATES_LIST}
+                  items={STATES_MAP}
                   label={copy.stateLabel}
                   handleClick={handleListItemChange}
                   className={styles.state}

@@ -1,14 +1,13 @@
-import { PARK_INFO, LIST_OPTIONS } from "../constants";
-import camelCase from "lodash/camelCase";
+import { PARK_INFO, DESIGNATION_OPTIONS } from "../constants";
 import ParkDesignation from "enum/ParkDesignation";
 
 const getParkDesignation = (
   designation: string,
-  parkCode: string
+  parkCode: string,
 ): ParkDesignation => {
-  const formattedDesignation = camelCase(designation);
-  if (LIST_OPTIONS.includes(formattedDesignation as ParkDesignation)) {
-    return formattedDesignation as ParkDesignation;
+  const foundDesignation = DESIGNATION_OPTIONS.find(item => item.name === designation);
+  if (foundDesignation) {
+    return foundDesignation.value as ParkDesignation;
   }
   const found = Object.values(ParkDesignation).find((parkKey) => {
     if (PARK_INFO[parkKey].codes.includes(parkCode)) {
