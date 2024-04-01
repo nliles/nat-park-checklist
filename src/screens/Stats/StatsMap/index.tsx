@@ -19,9 +19,7 @@ const StatsMap = ({
   useStatsMap(width, height, parks, formattedSelected);
 
   return (
-    <div ref={containerRef} className={styles.mapContainer} id="mapContainer">
-      <div id="tooltip" />
-    </div>
+    <div ref={containerRef} className={styles.mapContainer} id="statsMapContainer"/>
   );
 };
 

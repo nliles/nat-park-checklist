@@ -11,7 +11,7 @@ import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
 import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
-import { DESIGNATION_OPTIONS, STATES_MAP } from "../../../constants";
+import { DESIGNATION_OPTIONS, STATES_LIST } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./ParkView.module.scss";
@@ -43,8 +43,8 @@ const ParkView = ({
   const { watch, setValue } = useFormContext();
 
   const formData = watch("parkData");
-  const formatListItem = (item: string) =>
-    `${startCase(item)}s (${getParkTotal(item as ParkDesignation)})`;
+  const formatDesignationItem = (item: DropdownItem) =>
+    `${item.name}s (${getParkTotal(item.value as ParkDesignation)})`;
   const allDesignations = Object.values(formData).flat(1);
   const dropdownItem = startCase(selectedDesignation);
   const headerTitle = selectedDesignation
@@ -98,13 +98,13 @@ const ParkView = ({
                   label={copy.designationLabel}
                   initialSelectedItem={selectedDesignation}
                   handleClick={handleListItemChange}
-                  formatListItem={formatListItem}
+                  formatListItem={formatDesignationItem}
                   formatSelectedItem={formatSelectedItem}
                   className={styles.designation}
                   keyValue="designation"
                 />
                 <Dropdown
-                  items={STATES_MAP}
+                  items={STATES_LIST}
                   label={copy.stateLabel}
                   handleClick={handleListItemChange}
                   className={styles.state}

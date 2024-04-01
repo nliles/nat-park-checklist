@@ -24,9 +24,7 @@ const Map = ({
   useTooltip();
 
   return (
-    <div ref={containerRef} className={styles.mapContainer}>
-      <svg id="map" />
-    </div>
+    <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>
   );
 };
 
