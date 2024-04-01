@@ -34,10 +34,9 @@ function useStatsMap(
     const getStatePercentage = (d: Feature) => {
       const stateValue = STATES_MAP.find(
         (item) => item.name === d.properties?.name
-      );
+      )?.value || '';
       const stateParks = parks.filter((park) =>
-        // @ts-ignore
-        park.states.includes(stateValue.value)
+        park.states.includes(stateValue)
       );
       const total = stateParks.filter((selected) =>
         selectedParks.includes(selected.id)
@@ -103,7 +102,6 @@ function useStatsMap(
       const legendTicksGroup = d3
         .select("#legend")
         .append("g")
-        .attr("class", "tickGroup")
         .style("font-size", "10px")
         .style("text-anchor", "middle")
         .attr("transform", `translate(50, 28)`);
@@ -118,25 +116,24 @@ function useStatsMap(
         .attr("dy", ".35em")
         .text("Parks visited by state (%)");
 
-      legendTicksGroup
+      const ticks = legendTicksGroup
         .selectAll()
         .data([1, 2, 3, 4, 5, 6, 7, 8, 9])
         .enter()
         .append("g")
-        .attr("class", "tick")
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
           const x = -50 + legendItemWidth * tickIndex;
           return `translate(${x}, -3)`;
         });
 
-      d3.selectAll(".tick")
+      ticks
         .append("line")
         .attr("stroke", "black")
         .attr("y2", 6)
         .attr("y1", -`${legendItemHeight}`);
 
-      d3.selectAll(".tick")
+      ticks
         .append("text")
         .attr("dy", "1.75em")
         .text((d) => `${d}0`);
