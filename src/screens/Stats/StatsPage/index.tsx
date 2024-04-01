@@ -26,6 +26,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
             <span>of units visited</span>
           </div>
           <div className={styles.progress}>
+            <div className={styles.wrapper}>
               <CircularProgressbar
                 value={percentage}
                 strokeWidth={50}
@@ -37,6 +38,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
                   backgroundColor: "#4b5e26",
                 })}
               />
+            </div>
           </div>
           <DataBars items={selected} />
         </div>
