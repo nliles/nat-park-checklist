@@ -81,12 +81,11 @@ function useStatsMap(
         .append("svg")
         .attr("class", "map")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height + bottomPadding);
       // Tooltip
       const tooltip = d3.select("#tooltip").attr("class", styles.tooltip);
 
       // Draw the map
-      map.attr("width", width).attr("height", height + bottomPadding);
       const statesGroup = map.append("g");
 
       //Initialize legend
