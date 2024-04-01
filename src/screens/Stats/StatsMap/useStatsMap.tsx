@@ -94,6 +94,7 @@ function useStatsMap(
       const legendHeight = 50;
       const legendItemHeight = 7;
       const legendItemWidth = 20;
+      const legendMiddle = legendHeight / 2;
       const legend = legendSvg
         .attr("transform", `translate(${width - legendWidth}, 0)`)
         .append("g")
@@ -109,7 +110,7 @@ function useStatsMap(
         .style("fill", (d) => color(d))
         .attr("transform", (d, i) => {
           const x = legendItemWidth * i;
-          return `translate(${x}, 18)`;
+          return `translate(${x}, ${legendMiddle - legendItemHeight})`;
         });
 
       //Create legend ticks
@@ -117,7 +118,7 @@ function useStatsMap(
         .append("g")
         .style("font-size", "10px")
         .style("text-anchor", "middle")
-        .attr("transform", `translate(${legendHeight}, 28)`);
+        .attr("transform", `translate(${legendHeight}, ${legendMiddle})`);
 
       // Add legend title
       legendTicksGroup
@@ -137,7 +138,7 @@ function useStatsMap(
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
           const x = legendItemWidth * tickIndex - legendHeight;
-          return `translate(${x}, -3)`;
+          return `translate(${x}, 0)`;
         });
 
       ticks
