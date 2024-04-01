@@ -23,14 +23,6 @@
   }
 }
 
-.mapContainer {
-  margin-top: 20px;
-
-  @media (max-width: $mobile-landscape) {
-    display: none;
-  }
-}
-
 .columnOne {
   display: flex;
   flex-direction: column;
@@ -57,10 +49,6 @@
 .wrapper {
   width: 150px;
   height: 150px;
-
-  :global(.CircularProgressbar-text) {
-    transform: translate(-11px, 5px);
-  }
 }
 
 .container {

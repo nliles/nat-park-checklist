@@ -8,6 +8,7 @@ import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import { STATES_MAP } from "../../../constants";
 import usMapData from "data/us";
+import styles from "./StatsMap.module.scss";
 
 function useStatsMap(
   width: number,
@@ -63,30 +64,24 @@ function useStatsMap(
       );
 
       const path = geoPath().projection(projection);
-      const svg = d3.select("#statsMap");
+      const mapContainer = d3.select("#mapContainer");
+      const map = d3.select("#statsMap");
       const legendSvg = d3.select("#legend");
+      const tooltip = d3.select("#tooltip");
       // Tooltip
-      d3.select("#mapContainer")
-        .append("div")
-        .attr("id", "tooltip")
-        .attr(
-          "style",
-          "position: absolute; background: white; border: 1px solid black; opacity: 0;"
-        );
+      tooltip.attr("class", styles.tooltip);
 
       // Remove previous map before drawing a new one
-      svg.selectAll("g > *").remove();
-      legendSvg.selectAll("g > *").remove();
+      mapContainer.selectAll("g > *").remove();
 
       // Draw the map
-      svg.attr("width", width).attr("height", height + bottomPadding);
-      const statesGroup = svg.append("g");
+      map.attr("width", width).attr("height", height + bottomPadding);
+      const statesGroup = map.append("g");
 
       //Initialize legend
       const legendItemHeight = 7;
       const legendItemWidth = 20;
-      const legend = d3
-        .select("#legend")
+      const legend = legendSvg
         .attr("transform", `translate(${width - 260},0)`)
         .append("g")
         .selectAll()
@@ -109,7 +104,7 @@ function useStatsMap(
         .select("#legend")
         .append("g")
         .attr("class", "tickGroup")
-        .style("font-size", "10")
+        .style("font-size", "10px")
         .style("text-anchor", "middle")
         .attr("transform", `translate(50, 28)`);
 
@@ -154,26 +149,22 @@ function useStatsMap(
         .attr("fill", (d) => color(getStatePercentage(d)))
         .attr("stroke", "white")
         .attr("stroke-width", "1")
-        .on("mouseover", function (e, d) {
-          const percentage = Math.round(getStatePercentage(d) * 100);
-          d3.select("#tooltip")
-            .transition()
-            .duration(200)
-            .style("opacity", 1)
-            .text(`${percentage}%`);
-        })
-        .on("mouseout", function () {
-          d3.select("#tooltip").style("opacity", 0);
-        })
-        .on("mousemove", function (event, d) {
-          d3.select("#tooltip")
-            .style("left", event.pageX + 10 + "px")
-            .style("top", event.pageY + 10 + "px");
-        })
         .attr("d", path)
-        .enter()
-        .append("path")
-        .attr("d", path);
+        .on("mouseover", (event, d) => {
+          const percentage = Math.round(getStatePercentage(d) * 100);
+          tooltip
+            .style("opacity", 1)
+            .style("font-size", "12px")
+            .text(`${d.properties?.name}: ${percentage}%`);
+        })
+        .on("mousemove", (event, d) => {
+          tooltip
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY + 10}px`);
+        })
+        .on("mouseout", () => {
+          tooltip.style("opacity", 0);
+        });
     };
     if (parks.length) {
       drawMap();
