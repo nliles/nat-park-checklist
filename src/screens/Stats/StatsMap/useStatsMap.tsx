@@ -143,7 +143,7 @@ function useStatsMap(
       ticks
         .append("line")
         .attr("stroke", "black")
-        .attr("y2", 6)
+        .attr("y2", legendItemHeight)
         .attr("y1", -`${legendItemHeight}`);
 
       ticks
