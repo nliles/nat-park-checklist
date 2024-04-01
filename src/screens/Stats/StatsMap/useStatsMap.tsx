@@ -111,12 +111,12 @@ function useStatsMap(
       // Add legend title
       legendTicksGroup
         .append("text")
-        .attr("transform", `translate(0, -20)`)
+        .attr("transform", `translate(18, -20)`)
         .style("font-weight", "bold")
         .attr("x1", 0)
         .attr("y1", -20)
         .attr("dy", ".35em")
-        .text("Parks visited (%)");
+        .text("Parks visited by state (%)");
 
       legendTicksGroup
         .selectAll()
@@ -154,7 +154,6 @@ function useStatsMap(
           const percentage = Math.round(getStatePercentage(d) * 100);
           tooltip
             .style("opacity", 1)
-            .style("font-size", "12px")
             .text(`${d.properties?.name}: ${percentage}%`);
         })
         .on("mousemove", (event, d) => {
