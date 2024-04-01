@@ -119,7 +119,7 @@ function useStatsMap(
 
       const ticks = legendTicksGroup
         .selectAll()
-        .data(thresholds.map((item) => item * 10))
+        .data(thresholds)
         .enter()
         .append("g")
         .attr("transform", (d, i) => {
@@ -137,7 +137,7 @@ function useStatsMap(
       ticks
         .append("text")
         .attr("dy", "1.75em")
-        .text((d) => `${d}0`);
+        .text((d) => `${d * 100}`);
 
       // add states
       statesGroup
