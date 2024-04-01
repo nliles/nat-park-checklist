@@ -67,7 +67,6 @@ function useStatsMap(
       const mapContainer = d3.select("#mapContainer");
 
       // Remove previous map before drawing a new one
-      mapContainer.selectAll("g > *").remove();
       d3.select(".legend").remove();
       d3.select(".map").remove();
 
