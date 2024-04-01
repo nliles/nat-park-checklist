@@ -11,6 +11,9 @@
   padding: 10px 0;
   text-transform: capitalize;
   line-height: 2rem;
+  @media (max-width: 820px) {
+    line-height: normal;
+  }
 }
 
 .perc {
@@ -21,4 +24,5 @@
 .text {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }

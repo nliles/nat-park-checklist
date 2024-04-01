@@ -21,7 +21,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
       <Header title="My Park Stats" />
       <div className={styles.section}>
         <div className={styles.columnOne}>
-          <div className={styles.container}>
+          <div className={styles.percentText}>
             <span className={styles.total}>{`${percentage}%`}</span>
             <span>of units visited</span>
           </div>

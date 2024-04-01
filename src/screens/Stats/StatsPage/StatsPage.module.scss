@@ -26,7 +26,8 @@
 .columnOne {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  align-items: center;
+  width: auto;
   padding: 0 20px;
   border-right: 1px solid $lightGray;
 }
@@ -41,9 +42,6 @@
   justify-content: center;
   width: 90%;
   margin: 15px 0 25px;
-  @media (max-width: $mobile-landscape) {
-    margin: -20px 0 20px 0;
-  }
 }
 
 .wrapper {
@@ -51,9 +49,11 @@
   height: 150px;
 }
 
-.container {
+.percentText {
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
+  padding-left: 10px;
   font-family: "Nanum Myeongjo", serif;
   color: $green;
 }
