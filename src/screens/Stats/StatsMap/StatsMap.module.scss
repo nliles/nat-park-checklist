@@ -2,8 +2,6 @@
 @import "../../../styles/breakpoints.scss";
 
 .mapContainer {
-  margin: 0 100px;
-  overflow: hidden;
   @media (max-width: 1024px) {
     margin: 1rem 0;
   }
