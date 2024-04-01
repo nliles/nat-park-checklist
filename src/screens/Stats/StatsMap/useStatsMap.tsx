@@ -30,6 +30,7 @@ function useStatsMap(
       "#4b5e26",
     ];
     const color = d3.scaleQuantize([0, 1], colorScale);
+    const thresholds = color.thresholds();
 
     const getStatePercentage = (d: Feature) => {
       const stateValue = STATES_MAP.find(
@@ -84,7 +85,7 @@ function useStatsMap(
         .attr("transform", `translate(${width - 260},0)`)
         .append("g")
         .selectAll()
-        .data([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]);
+        .data([0, ...thresholds]);
 
       //Create legend items
       legend
@@ -118,7 +119,7 @@ function useStatsMap(
 
       const ticks = legendTicksGroup
         .selectAll()
-        .data([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .data(thresholds.map(item => item * 10))
         .enter()
         .append("g")
         .attr("transform", (d, i) => {
