@@ -38,10 +38,10 @@ function useStatsMap(
       const stateParks = parks.filter((park) =>
         park.states.includes(stateValue)
       );
-      const total = stateParks.filter((selected) =>
+      const selectedIds = stateParks.filter((selected) =>
         selectedParks.includes(selected.id)
       );
-      return (total.length || 0) / (stateParks.length || 0);
+      return (selectedIds.length || 0) / (stateParks.length || 0);
     };
 
     const drawMap = () => {
@@ -143,9 +143,8 @@ function useStatsMap(
         .selectAll("path")
         .data(usData.features)
         .join("path")
-        .attr("fill", (d) => color(getStatePercentage(d)))
-        .attr("stroke", "white")
-        .attr("stroke-width", "1")
+        .attr('class', styles.state)
+        .attr("fill", (d) => color(getStatePercentage(d)) || colorScale[0])
         .attr("d", path)
         .on("mouseover", (event, d) => {
           const percentage = Math.round(getStatePercentage(d) * 100);
