@@ -19,7 +19,11 @@ const StatsMap = ({
   useStatsMap(width, height, parks, formattedSelected);
 
   return (
-    <div ref={containerRef} className={styles.mapContainer} id="statsMapContainer"/>
+    <div
+      ref={containerRef}
+      className={styles.mapContainer}
+      id="statsMapContainer"
+    />
   );
 };
 

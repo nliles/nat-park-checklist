@@ -70,7 +70,8 @@ function useMap(
       d3.select(".map").remove();
 
       // Add map
-      const map = d3.select("#mapContainer")
+      const map = d3
+        .select("#mapContainer")
         .append("svg")
         .attr("class", "map")
         .attr("width", width)

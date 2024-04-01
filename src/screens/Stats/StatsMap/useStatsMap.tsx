@@ -83,7 +83,10 @@ function useStatsMap(
         .attr("width", width)
         .attr("height", height + bottomPadding);
       // Tooltip
-      const tooltip = d3.select("body").append("div").attr("class", styles.tooltip);
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", styles.tooltip);
 
       // Draw the map
       const statesGroup = map.append("g");
