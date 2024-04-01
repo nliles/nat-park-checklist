@@ -79,10 +79,12 @@ function useStatsMap(
       const statesGroup = map.append("g");
 
       //Initialize legend
+      const legendWidth = 260;
+      const legendHeight = 50;
       const legendItemHeight = 7;
       const legendItemWidth = 20;
       const legend = legendSvg
-        .attr("transform", `translate(${width - 260},0)`)
+        .attr("transform", `translate(${width - legendWidth}, 0)`)
         .append("g")
         .selectAll()
         .data([0, ...thresholds]);
@@ -105,15 +107,15 @@ function useStatsMap(
         .append("g")
         .style("font-size", "10px")
         .style("text-anchor", "middle")
-        .attr("transform", `translate(50, 28)`);
+        .attr("transform", `translate(${legendHeight}, 28)`);
 
       // Add legend title
       legendTicksGroup
         .append("text")
-        .attr("transform", `translate(18, -20)`)
+        .attr("transform", `translate(18, -${legendItemWidth})`)
         .style("font-weight", "bold")
         .attr("x1", 0)
-        .attr("y1", -20)
+        .attr("y1", -legendItemWidth)
         .attr("dy", ".35em")
         .text("Parks visited by state (%)");
 
@@ -124,14 +126,14 @@ function useStatsMap(
         .append("g")
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
-          const x = -50 + legendItemWidth * tickIndex;
+          const x = (legendItemWidth * tickIndex) - legendHeight;
           return `translate(${x}, -3)`;
         });
 
       ticks
         .append("line")
         .attr("stroke", "black")
-        .attr("y2", 6)
+        .attr("y2", legendItemHeight)
         .attr("y1", -`${legendItemHeight}`);
 
       ticks
