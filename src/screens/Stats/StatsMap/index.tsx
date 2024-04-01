@@ -20,8 +20,6 @@ const StatsMap = ({
 
   return (
     <div ref={containerRef} className={styles.mapContainer} id="mapContainer">
-      <svg id="legend" width="260" height="50" />
-      <svg id="statsMap" />
       <div id="tooltip" />
     </div>
   );

@@ -65,14 +65,26 @@ function useStatsMap(
 
       const path = geoPath().projection(projection);
       const mapContainer = d3.select("#mapContainer");
-      const map = d3.select("#statsMap");
-      const legendSvg = d3.select("#legend");
-      const tooltip = d3.select("#tooltip");
-      // Tooltip
-      tooltip.attr("class", styles.tooltip);
 
       // Remove previous map before drawing a new one
       mapContainer.selectAll("g > *").remove();
+      d3.select(".legend").remove();
+      d3.select(".map").remove();
+
+      // Legend
+      const legendSvg = mapContainer
+        .append("svg")
+        .attr("class", "legend")
+        .attr("width", 260)
+        .attr("height", 50);
+      // Map
+      const map = mapContainer
+        .append("svg")
+        .attr("class", "map")
+        .attr("width", width)
+        .attr("height", height);
+      // Tooltip
+      const tooltip = d3.select("#tooltip").attr("class", styles.tooltip);
 
       // Draw the map
       map.attr("width", width).attr("height", height + bottomPadding);
@@ -102,8 +114,7 @@ function useStatsMap(
         });
 
       //Create legend ticks
-      const legendTicksGroup = d3
-        .select("#legend")
+      const legendTicksGroup = legendSvg
         .append("g")
         .style("font-size", "10px")
         .style("text-anchor", "middle")
@@ -126,14 +137,14 @@ function useStatsMap(
         .append("g")
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
-          const x = (legendItemWidth * tickIndex) - legendHeight;
+          const x = legendItemWidth * tickIndex - legendHeight;
           return `translate(${x}, -3)`;
         });
 
       ticks
         .append("line")
         .attr("stroke", "black")
-        .attr("y2", legendItemHeight)
+        .attr("y2", 6)
         .attr("y1", -`${legendItemHeight}`);
 
       ticks
