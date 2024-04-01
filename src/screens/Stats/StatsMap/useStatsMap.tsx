@@ -33,9 +33,9 @@ function useStatsMap(
     const thresholds = color.thresholds();
 
     const getStatePercentage = (d: Feature) => {
-      const stateValue = STATES_MAP.find(
-        (item) => item.name === d.properties?.name
-      )?.value || '';
+      const stateValue =
+        STATES_MAP.find((item) => item.name === d.properties?.name)?.value ||
+        "";
       const stateParks = parks.filter((park) =>
         park.states.includes(stateValue)
       );
@@ -119,7 +119,7 @@ function useStatsMap(
 
       const ticks = legendTicksGroup
         .selectAll()
-        .data(thresholds.map(item => item * 10))
+        .data(thresholds.map((item) => item * 10))
         .enter()
         .append("g")
         .attr("transform", (d, i) => {
@@ -144,7 +144,7 @@ function useStatsMap(
         .selectAll("path")
         .data(usData.features)
         .join("path")
-        .attr('class', styles.state)
+        .attr("class", styles.state)
         .attr("fill", (d) => color(getStatePercentage(d)) || colorScale[0])
         .attr("d", path)
         .on("mouseover", (event, d) => {
