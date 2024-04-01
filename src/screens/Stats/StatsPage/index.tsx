@@ -35,7 +35,6 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
                   pathColor: "#4b5e26",
                   textColor: "#4b5e26",
                   trailColor: "#eae3d1",
-                  backgroundColor: "#4b5e26",
                 })}
               />
             </div>

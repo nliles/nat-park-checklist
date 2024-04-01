@@ -30,19 +30,19 @@ function useStatsMap(
       "#4b5e26",
     ];
     const color = d3.scaleQuantize([0, 1], colorScale);
+    const thresholds = color.thresholds();
 
     const getStatePercentage = (d: Feature) => {
-      const stateValue = STATES_MAP.find(
-        (item) => item.name === d.properties?.name
-      );
+      const stateValue =
+        STATES_MAP.find((item) => item.name === d.properties?.name)?.value ||
+        "";
       const stateParks = parks.filter((park) =>
-        // @ts-ignore
-        park.states.includes(stateValue.value)
+        park.states.includes(stateValue)
       );
-      const total = stateParks.filter((selected) =>
+      const selectedIds = stateParks.filter((selected) =>
         selectedParks.includes(selected.id)
       );
-      return (total.length || 0) / (stateParks.length || 0);
+      return (selectedIds.length || 0) / (stateParks.length || 0);
     };
 
     const drawMap = () => {
@@ -65,27 +65,40 @@ function useStatsMap(
 
       const path = geoPath().projection(projection);
       const mapContainer = d3.select("#mapContainer");
-      const map = d3.select("#statsMap");
-      const legendSvg = d3.select("#legend");
-      const tooltip = d3.select("#tooltip");
-      // Tooltip
-      tooltip.attr("class", styles.tooltip);
 
       // Remove previous map before drawing a new one
-      mapContainer.selectAll("g > *").remove();
+      d3.select(".legend").remove();
+      d3.select(".map").remove();
+
+      // Legend
+      const legendSvg = mapContainer
+        .append("svg")
+        .attr("class", "legend")
+        .attr("width", 260)
+        .attr("height", 50);
+      // Map
+      const map = mapContainer
+        .append("svg")
+        .attr("class", "map")
+        .attr("width", width)
+        .attr("height", height + bottomPadding);
+      // Tooltip
+      const tooltip = d3.select("#tooltip").attr("class", styles.tooltip);
 
       // Draw the map
-      map.attr("width", width).attr("height", height + bottomPadding);
       const statesGroup = map.append("g");
 
       //Initialize legend
+      const legendWidth = 260;
+      const legendHeight = 50;
       const legendItemHeight = 7;
       const legendItemWidth = 20;
+      const legendMiddle = legendHeight / 2;
       const legend = legendSvg
-        .attr("transform", `translate(${width - 260},0)`)
+        .attr("transform", `translate(${width - legendWidth}, 0)`)
         .append("g")
         .selectAll()
-        .data([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]);
+        .data([0, ...thresholds]);
 
       //Create legend items
       legend
@@ -96,59 +109,55 @@ function useStatsMap(
         .style("fill", (d) => color(d))
         .attr("transform", (d, i) => {
           const x = legendItemWidth * i;
-          return `translate(${x}, 18)`;
+          return `translate(${x}, ${legendMiddle - legendItemHeight})`;
         });
 
       //Create legend ticks
-      const legendTicksGroup = d3
-        .select("#legend")
+      const legendTicksGroup = legendSvg
         .append("g")
-        .attr("class", "tickGroup")
         .style("font-size", "10px")
         .style("text-anchor", "middle")
-        .attr("transform", `translate(50, 28)`);
+        .attr("transform", `translate(${legendHeight}, ${legendMiddle})`);
 
       // Add legend title
       legendTicksGroup
         .append("text")
-        .attr("transform", `translate(18, -20)`)
+        .attr("transform", `translate(18, -${legendItemWidth})`)
         .style("font-weight", "bold")
         .attr("x1", 0)
-        .attr("y1", -20)
+        .attr("y1", -legendItemWidth)
         .attr("dy", ".35em")
         .text("Parks visited by state (%)");
 
-      legendTicksGroup
+      const ticks = legendTicksGroup
         .selectAll()
-        .data([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .data(thresholds)
         .enter()
         .append("g")
-        .attr("class", "tick")
         .attr("transform", (d, i) => {
           const tickIndex = i + 1;
-          const x = -50 + legendItemWidth * tickIndex;
-          return `translate(${x}, -3)`;
+          const x = legendItemWidth * tickIndex - legendHeight;
+          return `translate(${x}, 0)`;
         });
 
-      d3.selectAll(".tick")
+      ticks
         .append("line")
         .attr("stroke", "black")
-        .attr("y2", 6)
+        .attr("y2", legendItemHeight)
         .attr("y1", -`${legendItemHeight}`);
 
-      d3.selectAll(".tick")
+      ticks
         .append("text")
         .attr("dy", "1.75em")
-        .text((d) => `${d}0`);
+        .text((d) => `${d * 100}`);
 
       // add states
       statesGroup
         .selectAll("path")
         .data(usData.features)
         .join("path")
-        .attr("fill", (d) => color(getStatePercentage(d)))
-        .attr("stroke", "white")
-        .attr("stroke-width", "1")
+        .attr("class", styles.state)
+        .attr("fill", (d) => color(getStatePercentage(d)) || colorScale[0])
         .attr("d", path)
         .on("mouseover", (event, d) => {
           const percentage = Math.round(getStatePercentage(d) * 100);
