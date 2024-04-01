@@ -184,7 +184,7 @@ export const TOTAL_UNITS = [...Object.values(PARK_INFO)].reduce(
 export const NAT_PARK_TOTAL_LINK =
   "https://www.nps.gov/aboutus/national-park-system.htm";
 
-export const STATES_MAP = [
+export const STATES_LIST = [
   { name: "American Samoa", value: "AS" },
   { name: "Alabama", value: "AL" },
   { name: "Alaska", value: "AK" },
@@ -207,7 +207,6 @@ export const STATES_MAP = [
   { name: "Kentucky", value: "KY" },
   { name: "Louisiana", value: "LA" },
   { name: "Maine", value: "ME" },
-  { name: "Marshall Islands", value: "MH" },
   { name: "Maryland", value: "MD" },
   { name: "Massachusetts", value: "MA" },
   { name: "Michigan", value: "MI" },
@@ -223,7 +222,6 @@ export const STATES_MAP = [
   { name: "New York", value: "NY" },
   { name: "North Carolina", value: "NC" },
   { name: "North Dakota", value: "ND" },
-  { name: "Commonwealth of the Northern Mariana Islands", value: "MP" },
   { name: "Ohio", value: "OH" },
   { name: "Oklahoma", value: "OK" },
   { name: "Oregon", value: "OR" },
@@ -243,5 +241,3 @@ export const STATES_MAP = [
   { name: "Wisconsin", value: "WI" },
   { name: "Wyoming", value: "WY" },
 ];
-
-export const STATES_LIST = STATES_MAP.map((state) => state.value);

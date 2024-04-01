@@ -65,17 +65,23 @@ function useMap(
       const getLinkTextFill = (id: string) =>
         getIsSelected(id) ? "white" : "black";
       const path = geoPath().projection(projection);
-      const svg = d3.select("#map");
+
+      // Remove previous map before drawing a new one
+      d3.select(".map").remove();
+
+      // Add map
+      const map = d3
+        .select("#mapContainer")
+        .append("svg")
+        .attr("class", "map")
+        .attr("width", width)
+        .attr("height", height + bottomPadding);
+
       let linkContainer: any = d3.select(null);
       let active: any = d3.select(null);
 
-      // Remove previous map before drawing a new one
-      svg.select("g").remove();
-
       // Draw the map
-      svg.attr("width", width).attr("height", height + bottomPadding);
-
-      const g = svg.append("g");
+      const g = map.append("g");
 
       const d = g
         .selectAll("path")
@@ -88,10 +94,6 @@ function useMap(
 
       // Draw Map Markers
       if (parks.length > 0) {
-        // remove old map markers
-        g.selectAll("a").remove();
-        g.selectAll("circle").remove();
-
         // add circles
         g.selectAll("circles")
           .data(parks)
@@ -224,7 +226,7 @@ function useMap(
 
       function reset() {
         active = d3.select(null);
-        svg.select("g").transition().duration(750).attr("transform", "");
+        map.select("g").transition().duration(750).attr("transform", "");
         linkContainer
           .transition()
           .duration(750)

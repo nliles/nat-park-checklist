@@ -17,7 +17,7 @@ function useTooltip() {
   };
 
   useEffect(() => {
-    /// tooltip creation
+    // tooltip creation
     const tooltip = d3
       .select("body")
       .append("div")

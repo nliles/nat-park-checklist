@@ -6,7 +6,7 @@ import { Park } from "types/park";
 // @ts-ignore
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
-import { STATES_MAP } from "../../../constants";
+import { STATES_LIST } from "../../../constants";
 import usMapData from "data/us";
 import styles from "./StatsMap.module.scss";
 
@@ -34,7 +34,7 @@ function useStatsMap(
 
     const getStatePercentage = (d: Feature) => {
       const stateValue =
-        STATES_MAP.find((item) => item.name === d.properties?.name)?.value ||
+        STATES_LIST.find((item) => item.name === d.properties?.name)?.value ||
         "";
       const stateParks = parks.filter((park) =>
         park.states.includes(stateValue)
@@ -64,7 +64,7 @@ function useStatsMap(
       );
 
       const path = geoPath().projection(projection);
-      const mapContainer = d3.select("#mapContainer");
+      const mapContainer = d3.select("#statsMapContainer");
 
       // Remove previous map before drawing a new one
       d3.select(".legend").remove();
@@ -83,7 +83,10 @@ function useStatsMap(
         .attr("width", width)
         .attr("height", height + bottomPadding);
       // Tooltip
-      const tooltip = d3.select("#tooltip").attr("class", styles.tooltip);
+      const tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", styles.tooltip);
 
       // Draw the map
       const statesGroup = map.append("g");

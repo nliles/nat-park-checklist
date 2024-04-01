@@ -10,13 +10,12 @@ describe("<Dropdown/>", () => {
     { name: "New York", value: "NY" },
   ];
 
-  it("displays the correct default Dropdowned item", async () => {
+  it("displays the correct default Dropdown item", async () => {
     render(
       <Dropdown
         items={items}
         initialSelectedItem="California"
         handleClick={() => {}}
-        formatListItem={(item) => item}
         keyValue="state"
       />
     );
@@ -31,7 +30,6 @@ describe("<Dropdown/>", () => {
         items={items}
         initialSelectedItem="California"
         handleClick={() => {}}
-        formatListItem={(item) => item}
         keyValue="state"
       />
     );
@@ -46,7 +44,6 @@ describe("<Dropdown/>", () => {
         items={items}
         initialSelectedItem="California"
         handleClick={mockClick}
-        formatListItem={(item) => item}
         keyValue="state"
       />
     );
