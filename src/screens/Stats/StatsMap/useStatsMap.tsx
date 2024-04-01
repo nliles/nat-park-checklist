@@ -104,7 +104,7 @@ function useStatsMap(
         .select("#legend")
         .append("g")
         .attr("class", "tickGroup")
-        .style("font-size", "10")
+        .style("font-size", "10px")
         .style("text-anchor", "middle")
         .attr("transform", `translate(50, 28)`);
 
@@ -153,9 +153,8 @@ function useStatsMap(
         .on("mouseover", (event, d) => {
           const percentage = Math.round(getStatePercentage(d) * 100);
           tooltip
-            .transition()
-            .duration(200)
             .style("opacity", 1)
+            .style("font-size", "12px")
             .text(`${d.properties?.name}: ${percentage}%`);
         })
         .on("mousemove", (event, d) => {
