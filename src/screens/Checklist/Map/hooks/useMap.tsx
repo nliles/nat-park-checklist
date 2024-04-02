@@ -59,9 +59,6 @@ function useMap(
 
       const getIsSelected = (id: string) => selectedParks.includes(id);
 
-      const getMarkerFill = (id: string) =>
-        getIsSelected(id) ? "#4b5e26" : "#a8c686";
-
       const getLinkTextFill = (id: string) =>
         getIsSelected(id) ? "white" : "black";
       const path = geoPath().projection(projection);
@@ -100,10 +97,10 @@ function useMap(
           .enter()
           .append("circle")
           .attr("class", styles.mobileCircle)
+          .classed(styles.active, (d: Park) => selectedParks.includes(d.id))
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
           .attr("r", 2)
-          .style("fill", (d) => getMarkerFill(d.id));
 
         // Tree map markers
         // add link container

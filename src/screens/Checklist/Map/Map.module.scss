@@ -69,8 +69,13 @@
 // Circle Map Markers
 .mobileCircle {
   display: none;
+  fill: $lightGreen;
   @media (max-width: $tablet) {
     display: block;
+  }
+
+  &.active {
+    fill: $green;
   }
 }
 
