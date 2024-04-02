@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import * as d3 from "d3";
 import cn from "classnames";
 import { hideTooltip } from "screens/Checklist/Map/handleTooltip";
-import tooltipStyles from "components/Tooltip/Tooltip.module.scss";
 import styles from "../Map.module.scss";
 
 function useTooltip() {
@@ -22,7 +21,7 @@ function useTooltip() {
       .select("body")
       .append("div")
       .attr("id", "tooltip")
-      .attr("class", cn(styles.tooltip, tooltipStyles.tooltipBaseStyle));
+      .attr("class", cn(styles.tooltip, styles.tooltipBaseStyle));
 
     const imgContainer = tooltip
       .append("div")
