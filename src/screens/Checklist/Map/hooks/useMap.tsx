@@ -81,7 +81,6 @@ function useMap(
         .data(usData.features)
         .enter()
         .append("path")
-        .attr("vector-effect", "non-scaling-stroke")
         .attr("class", styles.state)
         .attr("d", path);
 
@@ -221,7 +220,7 @@ function useMap(
     };
 
     drawMap();
-  }, [parks, height, width, handleClick, selectedParks]);
+  });
 }
 
 export default useMap;
