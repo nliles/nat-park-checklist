@@ -58,7 +58,7 @@ function useMap(
         const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
-  
+
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
 
@@ -96,7 +96,7 @@ function useMap(
           .classed(styles.active, (d: Park) => selectedParks.includes(d.id))
           .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
           .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
-          .attr("r", 2)
+          .attr("r", 2);
 
         // Tree map markers
         // add link container
@@ -136,13 +136,13 @@ function useMap(
             "points",
             "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
           )
-          .attr('class', styles.tree)
+          .attr("class", styles.tree)
           .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
           .on("mouseover", function () {
-            d3.select(this).classed(styles.hoverTree, true)
+            d3.select(this).classed(styles.hoverTree, true);
           })
           .on("mouseout", function (e: Event, d: Park) {
-            d3.select(this).classed(styles.hoverTree, false)
+            d3.select(this).classed(styles.hoverTree, false);
           });
 
         // add link text

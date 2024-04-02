@@ -87,7 +87,8 @@
   stroke-width: 20px;
   stroke-miterlimit: 10px;
 
-  &.activeTree, &.hoverTree {
+  &.activeTree,
+  &.hoverTree {
     fill: $green;
   }
 }
@@ -107,7 +108,8 @@
   cursor: pointer;
   fill: $black;
 
-  &.activeTree, &.hoverTree {
+  &.activeTree,
+  &.hoverTree {
     fill: $white;
   }
 
