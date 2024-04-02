@@ -43,6 +43,8 @@ function useMap(
         usData
       );
 
+      const path = geoPath().projection(projection);
+
       const getMarkCoords = ({
         park,
         scale = 1,
@@ -56,13 +58,7 @@ function useMap(
         const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
-
-      const getIsSelected = (id: string) => selectedParks.includes(id);
-
-      const getLinkTextFill = (id: string) =>
-        getIsSelected(id) ? "white" : "black";
-      const path = geoPath().projection(projection);
-
+  
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
 
@@ -113,14 +109,14 @@ function useMap(
           .attr("xlink:href", (d) => d.url || "")
           .attr("transform", (park: Park) => getMarkCoords({ park }))
           .on("mouseover", function (e, d) {
-            const linkText = d3.select(this).selectAll("text");
-            linkText.style("fill", "white");
+            d3.select(this).selectAll("text").classed(styles.hoverTree, true);
             handleMouseOver(d);
           })
           .on("mousemove", handleMouseMove)
           .on("mouseout", function (e, d) {
-            const linkText = d3.select(this).selectAll("text");
-            linkText.style("fill", getLinkTextFill(d.id));
+            // const linkText = d3.select(this).selectAll("text");
+            d3.select(this).selectAll("text").classed(styles.hoverTree, false);
+            // linkText.style("fill", getLinkTextFill(d.id));
             handleMouseOut();
           });
 
@@ -156,13 +152,11 @@ function useMap(
           .append("text")
           .text((d: Park, i: number) => `${i + 1}`)
           .attr("class", styles.treeLinkText)
-          .style("fill", (d: Park) => getLinkTextFill(d.id))
-          .attr("text-anchor", "middle")
+          .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
           .attr("x", TREE_MARKER_WIDTH)
           .attr("y", 30)
           .on("mouseover", function (e: Event, d: Park) {
             e.stopPropagation();
-            d3.select(this).style("fill", getLinkTextFill(d.id));
             handleMouseOver(d);
           });
       }

@@ -103,7 +103,13 @@
 .treeLinkText {
   font-size: 10px;
   font-weight: 600;
+  text-anchor: middle;
   cursor: pointer;
+  fill: $black;
+
+  &.activeTree, &.hoverTree {
+    fill: $white;
+  }
 
   &:hover {
     text-decoration: underline;
