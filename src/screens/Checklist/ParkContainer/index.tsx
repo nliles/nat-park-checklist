@@ -41,11 +41,11 @@ const ParkContainer = () => {
     formState: { isDirty },
   } = methods;
 
+  const formData: SelectedParks = watch("parkData");
+
   useEffect(() => {
     reset({ parkData: selectedParks });
   }, [selectedParks, reset]);
-
-  const formData: SelectedParks = watch("parkData");
 
   const handleOnSubmit = async () => {
     try {

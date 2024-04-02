@@ -9,7 +9,7 @@ jest.mock("react-redux", () => ({
 describe("<PageWrapper />", () => {
   it("Displays the correct content", () => {
     render(
-      <PageWrapper count={10}>
+      <PageWrapper>
         <div>hi</div>
       </PageWrapper>
     );

@@ -53,10 +53,6 @@
   }
 }
 
-.total {
-  margin-right: 1rem;
-}
-
 .right {
   display: flex;
   align-items: center;
@@ -65,5 +61,21 @@
   @media (max-width: $mobile-landscape) {
     justify-content: flex-end;
     width: 70%;
+  }
+}
+
+.socialLinks {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  a {
+    color: $green;
+    padding: 0 10px;
   }
 }
