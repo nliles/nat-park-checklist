@@ -7,7 +7,7 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./ParkList.module.scss";
-import { defaultSelectedValues } from 'hooks/useSelectedParks';
+import { defaultSelectedValues } from "hooks/useSelectedParks";
 import copy from "./copy";
 
 type ListProps = {
@@ -17,7 +17,12 @@ type ListProps = {
   selectedDesignation?: string;
 };
 
-const ParkList = ({ parks = [], listTitle, handleOnSubmit, selectedDesignation }: ListProps) => {
+const ParkList = ({
+  parks = [],
+  listTitle,
+  handleOnSubmit,
+  selectedDesignation,
+}: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const {
     handleSubmit,
@@ -27,13 +32,13 @@ const ParkList = ({ parks = [], listTitle, handleOnSubmit, selectedDesignation }
 
   const handleClick = () => {
     if (selectedDesignation) {
-      setValue(`parkData.${selectedDesignation}`, [], { shouldDirty: true })
+      setValue(`parkData.${selectedDesignation}`, [], { shouldDirty: true });
     } else {
       Object.keys(defaultSelectedValues).forEach((designation) => {
-        setValue(`parkData.${designation}`, [], { shouldDirty: true })
-      })
+        setValue(`parkData.${designation}`, [], { shouldDirty: true });
+      });
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -62,7 +67,7 @@ const ParkList = ({ parks = [], listTitle, handleOnSubmit, selectedDesignation }
           <em className={styles.noResults}>{copy.noResults}</em>
         )}
         <div className={styles.buttonWrapper}>
-        <Button
+          <Button
             sizeSm
             text="Clear"
             secondary
@@ -70,14 +75,14 @@ const ParkList = ({ parks = [], listTitle, handleOnSubmit, selectedDesignation }
             className={styles.clearButton}
           />
           {isLoggedIn && (
-          <Button
-            sizeSm
-            disabled={!isDirty}
-            isLoading={isSubmitting}
-            text="Save"
-            type={ButtonType.SUBMIT}
-            className={styles.saveButton}
-          />
+            <Button
+              sizeSm
+              disabled={!isDirty}
+              isLoading={isSubmitting}
+              text="Save"
+              type={ButtonType.SUBMIT}
+              className={styles.saveButton}
+            />
           )}
         </div>
       </form>
