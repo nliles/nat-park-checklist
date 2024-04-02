@@ -2,7 +2,6 @@ import { useState, useLayoutEffect } from "react";
 import { loadState, saveState } from "storage/sessionStorage";
 import { useSelector } from "react-redux";
 import { State } from "reducers/types";
-import { TOTAL_UNITS } from "../../constants";
 import LoginModalContainer from "modals/login/LoginModalContainer";
 import SubNav from "components/SubNav";
 import Total from "components/Total";
@@ -13,9 +12,10 @@ import styles from "./NavBar.module.scss";
 
 type NavBarProps = {
   count?: number;
+  total?: number;
 };
 
-const NavBar = ({ count }: NavBarProps) => {
+const NavBar = ({ count, total }: NavBarProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
@@ -52,11 +52,10 @@ const NavBar = ({ count }: NavBarProps) => {
           {!isLoggedIn && <LoginIcon handleClick={toggleModal} />}
           {isLoggedIn && (
             <>
-              {count !== undefined && (
+              {count !== undefined && total !== undefined && (
                 <Total
                   count={count}
-                  total={TOTAL_UNITS}
-                  tooltipText={copy.tooltipCopy}
+                  total={total}
                   styleName={styles.total}
                 />
               )}
