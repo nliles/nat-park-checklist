@@ -69,12 +69,30 @@
 // Circle Map Markers
 .mobileCircle {
   display: none;
+  fill: $lightGreen;
   @media (max-width: $tablet) {
     display: block;
+  }
+
+  &.active {
+    fill: $green;
   }
 }
 
 // Tree Map Markers
+.tree {
+  fill-rule: evenodd;
+  fill: $lightGreen;
+  stroke: $black;
+  stroke-width: 20px;
+  stroke-miterlimit: 10px;
+
+  &.activeTree,
+  &.hoverTree {
+    fill: $green;
+  }
+}
+
 .treeLink {
   display: none;
   cursor: default;
@@ -86,7 +104,14 @@
 .treeLinkText {
   font-size: 10px;
   font-weight: 600;
+  text-anchor: middle;
   cursor: pointer;
+  fill: $black;
+
+  &.activeTree,
+  &.hoverTree {
+    fill: $white;
+  }
 
   &:hover {
     text-decoration: underline;
