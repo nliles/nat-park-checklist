@@ -49,12 +49,6 @@ const NavBar = ({ count, total }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
-        {count !== undefined && total !== undefined && (
-                <Total
-                  count={count}
-                  total={total}
-                />
-              )}
           {!isLoggedIn && <LoginIcon handleClick={toggleModal} />}
           {isLoggedIn && (
             <>

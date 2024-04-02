@@ -10,11 +10,7 @@ type MapProps = {
   handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
 
-const Map = ({
-  parks = [],
-  selectedParks = [],
-  handleClick,
-}: MapProps) => {
+const Map = ({ parks = [], selectedParks = [], handleClick }: MapProps) => {
   const { containerRef, width, height } = useContainerWidth();
   const formattedSelected = Object.values(selectedParks).flat(1);
 

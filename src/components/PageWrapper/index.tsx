@@ -5,13 +5,11 @@ import styles from "./PageWrapper.module.scss";
 
 type PageWrapperProps = {
   children: ReactNode;
-  count?: number;
-  total?: number;
 };
 
-const PageWrapper = ({ children, count, total }: PageWrapperProps) => (
+const PageWrapper = ({ children }: PageWrapperProps) => (
   <div className={styles.wrapper}>
-    <NavBar count={count} total={total} />
+    <NavBar />
     <main role="main">{children}</main>
     <Footer />
   </div>

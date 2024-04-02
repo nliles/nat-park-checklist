@@ -66,9 +66,10 @@
   width: 150px;
 }
 
-.designation, .state {
+.designation,
+.state {
   @media (max-width: $mobile-landscape) {
     width: 100%;
-    margin-right: 0
+    margin-right: 0;
   }
 }

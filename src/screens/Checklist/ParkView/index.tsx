@@ -80,9 +80,9 @@ const ParkView = ({
     : allDesignations;
 
   const found = parks.filter((park) => selectedData.includes(park.id));
-  
+
   return (
-    <PageWrapper count={found.length || 0} total={parks.length || 0}>
+    <PageWrapper>
       <div className={styles.container}>
         <Header title={headerTitle} />
         {isLoading && <Spinner />}
@@ -108,12 +108,12 @@ const ParkView = ({
                   initialSelectedItem={selectedState}
                   keyValue="state"
                 />
-                <Total
-                  count={found.length || 0}
-                  total={parks.length}
-                  styleName={cn(styles.count, styles.desktopCount)}
-                />
               </div>
+              <Total
+                count={found.length || 0}
+                total={parks.length}
+                className={cn(styles.count, styles.desktopCount)}
+              />
             </div>
             <Map
               parks={parks}
