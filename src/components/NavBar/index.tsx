@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import { State } from "reducers/types";
 import LoginModalContainer from "modals/login/LoginModalContainer";
 import SubNav from "components/SubNav";
-import Total from "components/Total";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import { icons } from "components/Footer/constants";
+import Icon from "enum/Icon";
 import Avatar from "components/Avatar";
 import LoginIcon from "components/LoginIcon";
 import copy from "./copy";
@@ -49,6 +51,17 @@ const NavBar = ({ count, total }: NavBarProps) => {
           </h1>
         </div>
         <div className={styles.right}>
+        <div className={styles.socialLinks}>
+        {icons.map((i) => (
+          <a href={i.link} key={i.link}>
+            {i.icon === Icon.LINKED_IN && <FaLinkedin aria-label="LinkedIn" />}
+            {i.icon === Icon.GITHUB && <FaGithub aria-label="Github" />}
+            {i.icon === Icon.INSTAGRAM && (
+              <FaInstagram aria-label="Instagram" />
+            )}
+          </a>
+        ))}
+      </div>
           {!isLoggedIn && <LoginIcon handleClick={toggleModal} />}
           {isLoggedIn && (
             <>
