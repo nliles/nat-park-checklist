@@ -116,6 +116,7 @@ const ParkView = ({
               parks={parks}
               listTitle={listTitle}
               handleOnSubmit={handleOnSubmit}
+              selectedDesignation={selectedDesignation}
             />
           </>
         )}

@@ -9,7 +9,9 @@ type ButtonProps = {
   isLoading?: boolean;
   type?: ButtonTypeValue;
   sizeSm?: boolean;
-  styleName?: string;
+  className?: string;
+  secondary?: boolean;
+  onClick?: () => void;
 };
 
 const Button = ({
@@ -18,15 +20,19 @@ const Button = ({
   disabled,
   isLoading,
   sizeSm,
-  styleName,
+  className,
+  secondary,
+  onClick = () => {},
 }: ButtonProps) => {
   return (
     <button
       disabled={disabled || isLoading}
-      className={cn(styles.button, styleName, {
+      className={cn(styles.button, className, {
         [styles.sm]: sizeSm,
+        [styles.secondary]: secondary,
       })}
       type={type}
+      onClick={onClick}
     >
       {isLoading && (
         <span className={styles.spinnerWrapper}>

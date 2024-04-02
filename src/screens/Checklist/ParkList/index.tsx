@@ -7,20 +7,33 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./ParkList.module.scss";
+import { defaultSelectedValues } from 'hooks/useSelectedParks';
 import copy from "./copy";
 
 type ListProps = {
   parks: Park[];
   listTitle: string;
   handleOnSubmit: () => void;
+  selectedDesignation?: string;
 };
 
-const ParkList = ({ parks = [], listTitle, handleOnSubmit }: ListProps) => {
+const ParkList = ({ parks = [], listTitle, handleOnSubmit, selectedDesignation }: ListProps) => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const {
     handleSubmit,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useFormContext();
+
+  const handleClick = () => {
+    if (selectedDesignation) {
+      setValue(`parkData.${selectedDesignation}`, [], { shouldDirty: true })
+    } else {
+      Object.keys(defaultSelectedValues).forEach((designation) => {
+        setValue(`parkData.${designation}`, [], { shouldDirty: true })
+      })
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -48,17 +61,25 @@ const ParkList = ({ parks = [], listTitle, handleOnSubmit }: ListProps) => {
         ) : (
           <em className={styles.noResults}>{copy.noResults}</em>
         )}
-        {isLoggedIn && (
-          <div className={styles.buttonWrapper}>
-            <Button
-              sizeSm
-              disabled={!isDirty}
-              isLoading={isSubmitting}
-              text="Save"
-              type={ButtonType.SUBMIT}
-            />
-          </div>
-        )}
+        <div className={styles.buttonWrapper}>
+        <Button
+            sizeSm
+            text="Clear"
+            secondary
+            onClick={handleClick}
+            className={styles.clearButton}
+          />
+          {isLoggedIn && (
+          <Button
+            sizeSm
+            disabled={!isDirty}
+            isLoading={isSubmitting}
+            text="Save"
+            type={ButtonType.SUBMIT}
+            className={styles.saveButton}
+          />
+          )}
+        </div>
       </form>
     </div>
   );
