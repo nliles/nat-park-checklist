@@ -3,6 +3,7 @@
 
 .container {
   margin: 50px 100px;
+  padding-bottom: 100px;
 
   @media (max-width: $desktop) {
     margin: 0 25px;
