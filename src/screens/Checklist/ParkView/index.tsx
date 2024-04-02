@@ -1,6 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import PageWrapper from "components/PageWrapper";
+import cn from "classnames";
 import { Park } from "types/park";
+import Total from "components/Total";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "screens/Checklist/Map";
@@ -78,7 +80,7 @@ const ParkView = ({
     : allDesignations;
 
   const found = parks.filter((park) => selectedData.includes(park.id));
-
+  
   return (
     <PageWrapper count={found.length || 0} total={parks.length || 0}>
       <div className={styles.container}>
@@ -105,6 +107,11 @@ const ParkView = ({
                   className={styles.state}
                   initialSelectedItem={selectedState}
                   keyValue="state"
+                />
+                <Total
+                  count={found.length || 0}
+                  total={parks.length}
+                  styleName={cn(styles.count, styles.desktopCount)}
                 />
               </div>
             </div>
