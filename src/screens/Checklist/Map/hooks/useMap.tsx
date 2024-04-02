@@ -114,9 +114,7 @@ function useMap(
           })
           .on("mousemove", handleMouseMove)
           .on("mouseout", function (e, d) {
-            // const linkText = d3.select(this).selectAll("text");
             d3.select(this).selectAll("text").classed(styles.hoverTree, false);
-            // linkText.style("fill", getLinkTextFill(d.id));
             handleMouseOut();
           });
 
@@ -155,7 +153,7 @@ function useMap(
           .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
           .attr("x", TREE_MARKER_WIDTH)
           .attr("y", 30)
-          .on("mouseover", function (e: Event, d: Park) {
+          .on("mouseover", (e: Event, d: Park) => {
             e.stopPropagation();
             handleMouseOver(d);
           });
