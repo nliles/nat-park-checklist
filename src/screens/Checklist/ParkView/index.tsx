@@ -115,11 +115,7 @@ const ParkView = ({
                 className={cn(styles.count, styles.desktopCount)}
               />
             </div>
-            <Map
-              parks={parks}
-              selectedParks={formData}
-              handleClick={handleClick}
-            />
+            <Map parks={parks} handleClick={handleClick} />
             <ParkList
               parks={parks}
               listTitle={listTitle}

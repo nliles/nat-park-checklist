@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
 import { Feature, FeatureCollection } from "geojson";
@@ -21,9 +22,12 @@ function useMap(
   width: number,
   height: number,
   parks: Park[],
-  selectedParks: string[],
   handleClick?: (id: string, parkCode: string, designation: string) => void
 ) {
+  const { watch } = useFormContext();
+  const formData = watch("parkData");
+  const selectedParks = Object.values(formData).flat(1);
+
   useEffect(() => {
     const drawMap = () => {
       // Map data
