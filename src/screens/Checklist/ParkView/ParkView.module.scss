@@ -5,26 +5,6 @@
   height: 100%;
 }
 
-.count {
-  grid-column-start: 1;
-  grid-row-start: 1;
-  justify-self: right;
-
-  &.desktopCount {
-    display: block;
-    @media (max-width: $mobile-landscape) {
-      display: none;
-    }
-  }
-}
-
-.mobileCount {
-  display: none;
-  @media (max-width: $mobile-landscape) {
-    display: block;
-  }
-}
-
 .dropdownWrapper {
   margin: 0 100px;
   display: grid;
@@ -49,6 +29,12 @@
   justify-content: center;
   grid-column-start: 1;
   grid-row-start: 1;
+
+  @media (max-width: $mobile-landscape) {
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+  }
 }
 
 .designation {
@@ -58,4 +44,11 @@
 
 .state {
   width: 150px;
+}
+
+.designation, .state {
+  @media (max-width: $mobile-landscape) {
+    width: 100%;
+    margin-right: 0
+  }
 }

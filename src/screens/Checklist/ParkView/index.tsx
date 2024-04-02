@@ -1,11 +1,9 @@
 import { useFormContext } from "react-hook-form";
-import cn from "classnames";
 import PageWrapper from "components/PageWrapper";
 import { Park } from "types/park";
 import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "screens/Checklist/Map";
-import Total from "components/Total";
 import Spinner from "components/ui/Spinner";
 import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
@@ -81,21 +79,14 @@ const ParkView = ({
 
   const found = parks.filter((park) => selectedData.includes(park.id));
 
-  const totalProps = {
-    count: found.length || 0,
-    total: parks.length,
-    tooltipText: copy.tooltipCopy(dropdownItem.toLowerCase(), selectedState),
-  };
-
   return (
-    <PageWrapper count={allDesignations.length || 0}>
+    <PageWrapper count={found.length || 0} total={parks.length || 0}>
       <div className={styles.container}>
         <Header title={headerTitle} />
         {isLoading && <Spinner />}
         {!isLoading && (
           <>
             <div className={styles.dropdownWrapper}>
-              <Total {...totalProps} styleName={styles.mobileCount} />
               <div className={styles.dropdowns}>
                 <Dropdown
                   items={DESIGNATION_OPTIONS}
@@ -116,12 +107,6 @@ const ParkView = ({
                   keyValue="state"
                 />
               </div>
-              {(selectedDesignation || selectedState) && (
-                <Total
-                  {...totalProps}
-                  styleName={cn(styles.count, styles.desktopCount)}
-                />
-              )}
             </div>
             <Map
               parks={parks}
