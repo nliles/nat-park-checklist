@@ -7,14 +7,12 @@ import styles from "./Map.module.scss";
 type MapProps = {
   parks: Park[];
   selectedParks?: string[];
-  defaultWidth?: number;
   handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
 
 const Map = ({
   parks = [],
   selectedParks = [],
-  defaultWidth = window.innerWidth,
   handleClick,
 }: MapProps) => {
   const { containerRef, width, height } = useContainerWidth();
