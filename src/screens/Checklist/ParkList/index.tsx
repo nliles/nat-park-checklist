@@ -66,15 +66,15 @@ const ParkList = ({
         ) : (
           <em className={styles.noResults}>{copy.noResults}</em>
         )}
-        <div className={styles.buttonWrapper}>
-          <Button
-            sizeSm
-            text="Clear"
-            secondary
-            onClick={handleClick}
-            className={styles.clearButton}
-          />
-          {isLoggedIn && (
+        {isLoggedIn && (
+          <div className={styles.buttonWrapper}>
+            <Button
+              sizeSm
+              text="Clear"
+              secondary
+              onClick={handleClick}
+              className={styles.clearButton}
+            />
             <Button
               sizeSm
               disabled={!isDirty}
@@ -83,8 +83,8 @@ const ParkList = ({
               type={ButtonType.SUBMIT}
               className={styles.saveButton}
             />
-          )}
-        </div>
+          </div>
+        )}
       </form>
     </div>
   );
