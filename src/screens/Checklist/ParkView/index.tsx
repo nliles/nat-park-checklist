@@ -15,6 +15,7 @@ import { DESIGNATION_OPTIONS, STATES_LIST } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./ParkView.module.scss";
+import { useCallback } from "react";
 
 export type ParkViewProps = {
   handleListItemChange: ({
@@ -56,20 +57,23 @@ const ParkView = ({
     ? `${dropdownItem} checklist ${stateText}`
     : `${copy.allDesignationTitle} checklist ${stateText}`;
 
-  const handleClick = (id: string, parkCode: string, designation: string) => {
-    const formattedName = getParkDesignation(designation, parkCode);
-    let designationArray = formData[formattedName].slice();
-    if (designationArray.includes(id)) {
-      designationArray = designationArray.filter(
-        (parkId: string) => parkId !== id
-      );
-    } else {
-      designationArray.push(id);
-    }
-    setValue(`parkData.${formattedName}`, designationArray, {
-      shouldDirty: true,
-    });
-  };
+  const handleClick = useCallback(
+    (id: string, parkCode: string, designation: string) => {
+      const formattedName = getParkDesignation(designation, parkCode);
+      let designationArray = formData[formattedName].slice();
+      if (designationArray.includes(id)) {
+        designationArray = designationArray.filter(
+          (parkId: string) => parkId !== id
+        );
+      } else {
+        designationArray.push(id);
+      }
+      setValue(`parkData.${formattedName}`, designationArray, {
+        shouldDirty: true,
+      });
+    },
+    [formData, setValue]
+  );
 
   const selectedData = selectedDesignation
     ? formData[selectedDesignation]
