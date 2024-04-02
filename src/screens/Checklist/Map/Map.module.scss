@@ -75,6 +75,18 @@
 }
 
 // Tree Map Markers
+.tree {
+  fill-rule: evenodd;
+  fill: $lightGreen;
+  stroke: $black;
+  stroke-width: 20px;
+  stroke-miterlimit: 10px;
+
+  &.activeTree, &.hoverTree {
+    fill: $green;
+  }
+}
+
 .treeLink {
   display: none;
   cursor: default;

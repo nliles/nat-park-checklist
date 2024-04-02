@@ -145,16 +145,13 @@ function useMap(
             "points",
             "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
           )
-          .style("fill", (d: Park) => getMarkerFill(d.id))
-          .style("fill-rule", "evenodd")
-          .style("stroke", "#231f20")
-          .style("stroke-width", "20px")
-          .style("stroke-miterlimit", "10")
+          .attr('class', styles.tree)
+          .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
           .on("mouseover", function () {
-            d3.select(this).style("fill", "#4b5e26");
+            d3.select(this).classed(styles.hoverTree, true)
           })
           .on("mouseout", function (e: Event, d: Park) {
-            d3.select(this).style("fill", getMarkerFill(d.id));
+            d3.select(this).classed(styles.hoverTree, false)
           });
 
         // add link text
