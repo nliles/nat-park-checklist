@@ -134,12 +134,12 @@ function useMap(
             handleClick and selectedParks from the dependency array and toggles the
             color on click
             TODO: Try to add back handleClick and selectedParks to the dependency array */
-            const tree = d3.select(this).selectAll('polygon');
-            const treeLink = d3.select(this.parentNode).selectAll("text")
+            const tree = d3.select(this).selectAll("polygon");
+            const treeLink = d3.select(this.parentNode).selectAll("text");
             const isActive = tree.classed(styles.activeTree);
             // toggle class
             tree.classed(styles.activeTree, !isActive);
-            treeLink.classed(styles.activeTree, !isActive)
+            treeLink.classed(styles.activeTree, !isActive);
             // save park state
             handleClick?.(d.id, d.parkCode, d.designation);
           });
