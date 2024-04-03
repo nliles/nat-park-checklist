@@ -127,8 +127,20 @@ function useMap(
           .attr("width", 33)
           .attr("height", 45)
           .attr("viewBox", "0 0 540.41 736.19")
-          .on("click", (e: Event, d: Park) => {
+          .on("click", function (e: Event, d: Park) {
             e.preventDefault();
+            /* This is a hacky solution to fix an issue when the state 
+            is zoomed and the tree click causes a reset. This solution excludes
+            handleClick and selectedParks from the dependency array and toggles the
+            color on click
+            TODO: Try to add back handleClick and selectedParks to the dependency array */
+            const tree = d3.select(this).selectAll("polygon");
+            const treeLink = d3.select(this.parentNode).selectAll("text");
+            const isActive = tree.classed(styles.activeTree);
+            // toggle class
+            tree.classed(styles.activeTree, !isActive);
+            treeLink.classed(styles.activeTree, !isActive);
+            // save park state
             handleClick?.(d.id, d.parkCode, d.designation);
           });
 
@@ -224,7 +236,7 @@ function useMap(
     };
 
     drawMap();
-  });
+  }, [parks, height, width]);
 }
 
 export default useMap;
