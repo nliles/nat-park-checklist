@@ -70,7 +70,7 @@ const ParkList = ({
           <div className={styles.buttonWrapper}>
             <Button
               sizeSm
-              text="Clear"
+              text={copy.clearBtn}
               secondary
               onClick={handleClick}
               className={styles.clearButton}
@@ -79,7 +79,7 @@ const ParkList = ({
               sizeSm
               disabled={!isDirty}
               isLoading={isSubmitting}
-              text="Save"
+              text={copy.saveBtn}
               type={ButtonType.SUBMIT}
               className={styles.saveButton}
             />
