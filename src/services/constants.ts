@@ -1,4 +1,4 @@
-export const prodBaseURL = "/api/";
+export const prodBaseURL = "https://nat-park-backend.fly.dev";
 
 export const devBaseURL = "http://localhost:5000/";
 
