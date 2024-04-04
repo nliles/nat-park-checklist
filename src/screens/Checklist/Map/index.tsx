@@ -6,12 +6,11 @@ import styles from "./Map.module.scss";
 
 type MapProps = {
   parks: Park[];
-  handleClick?: (id: string, parkCode: string, designation: string) => void;
 };
 
-const Map = ({ parks = [], handleClick }: MapProps) => {
+const Map = ({ parks = [] }: MapProps) => {
   const { containerRef, width, height } = useContainerWidth();
-  useMap(width, height, parks, handleClick);
+  useMap(width, height, parks);
   useTooltip();
 
   return (

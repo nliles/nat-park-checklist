@@ -7,6 +7,7 @@ import { Feature, FeatureCollection } from "geojson";
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import usMapData from "data/us";
+import getParkDesignation from "helpers/getParkDesignation";
 import { Park } from "types/park";
 import {
   handleMouseOver,
@@ -18,17 +19,27 @@ import styles from "../Map.module.scss";
 const TREE_MARKER_HEIGHT = 45;
 const TREE_MARKER_WIDTH = 16.5;
 
-function useMap(
-  width: number,
-  height: number,
-  parks: Park[],
-  handleClick?: (id: string, parkCode: string, designation: string) => void
-) {
-  const { watch } = useFormContext();
+function useMap(width: number, height: number, parks: Park[]) {
+  const { watch, setValue } = useFormContext();
   const formData = watch("parkData");
   const selectedParks = Object.values(formData).flat(1);
 
   useEffect(() => {
+    const handleClick = (id: string, parkCode: string, designation: string) => {
+      const formattedName = getParkDesignation(designation, parkCode);
+      let designationArray = formData[formattedName].slice();
+      if (designationArray.includes(id)) {
+        designationArray = designationArray.filter(
+          (parkId: string) => parkId !== id
+        );
+      } else {
+        designationArray.push(id);
+      }
+      setValue(`parkData.${formattedName}`, designationArray, {
+        shouldDirty: true,
+      });
+    };
+
     const drawMap = () => {
       // Map data
       const usData = topojson.feature(
@@ -129,15 +140,14 @@ function useMap(
           .attr("viewBox", "0 0 540.41 736.19")
           .on("click", function (e: Event, d: Park) {
             e.preventDefault();
-            /* This is a hacky solution to fix an issue when the state 
-            is zoomed and the tree click causes a reset. This solution excludes
-            handleClick and selectedParks from the dependency array and toggles the
-            color on click
-            TODO: Try to add back handleClick and selectedParks to the dependency array */
+            /* If the map is zoomed in and a state is selected,
+            the state update causes the map to re-render and the zooms
+            the user out. Toggling the color in this component and 
+            excluding selectedParks from the dependencies for now */
             const tree = d3.select(this).selectAll("polygon");
             const treeLink = d3.select(this.parentNode).selectAll("text");
             const isActive = tree.classed(styles.activeTree);
-            // toggle class
+            // // toggle class
             tree.classed(styles.activeTree, !isActive);
             treeLink.classed(styles.activeTree, !isActive);
             // save park state
@@ -237,7 +247,7 @@ function useMap(
 
     drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parks, height, width]);
+  }, [parks, height, width, setValue, formData]);
 }
 
 export default useMap;

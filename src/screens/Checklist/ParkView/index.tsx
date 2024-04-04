@@ -9,7 +9,6 @@ import Map from "screens/Checklist/Map";
 import Spinner from "components/ui/Spinner";
 import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
-import getParkDesignation from "helpers/getParkDesignation";
 import startCase from "lodash/startCase";
 import { DESIGNATION_OPTIONS, STATES_LIST } from "../../../constants";
 import getParkTotal from "helpers/getParkTotal";
@@ -40,7 +39,7 @@ const ParkView = ({
   handleListItemChange,
   handleOnSubmit,
 }: ParkViewProps) => {
-  const { watch, setValue } = useFormContext();
+  const { watch } = useFormContext();
 
   const formData = watch("parkData");
   const formatDesignationItem = (item: DropdownItem) =>
@@ -55,21 +54,6 @@ const ParkView = ({
   const listTitle = selectedDesignation
     ? `${dropdownItem} checklist ${stateText}`
     : `${copy.allDesignationTitle} checklist ${stateText}`;
-
-  const handleClick = (id: string, parkCode: string, designation: string) => {
-    const formattedName = getParkDesignation(designation, parkCode);
-    let designationArray = formData[formattedName].slice();
-    if (designationArray.includes(id)) {
-      designationArray = designationArray.filter(
-        (parkId: string) => parkId !== id
-      );
-    } else {
-      designationArray.push(id);
-    }
-    setValue(`parkData.${formattedName}`, designationArray, {
-      shouldDirty: true,
-    });
-  };
 
   const selectedData = selectedDesignation
     ? formData[selectedDesignation]
@@ -111,7 +95,7 @@ const ParkView = ({
                 className={cn(styles.count, styles.desktopCount)}
               />
             </div>
-            <Map parks={parks} handleClick={handleClick} />
+            <Map parks={parks} />
             <ParkList
               parks={parks}
               listTitle={listTitle}
