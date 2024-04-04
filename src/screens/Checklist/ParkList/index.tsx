@@ -7,7 +7,6 @@ import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
 import getParkDesignation from "helpers/getParkDesignation";
 import styles from "./ParkList.module.scss";
-import { defaultSelectedValues } from "hooks/useSelectedParks";
 import copy from "./copy";
 
 type ListProps = {
@@ -26,19 +25,8 @@ const ParkList = ({
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const {
     handleSubmit,
-    setValue,
     formState: { isDirty, isSubmitting },
   } = useFormContext();
-
-  const handleClick = () => {
-    if (selectedDesignation) {
-      setValue(`parkData.${selectedDesignation}`, [], { shouldDirty: true });
-    } else {
-      Object.keys(defaultSelectedValues).forEach((designation) => {
-        setValue(`parkData.${designation}`, [], { shouldDirty: true });
-      });
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -68,13 +56,6 @@ const ParkList = ({
         )}
         {isLoggedIn && (
           <div className={styles.buttonWrapper}>
-            <Button
-              sizeSm
-              text={copy.clearBtn}
-              secondary
-              onClick={handleClick}
-              className={styles.clearButton}
-            />
             <Button
               sizeSm
               disabled={!isDirty}

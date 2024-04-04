@@ -15,7 +15,7 @@ import {
   handleMouseMove,
 } from "screens/Checklist/Map/handleTooltip";
 import useContainerWidth from "hooks/useContainerWidth";
-import useTooltip from "screens/Checklist/Map/hooks/useTooltip";
+import useTooltip from "screens/Checklist/Map/useTooltip";
 import styles from "./Map.module.scss";
 
 type MapProps = {
@@ -246,6 +246,12 @@ const Map = ({ parks = [] }: MapProps) => {
       function reset() {
         active = d3.select(null);
         map.select("g").transition().duration(750).attr("transform", "");
+
+        // g.transition().duration(750).call(
+        //   zoom.transform,
+        //   d3.zoomIdentity
+        // );
+
         linkContainer
           .transition()
           .duration(750)
