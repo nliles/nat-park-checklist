@@ -251,7 +251,7 @@ const Map = ({ parks = [] }: MapProps) => {
         //   zoom.transform,
         //   d3.zoomIdentity
         // );
-        
+
         linkContainer
           .transition()
           .duration(750)
