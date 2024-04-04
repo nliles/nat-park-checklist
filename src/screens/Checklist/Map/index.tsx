@@ -15,7 +15,7 @@ const Map = ({ parks = [], handleClick }: MapProps) => {
   useTooltip();
 
   return (
-    <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>
+    <div ref={containerRef} className={styles.mapContainer} id="mapContainer" />
   );
 };
 
