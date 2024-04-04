@@ -237,7 +237,7 @@ function useMap(
 
     drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parks, height, width, handleClick]);
+  }, [parks, height, width]);
 }
 
 export default useMap;
