@@ -5,7 +5,7 @@ import { Park } from "types/park";
 import Button from "components/ui/Button";
 import { ButtonType } from "components/ui/Button/enum";
 import Checkbox from "components/ui/Checkbox";
-import getParkDesignation from "helpers/getParkDesignation";
+import camelCase from "lodash/camelCase";
 import styles from "./ParkList.module.scss";
 import copy from "./copy";
 
@@ -37,10 +37,7 @@ const ParkList = ({
         {parks.length ? (
           <div className={styles.listContainer}>
             {parks.map((park, i) => {
-              const formattedName = getParkDesignation(
-                park.designation,
-                park.parkCode
-              );
+              const formattedName = camelCase(park.designation)
               return (
                 <Checkbox
                   key={park.fullName}

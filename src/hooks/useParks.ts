@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
+import camelCase from "lodash/camelCase";
 import toast from "react-hot-toast";
 import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
-import { ALL_CODES } from "../constants";
-import { NPS_API, API_KEY } from "hooks/constants";
+import { getParks } from "services/park.service";
 import { loadState, saveState } from "storage/sessionStorage";
-import sortParks from "helpers/sortParks";
-import formatParks from "helpers/formatParks";
 import copy from "./copy";
-import getParkDesignation from "helpers/getParkDesignation";
 
 function useParks(
   selectedItem?: ParkDesignationType,
@@ -23,18 +20,13 @@ function useParks(
       try {
         let data = loadState(storageKey) || [];
         if (!data.length) {
-          const res = await fetch(
-            `${NPS_API}/parks?parkCode=${ALL_CODES}&limit=496&sort=fullName&api_key=${API_KEY}`
-          );
-          const json = await res.json();
-
-          data = sortParks(formatParks(json.data));
+          data = await getParks();
           saveState(storageKey, JSON.stringify(data));
         }
         const filteredParks = data
           .filter((park: Park) =>
             selectedItem
-              ? getParkDesignation(park.designation, park.parkCode) ===
+              ? camelCase(park.designation) ===
                 selectedItem
               : park
           )

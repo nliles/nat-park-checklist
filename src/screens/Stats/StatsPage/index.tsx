@@ -1,4 +1,3 @@
-import { TOTAL_UNITS } from "../../../constants";
 import { Park } from "types/park";
 import { SelectedParks } from "types";
 import Header from "components/Header";
@@ -15,7 +14,7 @@ type StatsPageProps = {
 
 const StatsPage = ({ selected, parks }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
-  const percentage = Math.floor((totalParks.length / TOTAL_UNITS) * 100);
+  const percentage = Math.floor((totalParks.length / parks.length) * 100);
   return (
     <div>
       <Header title="My Park Stats" />
@@ -39,14 +38,13 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               />
             </div>
           </div>
-          <DataBars items={selected} />
+          <DataBars selected={selected} parks={parks}/>
         </div>
         <div className={styles.columnTwo}>
           <StatsMap selectedParks={totalParks} parks={parks} />
           <DataTable
-            count={totalParks.length}
-            total={TOTAL_UNITS}
-            items={selected}
+            selected={selected}
+            parks={parks}
           />
         </div>
       </div>

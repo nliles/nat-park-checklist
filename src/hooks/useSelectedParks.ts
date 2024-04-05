@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getParks } from "services/park.service";
+import { getUserParks } from "services/park.service";
 import toast from "react-hot-toast";
 import { SelectedParks } from "types";
 import copy from "./copy";
@@ -37,7 +37,7 @@ function useSelectedParks(isLoggedIn: boolean) {
     const fetchParks = async () => {
       try {
         setIsLoading(true);
-        const { parks } = await getParks();
+        const { parks } = await getUserParks();
         setSelectedParks(parks);
       } catch (err: any) {
         if (err?.status !== 401) {
