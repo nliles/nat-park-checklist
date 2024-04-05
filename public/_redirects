@@ -1,4 +1,2 @@
-/api/auth/*  https://nat-park-backend.fly.dev/auth/:splat 200
-/api/park/*  https://nat-park-backend.fly.dev/park/:splat 200
 /api/*  "https://nat-park-backend.fly.dev/:splat 200
-/*  /index.html  200
+/* /index.html 200
