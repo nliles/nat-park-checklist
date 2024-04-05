@@ -7,7 +7,7 @@ type Response = {
   parks: SelectedParks;
 };
 
-export const getParks = (): Promise<{ parks: Park[] }> => {
+export const getParks = (): Promise<Park[]> => {
   return apiClient.get("/park");
 };
 
