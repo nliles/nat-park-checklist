@@ -44,7 +44,7 @@ const ParkView = ({
   const formData = watch("parkData");
   const formatDesignationItem = (item: DropdownItem) =>
     `${item.name}s (${getParkTotal(item.value as ParkDesignation)})`;
-  const allDesignations = Object.values(formData).flat(1);
+  const allDesignations = Object.values(formData || {}).flat(1);
   const dropdownItem = startCase(selectedDesignation);
   const headerTitle = selectedDesignation
     ? `${dropdownItem}s`
