@@ -1,18 +1,20 @@
 import startCase from "lodash/startCase";
 import { SelectedParks } from "types";
+import { Park } from "types/park";
 import ParkDesignation from "enum/ParkDesignation";
 import getParkTotal from "helpers/getParkTotal";
 import styles from "./DataTable.module.scss";
+import copy from "./copy";
 
 type DataTableProps = {
-  count: number;
-  total: number;
-  items: SelectedParks;
+  selected: SelectedParks;
+  parks: Park[];
 };
 
-const DataTable = ({ count, total, items }: DataTableProps) => {
-  const headers = ["Park Category", "Visited", "Total"];
-  const itemKeys = Object.keys(items) as ParkDesignation[];
+const DataTable = ({ selected, parks }: DataTableProps) => {
+  const headers = [copy.category, copy.visited, copy.total];
+  const itemKeys = Object.keys(selected) as ParkDesignation[];
+  const totalParks = Object.values(selected).flat(1);
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -29,8 +31,8 @@ const DataTable = ({ count, total, items }: DataTableProps) => {
           {itemKeys?.map((item) => (
             <tr key={item} className={styles.tr}>
               <td className={styles.td}>{`${startCase(item)}s`}</td>
-              <td className={styles.td}>{items[item].length}</td>
-              <td className={styles.td}>{getParkTotal(item)}</td>
+              <td className={styles.td}>{selected[item].length}</td>
+              <td className={styles.td}>{getParkTotal(item, parks)}</td>
             </tr>
           ))}
         </tbody>
@@ -38,9 +40,9 @@ const DataTable = ({ count, total, items }: DataTableProps) => {
           <tr>
             <th className={styles.th}>Total</th>
             <td className={styles.td}>
-              <strong>{count}</strong>
+              <strong>{totalParks.length}</strong>
             </td>
-            <td>{total}</td>
+            <td>{parks.length}</td>
           </tr>
         </tfoot>
       </table>

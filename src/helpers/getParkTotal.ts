@@ -1,11 +1,10 @@
 import { PARK_INFO } from "../constants";
+import { Park } from "types/park";
 import { ParkDesignationType } from "enum/ParkDesignation";
 
-const getParkTotal = (park: ParkDesignationType) => {
-  const parkCodes = PARK_INFO[park];
-  return (
-    (parkCodes.codes.length || 0) + (parkCodes.formattedParks?.length || 0)
-  );
+const getParkTotal = (designation: ParkDesignationType, park: Park[]) => {
+  const foundParks = park.filter(park => park.designation === designation);
+  return foundParks.length;
 };
 
 export default getParkTotal;
