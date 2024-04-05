@@ -8,7 +8,7 @@ import { Feature, FeatureCollection } from "geojson";
 import { geoAlbersUsaTerritories } from "d3-composite-projections";
 import * as topojson from "topojson";
 import usMapData from "data/us";
-import getParkDesignation from "helpers/getParkDesignation";
+import camelCase from "lodash/camelCase";
 import {
   handleMouseOver,
   handleMouseOut,
@@ -34,7 +34,7 @@ const Map = ({ parks = [] }: MapProps) => {
 
   useEffect(() => {
     const handleClick = (id: string, parkCode: string, designation: string) => {
-      const formattedName = getParkDesignation(designation, parkCode);
+      const formattedName = camelCase(designation);
       let designationArray = formData[formattedName].slice();
       if (designationArray.includes(id)) {
         designationArray = designationArray.filter(
