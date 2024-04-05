@@ -10,7 +10,7 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 
 // Main API base
 export const apiClient = axios.create({
-  baseURL: DEV_ENV ? devBaseURL : prodBaseURL,
+  baseURL: "https://nat-park-backend.fly.dev",
 });
 
 const handleError = (error: AxiosError) => {
