@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
 import camelCase from "lodash/camelCase";
-import { Park } from "types/park";
 import {
   updateUserParks,
   updateUserParkDesignation,
