@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
 import camelCase from "lodash/camelCase";
+import { Park } from "types/park";
 import {
   updateUserParks,
   updateUserParkDesignation,
@@ -16,6 +17,7 @@ import useParks from "hooks/useParks";
 import useSelectedParks from "hooks/useSelectedParks";
 import useQuery from "hooks/useQuery";
 import { ParkDesignationType } from "enum/ParkDesignation";
+import filterParks from "./filterParks";
 import copy from "./copy";
 
 const ParkContainer = () => {
@@ -25,6 +27,8 @@ const ParkContainer = () => {
   const selectedState = query.get("state")?.toUpperCase();
   const selectedDesignation = camelCase(designation) as ParkDesignationType;
   const { isLoading, parks } = useParks(selectedDesignation, selectedState);
+  const filteredParks = filterParks(parks, selectedDesignation, selectedState);
+
   const {
     isLoading: isSelectedLoading,
     selectedParks,
@@ -105,7 +109,7 @@ const ParkContainer = () => {
         isLoading={isLoading || isSelectedLoading}
         selectedDesignation={selectedDesignation}
         selectedState={selectedState}
-        parks={parks}
+        parks={filteredParks || []}
         handleListItemChange={handleListItemChange}
         handleOnSubmit={handleOnSubmit}
       />
