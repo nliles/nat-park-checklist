@@ -1,4 +1,4 @@
-import { Park } from "types/park";
+import { ParkData } from "types/park";
 import { SelectedParks } from "types";
 import Header from "components/Header";
 import StatsMap from "../StatsMap";
@@ -9,12 +9,14 @@ import styles from "./StatsPage.module.scss";
 
 type StatsPageProps = {
   selected: SelectedParks;
-  parks: Park[];
+  parks?: ParkData;
+  total: number;
 };
 
-const StatsPage = ({ selected, parks }: StatsPageProps) => {
+const StatsPage = ({ selected, parks, total }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
-  const percentage = Math.floor((totalParks.length / parks.length) * 100);
+  console.log(selected, parks);
+  const percentage = Math.floor((totalParks.length / total) * 100);
   return (
     <div>
       <Header title="My Park Stats" />
@@ -42,7 +44,7 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
         </div>
         <div className={styles.columnTwo}>
           <StatsMap selectedParks={totalParks} parks={parks} />
-          <DataTable selected={selected} parks={parks} />
+          <DataTable selected={selected} parks={parks} total={total} />
         </div>
       </div>
     </div>

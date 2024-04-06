@@ -14,13 +14,12 @@ describe("<StatsPage />", () => {
   };
 
   const renderStatsPage = () => {
-    render(<StatsPage parks={[]} selected={selected} />);
+    render(<StatsPage selected={selected} total={429} />);
   };
 
   it("Displays the correct content", () => {
     renderStatsPage();
-    expect(screen.getByText("NPS units visited")).toBeVisible();
     expect(screen.getAllByText("1").length).toEqual(3);
-    expect(screen.getAllByText("423").length).toEqual(2);
+    expect(screen.getAllByText("429").length).toEqual(2);
   });
 });

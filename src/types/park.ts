@@ -1,3 +1,5 @@
+import ParkDesignation from "enum/ParkDesignation";
+
 type Address = {
   stateCode: string;
 };
@@ -19,4 +21,8 @@ export type Park = {
   name: string;
   states: string;
   url: string;
+};
+
+export type ParkData = {
+  [key in ParkDesignation]: Park[];
 };

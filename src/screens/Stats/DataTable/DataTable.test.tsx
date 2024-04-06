@@ -15,17 +15,17 @@ describe("<DataTable />", () => {
   };
 
   it("Displays the correct count and total", () => {
-    render(<DataTable selected={parkData} parks={[]} />);
+    render(<DataTable selected={parkData} total={429} />);
     expect(screen.getByText("4")).toBeVisible();
-    expect(screen.getByText("423")).toBeVisible();
+    expect(screen.getByText("429")).toBeVisible();
   });
 
-  // it.each([
-  //   ["National Park", "3"],
-  //   ["National Reserve", "2"],
-  // ])("renders the correct data", (name, parkCount) => {
-  //   render(<DataTable selected={parkData} parks={[{}, {}, {}, {}]} total={423} />);
-  //   expect(screen.getByText(name)).toBeVisible();
-  //   expect(screen.getByText(parkCount)).toBeVisible();
-  // });
+  it.each([
+    ["National Park", "3"],
+    ["National Reserve", "2"],
+  ])("renders the correct data", (name, parkCount) => {
+    render(<DataTable selected={parkData} total={423} />);
+    expect(screen.getByText(name)).toBeVisible();
+    expect(screen.getByText(parkCount)).toBeVisible();
+  });
 });

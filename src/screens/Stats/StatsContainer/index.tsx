@@ -8,10 +8,10 @@ import StatsPage from "screens/Stats/StatsPage";
 const StatsContainer = () => {
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);
   const { selectedParks } = useSelectedParks(isLoggedIn);
-  const { parks } = useParks();
+  const { allParks, total } = useParks();
   return (
     <PageWrapper>
-      <StatsPage selected={selectedParks} parks={parks} />
+      <StatsPage selected={selectedParks} parks={allParks} total={total} />
     </PageWrapper>
   );
 };

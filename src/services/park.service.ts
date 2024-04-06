@@ -1,13 +1,13 @@
 import { apiClient } from "services/apiService";
 import { ParkDesignationType } from "enum/ParkDesignation";
 import { SelectedParks } from "types";
-import { Park } from "types/park";
+import { ParkData } from "types/park";
 
 type Response = {
   parks: SelectedParks;
 };
 
-export const getParks = (): Promise<Park[]> => {
+export const getParks = (): Promise<{ parks: ParkData; total: number }> => {
   return apiClient.get("/park");
 };
 
