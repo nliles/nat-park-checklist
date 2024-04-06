@@ -33,7 +33,7 @@ const Map = ({ parks = [] }: MapProps) => {
   useTooltip();
 
   useEffect(() => {
-    const handleClick = (id: string, parkCode: string, designation: string) => {
+    const handleClick = (id: string, designation: string) => {
       const formattedName = camelCase(designation);
       let designationArray = formData[formattedName].slice();
       if (designationArray.includes(id)) {
@@ -152,14 +152,14 @@ const Map = ({ parks = [] }: MapProps) => {
             the state update causes the map to re-render and the zooms
             the user out. Toggling the color in this component and 
             excluding selectedParks from the dependencies for now */
-            const tree = d3.select(this).selectAll("polygon");
-            const treeLink = d3.select(this.parentNode).selectAll("text");
-            const isActive = tree.classed(styles.activeTree);
-            // // toggle class
-            tree.classed(styles.activeTree, !isActive);
-            treeLink.classed(styles.activeTree, !isActive);
+            // const tree = d3.select(this).selectAll("polygon");
+            // const treeLink = d3.select(this.parentNode).selectAll("text");
+            // const isActive = tree.classed(styles.activeTree);
+            // // // toggle class
+            // tree.classed(styles.activeTree, !isActive);
+            // treeLink.classed(styles.activeTree, !isActive);
             // save park state
-            handleClick?.(d.id, d.parkCode, d.designation);
+            handleClick?.(d.id, d.designation);
           });
 
         // Add tree polygon shape
@@ -260,8 +260,7 @@ const Map = ({ parks = [] }: MapProps) => {
     };
 
     drawMap();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parks, height, width, setValue, formData]);
+  });
 
   return <div ref={containerRef} className={styles.mapContainer} />;
 };

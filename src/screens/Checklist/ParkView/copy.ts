@@ -2,7 +2,7 @@ const copy = {
   tooltipCopy: (designation?: string, state?: string) =>
     `Total number of ${state || ""} ${designation || "NPS unit"}s visited.`,
   designationLabel: "Select a designation",
-  stateLabel: "State",
+  stateLabel: "State/Terr.",
   allDesignationTitle: "National Park Unit",
 };
 
