@@ -260,7 +260,6 @@ const Map = ({ parks = [] }: MapProps) => {
     };
 
     drawMap();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   return <div ref={containerRef} className={styles.mapContainer} />;
