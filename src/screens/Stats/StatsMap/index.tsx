@@ -29,10 +29,7 @@ const colorScale = [
   "#4b5e26",
 ];
 
-const StatsMap = ({
-  parks,
-  selectedParks = [],
-}: MapProps) => {
+const StatsMap = ({ parks, selectedParks = [] }: MapProps) => {
   const { containerRef, width, height } = useContainerWidth();
   const formattedSelected = Object.values(selectedParks).flat(1);
   const allParks = Object.values(parks || {}).flat(1);
@@ -49,7 +46,7 @@ const StatsMap = ({
         park.states.includes(stateValue)
       );
       const selectedIds = stateParks.filter((selected) =>
-       formattedSelected.includes(selected.id)
+        formattedSelected.includes(selected.id)
       );
       return (selectedIds.length || 0) / (stateParks.length || 0);
     };
@@ -191,12 +188,7 @@ const StatsMap = ({
     }
   }, [height, width, allParks, formattedSelected, containerRef]);
 
-  return (
-    <div
-      ref={containerRef}
-      className={styles.mapContainer}
-    />
-  );
+  return <div ref={containerRef} className={styles.mapContainer} />;
 };
 
 export default StatsMap;
