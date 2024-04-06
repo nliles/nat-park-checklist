@@ -15,7 +15,6 @@ type StatsPageProps = {
 
 const StatsPage = ({ selected, parks, total }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
-  console.log(selected, parks);
   const percentage = Math.floor((totalParks.length / total) * 100);
   return (
     <div>

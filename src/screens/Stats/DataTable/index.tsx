@@ -15,7 +15,6 @@ const DataTable = ({ selected, parks, total }: DataTableProps) => {
   const headers = [copy.category, copy.visited, copy.total];
   const itemKeys = Object.keys(selected) as ParkDesignation[];
   const totalParks = Object.values(selected).flat(1);
-  console.log(parks);
   return (
     <div className={styles.container}>
       <table className={styles.table}>
