@@ -38,14 +38,11 @@ const StatsPage = ({ selected, parks }: StatsPageProps) => {
               />
             </div>
           </div>
-          <DataBars selected={selected} parks={parks}/>
+          <DataBars selected={selected} parks={parks} />
         </div>
         <div className={styles.columnTwo}>
           <StatsMap selectedParks={totalParks} parks={parks} />
-          <DataTable
-            selected={selected}
-            parks={parks}
-          />
+          <DataTable selected={selected} parks={parks} />
         </div>
       </div>
     </div>

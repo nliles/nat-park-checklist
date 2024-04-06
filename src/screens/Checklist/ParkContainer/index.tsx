@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import kebabCase from "lodash/kebabCase";
 import camelCase from "lodash/camelCase";
-import { updateUserParks, updateUserParkDesignation } from "services/park.service";
+import {
+  updateUserParks,
+  updateUserParkDesignation,
+} from "services/park.service";
 import { State } from "reducers/types";
 import ParkView from "screens/Checklist/ParkView";
 import useParks from "hooks/useParks";

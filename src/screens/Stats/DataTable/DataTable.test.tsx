@@ -15,7 +15,7 @@ describe("<DataTable />", () => {
   };
 
   it("Displays the correct count and total", () => {
-    render(<DataTable selected={parkData} parks={[]}/>);
+    render(<DataTable selected={parkData} parks={[]} />);
     expect(screen.getByText("4")).toBeVisible();
     expect(screen.getByText("423")).toBeVisible();
   });

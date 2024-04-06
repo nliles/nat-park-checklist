@@ -37,7 +37,7 @@ const ParkList = ({
         {parks.length ? (
           <div className={styles.listContainer}>
             {parks.map((park, i) => {
-              const formattedName = camelCase(park.designation)
+              const formattedName = camelCase(park.designation);
               return (
                 <Checkbox
                   key={park.fullName}
