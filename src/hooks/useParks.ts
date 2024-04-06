@@ -25,10 +25,7 @@ function useParks(
         }
         const filteredParks = data
           .filter((park: Park) =>
-            selectedItem
-              ? camelCase(park.designation) ===
-                selectedItem
-              : park
+            selectedItem ? camelCase(park.designation) === selectedItem : park
           )
           .filter((park: Park) =>
             selectedState ? park.states.includes(selectedState) : park
