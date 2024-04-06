@@ -152,12 +152,12 @@ const Map = ({ parks = [] }: MapProps) => {
             the state update causes the map to re-render and the zooms
             the user out. Toggling the color in this component and 
             excluding selectedParks from the dependencies for now */
-            const tree = d3.select(this).selectAll("polygon");
-            const treeLink = d3.select(this.parentNode).selectAll("text");
-            const isActive = tree.classed(styles.activeTree);
-            // // toggle class
-            tree.classed(styles.activeTree, !isActive);
-            treeLink.classed(styles.activeTree, !isActive);
+            // const tree = d3.select(this).selectAll("polygon");
+            // const treeLink = d3.select(this.parentNode).selectAll("text");
+            // const isActive = tree.classed(styles.activeTree);
+            // // // toggle class
+            // tree.classed(styles.activeTree, !isActive);
+            // treeLink.classed(styles.activeTree, !isActive);
             // save park state
             handleClick?.(d.id, d.designation);
           });
@@ -261,7 +261,7 @@ const Map = ({ parks = [] }: MapProps) => {
 
     drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parks, height, width, setValue, formData]);
+  });
 
   return <div ref={containerRef} className={styles.mapContainer} />;
 };
