@@ -33,7 +33,7 @@ const Map = ({ parks = [] }: MapProps) => {
   useTooltip();
 
   useEffect(() => {
-    const handleClick = (id: string, parkCode: string, designation: string) => {
+    const handleClick = (id: string, designation: string) => {
       const formattedName = camelCase(designation);
       let designationArray = formData[formattedName].slice();
       if (designationArray.includes(id)) {
@@ -159,7 +159,7 @@ const Map = ({ parks = [] }: MapProps) => {
             tree.classed(styles.activeTree, !isActive);
             treeLink.classed(styles.activeTree, !isActive);
             // save park state
-            handleClick?.(d.id, d.parkCode, d.designation);
+            handleClick?.(d.id, d.designation);
           });
 
         // Add tree polygon shape
