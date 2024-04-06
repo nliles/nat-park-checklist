@@ -3,7 +3,7 @@ import PageWrapper from "components/PageWrapper";
 import cn from "classnames";
 import { Park } from "types/park";
 import Total from "components/Total";
-import ParkDesignation, { ParkDesignationType } from "enum/ParkDesignation";
+import { ParkDesignationType } from "enum/ParkDesignation";
 import ParkList from "screens/Checklist/ParkList";
 import Map from "screens/Checklist/Map";
 import Spinner from "components/ui/Spinner";
@@ -11,7 +11,6 @@ import Dropdown, { DropdownItem } from "components/ui/Dropdown";
 import Header from "components/Header";
 import startCase from "lodash/startCase";
 import { DESIGNATION_OPTIONS, STATES_LIST } from "../../../constants";
-import getParkTotal from "helpers/getParkTotal";
 import copy from "./copy";
 import styles from "./ParkView.module.scss";
 
@@ -42,8 +41,7 @@ const ParkView = ({
   const { watch } = useFormContext();
 
   const formData = watch("parkData");
-  const formatDesignationItem = (item: DropdownItem) =>
-    `${item.name}s (${getParkTotal(item.value as ParkDesignation, parks)})`;
+  const formatDesignationItem = (item: DropdownItem) => `${item.name}s`;
   const allDesignations = Object.values(formData || {}).flat(1);
   const dropdownItem = startCase(selectedDesignation);
   const headerTitle = selectedDesignation
