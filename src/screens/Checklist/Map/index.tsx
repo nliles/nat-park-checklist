@@ -54,9 +54,8 @@ const Map = ({ parks = [] }: MapProps) => {
         usMapData,
         usMapData.objects.states
       ) as FeatureCollection;
-      const widthTabletDesktop = width >= 768;
       // Map padding
-      const bottomPadding = widthTabletDesktop ? 60 : 0;
+      const bottomPadding = 60;
 
       const projection = geoAlbersUsaTerritories().fitExtent(
         [
@@ -82,12 +81,14 @@ const Map = ({ parks = [] }: MapProps) => {
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
+      const zoom: any = d3.zoom().scaleExtent([1, 60]).on("zoom", handleZoom);
+
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
 
       // Add map
       const map = d3
-        .select(containerRef.current)
+        .select("#mapContainer")
         .append("svg")
         .attr("class", "map")
         .attr("width", width)
@@ -97,7 +98,7 @@ const Map = ({ parks = [] }: MapProps) => {
       let active: any = d3.select(null);
 
       // Draw the map
-      const g = map.append("g");
+      const g = map.append("g").call(zoom);
 
       const d = g
         .selectAll("path")
@@ -109,18 +110,6 @@ const Map = ({ parks = [] }: MapProps) => {
 
       // Draw Map Markers
       if (parks.length > 0) {
-        // add circles
-        g.selectAll("circles")
-          .data(parks)
-          .enter()
-          .append("circle")
-          .attr("class", styles.mobileCircle)
-          .classed(styles.active, (d: Park) => selectedParks.includes(d.id))
-          .attr("cx", (d) => projection([d.longitude, d.latitude])?.[0])
-          .attr("cy", (d) => projection([d.longitude, d.latitude])?.[1])
-          .attr("r", 2);
-
-        // Tree map markers
         // add link container
         linkContainer = g
           .selectAll("markers")
@@ -214,14 +203,10 @@ const Map = ({ parks = [] }: MapProps) => {
 
         g.transition()
           .duration(750)
-          .attr("transform", `translate(${translate})scale(${scale})`);
-
-        // g.transition().duration(750).call(
-        //   zoom.transform,
-        //   d3.zoomIdentity
-        //     .translate(width / 2 - scale * x, height / 2 - scale * y)
-        //     .scale(scale)
-        // );
+          .call(
+            zoom.transform,
+            d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+          );
 
         linkContainer
           .transition()
@@ -232,25 +217,16 @@ const Map = ({ parks = [] }: MapProps) => {
       }
 
       function handleZoom(e: any) {
-        d.attr("transform", e.transform);
+        g.attr("transform", e.transform);
+        linkContainer.attr("transform", (park: Park) =>
+          getMarkCoords({ park, scale: 1 / e.transform.k })
+        );
       }
-
-      const zoom = d3.zoom();
-
-      zoom.on("zoom", handleZoom);
-
-      zoom.scaleExtent([1, 1]);
-
-      // (svg as any).call(zoom)
 
       function reset() {
         active = d3.select(null);
-        map.select("g").transition().duration(750).attr("transform", "");
 
-        // g.transition().duration(750).call(
-        //   zoom.transform,
-        //   d3.zoomIdentity
-        // );
+        g.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
 
         linkContainer
           .transition()
