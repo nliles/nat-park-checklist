@@ -54,9 +54,8 @@ const Map = ({ parks = [] }: MapProps) => {
         usMapData,
         usMapData.objects.states
       ) as FeatureCollection;
-      const widthTabletDesktop = width >= 768;
       // Map padding
-      const bottomPadding = widthTabletDesktop ? 60 : 0;
+      const bottomPadding = 60;
 
       const projection = geoAlbersUsaTerritories().fitExtent(
         [
@@ -82,14 +81,14 @@ const Map = ({ parks = [] }: MapProps) => {
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
-      const zoom: any = d3.zoom().scaleExtent([1, 30]).on("zoom", handleZoom);
+      const zoom: any = d3.zoom().scaleExtent([1, 60]).on("zoom", handleZoom);
 
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
 
       // Add map
       const map = d3
-        .select(containerRef.current)
+        .select("#mapContainer")
         .append("svg")
         .attr("class", "map")
         .attr("width", width)
@@ -99,7 +98,7 @@ const Map = ({ parks = [] }: MapProps) => {
       let active: any = d3.select(null);
 
       // Draw the map
-      const g = map.append("g");
+      const g = map.append("g").call(zoom);
 
       const d = g
         .selectAll("path")
@@ -202,12 +201,6 @@ const Map = ({ parks = [] }: MapProps) => {
           scale = 0.9 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-        console.log(translate, scale);
-
-        // g.transition()
-        //   .duration(750)
-        //   .attr("transform", `translate(${translate})scale(${scale})`);
-
         g.transition()
           .duration(750)
           .call(
@@ -230,11 +223,8 @@ const Map = ({ parks = [] }: MapProps) => {
         );
       }
 
-      g.call(zoom);
-
       function reset() {
         active = d3.select(null);
-        // map.select("g").transition().duration(750).attr("transform", "");
 
         g.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
 
@@ -248,7 +238,7 @@ const Map = ({ parks = [] }: MapProps) => {
     drawMap();
   });
 
-  return <div ref={containerRef} className={styles.mapContainer} />;
+  return <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>;
 };
 
 export default Map;
