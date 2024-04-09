@@ -238,7 +238,7 @@ const Map = ({ parks = [] }: MapProps) => {
     drawMap();
   });
 
-  return <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>;
+  return <div ref={containerRef} className={styles.mapContainer}/>;
 };
 
 export default Map;
