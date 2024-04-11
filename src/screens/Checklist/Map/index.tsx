@@ -81,7 +81,7 @@ const Map = ({ parks = [] }: MapProps) => {
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
-      const zoom: any = d3.zoom().scaleExtent([1, 60]).on("zoom", handleZoom);
+      const zoom: any = d3.zoom().scaleExtent([1, 500]).on("zoom", handleZoom);
 
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
