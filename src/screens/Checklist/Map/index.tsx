@@ -202,7 +202,8 @@ const Map = ({ parks = [] }: MapProps) => {
           scale = 0.9 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-        map.transition()
+        map
+          .transition()
           .duration(750)
           .call(
             zoom.transform,
@@ -229,17 +230,18 @@ const Map = ({ parks = [] }: MapProps) => {
 
         map.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
 
-        linkContainer
-          .transition()
-          .duration(750)
-          .attr("transform", (park: Park) => getMarkCoords({ park }));
+        linkContainer.attr("transform", (park: Park) =>
+          getMarkCoords({ park })
+        );
       }
     };
 
     drawMap();
   });
 
-  return <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>;
+  return (
+    <div ref={containerRef} className={styles.mapContainer} id="mapContainer" />
+  );
 };
 
 export default Map;
