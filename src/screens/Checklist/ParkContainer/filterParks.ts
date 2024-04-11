@@ -9,7 +9,9 @@ const filterParks = (
 ) => {
   let filteredParks = selectedDesignation
     ? parks?.[selectedDesignation]
-    : Object.values(parks || {}).flat(1).sort((a,b) => a.fullName.localeCompare(b.fullName))
+    : Object.values(parks || {})
+        .flat(1)
+        .sort((a, b) => a.fullName.localeCompare(b.fullName));
   return filteredParks?.filter((park: Park) =>
     selectedState ? park.states.includes(selectedState) : park
   );

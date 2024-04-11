@@ -81,7 +81,7 @@ const Map = ({ parks = [] }: MapProps) => {
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
-      const zoom: any = d3.zoom().scaleExtent([1, 60]).on("zoom", handleZoom);
+      const zoom: any = d3.zoom().scaleExtent([1, 600]).on("zoom", handleZoom);
 
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
@@ -92,13 +92,14 @@ const Map = ({ parks = [] }: MapProps) => {
         .append("svg")
         .attr("class", "map")
         .attr("width", width)
-        .attr("height", height + bottomPadding);
+        .attr("height", height + bottomPadding)
+        .call(zoom);
 
       let linkContainer: any = d3.select(null);
       let active: any = d3.select(null);
 
       // Draw the map
-      const g = map.append("g").call(zoom);
+      const g = map.append("g");
 
       const d = g
         .selectAll("path")
@@ -201,7 +202,8 @@ const Map = ({ parks = [] }: MapProps) => {
           scale = 0.9 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-        g.transition()
+        map
+          .transition()
           .duration(750)
           .call(
             zoom.transform,
@@ -226,19 +228,20 @@ const Map = ({ parks = [] }: MapProps) => {
       function reset() {
         active = d3.select(null);
 
-        g.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        map.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
 
-        linkContainer
-          .transition()
-          .duration(750)
-          .attr("transform", (park: Park) => getMarkCoords({ park }));
+        linkContainer.attr("transform", (park: Park) =>
+          getMarkCoords({ park })
+        );
       }
     };
 
     drawMap();
   });
 
-  return <div ref={containerRef} className={styles.mapContainer} id="mapContainer"/>;
+  return (
+    <div ref={containerRef} className={styles.mapContainer} id="mapContainer" />
+  );
 };
 
 export default Map;
