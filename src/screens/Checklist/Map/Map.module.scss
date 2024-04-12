@@ -2,6 +2,7 @@
 @import "../../../styles/breakpoints.scss";
 
 .mapContainer {
+  position: relative;
   margin: 0 100px;
   overflow: hidden;
   border: 1px solid $tanOutline;
@@ -30,19 +31,6 @@
   }
 }
 
-// Circle Map Markers
-.mobileCircle {
-  display: none;
-  fill: $lightGreen;
-  @media (max-width: $tablet) {
-    display: block;
-  }
-
-  &.active {
-    fill: $green;
-  }
-}
-
 // Tree Map Markers
 .tree {
   fill-rule: evenodd;
@@ -58,11 +46,7 @@
 }
 
 .treeLink {
-  display: none;
   cursor: default;
-  @media (min-width: $tablet) {
-    display: block;
-  }
 }
 
 .treeLinkText {
@@ -150,4 +134,54 @@
     border: 10px solid transparent;
     border-bottom-color: $white;
   }
+}
+
+.buttons {
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.plusMinus {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.plus, .minus, .home {
+  all: unset;
+  font-size: 12px;
+  padding: 6px;
+  line-height: 2px;
+  background-color: $dimGray;
+  text-align: center;
+
+  svg {
+    fill: $white;
+  }
+}
+
+.plus, .minus {
+  border-right: 1px solid $black;
+  border-left: 1px solid $black;
+}
+
+.plus {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top: 1px solid $black;
+}
+
+.minus {
+  border-top: 1px solid $black;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom: 1px solid $black;
+}
+
+.home {
+  margin: 5px;
+  border: 1px solid $black;
+  border-radius: 5px;
 }
