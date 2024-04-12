@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { defaultSelectedValues } from "hooks/useSelectedParks";
+import { defaultSelectedValues } from "../../../constants";
 import StatsPage from ".";
 
 jest.mock("react-redux", () => ({

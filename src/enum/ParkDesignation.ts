@@ -6,6 +6,7 @@ export enum ParkDesignation {
   NAT_MILITARY_PARK = "nationalMilitaryPark",
   NAT_HISTORICAL_PARK = "nationalHistoricalPark",
   NAT_HISTORIC_SITE = "nationalHistoricSite",
+  INTERNATIONAL_HISTORIC_SITE = "internationalHistoricSite",
   NAT_LAKESHORE = "nationalLakeshore",
   NAT_MEMORIAL = "nationalMemorial",
   NAT_MONUMENT = "nationalMonument",
@@ -14,10 +15,9 @@ export enum ParkDesignation {
   NAT_RESERVES = "nationalReserve",
   NAT_REC_AREA = "nationalRecreationArea",
   NAT_RIVER = "nationalRiver",
-  NAT_SCENIC_TRAIL = "nationalScenicTrail",
-  NAT_SEASHORE = "nationalSeashore",
   NAT_WILD_AND_SCENIC_RIVER = "nationalWildAndScenicRiver",
-  INTERNATIONAL_HISTORIC_SITE = "internationalHistoricSite",
+  NAT_SEASHORE = "nationalSeashore",
+  NAT_SCENIC_TRAIL = "nationalScenicTrail",
   OTHER_DESIGNATION = "otherDesignation",
 }
 

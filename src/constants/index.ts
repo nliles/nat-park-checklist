@@ -1,5 +1,6 @@
 import ParkDesignation from "enum/ParkDesignation";
 import startCase from "lodash.startcase";
+import { SelectedParks } from "types";
 
 export const DESIGNATION_OPTIONS = [
   ...Object.values(ParkDesignation).map((designation) => ({
@@ -7,6 +8,29 @@ export const DESIGNATION_OPTIONS = [
     value: designation,
   })),
 ];
+
+export const defaultSelectedValues: SelectedParks = {
+  nationalPark: [],
+  nationalBattlefield: [],
+  nationalBattlefieldPark: [],
+  nationalBattlefieldSite: [],
+  nationalMilitaryPark: [],
+  nationalHistoricalPark: [],
+  nationalHistoricSite: [],
+  internationalHistoricSite: [],
+  nationalLakeshore: [],
+  nationalMemorial: [],
+  nationalMonument: [],
+  nationalParkway: [],
+  nationalPreserve: [],
+  nationalReserve: [],
+  nationalRecreationArea: [],
+  nationalRiver: [],
+  nationalWildAndScenicRiver: [],
+  nationalScenicTrail: [],
+  nationalSeashore: [],
+  otherDesignation: [],
+};
 
 export const NAT_PARK_TOTAL_LINK =
   "https://www.nps.gov/aboutus/national-park-system.htm";
