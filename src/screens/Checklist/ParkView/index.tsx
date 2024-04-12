@@ -41,7 +41,6 @@ const ParkView = ({
   const { watch } = useFormContext();
 
   const formData = watch("parkData");
-  const formatDesignationItem = (item: DropdownItem) => `${item.name}s`;
   const allDesignations = Object.values(formData || {}).flat(1);
   const dropdownItem = startCase(selectedDesignation);
   const headerTitle = selectedDesignation
@@ -73,7 +72,6 @@ const ParkView = ({
                   label={copy.designationLabel}
                   initialSelectedItem={selectedDesignation}
                   handleClick={handleListItemChange}
-                  formatListItem={formatDesignationItem}
                   formatSelectedItem={formatSelectedItem}
                   className={styles.designation}
                   keyValue="designation"
