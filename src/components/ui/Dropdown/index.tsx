@@ -20,7 +20,6 @@ type DropdownProps = {
   items: DropdownItem[];
   initialSelectedItem?: string;
   className?: string;
-  formatListItem?: (item: DropdownItem) => string;
   formatSelectedItem?: (item: DropdownItem) => string;
   keyValue: string;
 };
@@ -31,7 +30,6 @@ const Dropdown = ({
   items,
   initialSelectedItem,
   className,
-  formatListItem = (item: DropdownItem) => item.name,
   formatSelectedItem = (item: DropdownItem) => item.value,
   keyValue,
 }: DropdownProps) => {
@@ -110,7 +108,7 @@ const Dropdown = ({
             key={item.value}
             {...getItemProps({ item, index })}
           >
-            {formatListItem(item)}
+            {item.name}
           </li>
         ))}
       </ul>
