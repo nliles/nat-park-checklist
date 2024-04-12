@@ -2,7 +2,7 @@
 @import "../../../styles/breakpoints.scss";
 
 .mapContainer {
-  @media (max-width: 1024px) {
+  @media (max-width: $desktop) {
     margin: 2rem 0 3rem 0;
   }
 }
@@ -12,7 +12,7 @@
   padding: 2px;
   font-size: 12px;
   background: $white;
-  border: 1px solid black;
+  border: 1px solid $black;
   opacity: 0;
 }
 

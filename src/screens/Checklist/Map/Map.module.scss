@@ -6,11 +6,8 @@
   margin: 0 100px;
   overflow: hidden;
   border: 1px solid $tanOutline;
-  @media (max-width: 1024px) {
+  @media (max-width: $desktop) {
     margin: 0 25px;
-  }
-  @media (max-width: $mobile-landscape) {
-    border: none;
   }
 }
 
