@@ -149,7 +149,9 @@
   margin: 5px;
 }
 
-.plus, .minus, .home {
+.plus,
+.minus,
+.home {
   all: unset;
   font-size: 12px;
   padding: 6px;
@@ -162,7 +164,8 @@
   }
 }
 
-.plus, .minus {
+.plus,
+.minus {
   border-right: 1px solid $black;
   border-left: 1px solid $black;
 }
