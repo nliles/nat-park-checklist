@@ -1,5 +1,5 @@
 import React from "react";
-import { defaultSelectedValues } from "hooks/useSelectedParks";
+import { defaultSelectedValues } from "../../../constants";
 import { render, screen } from "@testing-library/react";
 import DataBars from ".";
 

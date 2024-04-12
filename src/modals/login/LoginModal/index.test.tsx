@@ -15,7 +15,7 @@ describe("<LoginModal />", () => {
   it("Displays the correct content when showRegistration is false", () => {
     renderForm();
     expect(
-      screen.getByText("Sign in to track your National Park visits.")
+      screen.getByText("Sign in to track your national park visits.")
     ).toBeVisible();
     expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign in");
     expect(screen.getByText("Don't have an account?")).toBeVisible();
@@ -25,7 +25,7 @@ describe("<LoginModal />", () => {
   it("Displays the correct content when showRegistration is true", () => {
     renderForm({ showRegistration: true });
     expect(
-      screen.getByText("Sign up to track your National Park visits.")
+      screen.getByText("Sign up to track your national park visits.")
     ).toBeVisible();
     expect(screen.getAllByRole("button")[0]).toHaveTextContent("Sign up");
     expect(screen.getByText("Already have an account?")).toBeVisible();

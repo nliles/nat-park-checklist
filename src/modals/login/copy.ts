@@ -5,7 +5,7 @@ const copy = {
   passwordRequired: "Password required. Please fill out this field",
   passwordLength: "Password must have at least 8 characters",
   paragraphText: (signUpText: string) =>
-    `${signUpText} to track your National Park visits.`,
+    `${signUpText} to track your national park visits.`,
   accountRegistrationText: "Already have an account?",
   accountLoginText: "Don't have an account?",
   registrationSuccess: "Thank you for creating an account!",
