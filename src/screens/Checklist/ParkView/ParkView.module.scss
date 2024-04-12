@@ -9,20 +9,6 @@
   grid-column-start: 1;
   grid-row-start: 1;
   justify-self: right;
-
-  &.desktopCount {
-    display: block;
-    @media (max-width: $mobile-landscape) {
-      display: none;
-    }
-  }
-}
-
-.mobileCount {
-  display: none;
-  @media (max-width: $mobile-landscape) {
-    display: block;
-  }
 }
 
 .dropdownWrapper {
@@ -33,7 +19,7 @@
   text-align: center;
 
   @media (max-width: $desktop) {
-    margin: 0 50px;
+    margin: 0 25px;
   }
 
   @media (max-width: $mobile-landscape) {
