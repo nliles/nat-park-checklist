@@ -55,7 +55,7 @@ function useMap({
         usMapData.objects.states
       ) as FeatureCollection;
       // Map padding
-      const bottomPadding = 60;
+      const bottomPadding = width > 540 ? 60 : 20;
 
       const projection = geoAlbersUsaTerritories().fitExtent(
         [
@@ -74,7 +74,7 @@ function useMap({
         park: Park;
         scale?: number;
       }) => {
-        const adjustedScale = width < 1000 ? scale * 0.75 : scale;
+        const adjustedScale = width < 1000 ? scale * (width / 1000) : scale;
         const p = projection([park.longitude, park.latitude]);
         const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
         const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
