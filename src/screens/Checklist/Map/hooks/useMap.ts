@@ -81,7 +81,7 @@ function useMap({
         return `translate(${x}, ${y})scale(${adjustedScale})`;
       };
 
-      const zoom: any = d3.zoom().scaleExtent([1, 600]).on("zoom", handleZoom);
+      const zoom = d3.zoom<SVGSVGElement, unknown>().scaleExtent([1, 600]).on("zoom", handleZoom);
 
       // Remove previous map before drawing a new one
       d3.select(".map").remove();
@@ -105,7 +105,7 @@ function useMap({
         .call(zoom);
 
       let linkContainer: any = d3.select(null);
-      let active: any = d3.select(null);
+      let active: d3.Selection<any, {}, any, any> = d3.select(null);
 
       // Draw the map
       const g = map.append("g");
@@ -145,8 +145,8 @@ function useMap({
           .attr("width", 33)
           .attr("height", 45)
           .attr("viewBox", "0 0 540.41 736.19")
-          .on("click", function (e: Event, d: Park) {
-            e.preventDefault();
+          .on("click", function (event: Event, d: Park) {
+            event.preventDefault();
             /* If the map is zoomed in and a state is selected,
                 the state update causes the map to re-render and the zooms
                 the user out. Toggling the color in this component and 
@@ -173,7 +173,7 @@ function useMap({
           .on("mouseover", function () {
             d3.select(this).classed(styles.hoverTree, true);
           })
-          .on("mouseout", function (e: Event, d: Park) {
+          .on("mouseout", function (event: Event, d: Park) {
             d3.select(this).classed(styles.hoverTree, false);
           });
 
@@ -185,8 +185,8 @@ function useMap({
           .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
           .attr("x", TREE_MARKER_WIDTH)
           .attr("y", 30)
-          .on("mouseover", (e: Event, d: Park) => {
-            e.stopPropagation();
+          .on("mouseover", (event: Event, d: Park) => {
+            event.stopPropagation();
             handleMouseOver(d);
           });
       }
@@ -202,7 +202,7 @@ function useMap({
         event.stopPropagation();
         active.classed(styles.active, false);
         if (active.node() === this) return reset();
-        active = d3.select(this).classed(styles.active, true);
+        active = d3.select<SVGElement, {}>(this).classed(styles.active, true);
         const bounds = path.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
@@ -227,10 +227,10 @@ function useMap({
           );
       }
 
-      function handleZoom(e: any) {
-        g.attr("transform", e.transform);
+      function handleZoom(event: any) {
+        g.attr("transform", event.transform);
         linkContainer.attr("transform", (park: Park) =>
-          getMarkCoords({ park, scale: 1 / e.transform.k })
+          getMarkCoords({ park, scale: 1 / event.transform.k })
         );
       }
 

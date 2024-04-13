@@ -13,9 +13,9 @@ type StatsPageProps = {
   total: number;
 };
 
-const StatsPage = ({ selected, parks, total }: StatsPageProps) => {
+const StatsPage = ({ selected, parks, total = 0 }: StatsPageProps) => {
   const totalParks = Object.values(selected).flat(1);
-  const percentage = Math.floor((totalParks.length / total) * 100);
+  const percentage = Math.floor((totalParks.length / total) * 100) || 0;
   return (
     <div>
       <Header title="My Park Stats" />
