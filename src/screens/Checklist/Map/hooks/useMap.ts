@@ -118,9 +118,18 @@ function useMap({
         .attr("class", styles.state)
         .attr("d", path);
 
-      // Draw Map Markers
-      if (parks.length > 0) {
-        // add link container
+      d.on("click", handleStateZoom);
+      d.on("mouseover", ({ currentTarget }) => {
+        d3.select(currentTarget).classed(styles.hover, true);
+      }).on("mouseout", ({ currentTarget }) => {
+        d3.select(currentTarget).classed(styles.hover, false);
+      });
+
+      if (parks.length) {
+        drawMarkers();
+      }
+
+      function drawMarkers() {
         linkContainer = g
           .selectAll("markers")
           .data(parks)
@@ -147,17 +156,6 @@ function useMap({
           .attr("viewBox", "0 0 540.41 736.19")
           .on("click", function (event: Event, d: Park) {
             event.preventDefault();
-            /* If the map is zoomed in and a state is selected,
-                the state update causes the map to re-render and the zooms
-                the user out. Toggling the color in this component and 
-                excluding selectedParks from the dependencies for now */
-            // const tree = d3.select(this).selectAll("polygon");
-            // const treeLink = d3.select(this.parentNode).selectAll("text");
-            // const isActive = tree.classed(styles.activeTree);
-            // // // toggle class
-            // tree.classed(styles.activeTree, !isActive);
-            // treeLink.classed(styles.activeTree, !isActive);
-            // save park state
             handleClick?.(d.id, d.designation);
           });
 
@@ -190,13 +188,6 @@ function useMap({
             handleMouseOver(d);
           });
       }
-
-      d.on("click", handleStateZoom);
-      d.on("mouseover", ({ currentTarget }) => {
-        d3.select(currentTarget).classed(styles.hover, true);
-      }).on("mouseout", ({ currentTarget }) => {
-        d3.select(currentTarget).classed(styles.hover, false);
-      });
 
       function handleStateZoom(event: Event, d: Feature) {
         event.stopPropagation();
