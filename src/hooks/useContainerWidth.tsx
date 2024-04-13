@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 function useContainerWidth() {
-  const defaultWidth = window.innerWidth;
   const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(defaultWidth);
-  const [height, setHeight] = useState(defaultWidth / 2);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   const updateDimensions = () => {
     if (containerRef.current) {

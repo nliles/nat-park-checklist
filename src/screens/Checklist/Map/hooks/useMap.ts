@@ -49,6 +49,8 @@ function useMap({
     };
 
     const drawMap = () => {
+      console.log('draw map')
+
       // Map data
       const usData = topojson.feature(
         usMapData,
@@ -74,7 +76,7 @@ function useMap({
         park: Park;
         scale?: number;
       }) => {
-        const adjustedScale = width < 1000 ? scale * (width / 1000) : scale;
+        const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
         const p = projection([park.longitude, park.latitude]);
         const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
         const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
@@ -82,9 +84,6 @@ function useMap({
       };
 
       const zoom = d3.zoom<SVGSVGElement, unknown>().scaleExtent([1, 600]).on("zoom", handleZoom);
-
-      // Remove previous map before drawing a new one
-      d3.select(".map").remove();
 
       // add click functionality to map buttons
       d3.select("#home").on("click", reset);
@@ -237,7 +236,11 @@ function useMap({
       }
     };
 
-    drawMap();
+    if (width && height) {
+      // Remove previous map before drawing a new one
+      d3.select(".map").remove();
+      drawMap();
+    }
   });
 }
 
