@@ -1,4 +1,4 @@
-import { useEffect, useRef, MutableRefObject, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { Park } from "types/park";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
