@@ -83,12 +83,12 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         );
     }
 
-    function handleZoom(event: any) {
-      d3.select(".map g").attr("transform", event.transform);
+    function handleZoom(d3Event: d3.D3ZoomEvent<SVGSVGElement, unknown>) {
+      d3.select(".map g").attr("transform", (d3Event as any).transform);
       d3.select(".map g")
         .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) =>
-          getMarkerCoords({ park, scale: 1 / event.transform.k })
+          getMarkerCoords({ park, scale: 1 / d3Event.transform.k })
         );
     }
 
