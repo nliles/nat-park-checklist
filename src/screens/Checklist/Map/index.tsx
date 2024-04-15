@@ -28,121 +28,9 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   // Selected park data
   const { watch, setValue } = useFormContext();
   const formData = watch("parkData");
-  const selectedParks = Object.values(formData).flat(1) as string[];
   useTooltip();
-
-  // Map data
-  const usData = topojson.feature(
-    usMapData,
-    usMapData.objects.states
-  ) as FeatureCollection;
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
-
-  const projection = geoAlbersUsaTerritories().fitExtent(
-    [
-      [0, bottomPadding],
-      [width, height],
-    ],
-    usData
-  );
-
-  const getMarkCoords = useCallback(
-    ({ park, scale = 1 }: { park: Park; scale?: number }) => {
-      const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
-      const p = projection([park.longitude, park.latitude]);
-      const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
-      const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
-      return `translate(${x}, ${y})scale(${adjustedScale})`;
-    },
-    [projection, width]
-  );
-
-  const handleClick = useCallback(
-    (id: string, designation: string) => {
-      const formattedName = camelCase(designation);
-      let designationArray = formData[formattedName].slice();
-      if (designationArray.includes(id)) {
-        designationArray = designationArray.filter(
-          (parkId: string) => parkId !== id
-        );
-      } else {
-        designationArray.push(id);
-      }
-      setValue(`parkData.${formattedName}`, designationArray, {
-        shouldDirty: true,
-      });
-    },
-    [formData, setValue]
-  );
-
-  const drawMarkers = useCallback(() => {
-    console.log("draw markers");
-    return d3
-      .select(".map g")
-      .selectAll("a")
-      .data(parks, (d: any) => d.id)
-      .join(
-        (enter) => {
-          const container = enter.append("a");
-          container
-            .attr("class", styles.treeContainer)
-            .classed(styles.selected, (d: Park) => selectedParks.includes(d.id))
-            .attr("xlink:href", (d: Park) => d.url || "")
-            .attr("transform", (park: Park) => getMarkCoords({ park }))
-            .on("mouseover", function (e: Event, d: Park) {
-              d3.select(this).selectAll("text").classed(styles.hoverTree, true);
-              handleMouseOver(d);
-            })
-            .on("mousemove", handleMouseMove)
-            .on("mouseout", function (e: Event, d: Park) {
-              d3.select(this)
-                .selectAll("text")
-                .classed(styles.hoverTree, false);
-              handleMouseOut();
-            });
-
-          container
-            .append("svg")
-            .attr("width", 33)
-            .attr("height", 45)
-            .attr("viewBox", "0 0 540.41 736.19")
-            .on("click", function (event: Event, d: Park) {
-              event.preventDefault();
-              handleClick?.(d.id, d.designation);
-            })
-            .append("polygon")
-            .attr(
-              "points",
-              "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
-            )
-            .attr("class", styles.tree)
-            .on("mouseover", function () {
-              d3.select(this).classed(styles.hoverTree, true);
-            })
-            .on("mouseout", function (event: Event, d: Park) {
-              d3.select(this).classed(styles.hoverTree, false);
-            });
-
-          container
-            .append("text")
-            .text((d: Park, i: number) => `${i + 1}`)
-            .attr("class", styles.treeLinkText)
-            .attr("x", TREE_MARKER_WIDTH)
-            .attr("y", 30)
-            .on("mouseover", (event: Event, d: Park) => {
-              event.stopPropagation();
-              handleMouseOver(d);
-            });
-          return container;
-        },
-        (update) => {
-          return update.classed(styles.selected, (d: Park) =>
-            selectedParks.includes(d.id)
-          );
-        }
-      );
-  }, [parks, selectedParks, getMarkCoords, handleClick]);
 
   useEffect(() => {
     // Map data
@@ -281,10 +169,118 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   }, [width, height, bottomPadding]);
 
   useEffect(() => {
+    const selectedParks = Object.values(formData).flat(1) as string[];
+
+    // Map data
+    const usData = topojson.feature(
+      usMapData,
+      usMapData.objects.states
+    ) as FeatureCollection;
+    const projection = geoAlbersUsaTerritories().fitExtent(
+      [
+        [0, bottomPadding],
+        [width, height],
+      ],
+      usData
+    );
+
+    const handleClick = (id: string, designation: string) => {
+      const formattedName = camelCase(designation);
+      let designationArray = formData[formattedName].slice();
+      if (designationArray.includes(id)) {
+        designationArray = designationArray.filter(
+          (parkId: string) => parkId !== id
+        );
+      } else {
+        designationArray.push(id);
+      }
+      setValue(`parkData.${formattedName}`, designationArray, {
+        shouldDirty: true,
+      });
+    };
+
+    const drawMarkers = () => {
+      console.log("draw markers");
+      return d3
+        .select(".map g")
+        .selectAll("a")
+        .data(parks, (d: any) => d.id)
+        .join(
+          (enter) => {
+            const container = enter.append("a");
+            container
+              .attr("class", styles.treeContainer)
+              .classed(styles.selected, (d: Park) =>
+                selectedParks.includes(d.id)
+              )
+              .attr("xlink:href", (d: Park) => d.url || "")
+              .attr("transform", (park: Park) => {
+                const adjustedScale = width < 1024 ? width / 1000 : 1;
+                const p = projection([park.longitude, park.latitude]);
+                const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
+                const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
+                return `translate(${x}, ${y})scale(${adjustedScale})`;
+              })
+              .on("mouseover", function (e: Event, d: Park) {
+                d3.select(this)
+                  .selectAll("text")
+                  .classed(styles.hoverTree, true);
+                handleMouseOver(d);
+              })
+              .on("mousemove", handleMouseMove)
+              .on("mouseout", function (e: Event, d: Park) {
+                d3.select(this)
+                  .selectAll("text")
+                  .classed(styles.hoverTree, false);
+                handleMouseOut();
+              });
+
+            container
+              .append("svg")
+              .attr("width", 33)
+              .attr("height", 45)
+              .attr("viewBox", "0 0 540.41 736.19")
+              .on("click", function (event: Event, d: Park) {
+                event.preventDefault();
+                handleClick?.(d.id, d.designation);
+              })
+              .append("polygon")
+              .attr(
+                "points",
+                "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
+              )
+              .attr("class", styles.tree)
+              .on("mouseover", function () {
+                d3.select(this).classed(styles.hoverTree, true);
+              })
+              .on("mouseout", function (event: Event, d: Park) {
+                d3.select(this).classed(styles.hoverTree, false);
+              });
+
+            container
+              .append("text")
+              .text((d: Park, i: number) => `${i + 1}`)
+              .attr("class", styles.treeLinkText)
+              .attr("x", TREE_MARKER_WIDTH)
+              .attr("y", 30)
+              .on("mouseover", (event: Event, d: Park) => {
+                event.stopPropagation();
+                handleMouseOver(d);
+              });
+            return container;
+          },
+          (update) => {
+            return update.classed(styles.selected, (d: Park) =>
+              selectedParks.includes(d.id)
+            );
+          }
+        );
+    };
+
     if (width && height) {
       drawMarkers();
     }
-  }, [parks, selectedParks, drawMarkers, width, height]);
+  }, [parks, formData, setValue, width, height, bottomPadding]);
 
   return (
     <div ref={containerRef} className={styles.mapContainer}>
