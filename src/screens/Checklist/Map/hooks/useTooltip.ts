@@ -15,7 +15,6 @@ function useTooltip() {
   };
 
   useEffect(() => {
-    console.log("add tooltip");
     // tooltip creation
     const tooltip = d3
       .select("body")
@@ -38,7 +37,7 @@ function useTooltip() {
       d3.select("#tooltip").remove();
       document.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, []);
 }
 
 export default useTooltip;

@@ -166,38 +166,38 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .append("path")
         .attr("class", styles.state)
         .attr("d", path)
-        .on("click", handleStateZoom);
-      data
+        .on("click", handleStateZoom)
         .on("mouseover", ({ currentTarget }) => {
           d3.select(currentTarget).classed(styles.hover, true);
         })
         .on("mouseout", ({ currentTarget }) => {
           d3.select(currentTarget).classed(styles.hover, false);
         });
+    };
 
-      data.exit().remove();
-
+    const drawMarkers = () => {
       const treeContainer = d3
         .select(".map g")
-        .selectAll("marker")
-        .data(parks)
-        .enter()
-        .append("a")
-        .attr("class", styles.treeLink)
-        .attr("xlink:href", (d) => d.url || "")
-        .attr("transform", (park: Park) => getMarkCoords({ park }))
-        .on("mouseover", function (e, d) {
-          d3.select(this).selectAll("text").classed(styles.hoverTree, true);
-          handleMouseOver(d);
-        })
-        .on("mousemove", handleMouseMove)
-        .on("mouseout", function (e, d) {
-          d3.select(this).selectAll("text").classed(styles.hoverTree, false);
-          handleMouseOut();
-        });
+        .selectAll("a")
+        .data(parks, d => (d as Park).id)
+        .join('a')
+        
+      const a = treeContainer
+          .attr("class", styles.treeLink)
+          .attr("xlink:href", (d: Park) => d.url || "")
+          .attr("transform", (park: Park) => getMarkCoords({ park }))
+          .on("mouseover", function (e: Event, d: Park) {
+            d3.select(this).selectAll("text").classed(styles.hoverTree, true);
+            handleMouseOver(d);
+          })
+          .on("mousemove", handleMouseMove)
+          .on("mouseout", function (e: Event, d: Park) {
+            d3.select(this).selectAll("text").classed(styles.hoverTree, false);
+            handleMouseOut();
+          })        
 
       // add tree svg container and polygon shape
-      treeContainer
+      a
         .append("svg")
         .attr("width", 33)
         .attr("height", 45)
@@ -221,7 +221,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         });
 
       // add link text
-      treeContainer
+      a
         .append("text")
         .text((d: Park, i: number) => `${i + 1}`)
         .attr("class", styles.treeLinkText)
@@ -232,16 +232,23 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
           event.stopPropagation();
           handleMouseOver(d);
         });
-    };
+    }
 
     if (width && height) {
-      d3.select(".map g").remove();
       drawMap();
     }
+
+    if (width && height && parks.length) {
+      drawMarkers();
+    }
+
+    return () => {
+      d3.select(".map g").remove();
+    };
   });
 
   return (
-    <div ref={containerRef} className={styles.mapContainer} id="mapContainer">
+    <div ref={containerRef} className={styles.mapContainer}>
       <MapButtons />
       <svg ref={mapRef} />
     </div>
