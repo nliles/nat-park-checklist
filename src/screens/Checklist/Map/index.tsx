@@ -22,31 +22,30 @@ import styles from "./Map.module.scss";
 const TREE_MARKER_HEIGHT = 45;
 const TREE_MARKER_WIDTH = 16.5;
 
+// Map data
+const US_DATA = topojson.feature(
+  usMapData,
+  usMapData.objects.states
+) as FeatureCollection;
+
 const Map = ({ parks = [] }: { parks: Park[] }) => {
-  const { containerRef, width, height } = useContainerWidth();
   const mapRef = useRef<any>(null);
+  const { containerRef, width, height } = useContainerWidth();
+  useTooltip();
   // Selected park data
   const { watch, setValue } = useFormContext();
   const formData = watch("parkData");
-  useTooltip();
+
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
 
   useEffect(() => {
-    // Map data
-    const usData = topojson.feature(
-      usMapData,
-      usMapData.objects.states
-    ) as FeatureCollection;
-    // Map padding
-    const bottomPadding = width > 540 ? 60 : 20;
-
     const mapProjection = geoAlbersUsaTerritories().fitExtent(
       [
         [0, bottomPadding],
         [width, height],
       ],
-      usData
+      US_DATA
     );
     const path = geoPath().projection(mapProjection);
     let active: d3.Selection<any, {}, any, any> = d3.select(null);
@@ -124,7 +123,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     };
 
     const drawMap = () => {
-      console.log("draw map");
       // add click functionality to map buttons
       d3.select("#home").on("click", reset);
       d3.select("#plus").on("click", function () {
@@ -146,7 +144,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       const g = map.append("g");
 
       g.selectAll("path")
-        .data(usData.features)
+        .data(US_DATA.features)
         .join("path")
         .attr("class", styles.state)
         .attr("d", path)
@@ -172,16 +170,12 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     const selectedParks = Object.values(formData).flat(1) as string[];
 
     // Map data
-    const usData = topojson.feature(
-      usMapData,
-      usMapData.objects.states
-    ) as FeatureCollection;
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
         [0, bottomPadding],
         [width, height],
       ],
-      usData
+      US_DATA
     );
 
     const handleClick = (id: string, designation: string) => {
@@ -200,7 +194,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     };
 
     const drawMarkers = () => {
-      console.log("draw markers");
       return d3
         .select(".map g")
         .selectAll("a")
