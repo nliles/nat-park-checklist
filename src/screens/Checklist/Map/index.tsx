@@ -77,6 +77,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   );
 
   const drawMarkers = useCallback(() => {
+    console.log("draw markers");
     return d3
       .select(".map g")
       .selectAll("a")
@@ -280,8 +281,10 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   }, [width, height, bottomPadding]);
 
   useEffect(() => {
-    drawMarkers();
-  }, [parks, selectedParks, drawMarkers]);
+    if (width && height) {
+      drawMarkers();
+    }
+  }, [parks, selectedParks, drawMarkers, width, height]);
 
   return (
     <div ref={containerRef} className={styles.mapContainer}>
