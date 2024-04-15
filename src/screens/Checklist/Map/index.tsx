@@ -55,7 +55,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
 
     function handleStateZoom(event: Event, d: Feature) {
       event.preventDefault();
-      // event.stopPropagation();
       active.classed(styles.active, false);
       if (active.node() === this) return reset();
       active = d3.select<SVGElement, {}>(this).classed(styles.active, true);
