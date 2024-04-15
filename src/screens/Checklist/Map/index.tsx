@@ -29,7 +29,7 @@ const US_DATA = topojson.feature(
 ) as FeatureCollection;
 
 const Map = ({ parks = [] }: { parks: Park[] }) => {
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef(null);
   const { containerRef, width, height } = useContainerWidth();
   useTooltip();
   // Selected park data
