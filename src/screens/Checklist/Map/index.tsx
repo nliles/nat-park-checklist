@@ -9,7 +9,7 @@ import * as topojson from "topojson";
 import { useFormContext } from "react-hook-form";
 import MapButtons from "./MapButtons";
 import useContainerWidth from "hooks/useContainerWidth";
-import useTooltip from "screens/Checklist/Map/hooks/useTooltip";
+import useTooltip from "screens/Checklist/Map/useTooltip";
 import usMapData from "data/us";
 import camelCase from "lodash/camelCase";
 import {
