@@ -109,7 +109,7 @@ function useMap({
         );
 
       d3.select(".map g")
-        .selectAll<any, any>("a")
+        .selectAll<SVGSVGElement, any>("a")
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
@@ -120,7 +120,7 @@ function useMap({
     function handleZoom(event: any) {
       d3.select(".map g").attr("transform", event.transform);
       d3.select(".map g")
-        .selectAll<any, any>("a")
+        .selectAll<SVGSVGElement, any>("a")
         .attr("transform", (park: Park) =>
           getMarkCoords({ park, scale: 1 / event.transform.k })
         );
@@ -136,7 +136,7 @@ function useMap({
         .call(zoom.transform, d3.zoomIdentity);
 
       d3.select(".map g")
-        .selectAll<any, any>("a")
+        .selectAll<SVGSVGElement, any>("a")
         .attr("transform", (park: Park) => getMarkCoords({ park }));
     }
 
