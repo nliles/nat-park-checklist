@@ -33,6 +33,7 @@ function useMap({
   // Selected park data
   const { watch, setValue } = useFormContext();
   const formData = watch("parkData");
+  const selectedParks = Object.values(formData).flat(1);
 
   useEffect(() => {
     // Map data
@@ -109,7 +110,7 @@ function useMap({
         );
 
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>("a")
+        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
@@ -120,7 +121,7 @@ function useMap({
     function handleZoom(event: any) {
       d3.select(".map g").attr("transform", event.transform);
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>("a")
+        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
         .attr("transform", (park: Park) =>
           getMarkCoords({ park, scale: 1 / event.transform.k })
         );
@@ -136,7 +137,7 @@ function useMap({
         .call(zoom.transform, d3.zoomIdentity);
 
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>("a")
+        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
         .attr("transform", (park: Park) => getMarkCoords({ park }));
     }
 
@@ -181,7 +182,6 @@ function useMap({
       const treeContainer = d3
         .select(".map g")
         .selectAll("marker")
-        .attr("class", "marker")
         .data(parks)
         .enter()
         .append("a")
@@ -214,7 +214,7 @@ function useMap({
           "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
         )
         .attr("class", styles.tree)
-        // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
+        .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
         .on("mouseover", function () {
           d3.select(this).classed(styles.hoverTree, true);
         })
@@ -227,7 +227,7 @@ function useMap({
         .append("text")
         .text((d: Park, i: number) => `${i + 1}`)
         .attr("class", styles.treeLinkText)
-        // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
+        .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
         .attr("x", TREE_MARKER_WIDTH)
         .attr("y", 30)
         .on("mouseover", (event: Event, d: Park) => {
