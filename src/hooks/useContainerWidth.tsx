@@ -18,7 +18,7 @@ function useContainerWidth() {
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
+  });
 
   return {
     containerRef,
