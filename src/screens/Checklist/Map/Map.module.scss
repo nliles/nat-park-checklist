@@ -29,6 +29,20 @@
 }
 
 // Tree Map Markers
+
+.treeContainer {
+  cursor: default;
+
+  &.selected {
+    .tree {
+      fill: $green;
+    }
+    .treeLinkText {
+      fill: $white;
+    }
+  }
+}
+
 .tree {
   fill-rule: evenodd;
   fill: $lightGreen;
@@ -36,14 +50,9 @@
   stroke-width: 20px;
   stroke-miterlimit: 10px;
 
-  &.activeTree,
   &.hoverTree {
     fill: $green;
   }
-}
-
-.treeLink {
-  cursor: default;
 }
 
 .treeLinkText {
@@ -53,7 +62,6 @@
   cursor: pointer;
   fill: $black;
 
-  &.activeTree,
   &.hoverTree {
     fill: $white;
   }
@@ -61,13 +69,6 @@
   &:hover {
     text-decoration: underline;
   }
-}
-
-// Map Tooltip
-.tooltip {
-  display: flex;
-  max-width: 150px;
-  width: auto;
 }
 
 // Tooltip Image
@@ -100,6 +101,9 @@
 }
 
 .tooltipBaseStyle {
+  display: flex;
+  max-width: 150px;
+  width: auto;
   visibility: hidden;
   position: absolute;
   z-index: 1;
