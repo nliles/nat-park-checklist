@@ -47,8 +47,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     usData
   );
 
-  const path = geoPath().projection(projection);
-
   const getMarkCoords = useCallback(
     ({ park, scale = 1 }: { park: Park; scale?: number }) => {
       const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
@@ -146,6 +144,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   }, [parks, selectedParks, getMarkCoords, handleClick]);
 
   useEffect(() => {
+    const path = geoPath().projection(projection);
     let active: d3.Selection<any, {}, any, any> = d3.select(null);
     const zoom: any = d3
       .zoom<SVGSVGElement, unknown>()
@@ -153,7 +152,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       .on("zoom", handleZoom);
 
     function handleStateZoom(event: Event, d: Feature) {
-      event.stopPropagation();
+      event.preventDefault();
+      // event.stopPropagation();
       active.classed(styles.active, false);
       if (active.node() === this) return reset();
       active = d3.select<SVGElement, {}>(this).classed(styles.active, true);
@@ -165,7 +165,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         scale = 0.9 / Math.max(dx / width, dy / height),
         translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-      d3.select(".map")
+      d3.select(mapRef.current)
         .transition()
         .duration(750)
         .call(
@@ -195,7 +195,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       active.classed(styles.active, false);
       active = d3.select(null);
 
-      d3.select(".map")
+      d3.select(mapRef.current)
         .transition()
         .duration(750)
         .call(zoom.transform, d3.zoomIdentity);
@@ -227,11 +227,9 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       // Draw the map
       const g = map.append("g");
 
-      const data = g.selectAll("path").data(usData.features);
-
-      data
-        .enter()
-        .append("path")
+      g.selectAll("path")
+        .data(usData.features)
+        .join("path")
         .attr("class", styles.state)
         .attr("d", path)
         .on("click", handleStateZoom)
@@ -250,7 +248,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     return () => {
       d3.select(".map g").remove();
     };
-  }, [width, height]);
+    // getMarkCoords, projection, usData.features
+  }, [width, height, bottomPadding]);
 
   useEffect(() => {
     drawMarkers();
