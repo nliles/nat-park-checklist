@@ -144,7 +144,22 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   }, [parks, selectedParks, getMarkCoords, handleClick]);
 
   useEffect(() => {
-    const path = geoPath().projection(projection);
+    // Map data
+    const usData = topojson.feature(
+      usMapData,
+      usMapData.objects.states
+    ) as FeatureCollection;
+    // Map padding
+    const bottomPadding = width > 540 ? 60 : 20;
+
+    const mapProjection = geoAlbersUsaTerritories().fitExtent(
+      [
+        [0, bottomPadding],
+        [width, height],
+      ],
+      usData
+    );
+    const path = geoPath().projection(mapProjection);
     let active: d3.Selection<any, {}, any, any> = d3.select(null);
     const zoom: any = d3
       .zoom<SVGSVGElement, unknown>()
@@ -178,7 +193,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
-          getMarkCoords({ park, scale: 1 / scale })
+          getMarkerCoords({ park, scale: 1 / scale })
         );
     }
 
@@ -187,7 +202,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       d3.select(".map g")
         .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) =>
-          getMarkCoords({ park, scale: 1 / event.transform.k })
+          getMarkerCoords({ park, scale: 1 / event.transform.k })
         );
     }
 
@@ -202,8 +217,22 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
 
       d3.select(".map g")
         .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
-        .attr("transform", (park: Park) => getMarkCoords({ park }));
+        .attr("transform", (park: Park) => getMarkerCoords({ park }));
     }
+
+    const getMarkerCoords = ({
+      park,
+      scale = 1,
+    }: {
+      park: Park;
+      scale?: number;
+    }) => {
+      const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
+      const p = mapProjection([park.longitude, park.latitude]);
+      const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
+      const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
+      return `translate(${x}, ${y})scale(${adjustedScale})`;
+    };
 
     const drawMap = () => {
       console.log("draw map");
@@ -248,7 +277,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     return () => {
       d3.select(".map g").remove();
     };
-    // getMarkCoords, projection, usData.features
   }, [width, height, bottomPadding]);
 
   useEffect(() => {
