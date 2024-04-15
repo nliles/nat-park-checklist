@@ -29,6 +29,20 @@
 }
 
 // Tree Map Markers
+
+.treeContainer {
+  cursor: default;
+
+  &.selected {
+    .tree {
+      fill: $green;
+    }
+    .treeLinkText {
+      fill: $white;
+    }
+  }
+}
+
 .tree {
   fill-rule: evenodd;
   fill: $lightGreen;
@@ -36,14 +50,9 @@
   stroke-width: 20px;
   stroke-miterlimit: 10px;
 
-  &.activeTree,
   &.hoverTree {
     fill: $green;
   }
-}
-
-.treeLink {
-  cursor: default;
 }
 
 .treeLinkText {
@@ -53,7 +62,6 @@
   cursor: pointer;
   fill: $black;
 
-  &.activeTree,
   &.hoverTree {
     fill: $white;
   }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, MutableRefObject } from "react";
+import { useEffect, useRef, MutableRefObject, useCallback } from "react";
 import { Park } from "types/park";
 import * as d3 from "d3";
 import { geoPath } from "d3-geo";
@@ -28,48 +28,40 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   // Selected park data
   const { watch, setValue } = useFormContext();
   const formData = watch("parkData");
-  const selectedParks = Object.values(formData).flat(1);
+  const selectedParks = Object.values(formData).flat(1) as string[];
   useTooltip();
 
-  useEffect(() => {
-    // Map data
-    const usData = topojson.feature(
-      usMapData,
-      usMapData.objects.states
-    ) as FeatureCollection;
-    // Map padding
-    const bottomPadding = width > 540 ? 60 : 20;
+  // Map data
+  const usData = topojson.feature(
+    usMapData,
+    usMapData.objects.states
+  ) as FeatureCollection;
+  // Map padding
+  const bottomPadding = width > 540 ? 60 : 20;
 
-    const projection = geoAlbersUsaTerritories().fitExtent(
-      [
-        [0, bottomPadding],
-        [width, height],
-      ],
-      usData
-    );
+  const projection = geoAlbersUsaTerritories().fitExtent(
+    [
+      [0, bottomPadding],
+      [width, height],
+    ],
+    usData
+  );
 
-    const path = geoPath().projection(projection);
-    let active: d3.Selection<any, {}, any, any> = d3.select(null);
-    const zoom: any = d3
-      .zoom<SVGSVGElement, unknown>()
-      .scaleExtent([1, 600])
-      .on("zoom", handleZoom);
+  const path = geoPath().projection(projection);
 
-    function getMarkCoords({
-      park,
-      scale = 1,
-    }: {
-      park: Park;
-      scale?: number;
-    }) {
+  const getMarkCoords = useCallback(
+    ({ park, scale = 1 }: { park: Park; scale?: number }) => {
       const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
       const p = projection([park.longitude, park.latitude]);
       const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
       const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
       return `translate(${x}, ${y})scale(${adjustedScale})`;
-    }
+    },
+    [projection, width]
+  );
 
-    function handleClick(id: string, designation: string) {
+  const handleClick = useCallback(
+    (id: string, designation: string) => {
       const formattedName = camelCase(designation);
       let designationArray = formData[formattedName].slice();
       if (designationArray.includes(id)) {
@@ -82,7 +74,83 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       setValue(`parkData.${formattedName}`, designationArray, {
         shouldDirty: true,
       });
-    }
+    },
+    [formData, setValue]
+  );
+
+  const drawMarkers = useCallback(() => {
+    return d3
+      .select(".map g")
+      .selectAll("a")
+      .data(parks, (d: any) => d.id)
+      .join(
+        (enter) => {
+          const container = enter.append("a");
+          container
+            .attr("class", styles.treeContainer)
+            .classed(styles.selected, (d: Park) => selectedParks.includes(d.id))
+            .attr("xlink:href", (d: Park) => d.url || "")
+            .attr("transform", (park: Park) => getMarkCoords({ park }))
+            .on("mouseover", function (e: Event, d: Park) {
+              d3.select(this).selectAll("text").classed(styles.hoverTree, true);
+              handleMouseOver(d);
+            })
+            .on("mousemove", handleMouseMove)
+            .on("mouseout", function (e: Event, d: Park) {
+              d3.select(this)
+                .selectAll("text")
+                .classed(styles.hoverTree, false);
+              handleMouseOut();
+            });
+
+          container
+            .append("svg")
+            .attr("width", 33)
+            .attr("height", 45)
+            .attr("viewBox", "0 0 540.41 736.19")
+            .on("click", function (event: Event, d: Park) {
+              event.preventDefault();
+              handleClick?.(d.id, d.designation);
+            })
+            .append("polygon")
+            .attr(
+              "points",
+              "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
+            )
+            .attr("class", styles.tree)
+            .on("mouseover", function () {
+              d3.select(this).classed(styles.hoverTree, true);
+            })
+            .on("mouseout", function (event: Event, d: Park) {
+              d3.select(this).classed(styles.hoverTree, false);
+            });
+
+          container
+            .append("text")
+            .text((d: Park, i: number) => `${i + 1}`)
+            .attr("class", styles.treeLinkText)
+            .attr("x", TREE_MARKER_WIDTH)
+            .attr("y", 30)
+            .on("mouseover", (event: Event, d: Park) => {
+              event.stopPropagation();
+              handleMouseOver(d);
+            });
+          return container;
+        },
+        (update) => {
+          return update.classed(styles.selected, (d: Park) =>
+            selectedParks.includes(d.id)
+          );
+        }
+      );
+  }, [parks, selectedParks, getMarkCoords, handleClick]);
+
+  useEffect(() => {
+    let active: d3.Selection<any, {}, any, any> = d3.select(null);
+    const zoom: any = d3
+      .zoom<SVGSVGElement, unknown>()
+      .scaleExtent([1, 600])
+      .on("zoom", handleZoom);
 
     function handleStateZoom(event: Event, d: Feature) {
       event.stopPropagation();
@@ -106,7 +174,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         );
 
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
+        .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
@@ -117,7 +185,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     function handleZoom(event: any) {
       d3.select(".map g").attr("transform", event.transform);
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
+        .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) =>
           getMarkCoords({ park, scale: 1 / event.transform.k })
         );
@@ -133,7 +201,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .call(zoom.transform, d3.zoomIdentity);
 
       d3.select(".map g")
-        .selectAll<SVGSVGElement, any>(`.${styles.treeLink}`)
+        .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) => getMarkCoords({ park }));
     }
 
@@ -175,77 +243,18 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         });
     };
 
-    const drawMarkers = () => {
-      const treeContainer = d3
-        .select(".map g")
-        .selectAll("a")
-        .data(parks, d => (d as Park).id)
-        .join('a')
-        
-      const a = treeContainer
-          .attr("class", styles.treeLink)
-          .attr("xlink:href", (d: Park) => d.url || "")
-          .attr("transform", (park: Park) => getMarkCoords({ park }))
-          .on("mouseover", function (e: Event, d: Park) {
-            d3.select(this).selectAll("text").classed(styles.hoverTree, true);
-            handleMouseOver(d);
-          })
-          .on("mousemove", handleMouseMove)
-          .on("mouseout", function (e: Event, d: Park) {
-            d3.select(this).selectAll("text").classed(styles.hoverTree, false);
-            handleMouseOut();
-          })        
-
-      // add tree svg container and polygon shape
-      a
-        .append("svg")
-        .attr("width", 33)
-        .attr("height", 45)
-        .attr("viewBox", "0 0 540.41 736.19")
-        .on("click", function (event: Event, d: Park) {
-          event.preventDefault();
-          handleClick?.(d.id, d.designation);
-        })
-        .append("polygon")
-        .attr(
-          "points",
-          "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
-        )
-        .attr("class", styles.tree)
-        .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
-        .on("mouseover", function () {
-          d3.select(this).classed(styles.hoverTree, true);
-        })
-        .on("mouseout", function (event: Event, d: Park) {
-          d3.select(this).classed(styles.hoverTree, false);
-        });
-
-      // add link text
-      a
-        .append("text")
-        .text((d: Park, i: number) => `${i + 1}`)
-        .attr("class", styles.treeLinkText)
-        .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
-        .attr("x", TREE_MARKER_WIDTH)
-        .attr("y", 30)
-        .on("mouseover", (event: Event, d: Park) => {
-          event.stopPropagation();
-          handleMouseOver(d);
-        });
-    }
-
     if (width && height) {
       drawMap();
-    }
-
-    if (width && height && parks.length) {
-      drawMarkers();
     }
 
     return () => {
       d3.select(".map g").remove();
     };
-  });
+  }, [width, height]);
+
+  useEffect(() => {
+    drawMarkers();
+  }, [parks, selectedParks, drawMarkers]);
 
   return (
     <div ref={containerRef} className={styles.mapContainer}>
