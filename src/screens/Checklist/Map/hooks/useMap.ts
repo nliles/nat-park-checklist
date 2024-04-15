@@ -108,7 +108,8 @@ function useMap({
           d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
         );
 
-      d3.select(".map g").selectAll<any, any>("a")
+      d3.select(".map g")
+        .selectAll<any, any>("a")
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
@@ -118,9 +119,11 @@ function useMap({
 
     function handleZoom(event: any) {
       d3.select(".map g").attr("transform", event.transform);
-      d3.select(".map g").selectAll<any, any>("a").attr("transform", (park: Park) =>
-        getMarkCoords({ park, scale: 1 / event.transform.k })
-      );
+      d3.select(".map g")
+        .selectAll<any, any>("a")
+        .attr("transform", (park: Park) =>
+          getMarkCoords({ park, scale: 1 / event.transform.k })
+        );
     }
 
     function reset() {
@@ -132,13 +135,13 @@ function useMap({
         .duration(750)
         .call(zoom.transform, d3.zoomIdentity);
 
-      d3.select(".map g").selectAll<any, any>("a").attr("transform", (park: Park) =>
-        getMarkCoords({ park })
-      );
+      d3.select(".map g")
+        .selectAll<any, any>("a")
+        .attr("transform", (park: Park) => getMarkCoords({ park }));
     }
 
     const drawMap = () => {
-      console.log('draw map')
+      console.log("draw map");
       // add click functionality to map buttons
       d3.select("#home").on("click", reset);
       d3.select("#plus").on("click", function () {
@@ -176,65 +179,61 @@ function useMap({
       });
 
       const treeContainer = d3
-      .select(".map g")
-      .selectAll("marker")
-      .attr("class", "marker")
-      .data(parks)
-      .enter()
-      .append("a")
-      .attr("class", styles.treeLink)
-      .attr("xlink:href", (d) => d.url || "")
-      .attr("transform", (park: Park) => getMarkCoords({ park }))
-      .on("mouseover", function (e, d) {
-        d3.select(this)
-          .selectAll("text")
-          .classed(styles.hoverTree, true);
-        handleMouseOver(d);
-      })
-      .on("mousemove", handleMouseMove)
-      .on("mouseout", function (e, d) {
-        d3.select(this)
-          .selectAll("text")
-          .classed(styles.hoverTree, false);
-        handleMouseOut();
-      });
+        .select(".map g")
+        .selectAll("marker")
+        .attr("class", "marker")
+        .data(parks)
+        .enter()
+        .append("a")
+        .attr("class", styles.treeLink)
+        .attr("xlink:href", (d) => d.url || "")
+        .attr("transform", (park: Park) => getMarkCoords({ park }))
+        .on("mouseover", function (e, d) {
+          d3.select(this).selectAll("text").classed(styles.hoverTree, true);
+          handleMouseOver(d);
+        })
+        .on("mousemove", handleMouseMove)
+        .on("mouseout", function (e, d) {
+          d3.select(this).selectAll("text").classed(styles.hoverTree, false);
+          handleMouseOut();
+        });
 
-    // add tree svg container and polygon shape
-    treeContainer
-      .append("svg")
-      .attr("width", 33)
-      .attr("height", 45)
-      .attr("viewBox", "0 0 540.41 736.19")
-      .on("click", function (event: Event, d: Park) {
-        event.preventDefault();
-        handleClick?.(d.id, d.designation);
-      })
-      .append("polygon")
-      .attr(
-        "points",
-        "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
-      )
-      .attr("class", styles.tree)
-      // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
-      .on("mouseover", function () {
-        d3.select(this).classed(styles.hoverTree, true);
-      })
-      .on("mouseout", function (event: Event, d: Park) {
-        d3.select(this).classed(styles.hoverTree, false);
-      });
+      // add tree svg container and polygon shape
+      treeContainer
+        .append("svg")
+        .attr("width", 33)
+        .attr("height", 45)
+        .attr("viewBox", "0 0 540.41 736.19")
+        .on("click", function (event: Event, d: Park) {
+          event.preventDefault();
+          handleClick?.(d.id, d.designation);
+        })
+        .append("polygon")
+        .attr(
+          "points",
+          "525.46 644.17 270.2 26.19 14.95 644.17 245.46 644.17 245.46 726.19 294.95 726.19 294.95 644.17 525.46 644.17"
+        )
+        .attr("class", styles.tree)
+        // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
+        .on("mouseover", function () {
+          d3.select(this).classed(styles.hoverTree, true);
+        })
+        .on("mouseout", function (event: Event, d: Park) {
+          d3.select(this).classed(styles.hoverTree, false);
+        });
 
-    // add link text
-    treeContainer
-      .append("text")
-      .text((d: Park, i: number) => `${i + 1}`)
-      .attr("class", styles.treeLinkText)
-      // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
-      .attr("x", TREE_MARKER_WIDTH)
-      .attr("y", 30)
-      .on("mouseover", (event: Event, d: Park) => {
-        event.stopPropagation();
-        handleMouseOver(d);
-      });
+      // add link text
+      treeContainer
+        .append("text")
+        .text((d: Park, i: number) => `${i + 1}`)
+        .attr("class", styles.treeLinkText)
+        // .classed(styles.activeTree, (d: Park) => selectedParks.includes(d.id))
+        .attr("x", TREE_MARKER_WIDTH)
+        .attr("y", 30)
+        .on("mouseover", (event: Event, d: Park) => {
+          event.stopPropagation();
+          handleMouseOver(d);
+        });
     };
 
     if (width && height) {
