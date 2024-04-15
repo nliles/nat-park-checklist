@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
-import cn from "classnames";
 import { hideTooltip } from "screens/Checklist/Map/handleTooltip";
 import styles from "../Map.module.scss";
 
@@ -16,12 +15,13 @@ function useTooltip() {
   };
 
   useEffect(() => {
+    console.log("add tooltip");
     // tooltip creation
     const tooltip = d3
       .select("body")
       .append("div")
       .attr("id", "tooltip")
-      .attr("class", cn(styles.tooltip, styles.tooltipBaseStyle));
+      .attr("class", styles.tooltipBaseStyle);
 
     const imgContainer = tooltip
       .append("div")
@@ -34,8 +34,11 @@ function useTooltip() {
     imgContainer.append("img").on("error", handleError);
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+    return () => {
+      d3.select("#tooltip").remove();
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 }
 
 export default useTooltip;

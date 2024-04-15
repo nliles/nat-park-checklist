@@ -63,13 +63,6 @@
   }
 }
 
-// Map Tooltip
-.tooltip {
-  display: flex;
-  max-width: 150px;
-  width: auto;
-}
-
 // Tooltip Image
 .imgContainer {
   display: flex;
@@ -100,6 +93,9 @@
 }
 
 .tooltipBaseStyle {
+  display: flex;
+  max-width: 150px;
+  width: auto;
   visibility: hidden;
   position: absolute;
   z-index: 1;

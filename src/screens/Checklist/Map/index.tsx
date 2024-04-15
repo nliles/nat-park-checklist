@@ -159,20 +159,23 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       // Draw the map
       const g = map.append("g");
 
-      const d = g
-        .selectAll("path")
-        .data(usData.features)
+      const data = g.selectAll("path").data(usData.features);
+
+      data
         .enter()
         .append("path")
         .attr("class", styles.state)
-        .attr("d", path);
+        .attr("d", path)
+        .on("click", handleStateZoom);
+      data
+        .on("mouseover", ({ currentTarget }) => {
+          d3.select(currentTarget).classed(styles.hover, true);
+        })
+        .on("mouseout", ({ currentTarget }) => {
+          d3.select(currentTarget).classed(styles.hover, false);
+        });
 
-      d.on("click", handleStateZoom);
-      d.on("mouseover", ({ currentTarget }) => {
-        d3.select(currentTarget).classed(styles.hover, true);
-      }).on("mouseout", ({ currentTarget }) => {
-        d3.select(currentTarget).classed(styles.hover, false);
-      });
+      data.exit().remove();
 
       const treeContainer = d3
         .select(".map g")
