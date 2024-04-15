@@ -234,7 +234,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               .attr("viewBox", "0 0 540.41 736.19")
               .on("click", function (event: Event, d: Park) {
                 event.preventDefault();
-                handleClick?.(d.id, d.designation);
+                handleClick(d.id, d.designation);
               })
               .append("polygon")
               .attr(
