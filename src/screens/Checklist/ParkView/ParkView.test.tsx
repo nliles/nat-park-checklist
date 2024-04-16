@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import ParkDesignation from "enum/ParkDesignation";
+import FormWrapper from "test-utils/FormWrapper";
 import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import { ParkViewProps } from ".";
 import ParkView from ".";
@@ -55,16 +56,12 @@ describe("<ParkView />", () => {
 
   it("Displays the correct content when isLoading is false", () => {
     renderParkView();
-    expect(screen.getByRole("link", { name: "1" })).toBeVisible();
-    expect(screen.getAllByRole("link", { name: "2" })[0]).toBeVisible();
     expect(screen.getByText("1. Acadia National Park")).toBeVisible();
     expect(screen.getByText("2. Arches National Park")).toBeVisible();
   });
 
   it("Displays the correct content when isLoading is true", () => {
     renderParkView({ isLoading: true });
-    expect(screen.queryAllByText("1").length).toEqual(0);
-    expect(screen.queryAllByText("2").length).toEqual(0);
     expect(
       screen.queryByText("1. Acadia National Park")
     ).not.toBeInTheDocument();

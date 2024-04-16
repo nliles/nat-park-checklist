@@ -31,6 +31,7 @@ const US_DATA = topojson.feature(
 const Map = ({ parks = [] }: { parks: Park[] }) => {
   const mapRef = useRef(null);
   const { containerRef, width, height } = useContainerWidth();
+  console.log(width, height, containerRef)
   useTooltip();
   // Selected park data
   const { watch, setValue } = useFormContext();
