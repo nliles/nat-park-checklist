@@ -19,9 +19,7 @@ describe("<Dropdown/>", () => {
         keyValue="state"
       />
     );
-    expect(
-      screen.getByText("CA")
-    ).toBeVisible();
+    expect(screen.getByText("CA")).toBeVisible();
   });
 
   it("formats list items correctly", async () => {
@@ -49,6 +47,6 @@ describe("<Dropdown/>", () => {
     );
     const item = within(screen.getByRole("listbox")).getByText("New York");
     userEvent.click(item);
-    expect(mockClick).toHaveBeenCalledWith({"state": "NY"});
+    expect(mockClick).toHaveBeenCalledWith({ state: "NY" });
   });
 });

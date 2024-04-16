@@ -11,10 +11,12 @@ describe("<Map />", () => {
       parkCode: "acad",
       states: "ME",
       fullName: "Acadia National Park",
-      images: [{
-        url: "photo/ME",
-        altText: "Acadia National Park photo",
-      }],
+      images: [
+        {
+          url: "photo/ME",
+          altText: "Acadia National Park photo",
+        },
+      ],
       name: "Acadia",
       latitude: "44.409286",
       longitude: "-68.247501",
@@ -35,7 +37,11 @@ describe("<Map />", () => {
   ];
 
   const renderMap = () => {
-    render(<FormProviderWrapper><Map parks={parks} /></FormProviderWrapper>);
+    render(
+      <FormProviderWrapper>
+        <Map parks={parks} />
+      </FormProviderWrapper>
+    );
   };
 
   it("Displays the correct content", () => {

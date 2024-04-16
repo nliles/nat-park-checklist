@@ -16,7 +16,10 @@ describe("<NavBar />", () => {
 
   it("Home page link", () => {
     render(<NavBar />);
-    expect(screen.getByText("NPS Unit Checklist").closest('a')).toHaveAttribute("href", "/");
+    expect(screen.getByText("NPS Unit Checklist").closest("a")).toHaveAttribute(
+      "href",
+      "/"
+    );
   });
 
   it("Displays the correct content when user is logged out", () => {
