@@ -6,7 +6,11 @@ const FormProviderWrapper = ({ children }: { children: ReactNode }) => {
   const methods = useForm({
     defaultValues: { parkData: defaultSelectedValues },
   });
-  return <FormProvider {...methods} getValues={jest.fn()}>{children}</FormProvider>;
+  return (
+    <FormProvider {...methods} getValues={jest.fn()}>
+      {children}
+    </FormProvider>
+  );
 };
 
 export default FormProviderWrapper;
