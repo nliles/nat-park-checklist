@@ -40,7 +40,7 @@ describe("<ParkList />", () => {
       <FormProviderWrapper>
         <ParkList
           parks={parks}
-          listTitle="National Park"
+          listTitle="National Park checklist"
           handleOnSubmit={() => {}}
         />
       </FormProviderWrapper>

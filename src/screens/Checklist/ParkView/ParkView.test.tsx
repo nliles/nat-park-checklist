@@ -55,9 +55,6 @@ describe("<ParkView />", () => {
 
   it("Displays the correct content when isLoading is false", () => {
     renderParkView();
-    expect(
-      screen.getByRole("button", { name: "National Parks" })
-    ).toBeVisible();
     expect(screen.getByRole("link", { name: "1" })).toBeVisible();
     expect(screen.getAllByRole("link", { name: "2" })[0]).toBeVisible();
     expect(screen.getByText("1. Acadia National Park")).toBeVisible();
@@ -66,9 +63,6 @@ describe("<ParkView />", () => {
 
   it("Displays the correct content when isLoading is true", () => {
     renderParkView({ isLoading: true });
-    expect(
-      screen.queryByRole("button", { name: "National Parks" })
-    ).not.toBeInTheDocument();
     expect(screen.queryAllByText("1").length).toEqual(0);
     expect(screen.queryAllByText("2").length).toEqual(0);
     expect(

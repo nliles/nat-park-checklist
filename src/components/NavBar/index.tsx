@@ -12,12 +12,7 @@ import LoginIcon from "components/LoginIcon";
 import copy from "./copy";
 import styles from "./NavBar.module.scss";
 
-type NavBarProps = {
-  count?: number;
-  total?: number;
-};
-
-const NavBar = ({ count, total }: NavBarProps) => {
+const NavBar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const isLoggedIn = useSelector((state: State) => !!state.auth.user);

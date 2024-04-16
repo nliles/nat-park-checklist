@@ -15,8 +15,8 @@ describe("<DataBars />", () => {
   };
 
   it.each([
-    ["National Park", "5%"],
-    ["National Reserve", "50%"],
+    ["National Parks", "5%"],
+    ["National Reserves", "50%"],
   ])("renders the correct data", (name, percentage) => {
     render(<DataBars selected={parkData} />);
     expect(screen.getByText(name)).toBeVisible();
