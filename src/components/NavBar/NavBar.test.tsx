@@ -15,20 +15,18 @@ describe("<NavBar />", () => {
   });
 
   it("Home page link", () => {
-    render(<NavBar count={10} />);
-    expect(
-      screen.getByText("National Park Unit Checklist").closest("a")
-    ).toHaveAttribute("href", "/");
+    render(<NavBar />);
+    expect(screen.getByText("NPS Unit Checklist").closest('a')).toHaveAttribute("href", "/");
   });
 
-  it("Displays the correct content when user not logged in", () => {
+  it("Displays the correct content when user is logged out", () => {
     render(<NavBar />);
     expect(screen.getByText("Sign in")).toBeVisible();
   });
 
-  it("Displays count when a user is logged in", () => {
+  it("Displays the correct content when user is logged in", () => {
     useSelectorMock.mockReturnValue({ auth: { user: "123" } });
-    render(<NavBar count={10} />);
-    expect(screen.getByText("10")).toBeVisible();
+    render(<NavBar />);
+    expect(screen.getByAltText("Kelso Dunes")).toBeVisible();
   });
 });

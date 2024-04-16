@@ -14,22 +14,22 @@ describe("<Dropdown/>", () => {
     render(
       <Dropdown
         items={items}
-        initialSelectedItem="California"
-        handleClick={() => {}}
+        initialSelectedItem="CA"
+        handleClick={jest.fn()}
         keyValue="state"
       />
     );
     expect(
-      screen.getByRole("button", { name: "California" })
-    ).toBeInTheDocument();
+      screen.getByText("CA")
+    ).toBeVisible();
   });
 
   it("formats list items correctly", async () => {
     render(
       <Dropdown
         items={items}
-        initialSelectedItem="California"
-        handleClick={() => {}}
+        initialSelectedItem="CA"
+        handleClick={jest.fn()}
         keyValue="state"
       />
     );
@@ -49,6 +49,6 @@ describe("<Dropdown/>", () => {
     );
     const item = within(screen.getByRole("listbox")).getByText("New York");
     userEvent.click(item);
-    expect(mockClick).toHaveBeenCalledWith("New York");
+    expect(mockClick).toHaveBeenCalledWith({"state": "NY"});
   });
 });

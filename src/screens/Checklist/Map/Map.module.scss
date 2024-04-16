@@ -108,7 +108,7 @@
   position: absolute;
   z-index: 1;
   height: auto;
-  padding: 10px;
+  padding: 0.5rem;
   background: $white;
   border-radius: 10px;
   border: 1px solid $black;
@@ -117,7 +117,7 @@
   &::before {
     content: " ";
     position: absolute;
-    bottom: 100%; /* At the top of the tooltip */
+    bottom: 100%;
     left: 50%;
     margin-left: -11px;
     border: 11px solid transparent;
@@ -127,7 +127,7 @@
   &::after {
     content: " ";
     position: absolute;
-    bottom: 99%; /* At the top of the tooltip */
+    bottom: 99%;
     left: 50%;
     margin-left: -10px;
     width: 0;
@@ -157,8 +157,14 @@
   font-size: 12px;
   width: 26px;
   height: 26px;
-  background-color: $dimGray;
+  background-color: $darkGray;
   text-align: center;
+
+  @media (max-width: $mobile-landscape) {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
 
   svg {
     fill: $white;

@@ -9,7 +9,7 @@ import * as topojson from "topojson";
 import { useFormContext } from "react-hook-form";
 import MapButtons from "./MapButtons";
 import useContainerWidth from "hooks/useContainerWidth";
-import useTooltip from "screens/Checklist/Map/hooks/useTooltip";
+import useTooltip from "screens/Checklist/Map/useTooltip";
 import usMapData from "data/us";
 import camelCase from "lodash/camelCase";
 import {
@@ -29,8 +29,9 @@ const US_DATA = topojson.feature(
 ) as FeatureCollection;
 
 const Map = ({ parks = [] }: { parks: Park[] }) => {
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef(null);
   const { containerRef, width, height } = useContainerWidth();
+  console.log(width, height, containerRef)
   useTooltip();
   // Selected park data
   const { watch, setValue } = useFormContext();
@@ -83,12 +84,12 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         );
     }
 
-    function handleZoom(event: any) {
-      d3.select(".map g").attr("transform", event.transform);
+    function handleZoom(d3Event: d3.D3ZoomEvent<SVGSVGElement, unknown>) {
+      d3.select(".map g").attr("transform", (d3Event as any).transform);
       d3.select(".map g")
         .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) =>
-          getMarkerCoords({ park, scale: 1 / event.transform.k })
+          getMarkerCoords({ park, scale: 1 / d3Event.transform.k })
         );
     }
 
@@ -234,7 +235,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               .attr("viewBox", "0 0 540.41 736.19")
               .on("click", function (event: Event, d: Park) {
                 event.preventDefault();
-                handleClick?.(d.id, d.designation);
+                handleClick(d.id, d.designation);
               })
               .append("polygon")
               .attr(

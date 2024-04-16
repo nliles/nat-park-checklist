@@ -15,7 +15,7 @@ describe("<ParkContainer/>", () => {
         <ParkContainer />
       </MemoryRouter>
     );
-    expect(screen.getByText("National Parks")).toBeVisible();
+    expect(screen.getByText("National Park Units")).toBeVisible();
   });
 
   it("Displays the correct designation from route", () => {

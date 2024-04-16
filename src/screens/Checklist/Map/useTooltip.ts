@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 import { hideTooltip } from "screens/Checklist/Map/handleTooltip";
-import styles from "../Map.module.scss";
+import styles from "./Map.module.scss";
 
 function useTooltip() {
   const handleKeyDown = (e: KeyboardEvent) => {

@@ -15,7 +15,7 @@ export const handleMouseOver = (park: Park) => {
 
   d3.select("#tooltip").style("visibility", "visible");
 
-  d3.select("#tooltip div img").attr("src", imageSrc);
+  d3.select("#tooltip div img").attr("src", imageSrc).attr("alt", image.altText);
 
   d3.select("#tooltip div h1").text(park.name || "");
 

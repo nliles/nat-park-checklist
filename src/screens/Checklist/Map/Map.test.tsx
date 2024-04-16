@@ -1,10 +1,9 @@
+import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import Map from ".";
 
 describe("<Map />", () => {
-  const mockMouseOver = jest.fn();
-  const mockMouseLeave = jest.fn();
-
   const parks = [
     {
       designation: "National Park",
@@ -12,7 +11,10 @@ describe("<Map />", () => {
       parkCode: "acad",
       states: "ME",
       fullName: "Acadia National Park",
-      images: [],
+      images: [{
+        url: "photo/ME",
+        altText: "Acadia National Park photo",
+      }],
       name: "Acadia",
       latitude: "44.409286",
       longitude: "-68.247501",
@@ -33,17 +35,15 @@ describe("<Map />", () => {
   ];
 
   const renderMap = () => {
-    render(<Map parks={parks} />);
+    render(<FormProviderWrapper><Map parks={parks} /></FormProviderWrapper>);
   };
 
   it("Displays the correct content", () => {
     renderMap();
-    expect(screen.getByText("1")).toBeVisible();
     expect(screen.getByText("1").closest("a")).toHaveAttribute(
       "href",
       "https://www.nps.gov/acad/index.htm"
     );
-    expect(screen.getByText("2")).toBeVisible();
     expect(screen.getByText("2").closest("a")).toHaveAttribute(
       "href",
       "https://www.nps.gov/arch/index.htm"
@@ -54,6 +54,8 @@ describe("<Map />", () => {
     renderMap();
     fireEvent.mouseOver(screen.getByText("1"));
     expect(screen.getByText("Acadia")).toBeVisible();
+    expect(screen.getByText("State: ME")).toBeVisible();
+    expect(screen.getByAltText("Acadia National Park photo")).toBeVisible();
     fireEvent.mouseOut(screen.getByText("1"));
     expect(screen.queryByText("Acadia")).not.toBeVisible();
   });
