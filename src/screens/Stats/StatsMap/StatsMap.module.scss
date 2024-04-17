@@ -2,6 +2,7 @@
 @import "../../../styles/breakpoints.scss";
 
 .mapContainer {
+  position: relative;
   @media (max-width: $desktop) {
     margin: 2rem 0 3rem 0;
   }
