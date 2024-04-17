@@ -72,10 +72,6 @@ const StatsMap = ({ parks, selectedParks = [] }: MapProps) => {
       const path = geoPath().projection(projection);
       const mapContainer = d3.select(containerRef.current);
 
-      // Remove previous map before drawing a new one
-      d3.select(".legend").remove();
-      d3.select(".map").remove();
-
       // Legend
       const legendSvg = mapContainer
         .append("svg")
@@ -183,9 +179,15 @@ const StatsMap = ({ parks, selectedParks = [] }: MapProps) => {
           tooltip.style("opacity", 0);
         });
     };
-    if (allParks.length) {
+    if (allParks.length && width && height) {
       drawMap();
     }
+
+    return () => {
+      // Remove previous map before drawing a new one
+      d3.select(".legend").remove();
+      d3.select(".map").remove();
+    };
   }, [height, width, allParks, formattedSelected, containerRef]);
 
   return <div ref={containerRef} className={styles.mapContainer} />;
