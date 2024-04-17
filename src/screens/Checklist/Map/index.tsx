@@ -39,7 +39,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
   const scaleRef = useRef({
-    scale: width < 1024 ? 1 * (width / 1000) : 1
+    scale: width < 1024 ? 1 * (width / 1000) : 1,
   });
 
   // ADD MAP
@@ -192,7 +192,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       let designationArray = formData[formattedDesignation];
       if (designationArray.includes(id)) {
         const idIndex = designationArray.indexOf(id);
-        designationArray.splice(idIndex, 1)
+        designationArray.splice(idIndex, 1);
       } else {
         designationArray.push(id);
       }
@@ -272,9 +272,12 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
             return container;
           },
           (update) => {
-            return update.classed(styles.selected, (d: Park) =>
+            const container = update;
+            container.select("text").text((d: Park, i: number) => `${i + 1}`);
+            container.classed(styles.selected, (d: Park) =>
               selectedParks.includes(d.id)
             );
+            return update;
           }
         );
     };
