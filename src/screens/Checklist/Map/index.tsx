@@ -41,8 +41,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     scale: 1,
   });
 
-  console.log(scaleRef?.current?.scale)
-
   useEffect(() => {
     const mapProjection = geoAlbersUsaTerritories().fitExtent(
       [
