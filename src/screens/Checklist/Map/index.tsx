@@ -31,6 +31,7 @@ const US_DATA = topojson.feature(
 const Map = ({ parks = [] }: { parks: Park[] }) => {
   const mapRef = useRef(null);
   const { containerRef, width, height } = useContainerWidth();
+  // Tree marker tooltip
   useTooltip();
   // Selected park data
   const { watch, setValue } = useFormContext();
@@ -38,9 +39,10 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
   const scaleRef = useRef({
-    scale: 1,
+    scale: width < 1024 ? 1 * (width / 1000) : 1
   });
 
+  // ADD MAP
   useEffect(() => {
     const mapProjection = geoAlbersUsaTerritories().fitExtent(
       [
@@ -59,7 +61,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     function handleStateZoom(event: Event, d: Feature) {
       event.preventDefault();
       active.classed(styles.active, false);
-      if (active.node() === this) return reset();
+      if (active.node() === this) return resetZoom();
       active = d3.select<SVGElement, {}>(this).classed(styles.active, true);
       const bounds = path.bounds(d),
         dx = bounds[1][0] - bounds[0][0],
@@ -98,7 +100,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         );
     }
 
-    function reset() {
+    function resetZoom() {
       active.classed(styles.active, false);
       active = d3.select(null);
       scaleRef.current.scale = 1;
@@ -120,10 +122,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       park: Park;
       scale?: number;
     }) => {
-      const adjustedScale =
-        width < 1024
-          ? scaleRef.current.scale * (width / 1000)
-          : scaleRef.current.scale;
+      const adjustedScale = scaleRef.current.scale;
       const p = mapProjection([park.longitude, park.latitude]);
       const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
       const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
@@ -131,8 +130,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     };
 
     const drawMap = () => {
-      // add click functionality to map buttons
-      d3.select("#home").on("click", reset);
+      // add click functionality to map zoom/reset buttons
+      d3.select("#home").on("click", resetZoom);
       d3.select("#plus").on("click", function () {
         zoom.scaleBy(map.transition().duration(750), 2);
       });
@@ -148,7 +147,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .attr("height", height + bottomPadding)
         .call(zoom);
 
-      // Draw the map
       const g = map.append("g");
 
       g.selectAll("path")
@@ -166,6 +164,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     };
 
     if (width && height) {
+      resetZoom();
       drawMap();
     }
 
@@ -174,6 +173,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     };
   }, [width, height, bottomPadding]);
 
+  // ADD MAP MARKERS
   useEffect(() => {
     const formData = watch("parkData");
     const selectedParks = Object.values(formData).flat(1) as string[];
@@ -186,6 +186,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       US_DATA
     );
 
+    // Select/deselect park
     const handleClick = (id: string, name: string, designation: string) => {
       const formattedDesignation = camelCase(designation);
       let designationArray = formData[formattedDesignation];
@@ -215,10 +216,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               )
               .attr("xlink:href", (d: Park) => d.url || "")
               .attr("transform", (park: Park) => {
-                const adjustedScale =
-                  width < 1024
-                    ? scaleRef.current.scale * (width / 1000)
-                    : scaleRef.current.scale;
+                const adjustedScale = scaleRef.current.scale;
                 const p = projection([park.longitude, park.latitude]);
                 const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
                 const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;

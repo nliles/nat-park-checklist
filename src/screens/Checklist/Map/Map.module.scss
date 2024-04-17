@@ -48,7 +48,7 @@
   fill: $lightGreen;
   stroke: $black;
   stroke-width: 20px;
-  stroke-miterlimit: 10px;
+  shape-rendering: geometricPrecision;
 
   &.hoverTree {
     fill: $green;
