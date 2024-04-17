@@ -272,9 +272,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
             return container;
           },
           (update) => {
-            const container = update;
-            container.select("text").text((d: Park, i: number) => `${i + 1}`);
-            container.classed(styles.selected, (d: Park) =>
+            update.select("text").text((d: Park, i: number) => `${i + 1}`);
+            update.classed(styles.selected, (d: Park) =>
               selectedParks.includes(d.id)
             );
             return update;
