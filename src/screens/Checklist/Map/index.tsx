@@ -190,9 +190,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       const formattedDesignation = camelCase(designation);
       let designationArray = formData[formattedDesignation];
       if (designationArray.includes(id)) {
-        designationArray = designationArray.filter(
-          (parkId: string) => parkId !== id
-        );
+        const idIndex = designationArray.indexOf(id);
+        designationArray.splice(idIndex, 1)
       } else {
         designationArray.push(id);
       }
