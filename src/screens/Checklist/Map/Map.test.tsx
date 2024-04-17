@@ -2,6 +2,11 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import FormProviderWrapper from "test-utils/FormProviderWrapper";
 import Map from ".";
+import useContainerWidth from "hooks/useContainerWidth";
+
+jest.mock("hooks/useContainerWidth");
+
+const mockUseClientRect = jest.mocked(useContainerWidth);
 
 describe("<Map />", () => {
   const parks = [
@@ -37,6 +42,12 @@ describe("<Map />", () => {
   ];
 
   const renderMap = () => {
+    mockUseClientRect.mockImplementation(() => ({
+      containerRef: { current: null },
+      width: 1000,
+      height: 500,
+    }));
+
     render(
       <FormProviderWrapper>
         <Map parks={parks} />

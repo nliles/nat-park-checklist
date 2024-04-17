@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { defaultSelectedValues } from "../../../constants";
+import { parks } from "fixures/parks";
 import DataTable from ".";
 
 describe("<DataTable />", () => {
@@ -8,24 +9,19 @@ describe("<DataTable />", () => {
     ...defaultSelectedValues,
     nationalPark: [
       "6DA17C86-088E-4B4D-B862-7C1BD5CF236B",
-      "C9056F71-7162-4208-8AE9-2D0AEFA594FD",
-      "6A1737A1-6848-4087-AAF7-68A427247357",
+      "36240051-018E-4915-B6EA-3F1A7F24FBE4",
     ],
     nationalReserve: ["C59FE971-54EE-447C-9DCE-CB781949B0B8"],
   };
 
-  it("Displays the correct count and total", () => {
-    render(<DataTable selected={parkData} total={429} />);
-    expect(screen.getByText("4")).toBeVisible();
+  it("Displays the correct visited and total per count per park", () => {
+    render(<DataTable selected={parkData} parks={parks} total={429} />);
+    expect(screen.getByText("3")).toBeVisible();
     expect(screen.getByText("429")).toBeVisible();
   });
 
-  it.each([
-    ["National Park", "3"],
-    ["National Reserve", "2"],
-  ])("renders the correct data", (name, parkCount) => {
-    render(<DataTable selected={parkData} total={423} />);
-    expect(screen.getByText(name)).toBeVisible();
-    expect(screen.getByText(parkCount)).toBeVisible();
+  it("Displays the correct total visited and total count", () => {
+    render(<DataTable selected={parkData} parks={parks} total={429} />);
+    expect(screen.getAllByText("2").length).toEqual(2);
   });
 });
