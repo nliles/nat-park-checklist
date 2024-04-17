@@ -37,6 +37,9 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
 
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
+  const scaleRef = useRef({
+    scale: 1,
+  });
 
   useEffect(() => {
     const mapProjection = geoAlbersUsaTerritories().fitExtent(
@@ -66,6 +69,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         scale = 0.9 / Math.max(dx / width, dy / height),
         translate = [width / 2 - scale * x, height / 2 - scale * y];
 
+      scaleRef.current.scale = 1 / scaleRef.current.scale;
+
       d3.select(mapRef.current)
         .transition()
         .duration(750)
@@ -79,22 +84,24 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .transition()
         .duration(750)
         .attr("transform", (park: Park) =>
-          getMarkerCoords({ park, scale: 1 / scale })
+          getMarkerCoords({ park, scale: scaleRef.current.scale })
         );
     }
 
     function handleZoom(d3Event: d3.D3ZoomEvent<SVGSVGElement, unknown>) {
+      scaleRef.current.scale = 1 / d3Event.transform.k;
       d3.select(".map g").attr("transform", (d3Event as any).transform);
       d3.select(".map g")
         .selectAll<SVGSVGElement, any>(`.${styles.treeContainer}`)
         .attr("transform", (park: Park) =>
-          getMarkerCoords({ park, scale: 1 / d3Event.transform.k })
+          getMarkerCoords({ park, scale: scaleRef.current.scale })
         );
     }
 
     function reset() {
       active.classed(styles.active, false);
       active = d3.select(null);
+      scaleRef.current.scale = 1;
 
       d3.select(mapRef.current)
         .transition()
@@ -113,7 +120,10 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       park: Park;
       scale?: number;
     }) => {
-      const adjustedScale = width < 1024 ? scale * (width / 1000) : scale;
+      const adjustedScale =
+        width < 1024
+          ? scaleRef.current.scale * (width / 1000)
+          : scaleRef.current.scale;
       const p = mapProjection([park.longitude, park.latitude]);
       const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
       const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
@@ -176,9 +186,9 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       US_DATA
     );
 
-    const handleClick = (id: string, designation: string) => {
-      const formattedName = camelCase(designation);
-      let designationArray = formData[formattedName];
+    const handleClick = (id: string, name: string, designation: string) => {
+      const formattedDesignation = camelCase(designation);
+      let designationArray = formData[formattedDesignation];
       if (designationArray.includes(id)) {
         designationArray = designationArray.filter(
           (parkId: string) => parkId !== id
@@ -186,7 +196,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
       } else {
         designationArray.push(id);
       }
-      setValue(`parkData.${formattedName}`, designationArray, {
+      setValue(`parkData.${formattedDesignation}`, designationArray, {
         shouldDirty: true,
       });
     };
@@ -206,7 +216,10 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               )
               .attr("xlink:href", (d: Park) => d.url || "")
               .attr("transform", (park: Park) => {
-                const adjustedScale = width < 1024 ? width / 1000 : 1;
+                const adjustedScale =
+                  width < 1024
+                    ? scaleRef.current.scale * (width / 1000)
+                    : scaleRef.current.scale;
                 const p = projection([park.longitude, park.latitude]);
                 const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
                 const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
@@ -233,7 +246,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               .attr("viewBox", "0 0 540.41 736.19")
               .on("click", function (event: Event, d: Park) {
                 event.preventDefault();
-                handleClick(d.id, d.designation);
+                event.stopPropagation();
+                handleClick(d.id, d.name, d.designation);
               })
               .append("polygon")
               .attr(
