@@ -167,7 +167,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   useEffect(() => {
     const formData = watch("parkData");
     const selectedParks = Object.values(formData).flat(1) as string[];
-
     // Map data
     const projection = geoAlbersUsaTerritories().fitExtent(
       [
@@ -179,7 +178,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
 
     const handleClick = (id: string, designation: string) => {
       const formattedName = camelCase(designation);
-      let designationArray = formData[formattedName].slice();
+      let designationArray = formData[formattedName];
       if (designationArray.includes(id)) {
         designationArray = designationArray.filter(
           (parkId: string) => parkId !== id
@@ -272,7 +271,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     if (width && height) {
       drawMarkers();
     }
-  }, [parks, setValue, watch, width, height, bottomPadding]);
+  }, [parks, watch, setValue, width, height, bottomPadding]);
 
   return (
     <div ref={containerRef} className={styles.mapContainer}>
