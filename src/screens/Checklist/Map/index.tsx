@@ -69,7 +69,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         scale = 0.9 / Math.max(dx / width, dy / height),
         translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-      scaleRef.current.scale = 1 / scaleRef.current.scale;
+      scaleRef.current.scale = 1 / scale;
 
       d3.select(mapRef.current)
         .transition()
