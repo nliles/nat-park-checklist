@@ -16,7 +16,6 @@ export const handleMouseOver = (park: Park) => {
     ? "Territory"
     : `State${statesArr.length > 1 ? "s" : ""}`;
   const states = `${stateText}: ${statesArr.join(", ")}`;
-  const designation = `Designation: ${park.designation}`;
 
   d3.select("#tooltip").style("visibility", "visible");
 
@@ -26,7 +25,7 @@ export const handleMouseOver = (park: Park) => {
 
   d3.select("#tooltip div h1").text(park.name || "");
 
-  d3.select(".designation").text(designation);
+  d3.select(".designation").text(park.designation);
 
   d3.select(".state").text(states);
 };
