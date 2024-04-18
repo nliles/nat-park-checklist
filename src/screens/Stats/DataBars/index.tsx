@@ -17,7 +17,7 @@ const DataBars = ({ selected, parks }: DataBarsProps) => {
       {itemKeys?.map((option) => {
         const total = parks?.[option].length || 0;
         const completed = selected[option].length;
-        const percentage = Math.round((completed / total) * 100);
+        const percentage = Math.round((completed / total) * 100) || 0;
         return (
           <div className={styles.progress} key={option}>
             <div className={styles.text}>
