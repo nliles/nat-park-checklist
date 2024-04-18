@@ -26,9 +26,9 @@ export const handleMouseOver = (park: Park) => {
 
   d3.select("#tooltip div h1").text(park.name || "");
 
-  d3.select("#tooltip div span").text(designation);
+  d3.select(".designation").text(designation);
 
-  d3.select("#tooltip div span").text(states);
+  d3.select(".state").text(states);
 };
 
 // hide tooltip
