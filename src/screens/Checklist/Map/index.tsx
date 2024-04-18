@@ -39,7 +39,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
   // Map padding
   const bottomPadding = width > 540 ? 60 : 20;
   const scaleRef = useRef({
-    scale: width < 1024 ? 1 * (width / 1000) : 1,
+    scale: 1,
   });
 
   // ADD MAP
