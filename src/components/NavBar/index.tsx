@@ -38,6 +38,7 @@ const NavBar = () => {
                 id="avatar"
                 className={styles.img}
                 width={30}
+                height={30}
                 src="np.svg"
                 alt={copy.altText}
               />

@@ -16,7 +16,8 @@ const Avatar = ({ active, handleClose }: AvatarProps) => (
       <img
         id="avatar"
         className={styles.avatar}
-        width={30}
+        width={40}
+        height={40}
         src="https://www.nps.gov/common/uploads/structured_data/A2751C78-ACB9-A19B-D7946503414E34AE.jpg"
         alt="Kelso Dunes"
       />
