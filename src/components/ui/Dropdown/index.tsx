@@ -66,6 +66,7 @@ const Dropdown = ({
       <button
         className={styles.button}
         type="button"
+        aria-label={`Open ${keyValue} dropdown`}
         {...getToggleButtonProps()}
       >
         <label

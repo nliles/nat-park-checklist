@@ -4,15 +4,15 @@ import styles from "./Map.module.scss";
 
 const MapButtons = () => (
   <div className={styles.buttons}>
-    <button className={styles.home} id="home">
+    <button className={styles.home} id="home" aria-label="Reset zoom">
       <ResetZoom />
     </button>
     <div className={styles.plusMinus}>
-      <button className={styles.plus} id="plus">
-        <FaPlus aria-label="Zoom in" />
+      <button className={styles.plus} id="plus" aria-label="Zoom in">
+        <FaPlus />
       </button>
-      <button className={styles.minus} id="minus">
-        <FaMinus aria-label="Zoom out" />
+      <button className={styles.minus} id="minus" aria-label="Zoom out">
+        <FaMinus />
       </button>
     </div>
   </div>
