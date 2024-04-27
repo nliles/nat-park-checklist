@@ -62,6 +62,10 @@
   cursor: pointer;
   fill: $black;
 
+  @media (max-width: $mobile-landscape) {
+    font-size: 7px;
+  }
+
   &.hoverTree {
     fill: $white;
   }

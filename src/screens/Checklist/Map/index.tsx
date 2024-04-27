@@ -20,7 +20,7 @@ import {
 import styles from "./Map.module.scss";
 
 const TREE_MARKER_HEIGHT = 45;
-const TREE_MARKER_WIDTH = 16.5;
+const TREE_MARKER_WIDTH = 33;
 
 // Map data
 const US_DATA = topojson.feature(
@@ -124,7 +124,7 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
     }) => {
       const adjustedScale = scaleRef.current.scale;
       const p = mapProjection([park.longitude, park.latitude]);
-      const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
+      const x = (p?.[0] || 0) - (TREE_MARKER_WIDTH / 2) * adjustedScale;
       const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
       return `translate(${x}, ${y})scale(${adjustedScale})`;
     };
@@ -216,11 +216,10 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               )
               .attr("xlink:href", (d: Park) => d.url || "")
               .attr("transform", (park: Park) => {
-                const adjustedScale = scaleRef.current.scale;
                 const p = projection([park.longitude, park.latitude]);
-                const x = (p?.[0] || 0) - TREE_MARKER_WIDTH * adjustedScale;
-                const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT * adjustedScale;
-                return `translate(${x}, ${y})scale(${adjustedScale})`;
+                const x = (p?.[0] || 0) - TREE_MARKER_WIDTH / 2;
+                const y = (p?.[1] || 0) - TREE_MARKER_HEIGHT;
+                return `translate(${x}, ${y})`;
               })
               .on("mouseover", function (e: Event, d: Park) {
                 d3.select(this)
@@ -238,8 +237,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
 
             container
               .append("svg")
-              .attr("width", 33)
-              .attr("height", 45)
+              .attr("width", TREE_MARKER_WIDTH)
+              .attr("height", TREE_MARKER_HEIGHT)
               .attr("viewBox", "0 0 540.41 736.19")
               .on("click", function (event: Event, d: Park) {
                 event.preventDefault();
@@ -263,8 +262,8 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
               .append("text")
               .text((d: Park, i: number) => `${i + 1}`)
               .attr("class", styles.treeLinkText)
-              .attr("x", TREE_MARKER_WIDTH)
-              .attr("y", 30)
+              .attr("x", TREE_MARKER_WIDTH / 2)
+              .attr("y", TREE_MARKER_HEIGHT * (2 / 3))
               .on("mouseover", (event: Event, d: Park) => {
                 event.stopPropagation();
                 handleMouseOver(d);
