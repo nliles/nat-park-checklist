@@ -18,6 +18,7 @@ import {
   handleMouseMove,
 } from "screens/Checklist/Map/handleTooltip";
 import styles from "./Map.module.scss";
+import { STATES_LIST } from "../../../constants";
 
 const TREE_MARKER_HEIGHT = 45;
 const TREE_MARKER_WIDTH = 33;
@@ -153,9 +154,6 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .data(US_DATA.features)
         .join("path")
         .attr("class", styles.state)
-        .text(function(d){
-            return d?.properties?.name;
-        })
         .attr("d", path)
         .on("click", handleStateZoom)
         .on("mouseover", ({ currentTarget }) => {
@@ -164,6 +162,24 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .on("mouseout", ({ currentTarget }) => {
           d3.select(currentTarget).classed(styles.hover, false);
         });
+
+        g.selectAll("text")
+        .data(US_DATA.features)
+        .enter()
+        .append("svg:text")
+        .attr("class", styles.copy)
+        .text(function(d){
+          const abbreviation = STATES_LIST.find((state) => state.name === d?.properties?.name)
+            return abbreviation?.value || '';
+        })
+        .attr("x", function(d){
+          return path.centroid(d)[0];
+        })
+        .attr("y", function(d){
+            return  path.centroid(d)[1];
+        })
+        .attr("text-anchor","middle")
+        .attr('font-size','6pt');
     };
 
     if (width && height) {
