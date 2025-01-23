@@ -153,6 +153,9 @@ const Map = ({ parks = [] }: { parks: Park[] }) => {
         .data(US_DATA.features)
         .join("path")
         .attr("class", styles.state)
+        .text(function(d){
+            return d?.properties?.name;
+        })
         .attr("d", path)
         .on("click", handleStateZoom)
         .on("mouseover", ({ currentTarget }) => {
